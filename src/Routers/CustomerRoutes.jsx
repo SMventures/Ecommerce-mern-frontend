@@ -8,7 +8,6 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import About from "../Pages/About";
 import Homepage from "../Pages/Homepage";
 import Navigation from "../customer/Components/Navbar/Navigation";
-import Cart from "../customer/Components/Cart/Cart";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Button} from "@mui/material";
 import { customTheme, customerTheme } from "../Admin/them/customeThem";
@@ -18,7 +17,9 @@ import Checkout from "../customer/Components/Checkout/Checkout";
 import Footer from "../customer/Components/footer/Footer";
 import PaymentSuccess from "../customer/Components/paymentSuccess/PaymentSuccess";
 import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
-
+import Search from "../customer/Components/Home/Search";
+import Cart from "../customer/Components/Cart/Cart";
+import Wishlist from "../customer/Components/wishlist/wishlist";
 const CustomerRoutes = () => {
     const location = useLocation();
     
@@ -50,6 +51,10 @@ const CustomerRoutes = () => {
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
+        <Route path="/search/:query" element={<Product />} />
+        <Route path="/wishlist" element={<Wishlist />}></Route>
+
+
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       <Footer/>

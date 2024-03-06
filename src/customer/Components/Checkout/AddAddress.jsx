@@ -54,13 +54,12 @@ export default function AddDeliveryAddressForm({ handleNext }) {
               <AddressCard address={item} />
               {selectedAddress?.id === item.id && (
                 <Button
-                  sx={{ mt: 2 }}
-                  size="large"
-                  variant="contained"
-                  color="primary"
-                  onClick={()=>handleCreateOrder(item)}
-                >
-                  Deliverd Here
+                sx={{ mt: 2, backgroundColor: "#2874f0", padding: ".9rem 1.5rem", color: "white" }}
+                size="large"
+                variant="contained"
+                onClick={() => handleCreateOrder(item)}
+            >
+                  Deliver Here
                 </Button>
               )}
             </div>
@@ -144,13 +143,12 @@ export default function AddDeliveryAddressForm({ handleNext }) {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  sx={{ padding: ".9rem 1.5rem" }}
+                  sx={{ mt: 2, backgroundColor: "#2874f0", padding: ".9rem 1.5rem", color: "white" }}
                   size="large"
                   type="submit"
                   variant="contained"
-                  color="primary"
                 >
-                  Deliverd Here
+                  Deliver Here
                 </Button>
               </Grid>
             </Grid>

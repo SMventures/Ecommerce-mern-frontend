@@ -16,6 +16,9 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
+  SEARCH_PRODUCT_REQUEST,
+  SEARCH_PRODUCT_SUCCESS,
+  SEARCH_PRODUCT_FAILURE
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
@@ -77,6 +80,30 @@ export const findProductById = (reqData) => async (dispatch) => {
     });
   }
 };
+
+
+export const searchProduct = (query) => async (dispatch) => {
+  try {
+    dispatch({ type: SEARCH_PRODUCT_REQUEST });
+    console.log("searching for product - ", data);
+
+    const { data } = await api.get(`/api/products/search/${query}`);
+
+    dispatch({
+      type: SEARCH_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SEARCH_PRODUCT_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 
 export const createProduct = (product) => async (dispatch) => {
   try {

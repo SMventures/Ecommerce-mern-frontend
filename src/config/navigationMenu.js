@@ -1,6 +1,6 @@
 export const navigation = {
     categories: [
-      {
+      {imageSrc:"https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100",
         id: 'Women',
         name: 'Women',
         featured: [
@@ -33,6 +33,7 @@ export const navigation = {
         ],
       },
       {
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100',
         id: 'Men',
         name: 'Men',
         featured: [
@@ -65,8 +66,10 @@ export const navigation = {
         ],
       },
       {
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100',
         id: 'Accessories',
         name: 'Accessories',
+      
         featured: [
           {
             name: 'New Arrivals',
@@ -109,6 +112,9 @@ export const navigation = {
       {
         id: 'Stationery',
         name: 'Stationery',
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100',
+        imageAlt: 'stationery',
+
         featured: [
           {
             name: 'New Arrivals',
@@ -144,7 +150,7 @@ export const navigation = {
          
         ],
       },
-      {
+      {imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100',
         id: 'Books',
         name: 'Books',
         featured: [
@@ -181,7 +187,7 @@ export const navigation = {
          
         ],
       },
-      {
+      {imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100',
         id: 'Electronics',
         name: 'Electronics',
         featured: [
