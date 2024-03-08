@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchProduct } from '../../../Redux/Customers/Product/Action';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import SearchIcon from '@mui/icons-material/Search';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import SearchResults from './SearchResults';
 
-import Product from '../Product/Product/Product';
 const Search = () => {
     const [query, setQuery] = useState('');
+    const [productArr, setProductsArr] = useState([]);
     const dispatch = useDispatch();
-    const location = useLocation();
+    const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
-    const handleSearch = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
-        dispatch(searchProduct(query));
+        console.log('Search query:', query); // Add this line
+        const res = await fetch(`http://localhost:5454/api/products/search/${query}`); // Use backticks for string interpolation
+        const searchedProducts = await res.json();
+        console.log('Search results:', searchedProducts.data); // Add this line
+        setProductsArr((prevProductArr) => [...prevProductArr, ...searchedProducts.data]);
+        console.log('Updated productArr:', productArr); // Add this line
+        navigate(`/SearchResults?query=${query}`);
     };
+    console.log('productArr:', productArr); // Add this line
 
     return (
         <form onSubmit={handleSearch}>
             <div className="relative flex items-center mx-4">
                 <input
                     type="text"
-                    style={{ color: "black", width: '500px' }}
+                    style={{ color: 'black', width: '500px' }}
                     placeholder="Search..."
                     value={query}
                     className="border border-gray-300 rounded-md px-10 py-2 mr-10 focus:outline-none focus:border-blue-500"
@@ -31,24 +38,11 @@ const Search = () => {
                     type="submit"
                     className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                    Search
+                    <SearchIcon />
                 </button>
-                {query && (
-                    <ul>
-                        {Product && Product.length > 0 && (
-                            <ul>
-                                {Product.map((product) => (
-                                    <li key={product._id}>
-                                        <Link to={`/${product.lavelOne}/${product.lavelTwo}/${product.lavelThree}`}>
-                                            {product.lavelThree}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </ul>
-                )}
             </div>
+            <SearchResults productArr={productArr} />
+
         </form>
     );
 };

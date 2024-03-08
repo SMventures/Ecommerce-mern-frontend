@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { useSnackbar } from 'notistack';
 
 import { Fragment } from "react";
 import "./CreateProductForm.css";
@@ -39,6 +40,10 @@ const CreateProductForm = () => {
     thirdLavelCategory: "",
     description: "",
   });
+  const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
+
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt")
 
@@ -70,7 +75,24 @@ const CreateProductForm = () => {
       size: sizes,
     }));
   };
+  const handleProductImageChange = (e) => {
+    const files = Array.from(e.target.files);
 
+    setImages([]);
+    setImagesPreview([]);
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((oldImages) => [...oldImages, reader.result]);
+          setImages((oldImages) => [...oldImages, reader.result]);
+        }
+      }
+      reader.readAsDataURL(file);
+    });
+  }
   // const handleRemoveSize = (index) => {
   //   const sizes = [...productData.size];
   //   sizes.splice(index, 1);
@@ -82,9 +104,42 @@ const CreateProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProduct({ data: productData, jwt }))
+
+    // Required field checks
+    if (
+        productData.title.trim() === "" ||
+        productData.price.trim() === "" ||
+        productData.size.length === 0 ||
+        productData.topLavelCategory.trim() === "" ||
+        productData.description.trim() === "" ||
+        images.length === 0
+    ) {
+        if (productData.title.trim() === "") {
+            enqueueSnackbar("Add Title", { variant: "warning" });
+        }
+        if (productData.price.trim() === "") {
+            enqueueSnackbar("Add Price", { variant: "warning" });
+        }
+        if (productData.size.length === 0) {
+            enqueueSnackbar("Add Sizes", { variant: "warning" });
+        }
+        if (productData.topLavelCategory.trim() === "") {
+            enqueueSnackbar("Add Top Level Category", { variant: "warning" });
+        }
+        if (productData.description.trim() === "") {
+            enqueueSnackbar("Add Description", { variant: "warning" });
+        }
+        if (images.length === 0) {
+            enqueueSnackbar("Add Product Images", { variant: "warning" });
+        }
+        return;
+    }
+
+    // Dispatch action to create product
+    dispatch(createProduct({ data: productData, jwt }));
     console.log(productData);
-  };
+};
+
 
   // const handleAddProducts=(data)=>{
   //   for(let item of data){
@@ -109,15 +164,23 @@ const CreateProductForm = () => {
         onSubmit={handleSubmit}
         className="createProductContainer min-h-screen"
       >
+        <h2 className="font-medium">Product Images</h2>
+        <div className="flex gap-2 overflow-x-auto h-32 border rounded">
+          {imagesPreview.map((image, i) => (
+            <img draggable="false" src={image} alt="Product" key={i} className="w-full h-full object-contain" />
+          ))}
+        </div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Image URL"
-              name="imageUrl"
-              value={productData.imageUrl}
-              onChange={handleChange}
+            <input
+              type="file"
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleProductImageChange}
+              className="hidden"
             />
+            Choose Files
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -217,23 +280,23 @@ const CreateProductForm = () => {
                 label="Second Level Category"
               >
                 {productData.topLavelCategory === "men" && (
-                
-                    <MenuItem value="Clothing">Clothing</MenuItem>
-                  
+
+                  <MenuItem value="Clothing">Clothing</MenuItem>
+
                 )}
                 {productData.topLavelCategory === "women" && (
-                
-                    <MenuItem value="Clothing">Clothing</MenuItem>
-                  
+
+                  <MenuItem value="Clothing">Clothing</MenuItem>
+
                 )}
                 {productData.topLavelCategory === "Stationery" && (
                   <MenuItem value="Stationery_Items">Stationery Items</MenuItem>
                 )}
                 {productData.topLavelCategory === "Accessories" && [
-                  
-                    <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
-                    <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
-          
+
+                  <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
+                  <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
+
                 ]}
                 {productData.topLavelCategory === "Electronics" && (
                   <MenuItem value="Electronic_Items">Electronic Items</MenuItem>
@@ -258,50 +321,50 @@ const CreateProductForm = () => {
                 ]}
 
                 if {productData.secondLavelCategory === "Stationery_Items" && [
-                  
 
-                    <MenuItem value="Pen">Pen</MenuItem>,
-                    <MenuItem value="Pencil">Pencil</MenuItem>,
-                    <MenuItem value="Highlighter">Highlighter</MenuItem>,
-                    <MenuItem value="Calender">Calender</MenuItem>,
-                    <MenuItem value="Markers">Markers</MenuItem>,
-                    <MenuItem value="Rulers">Rulers</MenuItem>,
-                    <MenuItem value="Notepad">Notepad</MenuItem>,
-                    <MenuItem value="Diary">Diary</MenuItem>,
-                  
+
+                  <MenuItem value="Pen">Pen</MenuItem>,
+                  <MenuItem value="Pencil">Pencil</MenuItem>,
+                  <MenuItem value="Highlighter">Highlighter</MenuItem>,
+                  <MenuItem value="Calender">Calender</MenuItem>,
+                  <MenuItem value="Markers">Markers</MenuItem>,
+                  <MenuItem value="Rulers">Rulers</MenuItem>,
+                  <MenuItem value="Notepad">Notepad</MenuItem>,
+                  <MenuItem value="Diary">Diary</MenuItem>,
+
                 ]}  {productData.secondLavelCategory === "Electronics_Items" && [
-         
-                    <MenuItem value="Keyboard">Keyboard</MenuItem>,
-                    <MenuItem value="Mouse">Mouse</MenuItem>,
-                    <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
-                    <MenuItem value="Camera">Camera</MenuItem>,
-                    <MenuItem value="Headphones">Headphones</MenuItem>,
 
-            
+                  <MenuItem value="Keyboard">Keyboard</MenuItem>,
+                  <MenuItem value="Mouse">Mouse</MenuItem>,
+                  <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
+                  <MenuItem value="Camera">Camera</MenuItem>,
+                  <MenuItem value="Headphones">Headphones</MenuItem>,
+
+
                 ]}  {productData.secondLavelCategory === "Phone_Accessories" && [
-               
-                    <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
-                    <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
-               
+
+                  <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
+                  <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
+
                 ]}
                 {productData.secondLavelCategory === "Laptop_Accessories" && [
-                
-                    <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
-                    <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
-                    <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
 
-                
+                  <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
+                  <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
+                  <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
+
+
                 ]}
                 {productData.secondLavelCategory === "Trading_Books" && [
-                  
-                    <MenuItem value="Motivational">Motivational</MenuItem>,
-                    <MenuItem value="Biography">Biography</MenuItem>,
-                    <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-                    <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
-                    <MenuItem value="Psychology">Psychology</MenuItem>,
-                    <MenuItem value="Risk_Management">Risk Management</MenuItem>,
-                    <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
-                 
+
+                  <MenuItem value="Motivational">Motivational</MenuItem>,
+                  <MenuItem value="Biography">Biography</MenuItem>,
+                  <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+                  <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
+                  <MenuItem value="Psychology">Psychology</MenuItem>,
+                  <MenuItem value="Risk_Management">Risk Management</MenuItem>,
+                  <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
+
                 ]}
 
 

@@ -6,13 +6,13 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            href: '/',
+            href: 'women/clothing/Hoodies',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
           },
           {
             name: 'Basic Tees',
-            href: '/',
+            href: 'women/clothing/Tshirts',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
           },

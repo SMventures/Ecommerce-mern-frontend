@@ -4,8 +4,8 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 
 const Image = styled('img')({
-    width: '98%',
-    height: 550,
+    width: '96%',
+    height: '320',
     margin: '0 auto',
 });
 

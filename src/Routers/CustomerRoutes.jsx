@@ -20,6 +20,9 @@ import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
 import Search from "../customer/Components/Home/Search";
 import Cart from "../customer/Components/Cart/Cart";
 import Wishlist from "../customer/Components/wishlist/wishlist";
+import SearchResults from "../customer/Components/Home/SearchResults"
+import  MyComponent from "../customer/Components/Home/MyComponent"
+
 const CustomerRoutes = () => {
     const location = useLocation();
     
@@ -51,8 +54,11 @@ const CustomerRoutes = () => {
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
-        <Route path="/search/:query" element={<Product />} />
+        {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
         <Route path="/wishlist" element={<Wishlist />}></Route>
+        <Route path="/SearchResults/:query" element={<SearchResults />} />
+
+        <Route path="/my-component" element={<MyComponent />} />
 
 
         {/* <Route path="*" element={<NotFound />} /> */}

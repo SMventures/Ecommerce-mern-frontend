@@ -291,7 +291,7 @@ export default function Navigation() {
                   {/* Flyout menus */}
 
                   <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
-                    <div className="flex space-between space-x-8">
+                    <div className="flex space-evenly gap-24">
                       {navigation.categories.map((category) => (
                         <Container>
                                      <img
@@ -380,7 +380,7 @@ export default function Navigation() {
                                                   className="mt-6 space-y-6 mx-14 pb-8 sm:mt-4 sm:space-y-4"
                                                 >
                                                   {section.items.map((item) => (
-                                                    <li key={item.name} className="flex">
+                                                    <li key={item.name} className="flex-flex">
                                                       <p
                                                         onClick={() =>
                                                           handleCategoryClick(
@@ -525,4 +525,3 @@ export default function Navigation() {
     </div>
   )
 };
-

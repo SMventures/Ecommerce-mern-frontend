@@ -88,6 +88,7 @@ export const searchProduct = (query) => async (dispatch) => {
     console.log("searching for product - ", data);
 
     const { data } = await api.get(`/api/products/search/${query}`);
+    console.log(data,"searched products");
 
     dispatch({
       type: SEARCH_PRODUCT_SUCCESS,
@@ -102,7 +103,7 @@ export const searchProduct = (query) => async (dispatch) => {
           : error.message,
     });
   }
-};
+}; 
 
 
 export const createProduct = (product) => async (dispatch) => {
