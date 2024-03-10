@@ -6,9 +6,13 @@ import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findProductById } from "../../../../Redux/Customers/Product/Action";
-import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
-import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
+import {addItemToCart} from "../../../../Redux/Customers/Cart/Action";
+import {getAllReviews} from "../../../../Redux/Customers/Review/Action";
+import {
+  findProductById,
+  getSimilarProducts,
+} from "../../../../Redux/Customers/Product/Action";
+
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
 
@@ -70,10 +74,18 @@ export default function ProductDetails() {
   const [activeImage, setActiveImage] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { customersProduct,review } = useSelector((store) => store);
+  const { customersProduct, review, similarProducts } = useSelector(
+    (store) => store
+  );
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
-  // console.log("param",productId,customersProduct.product)
+
+  useEffect(() => {
+    const data = { productId: productId, jwt };
+    dispatch(findProductById(data));
+    dispatch(getAllReviews(productId));
+    dispatch(getSimilarProducts(productId));
+  }, [dispatch, productId, jwt]);
 
   const handleSetActiveImage = (image) => {
     setActiveImage(image);
@@ -84,15 +96,6 @@ export default function ProductDetails() {
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
-
-  useEffect(() => {
-    const data = { productId: productId, jwt };
-    dispatch(findProductById(data));
-    dispatch(getAllReviews(productId));
-  }, [productId]);
-
-  // console.log("reviews ",review)
-
   return (
     <div className="bg-white lg:px-20">
       <div className="pt-6">
@@ -201,7 +204,7 @@ export default function ProductDetails() {
                   />
 
                   <p className="opacity-60 text-sm">42807 Ratings</p>
-                  <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
                     {reviews.totalCount} reviews
                   </p>
                 </div>
@@ -286,7 +289,7 @@ export default function ProductDetails() {
                 <Button
                   variant="contained"
                   type="submit"
-                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" }}
+                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" , background: "#2874f0"}}
                 >
                   Add To Cart
                 </Button>
@@ -494,14 +497,16 @@ export default function ProductDetails() {
 
         {/* similer product */}
         <section className=" pt-10">
-          <h1 className="py-5 text-xl font-bold">Similer Products</h1>
+          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
           <div className="flex flex-wrap space-y-5">
-            {gounsPage1.map((item) => (
-              <HomeProductCard product={item} />
+          {similarProducts?.map((product) => (
+          <div key={product.id}>
+            </div>
             ))}
-          </div>
+       </div>
         </section>
       </div>
     </div>
   );
 }
+

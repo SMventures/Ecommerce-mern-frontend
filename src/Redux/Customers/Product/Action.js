@@ -58,6 +58,23 @@ export const findProducts = (reqData) => async (dispatch) => {
     });
   }
 };
+export const getSimilarProducts = (category) => async (dispatch) => {
+  try {
+      dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+
+      const { data } = await axios.get(`/api/products?category=${category}`);
+
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
+          payload: data,
+      });
+  } catch (error) {
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
+          payload: error.response.data.message,
+      });
+  }
+};
 
 export const findProductById = (reqData) => async (dispatch) => {
   try {
@@ -109,6 +126,7 @@ export const searchProduct = (query) => async (dispatch) => {
 export const createProduct = (product) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_PRODUCT_REQUEST });
+    console.log( "creating new product",product.data);
 
     const { data } = await api.post(
       `${API_BASE_URL}/api/admin/products/`,

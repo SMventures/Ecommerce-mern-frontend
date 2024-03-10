@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import SearchIcon from '@mui/icons-material/Search';
-import { Link } from 'react-router-dom';
-import SearchResults from './SearchResults';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
     const [query, setQuery] = useState('');
-    const [productArr, setProductsArr] = useState([]);
-    const dispatch = useDispatch();
-    const navigate = useNavigate(); // Use useNavigate instead of useHistory
+    const navigate = useNavigate();
 
-    const handleSearch = async (e) => {
+    const handleSearch = (e) => {
         e.preventDefault();
-        console.log('Search query:', query); // Add this line
-        const res = await fetch(`http://localhost:5454/api/products/search/${query}`); // Use backticks for string interpolation
-        const searchedProducts = await res.json();
-        console.log('Search results:', searchedProducts.data); // Add this line
-        setProductsArr((prevProductArr) => [...prevProductArr, ...searchedProducts.data]);
-        console.log('Updated productArr:', productArr); // Add this line
-        navigate(`/SearchResults?query=${query}`);
+        navigate(`/SearchResults/${query}`);
     };
-    console.log('productArr:', productArr); // Add this line
 
     return (
         <form onSubmit={handleSearch}>
@@ -41,8 +29,6 @@ const Search = () => {
                     <SearchIcon />
                 </button>
             </div>
-            <SearchResults productArr={productArr} />
-
         </form>
     );
 };

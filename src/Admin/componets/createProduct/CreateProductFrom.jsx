@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Typography } from "@mui/material";
 import {
   Grid,
@@ -10,11 +10,11 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useSnackbar } from 'notistack';
-
-import { Fragment } from "react";
-import "./CreateProductForm.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../Redux/Customers/Product/Action";
+import styled from "styled-components";
+import ImageIcon from '@mui/icons-material/Image';
+import axios from 'axios'; // Import Axios for making HTTP requests
 
 
 const initialSizes = [
@@ -23,9 +23,24 @@ const initialSizes = [
   { name: "L", quantity: 0 },
 ];
 
+
+
 const CreateProductForm = () => {
 
+  const handleSizeChange = (e, index) => {
+    let { name, value } = e.target;
+    name==="size_quantity"?name="quantity":name=e.target.name;
+
+    const sizes = [...productData.size];
+    sizes[index][name] = value;
+    setProductData((prevState) => ({
+      ...prevState,
+      size: sizes,
+    }));
+  };
+
   const [productData, setProductData] = useState({
+    imageFile: null, // Add image file state
     imageUrl: "",
     brand: "",
     title: "",
@@ -40,116 +55,29 @@ const CreateProductForm = () => {
     thirdLavelCategory: "",
     description: "",
   });
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
-  const { enqueueSnackbar } = useSnackbar();
 
-  const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt")
+  const dispatch=useDispatch();
+  const jwt=localStorage.getItem("jwt");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "imageFile") {
+      setProductData((prevState) => ({
+        ...prevState,
+        [name]: e.target.files[0], // Set image file
+      }));
+    } else {
+      setProductData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
-
-  const handleSizeChange = (e, index) => {
-    let { name, value } = e.target;
-    name === "size_quantity" ? name = "quantity" : name = e.target.name;
-
-    const sizes = [...productData.size];
-    sizes[index][name] = value;
-    setProductData((prevState) => ({
-      ...prevState,
-      size: sizes,
-    }));
-  };
-
-  const handleAddSize = () => {
-    const sizes = [...productData.size];
-    sizes.push({ name: "", quantity: "" });
-    setProductData((prevState) => ({
-      ...prevState,
-      size: sizes,
-    }));
-  };
-  const handleProductImageChange = (e) => {
-    const files = Array.from(e.target.files);
-
-    setImages([]);
-    setImagesPreview([]);
-
-    files.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((oldImages) => [...oldImages, reader.result]);
-          setImages((oldImages) => [...oldImages, reader.result]);
-        }
-      }
-      reader.readAsDataURL(file);
-    });
-  }
-  // const handleRemoveSize = (index) => {
-  //   const sizes = [...productData.size];
-  //   sizes.splice(index, 1);
-  //   setProductData((prevState) => ({
-  //     ...prevState,
-  //     size: sizes,
-  //   }));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Required field checks
-    if (
-        productData.title.trim() === "" ||
-        productData.price.trim() === "" ||
-        productData.size.length === 0 ||
-        productData.topLavelCategory.trim() === "" ||
-        productData.description.trim() === "" ||
-        images.length === 0
-    ) {
-        if (productData.title.trim() === "") {
-            enqueueSnackbar("Add Title", { variant: "warning" });
-        }
-        if (productData.price.trim() === "") {
-            enqueueSnackbar("Add Price", { variant: "warning" });
-        }
-        if (productData.size.length === 0) {
-            enqueueSnackbar("Add Sizes", { variant: "warning" });
-        }
-        if (productData.topLavelCategory.trim() === "") {
-            enqueueSnackbar("Add Top Level Category", { variant: "warning" });
-        }
-        if (productData.description.trim() === "") {
-            enqueueSnackbar("Add Description", { variant: "warning" });
-        }
-        if (images.length === 0) {
-            enqueueSnackbar("Add Product Images", { variant: "warning" });
-        }
-        return;
-    }
-
-    // Dispatch action to create product
     dispatch(createProduct({ data: productData, jwt }));
-    console.log(productData);
-};
-
-
-  // const handleAddProducts=(data)=>{
-  //   for(let item of data){
-  //     const productsData={
-  //       data:item,
-  //       jwt,
-  //     }
-  //     dispatch(createProduct(productsData))
-  //   }
-  // }
+  };
 
   return (
     <Fragment className="createProductContainer ">
@@ -162,25 +90,17 @@ const CreateProductForm = () => {
       </Typography>
       <form
         onSubmit={handleSubmit}
+        enctype="multipart/form-data"
         className="createProductContainer min-h-screen"
       >
-        <h2 className="font-medium">Product Images</h2>
-        <div className="flex gap-2 overflow-x-auto h-32 border rounded">
-          {imagesPreview.map((image, i) => (
-            <img draggable="false" src={image} alt="Product" key={i} className="w-full h-full object-contain" />
-          ))}
-        </div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <input
               type="file"
-              name="images"
               accept="image/*"
-              multiple
-              onChange={handleProductImageChange}
-              className="hidden"
+              name="imageFile"
+              onChange={handleChange}
             />
-            Choose Files
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -428,9 +348,11 @@ const CreateProductForm = () => {
             </Button> */}
           </Grid>
         </Grid>
-      </form>
+        </form>
+
     </Fragment>
   );
 };
+
 
 export default CreateProductForm;

@@ -25,7 +25,8 @@ import  MyComponent from "../customer/Components/Home/MyComponent"
 
 const CustomerRoutes = () => {
     const location = useLocation();
-    
+
+
   
     // Only show Navigation component when not on the NotFound page
     const showNavigation = location.pathname !== "*";
@@ -56,7 +57,7 @@ const CustomerRoutes = () => {
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
         {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
         <Route path="/wishlist" element={<Wishlist />}></Route>
-        <Route path="/SearchResults/:query" element={<SearchResults />} />
+        <Route path="/SearchResults/:query" element ={<SearchResults />} />
 
         <Route path="/my-component" element={<MyComponent />} />
 
