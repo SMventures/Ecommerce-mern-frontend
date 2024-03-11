@@ -15,6 +15,7 @@ import { createProduct } from "../../../Redux/Customers/Product/Action";
 import styled from "styled-components";
 import ImageIcon from '@mui/icons-material/Image';
 import axios from 'axios'; // Import Axios for making HTTP requests
+// import { JSON } from 'json';
 
 
 const initialSizes = [
@@ -24,20 +25,8 @@ const initialSizes = [
 ];
 
 
-
 const CreateProductForm = () => {
 
-  const handleSizeChange = (e, index) => {
-    let { name, value } = e.target;
-    name==="size_quantity"?name="quantity":name=e.target.name;
-
-    const sizes = [...productData.size];
-    sizes[index][name] = value;
-    setProductData((prevState) => ({
-      ...prevState,
-      size: sizes,
-    }));
-  };
 
   const [productData, setProductData] = useState({
     imageFile: null, // Add image file state
@@ -48,7 +37,7 @@ const CreateProductForm = () => {
     discountedPrice: "",
     price: "",
     discountPersent: "",
-    size: initialSizes,
+    size: (initialSizes),
     quantity: "",
     topLavelCategory: "",
     secondLavelCategory: "",
@@ -56,15 +45,19 @@ const CreateProductForm = () => {
     description: "",
   });
 
-  const dispatch=useDispatch();
-  const jwt=localStorage.getItem("jwt");
+  console.log(productData)
+  const [sizes, setSizes] = useState(initialSizes);
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "imageFile") {
+      setImageFile(e.target.files[0]); // Update imageFile state
       setProductData((prevState) => ({
         ...prevState,
-        [name]: e.target.files[0], // Set image file
+        [name]: e.target.files[0], // Set image file in productData
       }));
     } else {
       setProductData((prevState) => ({
@@ -74,9 +67,35 @@ const CreateProductForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSizeChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedSizes = [...sizes]; // Make a copy of the sizes array
+    updatedSizes[index][name] = value; // Update the corresponding size object
+    setSizes(updatedSizes); // Update the sizes state
+  };
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createProduct({ data: productData, jwt }));
+    const formData = new FormData();
+    formData.append("imageFile", productData.imageFile); // Append image file to form data
+    // Append other product data to form data
+    for (const key in productData) {
+      if (key !== "imageFile") {
+        formData.append(key, productData[key]);
+      }
+    }
+    try {
+      const response = await axios.post("http://localhost:5454/api/admin/products/", formData, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // Handle success
+    } catch (error) {
+      // Handle error
+    }
   };
 
   return (
@@ -303,8 +322,9 @@ const CreateProductForm = () => {
               value={productData.description}
             />
           </Grid>
-          {productData.size.map((size, index) => (
-            <Grid container item spacing={3} >
+          
+          {sizes.map((size, index) => (
+            <Grid container item spacing={3} key={index}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Size Name"
@@ -318,15 +338,21 @@ const CreateProductForm = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Quantity"
-                  name="size_quantity"
+                  name="quantity"
                   type="number"
+                  value={size.quantity}
                   onChange={(event) => handleSizeChange(event, index)}
                   required
                   fullWidth
                 />
-              </Grid> </Grid>
-
+              </Grid>
+            </Grid>
           ))}
+          
+          
+
+
+          
           <Grid item xs={12} >
             <Button
               variant="contained"
@@ -348,7 +374,7 @@ const CreateProductForm = () => {
             </Button> */}
           </Grid>
         </Grid>
-        </form>
+      </form>
 
     </Fragment>
   );

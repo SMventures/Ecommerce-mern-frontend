@@ -21,6 +21,7 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../Redux/Auth/Action';
+import {smlogo} from "../../smlogo.png"
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -183,7 +184,7 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
           >
             <MenuIcon />
           </IconButton>}
-          <Avatar alt="Zosh" src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png" />
+          <Avatar alt="digital Dalal Street" src="smlogo" />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

@@ -62,7 +62,8 @@ export const getSimilarProducts = (category) => async (dispatch) => {
   try {
       dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
 
-      const { data } = await axios.get(`/api/products?category=${category}`);
+      const { data } = await api.get('/api/products/:category/similar');
+      console.log("products by category: ", data);
 
       dispatch({
           type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,

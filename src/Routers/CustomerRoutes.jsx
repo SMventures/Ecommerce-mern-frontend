@@ -2,10 +2,6 @@ import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import ProductDetails from "../customer/Components/Product/ProductDetails/ProductDetails";
 import Product from "../customer/Components/Product/Product/Product";
-import Contact from "../Pages/Contact";
-import TearmsCondition from "../Pages/TearmsCondition";
-import PrivacyPolicy from "../Pages/PrivacyPolicy";
-import About from "../Pages/About";
 import Homepage from "../Pages/Homepage";
 import Navigation from "../customer/Components/Navbar/Navigation";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -22,6 +18,13 @@ import Cart from "../customer/Components/Cart/Cart";
 import Wishlist from "../customer/Components/wishlist/wishlist";
 import SearchResults from "../customer/Components/Home/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
+import FAQ from "../customer/Components/footer/FAQ";
+import About from "../customer/Components/footer/About";
+// import Features from "../customer/Components/footer/Features";
+// import Pricing from "../customer/Components/footer/Pricing";
+// import { Highlight } from "@mui/icons-material";
+// import Highlights from "../customer/Components/footer/Highlights";
+import Terms from "../customer/Components/footer/Terms";
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -43,10 +46,14 @@ const CustomerRoutes = () => {
 
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/home" element={<Homepage />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/privaciy-policy" element={<PrivacyPolicy />}></Route>
-        <Route path="/terms-condition" element={<TearmsCondition />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/FAQ" element={<FAQ />}></Route>
+        <Route path="/About" element={<About />}></Route>
+        <Route path="/Terms" element={<Terms/>}></Route>
+     
+        {/* <Route path="/Features" element={<Features />}></Route>
+        <Route path="/Pricing" element={<Pricing />}></Route>
+        <Route path="/Highlights" element={<Highlights />}></Route>        */}
+        {/* <Route path="/contact" element={<Contact />}></Route> */}
         <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
         <Route path="/product/:productId" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>

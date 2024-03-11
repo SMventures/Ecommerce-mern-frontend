@@ -35,7 +35,7 @@ const SearchResults = () => {
                                     <div className='space-y-2 ml-5'>
                                         <p className='font-semibold opacity-50 text-xs space-x-5'>{product.brand} {product.name}</p>
                                         <p><span>Color: {product.color}</span></p>
-                                        <p>Seller: {product.seller}</p>
+                                        <p>Seller: Sm Ventures</p>
                                         <p>Price: ₹{product.price}</p>
                                     </div>
                                 </div>
