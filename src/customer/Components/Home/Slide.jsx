@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, Divider, styled } from '@mui/material';
 import Countdown from 'react-countdown';
-import { SlideData } from '../../../Data/SlideData';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { findProducts } from '../../../Redux/Customers/Product/Action';
 
 const responsive = {
     desktop: {
@@ -56,22 +57,54 @@ const ViewAllButton = styled(Button)`
 
 const Slide = ({ title, timer }) => {
     const navigate = useNavigate();
+    const [isLoaderOpen, setIsLoaderOpen] = useState(false);
+    const dispatch = useDispatch();
+    const { customersProduct } = useSelector((store) => store);
 
-    const navigateToBooks = () => {
-        navigate("/books");
+    useEffect(() => {
+        if (customersProduct.loading) {
+            setIsLoaderOpen(true);
+        } else {
+            setIsLoaderOpen(false);
+        }
+    }, [customersProduct.loading]);
+
+    useEffect(() => {
+        // Fetch products for the current category
+        dispatch(findProducts(title.toLowerCase().replace(/ /g, "_")));
+    }, [dispatch, title]);
+
+    const handleViewAll = (categoryHref) => {
+        navigate(categoryHref);
     };
 
-    const navigateToWomen = () => {
-        navigate("/women");
-    };
-
+    useEffect(() => {
+      // Fetch products for each category
+      // dispatch(findProducts('books')
     
+      // dispatch(findProducts('electronics'));
+      // dispatch(findProducts('stationery'));
+      // dispatch(findProducts('accessories'));
+      dispatch(findProducts('men_tshirts'));
+      dispatch(findProducts('women_hoodies'));
+    }, [dispatch]);
+  
+  
 
     const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
 
     const renderer = ({ hours, minutes, seconds }) => {
         return <Box variant="span">{hours}:{minutes}:{seconds} Left</Box>;
     };
+
+    console.log("customersProduct:", customersProduct);
+    console.log("products:", customersProduct?.products);
+    console.log("content:", customersProduct?.products?.content);
+
+    // Check if products and content are available before rendering
+    if (!customersProduct || !customersProduct.products || !customersProduct.products.content) {
+        return null; // Render nothing if data is not available yet
+    }
 
     return (
         <Component>
@@ -83,7 +116,7 @@ const Slide = ({ title, timer }) => {
                         <Countdown date={Date.now() + 5.04e+7} renderer={renderer} />
                     </Timer>
                 }
-                <ViewAllButton variant="contained" color="primary" onClick={title === "Women's Collection" ? navigateToWomen : navigateToBooks}>
+                <ViewAllButton variant="contained" color="primary" onClick={() => handleViewAll(`/category/${title.toLowerCase().replace(/ /g, "_")}`)}>
                     View All
                 </ViewAllButton>
             </Deal>
@@ -102,13 +135,13 @@ const Slide = ({ title, timer }) => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {SlideData.map(temp => (
-                    <Box textAlign="center" style={{ padding: '25px 15px' }}>
+                {customersProduct.products.content.map((product) => (
+                    <Box textAlign="center" key={product.id} style={{ padding: '25px 15px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img src={temp.url} alt={temp.title.shortTitle} style={{ width: 'auto', height: 150 }} />
-                            <Typography style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Typography>
-                            <Typography style={{ color: 'green' }}>{temp.discount}</Typography>
-                            <Typography style={{ color: '#212121', opacity: '.6' }}>{temp.tagline}</Typography>
+                            <img src={product.imageUrl} alt={product.title} style={{ width: 'auto', height: 150 }} />
+                            <Typography style={{ fontWeight: 600, color: '#212121' }}>{product.title}</Typography>
+                            <Typography style={{ color: 'green' }}>{product.discount}</Typography>
+                            <Typography style={{ color: '#212121', opacity: '.6' }}>{product.tagline}</Typography>
                         </div>
                     </Box>
                 ))}
@@ -116,5 +149,6 @@ const Slide = ({ title, timer }) => {
         </Component>
     );
 };
+
 
 export default Slide;

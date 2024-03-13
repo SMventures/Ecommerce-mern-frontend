@@ -56,8 +56,8 @@ export const navigation = {
             id: 'Clothing',
             name: 'Clothing',
             items: [
-              { name: 'Tshirts', id: 'men_tshirts' },
-              { name: 'Hoodies', id: 'men_hoodies' },
+              { name: 'Men Tshirts', id: 'men_tshirts' },
+              { name: 'Men Hoodies', id: 'men_hoodies' },
            
             ],
           },
@@ -100,8 +100,8 @@ export const navigation = {
             id: 'Phone_Accessories',
             name: 'Phone Accessories',
             items: [
-              { name: 'Phone Covers', id: '#' },
-              { name: 'Phone Skins', id: '#' },
+              { name: 'Phone Covers', id: 'Phone_Covers' },
+              { name: 'Phone Skins', id: 'Phone_Skins' },
             
             ],
           },

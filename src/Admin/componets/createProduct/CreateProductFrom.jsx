@@ -73,7 +73,7 @@ const CreateProductForm = () => {
     updatedSizes[index][name] = value; // Update the corresponding size object
     setSizes(updatedSizes); // Update the sizes state
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -199,8 +199,8 @@ const CreateProductForm = () => {
                 onChange={handleChange}
                 label="Top Level Category"
               >
-                <MenuItem value="men">Men</MenuItem>
-                <MenuItem value="women">Women</MenuItem>
+                <MenuItem value="Men">Men</MenuItem>
+                <MenuItem value="Women">Women</MenuItem>
                 <MenuItem value="Electronics">Electronics</MenuItem>
                 <MenuItem value="Stationery">Stationery</MenuItem>
                 <MenuItem value="Books">Books</MenuItem>
@@ -218,29 +218,30 @@ const CreateProductForm = () => {
                 onChange={handleChange}
                 label="Second Level Category"
               >
-                {productData.topLavelCategory === "men" && (
-
+                {productData.topLavelCategory === "Men" && (
                   <MenuItem value="Clothing">Clothing</MenuItem>
-
                 )}
-                {productData.topLavelCategory === "women" && (
-
+                {productData.topLavelCategory === "Women" && (
                   <MenuItem value="Clothing">Clothing</MenuItem>
-
                 )}
                 {productData.topLavelCategory === "Stationery" && (
                   <MenuItem value="Stationery_Items">Stationery Items</MenuItem>
                 )}
                 {productData.topLavelCategory === "Accessories" && [
-
-                  <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
-                  <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
-
+                
+                    <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
+                    <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
+                
                 ]}
                 {productData.topLavelCategory === "Electronics" && (
-                  <MenuItem value="Electronic_Items">Electronic Items</MenuItem>
+                  <MenuItem value="Electronics_Items">Electronic Items</MenuItem>
+                )}
+                {productData.topLavelCategory === "Books" && (
+              
+                    <MenuItem value="Trading_Books">Trading Books</MenuItem>
                 )}
               </Select>
+
             </FormControl>
           </Grid>
           <Grid item xs={6} sm={4}>
@@ -254,12 +255,12 @@ const CreateProductForm = () => {
               >
                 {productData.secondLavelCategory === "Clothing" && [
                   <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
-                  <MenuItem value="men_hoodies">Men Hoodies</MenuItem>,
+                  <MenuItem value="men_hoodies"> Men Hoodies</MenuItem>,
                   <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
                   <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
                 ]}
 
-                if {productData.secondLavelCategory === "Stationery_Items" && [
+                {productData.secondLavelCategory === "Stationery_Items" && [
 
 
                   <MenuItem value="Pen">Pen</MenuItem>,
@@ -322,7 +323,7 @@ const CreateProductForm = () => {
               value={productData.description}
             />
           </Grid>
-          
+
           {sizes.map((size, index) => (
             <Grid container item spacing={3} key={index}>
               <Grid item xs={12} sm={6}>
@@ -348,11 +349,11 @@ const CreateProductForm = () => {
               </Grid>
             </Grid>
           ))}
-          
-          
 
 
-          
+
+
+
           <Grid item xs={12} >
             <Button
               variant="contained"
