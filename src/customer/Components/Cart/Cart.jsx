@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCart } from "../../../Redux/Customers/Cart/Action";
+import { blue } from '@mui/material/colors';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,10 @@ const Cart = () => {
             onClick={() => navigate("/checkout?step=2")}
             variant="contained"
             type="submit"
-            sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
+            sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%",  backgroundColor:blue[700], // Change the background color to blue
+            "&:hover": {
+              backgroundColor: blue[500] // Change the background color on hover
+            } }}
           >
             Check Out
           </Button>

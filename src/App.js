@@ -15,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/*" element={<CustomerRoutes />} />
         <Route path="/admin/*" element={<AdminPannel />} />
+        <Route path="*" element={<NotFound />} /> {/* Add this route */}
+
         
       </Routes>
     </div>

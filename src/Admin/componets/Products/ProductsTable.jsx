@@ -206,7 +206,7 @@ const ProductsTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customersProduct?.products?.content?.map((item) => (
+            {customersProduct?.products?.content?.map((item) => (
                 <TableRow
                   hover
                   key={item.name}

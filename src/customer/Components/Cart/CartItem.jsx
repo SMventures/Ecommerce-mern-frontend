@@ -5,6 +5,7 @@ import { removeCartItem, updateCartItem } from "../../../Redux/Customers/Cart/Ac
 import { IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { blue } from '@mui/material/colors';
 
 const CartItem = ({ item,showButton }) => {
   const dispatch = useDispatch();
@@ -46,18 +47,18 @@ const CartItem = ({ item,showButton }) => {
       </div>
      {showButton&& <div className="lg:flex items-center lg:space-x-10 pt-4">
         <div className="flex items-center space-x-2 ">
-          <IconButton onClick={()=>handleUpdateCartItem(-1)} disabled={item?.quantity<=1} color="primary" aria-label="add an alarm">
+          <IconButton onClick={()=>handleUpdateCartItem(-1)} disabled={item?.quantity<=1} style={{ color: blue[700] }} aria-label="add an alarm">
             <RemoveCircleOutlineIcon />
           </IconButton>
 
           <span className="py-1 px-7 border rounded-sm">{item?.quantity}</span>
-          <IconButton onClick={()=>handleUpdateCartItem(1)} color="primary" aria-label="add an alarm">
+          <IconButton onClick={()=>handleUpdateCartItem(1)} style={{ color: blue[700] }} aria-label="add an alarm">
             <AddCircleOutlineIcon />
           </IconButton>
         </div>
         <div className="flex text-sm lg:text-base mt-5 lg:mt-0">
           
-          <Button onClick={handleRemoveItemFromCart} variant="text">
+          <Button onClick={handleRemoveItemFromCart} variant="text" style={{ color: blue[800] }}>
             Remove{" "}
           </Button>
           

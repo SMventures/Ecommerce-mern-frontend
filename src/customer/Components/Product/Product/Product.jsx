@@ -64,7 +64,7 @@ export default function Product() {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
     const query = searchParams.toString();
-    navigate({ search: `?${query}` });
+    navigate({ search: `?${query}` });     
   };
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);

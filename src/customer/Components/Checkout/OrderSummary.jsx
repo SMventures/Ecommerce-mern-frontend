@@ -74,7 +74,7 @@ const handleCreatePayment=()=>{
               onClick={handleCreatePayment}
               variant="contained"
               type="submit"
-              sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
+                  sx={{ mt: 2, backgroundColor: "#2874f0", padding: ".9rem 1.5rem", color: "white" }}
             >
               Payment
             </Button>

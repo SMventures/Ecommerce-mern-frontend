@@ -78,6 +78,7 @@ console.log("step",step)
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
+
               disabled={step == 2}
               onClick={handleBack}
               sx={{ mr: 1 }}

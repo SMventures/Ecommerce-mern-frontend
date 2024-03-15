@@ -16,6 +16,9 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
+  SEARCH_PRODUCT_REQUEST,
+  SEARCH_PRODUCT_SUCCESS,
+  SEARCH_PRODUCT_FAILURE
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
@@ -55,6 +58,24 @@ export const findProducts = (reqData) => async (dispatch) => {
     });
   }
 };
+export const getSimilarProducts = (category) => async (dispatch) => {
+  try {
+      dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+
+      const { data } = await api.get('/api/products/:category/similar');
+      console.log("products by category: ", data);
+
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
+          payload: data,
+      });
+  } catch (error) {
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
+          payload: error.response.data.message,
+      });
+  }
+};
 
 export const findProductById = (reqData) => async (dispatch) => {
   try {
@@ -78,9 +99,35 @@ export const findProductById = (reqData) => async (dispatch) => {
   }
 };
 
+
+export const searchProduct = (query) => async (dispatch) => {
+  try {
+    dispatch({ type: SEARCH_PRODUCT_REQUEST });
+    console.log("searching for product - ", data);
+
+    const { data } = await api.get(`/api/products/search/${query}`);
+    console.log(data,"searched products");
+
+    dispatch({
+      type: SEARCH_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SEARCH_PRODUCT_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}; 
+
+
 export const createProduct = (product) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_PRODUCT_REQUEST });
+    console.log( "creating new product",product.data);
 
     const { data } = await api.post(
       `${API_BASE_URL}/api/admin/products/`,

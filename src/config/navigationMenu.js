@@ -1,18 +1,18 @@
 export const navigation = {
     categories: [
-      {
+      {imageSrc:"https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100",
         id: 'Women',
         name: 'Women',
         featured: [
           {
             name: 'New Arrivals',
-            href: '/',
+            href: 'women/clothing/Hoodies',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
           },
           {
             name: 'Basic Tees',
-            href: '/',
+            href: 'women/clothing/Tshirts',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
           },
@@ -33,6 +33,7 @@ export const navigation = {
         ],
       },
       {
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100',
         id: 'Men',
         name: 'Men',
         featured: [
@@ -55,8 +56,8 @@ export const navigation = {
             id: 'Clothing',
             name: 'Clothing',
             items: [
-              { name: 'Tshirts', id: 'men_tshirts' },
-              { name: 'Hoodies', id: 'men_hoodies' },
+              { name: 'Men Tshirts', id: 'men_tshirts' },
+              { name: 'Men Hoodies', id: 'men_hoodies' },
            
             ],
           },
@@ -65,8 +66,10 @@ export const navigation = {
         ],
       },
       {
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100',
         id: 'Accessories',
         name: 'Accessories',
+      
         featured: [
           {
             name: 'New Arrivals',
@@ -97,8 +100,8 @@ export const navigation = {
             id: 'Phone_Accessories',
             name: 'Phone Accessories',
             items: [
-              { name: 'Phone Covers', id: '#' },
-              { name: 'Phone Skins', id: '#' },
+              { name: 'Phone Covers', id: 'Phone_Covers' },
+              { name: 'Phone Skins', id: 'Phone_Skins' },
             
             ],
           },
@@ -109,6 +112,9 @@ export const navigation = {
       {
         id: 'Stationery',
         name: 'Stationery',
+        imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100',
+        imageAlt: 'stationery',
+
         featured: [
           {
             name: 'New Arrivals',
@@ -144,7 +150,7 @@ export const navigation = {
          
         ],
       },
-      {
+      {imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100',
         id: 'Books',
         name: 'Books',
         featured: [
@@ -181,7 +187,7 @@ export const navigation = {
          
         ],
       },
-      {
+      {imageSrc: 'https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100',
         id: 'Electronics',
         name: 'Electronics',
         featured: [
