@@ -1,7 +1,19 @@
-export const dressPage1 = [
+import {blacktrader} from "../../media"
+import {bluebook} from "../../media"
+import {blue_book} from "../../media"
+import {book1_Fo5dpVq} from "../../media"
+import {book2_qeNgfss} from "../../media"
+import {candlestick_guide} from "../../media"
+import {combos1} from "../../media"
+import {currencytrading} from "../../media"
+import {how_to_make_money} from "../../media"
+import {how_to_trade_2} from "../../media"
+
+
+export const books = [
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/l0wrafk0/dress/l/2/o/3xl-m2s13003-peach-madame-original-imagchhhwbypcann.jpeg?q=70",
+     <blacktrader.jpg/>,
     "brand": "MADAME",
     "title": "Women Asymmetric Pink Dress",
     "color": "",
@@ -31,7 +43,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/1/h/g/m-pw333-purshottam-wala-original-imag8zf6ybkmhehy-bb.jpeg?q=70",
+      <bluebook.jpg/>,
     "brand": "Daevish",
     "title": "Women Maxi Blue Dress",
     "color": "",
@@ -61,7 +73,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/z/s/i/s-a1-zwerlon-original-imagn9uycxbhshur.jpeg?q=70",
+      <blue_book.jpg/>,
     "brand": "ZWERLON",
     "title": "Women A-line Purple Dress",
     "color": "",
@@ -91,7 +103,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/q/7/v/s-pwd322-purshottam-wala-original-imagm7ypaavduvnm.jpeg?q=70",
+      <book1_Fo5dpVq.jpg/>,
     "brand": "Purshottam Wala",
     "title": "Women Fit and Flare Black Dress",
     "color": "",
@@ -122,7 +134,7 @@ export const dressPage1 = [
   
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/e/a/p/s-pwd322-purshottam-wala-original-imagm6ywr7vz95sz.jpeg?q=70",
+      <book2_qeNgfss.jpg/>,
     "brand": "Purshottam Wala",
     "title": "Women Fit and Flare Blue Dress",
     "color": "",
@@ -152,7 +164,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/kdlzte80/ethnic-set/p/f/q/l-3209-mint-02-neysa-original-imafuh85unfjczkd.jpeg?q=70",
+      <bulltshit.jpg/>,
     "brand": "NEYSA",
     "title": "Women Two Piece Dress Light Green Dress",
     "color": "",
@@ -182,7 +194,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/l0igvww0/dress/g/p/u/xl-wd-1001-leriya-fashion-original-imagc9zbhfhsy33w.jpeg?q=70",
+      <candlestick_guide.jpg/>,
     "brand": "Leriya Fashion",
     "title": "Women A-line Maroon Dress",
     "color": "",
@@ -212,7 +224,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/l2hwwi80/dress/6/q/q/l-310tk6042-selvia-original-imagdtyyqfy7ahwf.jpeg?q=70",
+      <combos1.jpg/>,
     "brand": "Selvia",
     "title": "Women A-line Black Dress",
     "color": "",
@@ -242,7 +254,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/a/c/m/l-3261-buynewtrend-original-imagnrpdhdeke5be.jpeg?q=70",
+      <currencytrading.jpg/>,
     "brand": "BuyNewTrend",
     "title": "Women Sheath Dark Blue Dress",
     "color": "",
@@ -272,7 +284,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/kuyf8nk0/dress/x/4/c/s-21auw15994-116106-w-original-imag7ymmr5gggzzg.jpeg?q=70",
+      <how_to_make_money.jpg/>,
     "brand": "W",
     "title": "Women A-line Green, White Dress",
     "color": "",
@@ -302,7 +314,7 @@ export const dressPage1 = [
   },
   {
     "imageUrl":
-      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/9/f/g/xl-271-shivay-style-original-imafnf5ne9wqyw6n-bb.jpeg?q=70",
+      <how_to_trade_2.jpg/>,
     "brand": "Sheetal Associates",
     "title": "Women Maxi Grey Dress",
     "color": "",

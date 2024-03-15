@@ -1,8 +1,18 @@
-export const mensPantsPage1=[
+import bag1 from '../../media/product/bag1.jpg'
+import black_hoodie from '../../media/product/black_hoodie.jpg'
+import black_laptopcover from '../../media/product/black_laptopcover.jpg'
+import black_stock_tshirt from '../../media/product/black_stock_tshirt.jpg'
+import blue_hoodie from '../../media/product/blue_hoodie.jpg'
+import calender from '../../media/product/calender.jpg'
+import camera from '../../media/product/camera.jpg'
+import diary1 from '../../media/product/dairy1.jpg'
+import headphn from '../../media/product/headphn.jpg'
+import keyboard from '../../media/product/keyboard.jpg'
+export const NewArrivals=[
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/kb1470w0/jean/x/r/a/30-11274626-roadster-original-imafsgsthk6gdpjg.jpeg?q=70",
-        "brand": "Roadster",
-        "title": "Men Regular Mid Rise Blue Jeans",
+        "image": bag1,
+        "brand": "SM Ventures",
+        "title": "Trading Bag",
         "color": "blue",
         "discountedPrice": 591,
         "price": 1159,
@@ -29,9 +39,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/v/c/n/30-586035-v-mart-original-imagmh7fzah3r2jj.jpeg?q=70",
-        "brand": "V-MART",
-        "title": "Men Slim Mid Rise Grey Jeans",
+        "image": black_hoodie,
+        "brand": "SM Ventures",
+        "title": "Black stock hoodie",
         "color": "",
         "discountedPrice": 398,
         "price": 3999,
@@ -57,9 +67,9 @@ export const mensPantsPage1=[
 ,        "disscount":49
    },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/1/4/v/-original-imaggjcyhzz4myqh.jpeg?q=70",
-        "brand": "KILLER",
-        "title": "Men Slim Mid Rise Dark Blue Jeans",
+        "imageUrl": black_laptopcover,
+        "brand": "SM",
+        "title": "Laptop cover",
         "color": "",
         "discountedPrice": 959,
         "price": 319,
@@ -86,7 +96,7 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/jean/n/u/3/bmw-darklevis-ben-martin-32-original-imaedpc4zcgjadsv.jpeg?q=70",
+        "image": black_stock_tshirt,
         "brand": "BEN MARTIN",
         "title": "Men Regular Mid Rise Dark Blue Jeans",
         "color": "",
@@ -115,9 +125,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/r/g/f/32-18298-1258-levi-s-original-imaggz3fnw5cdphp.jpeg?q=70",
-        "brand": "LEVI'S",
-        "title": "511 Men Slim Mid Rise Blue Jeans",
+        "image": blue_hoodie,
+        "brand": "SM",
+        "title": "Blue Trading hoodie",
         "color": "",
         "discountedPrice": 1499,
         "price": 3199,
@@ -144,9 +154,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/i/l/0/-original-imagzhdnczq6gfrg.jpeg?q=70",
-        "brand": "BEING HUMAN",
-        "title": "Men Slim Mid Rise Black Jeans",
+        "imageUrl": calender,
+        "brand": "SM",
+        "title": "Trading calneder",
         "color": "",
         "discountedPrice": 899,
         "price": 2999,
@@ -173,9 +183,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/d/v/v/-original-imagjczbguefwqhc.jpeg?q=70",
-        "brand": "LEVI'S",
-        "title": "511 Men Slim Mid Rise Blue Jeans",
+        "image": camera,
+        "brand": "SM",
+        "title": "Trading camera",
         "color": "",
         "discountedPrice": 1199,
         "price": 2899,
@@ -202,9 +212,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/jsc3ssw0/jean/a/g/g/30-6772714-roadster-original-imafdwqhsttggqqh.jpeg?q=70",
-        "brand": "Roadster",
-        "title": "Men Regular Mid Rise Blue Jeans",
+        "imageUrl": diary1,
+        "brand": "SM",
+        "title": "Trading diary",
         "color": "",
         "discountedPrice": 549,
         "price": 1699,
@@ -231,9 +241,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/l4zxn680/jean/u/z/3/32-18298-1256-levi-s-original-imagfrtwbdpke7nq.jpeg?q=70",
-        "brand": "LEVI'S",
-        "title": "511 Men Slim Mid Rise Blue Jeans",
+        "image": headphn,
+        "brand": "SM",
+        "title": "Headphn",
         "color": "",
         "discountedPrice": 1099,
         "price": 3199,
@@ -260,9 +270,9 @@ export const mensPantsPage1=[
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/u/a/r/-original-imaghsebzzwwghem.jpeg?q=70",
-        "brand": "PETER ENGLAND",
-        "title": "Men Skinny Mid Rise Blue Jeans",
+        "imageUrl": keyboard,
+        "brand": "SM",
+        "title": "Trading Keyboard",
         "color": "",
         "discountedPrice": 799,
         "price": 1999,

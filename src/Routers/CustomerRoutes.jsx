@@ -15,7 +15,7 @@ import PaymentSuccess from "../customer/Components/paymentSuccess/PaymentSuccess
 import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
 import Search from "../customer/Components/Home/Search";
 import Cart from "../customer/Components/Cart/Cart";
-import Wishlist from "../customer/Components/wishlist/wishlist";
+
 import SearchResults from "../customer/Components/Home/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
@@ -25,6 +25,7 @@ import About from "../customer/Components/footer/About";
 // import { Highlight } from "@mui/icons-material";
 // import Highlights from "../customer/Components/footer/Highlights";
 import Terms from "../customer/Components/footer/Terms";
+import Wishlist from "../customer/Components/Wishlist/Wishlistt";
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -65,6 +66,7 @@ const CustomerRoutes = () => {
         {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
         <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/SearchResults/:query" element ={<SearchResults />} />
+        <Route path="/wishlist" element={<Wishlist />}></Route>
 
         <Route path="/my-component" element={<MyComponent />} />
 

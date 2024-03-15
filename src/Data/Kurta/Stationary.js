@@ -1,6 +1,18 @@
-export const kurtaPage1=[
+import bag1 from '../../media/product/bag1.jpg'
+import bag2 from '../../media/product/bag2.jpg'
+import calender from '../../media/product/calender.jpg'
+import diary from '../../media/product/diary.jpg'
+import diary1 from '../../media/product/dairy1.jpg'
+import diary2 from '../../media/product/diary2.jpg'
+import diary3 from '../../media/product/diary3.jpg'
+import highlighter from '../../media/product/highlighter.jpg'
+import pen1 from '../../media/product/pen1.jpg'
+import pen2 from '../../media/product/pen2.jpg'
+
+export const 
+Stationary=[
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/b/4/m/m-na-kurta-set-010-rama-woxen-original-imagzkgg8mnyxmcg.jpeg?q=70",
+        "image": bag1.jpg,
         "brand": "WOXEN",
         "title": "Women Kurta and Pant Set Art Silk",
         "color": "",
@@ -10,7 +22,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/2/l/r/l-6909-blue-libas-original-imafygzxftqzszfx-bb.jpeg?q=70",
+        "image": bag2.jpg,
         "brand": "LIBAS",
         "title": "Women Kurta and Palazzo Set Cotton Blend",
         "color": "",
@@ -20,7 +32,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l3t2fm80/ethnic-set/o/q/7/m-9kbd183-samah-original-imageuh5a8hgwusj.jpeg?q=70",
+        "image": calender.jpg,
         "brand": "Samah",
         "title": "Women Kurta, Pant And Dupatta Set Silk Blend, Cotton Bl...",
         "color": "",
@@ -30,7 +42,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l2z26q80/ethnic-set/s/n/m/xxl-blue-indigoset-klosia-original-image7c4dckmy2tt.jpeg?q=70",
+        "image": diary.jpg,
         "brand": "Klosia",
         "title": "Women Kurta, Pant And Dupatta Set Viscose Rayon",
         "color": "",
@@ -40,7 +52,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l0mr7gw0/ethnic-set/e/r/w/m-palazoo-set-kenix-world-original-imagcdtgpszm7cdy.jpeg?q=70",
+        "image": diary1.jpg,
         "brand": "shoecom",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
@@ -50,7 +62,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/c/t/z/l-vj-1-maroon-dupatta-set-prisca-original-imagb7evryurffsz-bb.jpeg?q=70",
+        "image": diary2.jpg,
         "brand": "PRISCA",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
@@ -60,7 +72,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l4u7vrk0/ethnic-set/u/h/4/m-e916-the-style-story-original-imagfmqguehvhen3.jpeg?q=70",
+        "image": diary3.jpg,
         "brand": "The Style Story",
         "title": "Women Kurta, Pyjama & Dupatta Set Viscose Rayon",
         "color": "",
@@ -70,7 +82,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/j/t/a/xl-mk-01-peech-marudhara-original-imagzwze8huxjfgf.jpeg?q=70",
+        "image":highlighter.jpg,
         "brand": "Marudhara",
         "title": "Women Kurta and Pant Set Pure Cotton",
         "color": "",
@@ -80,7 +92,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/l/7/u/l-vfku1833skd-vbuyz-original-imaggtqkmyvjzjey.jpeg?q=70",
+        "image": pen1.jpg,
         "brand": "Vbuyz",
         "title": "Women Kurta, Pant And Dupatta Set Pure Cotton",
         "color": "",
@@ -90,7 +102,7 @@ export const kurtaPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/f/7/h/xxl-riya-blue-klosia-original-imagghg2ufvshyfr.jpeg?q=70",
+        "image": pen2.jpg,
         "brand": "Klosia",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",

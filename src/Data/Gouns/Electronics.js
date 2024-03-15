@@ -1,6 +1,14 @@
-export const gounsPage1=[
+import camera from '../../media/product/camera.jpg'
+import headphn from '../../media/product/headphn.jpg'
+import keyboard from '../../media/product/keyboard.jpg'
+import mouse1 from '../../media/product/mouse1.jpg'
+import mouse2_sJZ6cc4 from '../../media/product/mouse2_sJZ6cc4.jpg'
+import mouse3_4EO7OJV from '../../media/product/mouse3_4EO7OJV.jpg'
+import mouse4_Islr2hH from '../../media/product/mouse4_Islr2hH.jpg'
+import usb from '../../media/product/usb.jpg'
+export const Electronics=[
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/kw5ag7k0/kurta/f/j/g/xxl-sg1011-sanganeri-feb-original-imag8w9xbbakjkju.jpeg?q=70",
+        "image": camera.jpg,
         "brand": "Riya Creation",
         "title": "Houndstooth Rayon Blend Stitched Anarkali Gown",
         "color": "Blue",
@@ -10,7 +18,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/gown/9/5/7/na-s-3-4-sleeve-stitched-sho31krred-saponharsh-na-original-imagmufurbc2znpg.jpeg?q=70",
+        "image": headphn.jpg,
         "brand": "SAPONHARSH",
         "title": "Printed Viscose Rayon Stitched Anarkali Gown",
         "color": "Red",
@@ -20,7 +28,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/kzfvzww0/gown/l/z/g/16-s-short-sleeve-stitched-gown-badami-ne-style-60-original-imagbg8m9dpz4wtw.jpeg?q=70",
+        "image": keyboard.jpg,
         "brand": "NE STYLE",
         "title": "Printed Crepe Stitched Anarkali Gown",
         "color": "Beige",
@@ -30,7 +38,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/kzfvzww0/gown/l/z/g/16-s-short-sleeve-stitched-gown-badami-ne-style-60-original-imagbg8m9dpz4wtw.jpeg?q=70",
+        "image": mouse1.jpg,
         "brand": "NE STYLE",
         "title": "Printed Crepe Stitched Anarkali Gown",
         "color": "Beige",
@@ -40,7 +48,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/kzfvzww0/gown/n/t/z/17-xl-short-sleeve-stitched-gown-rama-green-ne-style-60-original-imagbg8mwdhswgzh.jpeg?q=70",
+        "image": mouse2_sJZ6cc4.jpg,
         "brand": "NE STYLE",
         "title": "Printed Crepe Stitched Anarkali Gown",
         "color": "Light Green",
@@ -50,7 +58,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/kzfvzww0/gown/v/z/l/18-l-short-sleeve-stitched-gown-nevy-blue-trikon-ne-style-60-original-imagbg8jhfhkjynd.jpeg?q=70",
+        "image": mouse3_4EO7OJV.jpg,
         "brand": "NE STYLE",
         "title": "Printed Crepe Stitched Anarkali Gown",
         "color": "Dark Blue",
@@ -60,7 +68,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shopsy-gown/q/b/k/free-half-sleeve-semi-stitched-ss-ng-1-r4mila-original-imaggnskhergruu4.jpeg?q=70",
+        "image": mouse4_Islr2hH.jpg,
         "brand": "Zinariya Fab",
         "title": "Embroidered Net Semi Stitched Anarkali Gown",
         "color": "Pink",
@@ -70,7 +78,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/gown/8/r/g/na-xxl-sleeveless-stitched-grey-gown-m-glfashion-na-original-imagnzkhprbhezpf.jpeg?q=70",
+        "image": usb.jpg,
         "brand": "GLFashion",
         "title": "Solid Rayon Blend Stitched Anarkali Gown",
         "color": "Grey",
@@ -80,7 +88,7 @@ export const gounsPage1=[
         "size": ""
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shopsy-gown/k/j/p/free-half-sleeve-semi-stitched-ngb-09-life-sky-original-imag5gtdzhh8g7bn.jpeg?q=70",
+        "image": "https://th.bing.com/th/id/OIP.n29innqB_lGtNhLKGSdvoAHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         "brand": "Zinariya Fab",
         "title": "Embroidered Net Semi Stitched Anarkali Gown",
         "color": "Pink",
