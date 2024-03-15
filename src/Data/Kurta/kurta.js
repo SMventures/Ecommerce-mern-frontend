@@ -1,114 +1,1175 @@
+import bag1 from '../media/product/bag1.jpg'
+import black_hoodie from '../media/product/black_hoodie.jpg'
+import black_laptopcover from '../media/product/black_laptopcover.jpg'
+import black_stock_tshirt from '../media/product/black_stock_tshirt.jpg'
+import blue_hoodie from '../media/product/blue_hoodie.jpg'
+import calender from '../media/product/calender.jpg'
+import camera from '../media/product/camera.jpg'
+import diary1 from '../media/product/dairy1.jpg'
+import headphn from '../media/product/headphn.jpg'
+import keyboard from '../media/product/keyboard.jpg'
 export const kurtaPage1=[
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/b/4/m/m-na-kurta-set-010-rama-woxen-original-imagzkgg8mnyxmcg.jpeg?q=70",
-        "brand": "WOXEN",
-        "title": "Women Kurta and Pant Set Art Silk",
-        "color": "",
-        "selling_price": "₹699",
-        "price": "₹2,899",
-        "disscount": "75% off",
-        "size": ""
+        "image": bag1,
+        "brand": "SM Ventures Ventures",
+        "title": "Trading Bag",
+        "color": "blue",
+        "discountedPrice": 591,
+        "price": 1159,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 63
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/2/l/r/l-6909-blue-libas-original-imafygzxftqzszfx-bb.jpeg?q=70",
-        "brand": "LIBAS",
-        "title": "Women Kurta and Palazzo Set Cotton Blend",
+        "image": black_hoodie,
+        "brand": "SM Ventures Ventures",
+        "title": "Black stock hoodie",
         "color": "",
-        "selling_price": "₹1,082",
-        "price": "₹2,799",
-        "disscount": "61% off",
-        "size": ""
+        "discountedPrice": 398,
+        "price": 3999,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount":49
+   },
+    {
+        "imageUrl": black_laptopcover,
+        "brand": "SM Ventures",
+        "title": "Laptop cover",
+        "color": "",
+        "discountedPrice": 959,
+        "price": 319,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l3t2fm80/ethnic-set/o/q/7/m-9kbd183-samah-original-imageuh5a8hgwusj.jpeg?q=70",
-        "brand": "Samah",
-        "title": "Women Kurta, Pant And Dupatta Set Silk Blend, Cotton Bl...",
+        "image": black_stock_tshirt,
+        "brand": "BEN MARTIN",
+        "title": "Men Regular Mid Rise Dark Blue Jeans",
         "color": "",
-        "selling_price": "₹702",
-        "price": "₹3,997",
-        "disscount": "82% off",
-        "size": ""
+        "discountedPrice": 499,
+        "price": 1399,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 64
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l2z26q80/ethnic-set/s/n/m/xxl-blue-indigoset-klosia-original-image7c4dckmy2tt.jpeg?q=70",
-        "brand": "Klosia",
-        "title": "Women Kurta, Pant And Dupatta Set Viscose Rayon",
+        "image": blue_hoodie,
+        "brand": "SM Ventures",
+        "title": "Blue Trading hoodie",
         "color": "",
-        "selling_price": "₹664",
-        "price": "₹2,999",
-        "disscount": "77% off",
-        "size": ""
+        "discountedPrice": 1499,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 55
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l0mr7gw0/ethnic-set/e/r/w/m-palazoo-set-kenix-world-original-imagcdtgpszm7cdy.jpeg?q=70",
-        "brand": "shoecom",
-        "title": "Women Kurta and Palazzo Set Viscose Rayon",
+        "imageUrl": calender,
+        "brand": "SM Ventures",
+        "title": "Trading calneder",
         "color": "",
-        "selling_price": "₹433",
-        "price": "₹2,995",
-        "disscount": "85% off",
-        "size": ""
+        "discountedPrice": 899,
+        "price": 2999,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/c/t/z/l-vj-1-maroon-dupatta-set-prisca-original-imagb7evryurffsz-bb.jpeg?q=70",
-        "brand": "PRISCA",
-        "title": "Women Kurta and Pant Set Viscose Rayon",
+        "image": camera,
+        "brand": "SM Ventures",
+        "title": "Trading camera",
         "color": "",
-        "selling_price": "₹779",
-        "price": "₹1,299",
-        "disscount": "40% off",
-        "size": ""
+        "discountedPrice": 1199,
+        "price": 2899,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 60
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/l4u7vrk0/ethnic-set/u/h/4/m-e916-the-style-story-original-imagfmqguehvhen3.jpeg?q=70",
-        "brand": "The Style Story",
-        "title": "Women Kurta, Pyjama & Dupatta Set Viscose Rayon",
+        "imageUrl": diary1,
+        "brand": "SM Ventures",
+        "title": "Trading diary",
         "color": "",
-        "selling_price": "₹748",
-        "price": "₹1,999",
-        "disscount": "62% off",
-        "size": ""
+        "discountedPrice": 549,
+        "price": 1699,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 67
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/j/t/a/xl-mk-01-peech-marudhara-original-imagzwze8huxjfgf.jpeg?q=70",
-        "brand": "Marudhara",
-        "title": "Women Kurta and Pant Set Pure Cotton",
+        "image": headphn,
+        "brand": "SM Ventures",
+        "title": "Headphn",
         "color": "",
-        "selling_price": "₹499",
-        "price": "₹1,999",
-        "disscount": "75% off",
-        "size": ""
+        "discountedPrice": 1099,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 67
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/l/7/u/l-vfku1833skd-vbuyz-original-imaggtqkmyvjzjey.jpeg?q=70",
-        "brand": "Vbuyz",
-        "title": "Women Kurta, Pant And Dupatta Set Pure Cotton",
+        "imageUrl": keyboard,
+        "brand": "SM Ventures",
+        "title": "Trading Keyboard",
         "color": "",
-        "selling_price": "₹1,540",
-        "price": "₹5,799",
-        "disscount": "73% off",
-        "size": ""
+        "discountedPrice": 799,
+        "price": 1999,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 60
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/f/7/h/xxl-riya-blue-klosia-original-imagghg2ufvshyfr.jpeg?q=70",
-        "brand": "Klosia",
-        "title": "Women Kurta and Palazzo Set Viscose Rayon",
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/l/d/x/-original-imaghhum2vxpnjuz.jpeg?q=70",
+        "brand": "Roadster",
+        "title": "Men Skinny Mid Rise Black Jeans",
         "color": "",
-        "selling_price": "₹664",
-        "price": "₹2,999",
-        "disscount": "77% off",
-        "size": ""
+        "discountedPrice": 674,
+        "price": 1799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 62
+        
     },
     {
-        "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/ethnic-set/2/b/b/xxl-20257o-blue-libas-original-imag6xze3wpu7w4h-bb.jpeg?q=70",
-        "brand": "LIBAS",
-        "title": "Women Kurta and Palazzo Set Silk Blend",
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/9/j/e/32-586037-v-mart-original-imagmh6sychbwrn9.jpeg?q=70",
+        "brand": "V-MART",
+        "title": "Men Slim Mid Rise Grey Jeans",
         "color": "",
-        "selling_price": "₹1,557",
-        "price": "₹3,499",
-        "disscount": "55% off",
-        "size": ""
+        "discountedPrice": 359,
+        "price": 399,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 10
+        
     },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/p/y/d/30-udjeno0707-u-s-polo-assn-denim-co-original-imagm7yycjq7xznz.jpeg?q=70",
+        "brand": "U.S. POLO ASSN.",
+        "title": "Men Slim Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 919,
+        "price": 2299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 60
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/9/v/8/32-kjb-1389-slnkft-bl-killer-original-imagnwdsn66aprj7.jpeg?q=70",
+        "brand": "KILLER",
+        "title": "Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1149,
+        "price": 3299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 65
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/e/z/u/-original-imagh292y5jphfqq.jpeg?q=70",
+        "brand": "LEVI'S",
+        "title": "511 Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1199,
+        "price": 2899,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 60
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/n/q/y/-original-imaghzuqgugbczzc.jpeg?q=70",
+        "brand": "Pepe Jeans",
+        "title": "Men Regular Low Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1099,
+        "price": 3599,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/s/c/o/30-5669588-roadster-original-imafw2g8cujdwg7j-bb.jpeg?q=70",
+        "brand": "Roadster",
+        "title": "Men Regular Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 644,
+        "price": 1499,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 57
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/r/t/g/36-611030-v-mart-original-imagzbd2uagg7ykz.jpeg?q=70",
+        "brand": "V-MART",
+        "title": "Men Regular Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 549,
+        "price": 599,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 8
+       
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/kkh6zrk0/jean/s/s/y/40-1-bm-jj3-ben-martin-original-imafzt47zuejkugw.jpeg?q=70",
+        "brand": "BEN MARTIN",
+        "title": "Men Regular Mid Rise White Jeans",
+        "color": "",
+        "discountedPrice": 499,
+        "price": 2999,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 83
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/s/f/a/32-ecro-01bb-004-spykar-original-imagggrecqhgnwaq.jpeg?q=70",
+        "brand": "Spykar",
+        "title": "Men Slim Low Rise Dark Blue Jeans",
+        "color": "",
+        "discountedPrice": 1149,
+        "price": 3299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 65
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/2/x/n/32-586038-v-mart-original-imagmh6runwyyfab.jpeg?q=70",
+        "brand": "V-MART",
+        "title": "Men Slim Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 379,
+        "price": 399,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 5
+       
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/8/7/3/34-tiagun-medgrey-studio-nexx-original-imagz4an3uc9mz5h.jpeg?q=70",
+        "brand": "STUDIO NEXX",
+        "title": "Men Regular Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 579,
+        "price": 1499,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 61
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/m/n/b/-original-imagjcgksxjfhq9m.jpeg?q=70",
+        "brand": "LEVI'S",
+        "title": "512 Men Tapered Fit Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1499,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 55
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/f/p/v/30-hljn000893-highlander-original-imafpchpxfrurgvr-bb.jpeg?q=70",
+        "brand": "HIGHLANDER",
+        "title": "Men Slim Mid Rise Black Jeans",
+        "color": "",
+        "discountedPrice": 475,
+        "price": 1299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 63
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/q/n/b/-original-imaggcq3fqzt9sgb.jpeg?q=70",
+        "brand": "Peter England University",
+        "title": "Men Skinny Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 719,
+        "price": 1799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 60
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/d/b/o/-original-imaghzupjuhygzpe.jpeg?q=70",
+        "brand": "Pepe Jeans",
+        "title": "Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1099,
+        "price": 3599,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/j/3/9/32-kjb-1397-anklft-indg-killer-original-imagnrpetfjjw9wx.jpeg?q=70",
+        "brand": "KILLER",
+        "title": "Men Slim Mid Rise Dark Blue Jeans",
+        "color": "",
+        "discountedPrice": 1149,
+        "price": 3299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 65
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/r/p/e/30-grey-basic-shio-original-imagzjjq9cx9x2fv.jpeg?q=70",
+        "brand": "Shio",
+        "title": "Men Slim Mid Rise Dark Grey Jeans",
+        "color": "",
+        "discountedPrice": 159,
+        "price": 799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 81
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/y/9/y/-original-imagkpkdyadfax55.jpeg?q=70",
+        "brand": "Peter England University",
+        "title": "Men Tapered Fit Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 809,
+        "price": 1799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 55
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/l3xcr680/jean/5/o/n/30-lmjn001638-lee-original-imagex753ukhqezu.jpeg?q=70",
+        "brand": "LEE",
+        "title": "Men Skinny Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 839,
+        "price": 2799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/s/c/o/30-5669588-roadster-original-imafw2g8cujdwg7j-bb.jpeg?q=70",
+        "brand": "Roadster",
+        "title": "Men Regular Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 644,
+        "price": 1499,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 57
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/i/p/s/28-grey-whisker-shio-original-imagzjjqbgchtfme.jpeg?q=70",
+        "brand": "Shio",
+        "title": "Men Slim Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 159,
+        "price": 799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 81
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/t/n/d/-original-imaghkc8haauzwxf.jpeg?q=70",
+        "brand": "PETER ENGLAND",
+        "title": "Men Skinny Mid Rise Dark Blue Jeans",
+        "color": "",
+        "discountedPrice": 804,
+        "price": 2299,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 65
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/ksez24w0/jean/2/4/q/30-khjn000023-ketch-original-imag5zr8zqqgszjg.jpeg?q=70",
+        "brand": "KETCH",
+        "title": "Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 524,
+        "price": 1799,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/e/t/2/-original-imagjcgk8dy4rztf.jpeg?q=70",
+        "brand": "LEVI'S",
+        "title": "512 Men Tapered Fit Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1499,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 55
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/6/i/t/-original-imaghhvypzfmzxgq.jpeg?q=70",
+        "brand": "Pepe Jeans",
+        "title": "Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1099,
+        "price": 3599,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 70
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/kz065jk0/jean/x/5/u/34-udjeno0378-u-s-polo-assn-original-imagb3v3j86hzmvd.jpeg?q=70",
+        "brand": "U.S. POLO ASSN.",
+        "title": "Men Slim Mid Rise Black Jeans",
+        "color": "",
+        "discountedPrice": 999,
+        "price": 1999,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 50
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/jwwffrk0/jean/v/f/z/26-8962319-roadster-original-imafhh89hbdsbwgm.jpeg?q=70",
+        "brand": "Roadster",
+        "title": "Men Slim Mid Rise Grey Jeans",
+        "color": "",
+        "discountedPrice": 719,
+        "price": 1499,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 52
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/l4zxn680/jean/s/l/l/32-18298-1272-levi-s-original-imagfrvkchgprytj.jpeg?q=70",
+        "brand": "LEVI'S",
+        "title": "511 Men Slim Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1099,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 67
+        
+    },
+    {
+        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/g/w/x/32-36087-0628-levi-s-original-imaget8jchky5tgs-bb.jpeg?q=70",
+        "brand": "LEVI'S",
+        "title": "512 Men Tapered Fit Mid Rise Blue Jeans",
+        "color": "",
+        "discountedPrice": 1099,
+        "price": 3199,
+        "size": [
+            {
+              "name": "S",
+              "quantity": 20
+            },
+            {
+              "name": "M",
+              "quantity": 30
+            },
+            {
+              "name": "L",
+              "quantity": 50
+            }
+          ],
+          "quantity": 100,
+          "topLavelCategory": "Men",
+          "secondLavelCategory": "Clothing",
+          "thirdLavelCategory": "Pant",
+          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "disscount": 67
+        
+        
+    }
+,
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/kw2fki80/ethnic-set/k/i/k/xxl-201-jaipuri-collection-original-imag8tvaw4ddrtah.jpeg?q=70",
         "brand": "flamingo blue",

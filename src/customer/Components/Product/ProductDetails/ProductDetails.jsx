@@ -3,7 +3,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "./ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
-import HomeProductCard from "../../Home/HomeProductCard";
+// import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {addItemToCart} from "../../../../Redux/Customers/Cart/Action";
@@ -12,7 +12,8 @@ import {
   findProductById,
   getSimilarProducts,
 } from "../../../../Redux/Customers/Product/Action";
-
+import { mensShoesPage1 } from "../../../../Data/shoes";
+import HomeProductSection from "../../Home/HomeProductSection";
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
 
@@ -166,8 +167,8 @@ export default function ProductDetails() {
           </div>
 
           {/* Product info */}
-          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
-            <div className="lg:col-span-2">
+          <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
+          <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
               <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                 {customersProduct.product?.brand}
               </h1>
@@ -496,15 +497,17 @@ export default function ProductDetails() {
         </section>
 
         {/* similer product */}
-        <section className=" pt-10">
-          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-          <div className="flex flex-wrap space-y-5">
-          {similarProducts?.map((product) => (
-          <div key={product.id}>
-            </div>
-            ))}
-       </div>
-        </section>
+        {/* <section className=" pt-2"> */}
+          <h1 className="py-2 pb-4 my-4 text-xl font-bold">Similar Products</h1>
+          {/* <div className="flex flex-wrap space-y-5"> */}
+          {/* {similarProducts?.map((product) => (
+          <div key={product.id}> */}
+          <HomeProductSection data={mensShoesPage1}  />
+{/* 
+            </div> */}
+            {/* ))} */}
+       {/* </div> */}
+        {/* </section> */}
       </div>
     </div>
   );

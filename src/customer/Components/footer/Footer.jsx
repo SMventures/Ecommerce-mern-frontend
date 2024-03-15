@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="relative bg-gray-900 pt-8 pb-6">
       <div className="container mx-auto px-4">
-      <div className="flex flex-wrap -mx-3 lg:justify-between"> 
+      <div className="flex flex-wrap -mx-3 lg:justify-end items-right"> 
         <div className="w-full md:w-1/2 px-4">
             <h4 className="text-3xl font-semibold text-white">Let's keep in touch!</h4>
             <h5 className="text-lg mt-0 mb-2 text-white">
@@ -64,14 +64,14 @@ function Footer() {
                 <ul className="list-none">
                   {/* Contact links */}
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/">Send us an Messege</a>
+                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/">Send your Queries</a>
                   </li>
                   <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Email us</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Call us</a>
-                  </li>
+                  </li> */}
                   <li>
                     {/* <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Pricing</a> */}
                   </li>
@@ -80,13 +80,13 @@ function Footer() {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-blueGray-300" />
+        {/* <hr className="my-6 border-blueGray-300" />
         <div className="flex flex-wrap items-center md:justify-between ">
           <div className="w-full md:w-4/12 px-4 mx-auto text-center">
             <div className="text-sm text-white font-semibold py-1">
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

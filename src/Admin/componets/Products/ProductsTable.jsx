@@ -177,8 +177,8 @@ const ProductsTable = () => {
                 label="Sort By Price"
                 onChange={(e) => handleFilterChange(e, "sort")}
               >
-                <MenuItem value={"price_high"}>Heigh - Low</MenuItem>
-                <MenuItem value={"price_low"}>Low - Heigh</MenuItem>
+                <MenuItem value={"price_high"}>High - Low</MenuItem>
+                <MenuItem value={"price_low"}>Low - High</MenuItem>
               </Select>
             </FormControl>
           </Grid>
