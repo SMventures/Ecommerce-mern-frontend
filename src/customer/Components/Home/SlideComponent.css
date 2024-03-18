@@ -1,0 +1,15 @@
+.product-box {
+  text-align: center;
+  padding: 25px 15px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image {
+  width: auto;
+  height: 150px;
+}

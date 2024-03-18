@@ -16,6 +16,11 @@ const Wishlist = () => {
     dispatch(getWishlist(jwt));
   }, [jwt]);
 
+  // Add a null check to prevent accessing undefined properties
+  if (!wishlist || !wishlist.wishlistItems) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="">
       {wishlist.wishlistItems.length > 0 && (

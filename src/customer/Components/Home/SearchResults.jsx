@@ -33,10 +33,8 @@ const SearchResults = () => {
                                 <div className='flex items-center space-x-4'>
                                     <img className='w-[5rem] h-[5rem] object-cover object-top' src={product.imageUrl} alt="" />
                                     <div className='space-y-2 ml-5'>
-                                        <p className='font-semibold opacity-50 text-xs space-x-5'>{product.brand} {product.name}</p>
-                                        <p><span>Color: {product.color}</span></p>
-                                        <p>Seller: Sm Ventures</p>
-                                        <p>Price: ₹{product.price}</p>
+                                        <p className='font-semibold opacity-50 text-xs space-x-5'> {product.name}</p>
+                                        <p>{product.brand}</p>
                                     </div>
                                 </div>
                             </Link>

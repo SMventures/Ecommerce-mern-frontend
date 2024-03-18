@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import ProductReviewCard from "./ProductReviewCard";
+import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
+
+import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
@@ -342,15 +344,19 @@ export default function ProductDetails() {
           </h1>
 
           <div className="border p-5">
-            <Grid container spacing={7}>
-              <Grid item xs={7}>
-                <div className="space-y-5">
-                  { review.reviews?.map((item, i) => (
-                    <ProductReviewCard item={item} />
-                  ))}
-                </div>
-              </Grid>
-
+          <Grid container spacing={7}>
+            <Grid item xs={7}>
+              <div className="space-y-5">
+                {/* Iterate over reviews and render ProductReviewCard for each */}
+                {review.reviews?.map((item, i) => (
+                  <ProductReviewCard key={i} item={item} />
+                ))}
+              </div>
+            </Grid>
+            <ProductReviewCard/>
+         
+            {/* Add other components if needed */}
+         
               <Grid item xs={5}>
                 <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
                 <div className="flex items-center space-x-3 pb-10">
@@ -509,4 +515,3 @@ export default function ProductDetails() {
     </div>
   );
 }
-

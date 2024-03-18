@@ -1,19 +1,20 @@
-import {blacktrader} from "../../media"
-import {bluebook} from "../../media"
-import {blue_book} from "../../media"
-import {book1_Fo5dpVq} from "../../media"
-import {book2_qeNgfss} from "../../media"
-import {candlestick_guide} from "../../media"
-import {combos1} from "../../media"
-import {currencytrading} from "../../media"
-import {how_to_make_money} from "../../media"
-import {how_to_trade_2} from "../../media"
+import redbook from "../media/product/red__book.jpg";
+import bluebook from "../media/product/bluebook.jpg"
+import blue_book from "../media/product/blue_book.jpg"
+import book1_Fo5dpVq from "../media/product/book1_Fo5dpVq.jpg"
+import book2_qeNgfss from "../media/product/book2_qeNgfss.jpg"
+import candlestick_guide from "../media/product/candlestick_guide.jpg"
+import currencytrading from "../media/product/currencytrading.jpg"
+import how_to_make_money from "../media/product/how_to_make_money.jpg"
+import how_to_trade_2 from "../media/product/how_to_trade_2.jpg"
+import investingbook from "../media/product/investing_book.jpg"
 
 
-export const books = [
+
+export const dressPage1 = [
   {
     "imageUrl":
-     <blacktrader.jpg/>,
+    redbook ,
     "brand": "MADAME",
     "title": "Women Asymmetric Pink Dress",
     "color": "",
@@ -35,15 +36,14 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
+    "topLavelCategory": "Books",
+    "secondLavelCategory": "Trading Books",
     "thirdLavelCategory": "Dress",
     "description":
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
-    "imageUrl":
-      <bluebook.jpg/>,
+    "imageUrl": bluebook,
     "brand": "Daevish",
     "title": "Women Maxi Blue Dress",
     "color": "",
@@ -65,15 +65,14 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
+    "topLavelCategory": "Books",
+    "secondLavelCategory": "Trading Books",
     "thirdLavelCategory": "Dress",
     "description":
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
-    "imageUrl":
-      <blue_book.jpg/>,
+    "imageUrl":blue_book,
     "brand": "ZWERLON",
     "title": "Women A-line Purple Dress",
     "color": "",
@@ -95,15 +94,14 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
+    "topLavelCategory": "Books",
+    "secondLavelCategory": "Trading Books",
     "thirdLavelCategory": "Dress",
     "description":
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
-    "imageUrl":
-      <book1_Fo5dpVq.jpg/>,
+    "imageUrl": book1_Fo5dpVq,
     "brand": "Purshottam Wala",
     "title": "Women Fit and Flare Black Dress",
     "color": "",
@@ -125,16 +123,15 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
+    "topLavelCategory": "Books",
+    "secondLavelCategory": "Trading Books",
     "thirdLavelCategory": "Dress",
     "description":
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   
   {
-    "imageUrl":
-      <book2_qeNgfss.jpg/>,
+    "imageUrl": candlestick_guide,
     "brand": "Purshottam Wala",
     "title": "Women Fit and Flare Blue Dress",
     "color": "",
@@ -156,15 +153,15 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
-    "thirdLavelCategory": "Dress",
+    "topLavelCategory": "Books ",
+    "secondLavelCategory": "Trading_Books",
+    "thirdLavelCategory": "Technical_Analysis",
     "description":
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
     "imageUrl":
-      <bulltshit.jpg/>,
+    currencytrading,
     "brand": "NEYSA",
     "title": "Women Two Piece Dress Light Green Dress",
     "color": "",
@@ -193,8 +190,7 @@ export const books = [
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
-    "imageUrl":
-      <candlestick_guide.jpg/>,
+    "imageUrl":book2_qeNgfss,
     "brand": "Leriya Fashion",
     "title": "Women A-line Maroon Dress",
     "color": "",
@@ -223,8 +219,7 @@ export const books = [
       "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
   },
   {
-    "imageUrl":
-      <combos1.jpg/>,
+    "imageUrl":how_to_make_money,
     "brand": "Selvia",
     "title": "Women A-line Black Dress",
     "color": "",
@@ -254,7 +249,7 @@ export const books = [
   },
   {
     "imageUrl":
-      <currencytrading.jpg/>,
+    how_to_trade_2 ,
     "brand": "BuyNewTrend",
     "title": "Women Sheath Dark Blue Dress",
     "color": "",
@@ -284,9 +279,9 @@ export const books = [
   },
   {
     "imageUrl":
-      <how_to_make_money.jpg/>,
-    "brand": "W",
-    "title": "Women A-line Green, White Dress",
+    investingbook,
+    "brand": "Sm Ventures",
+    "title": "Stock Market Investing Guide ",
     "color": "",
     "discountedPrice": 719,
     "price": 1999,
@@ -306,15 +301,15 @@ export const books = [
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Women",
-    "secondLavelCategory": "Clothing",
-    "thirdLavelCategory": "Dress",
+    "topLavelCategory": "Books",
+    "secondLavelCategory": "Trading_Books",
+    "thirdLavelCategory": "",
     "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
+      "Stock Market Investing Guide for Beginners."
   },
   {
     "imageUrl":
-      <how_to_trade_2.jpg/>,
+      "https://rukminim1.flixcart.com/image/612/612/xif0q/dress/9/f/g/xl-271-shivay-style-original-imafnf5ne9wqyw6n-bb.jpeg?q=70",
     "brand": "Sheetal Associates",
     "title": "Women Maxi Grey Dress",
     "color": "",
