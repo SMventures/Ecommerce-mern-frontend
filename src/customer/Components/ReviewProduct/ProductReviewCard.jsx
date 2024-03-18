@@ -1,28 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux"; 
-import  { useState } from "react";
+import React, { useState } from "react";
 import { Avatar, Rating, Box, Typography, Grid } from "@mui/material";
-import { getUser } from "../../../Redux/Auth/Action";
-import {  useEffect} from "react";
-import { useDispatch } from "react-redux";
-
 
 const ProductReviewCard = ({ item }) => {
-  
-
-  const [value, setValue] = useState(item?.rating || 0); 
-  const jwt=localStorage.getItem("jwt");
-  const dispatch=useDispatch();
-
-  useEffect(()=>{
-    if(jwt){
-      dispatch(getUser(jwt))
-    }
-  
-  },[jwt])
-  
-  
-  // Initialize rating value
+  const [value, setValue] = useState(item?.rating || 0);
 
   return (
     <div className="">
@@ -35,7 +15,7 @@ const ProductReviewCard = ({ item }) => {
               alt={item?.user?.firstName}
               src=""
             >
-             {item?.user?.firstName[0].toUpperCase()}  
+              {item?.user?.firstName[0].toUpperCase()}
             </Avatar>
           </Box>
         </Grid>
