@@ -97,6 +97,8 @@ export default function ProductDetails() {
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
+
+ 
   return (
     <div className="bg-white lg:px-20">
       <div className="pt-6">
@@ -163,7 +165,29 @@ export default function ProductDetails() {
                   />
                 </div>
               ))}
+              
             </div>
+
+          
+            <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
+  <Button
+    variant="contained"
+    type="submit"
+    sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0"}}
+  >
+    Add To Cart
+  </Button>
+  
+  <Button 
+    variant="contained"
+    type="submit"
+    sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0"}}
+  >
+    Buy Now
+  </Button>
+</form>
+
+           
           </div>
 
           {/* Product info */}
@@ -287,20 +311,14 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" , background: "#2874f0"}}
-                >
-                  Add To Cart
-                </Button>
+               
               </form>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
               {/* Description and details */}
               <div>
-                <h3 className="sr-only">Description</h3>
+                <h3 className="text-sm font-bold text-gray-900 mt-2 mb-2">Description</h3>
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
@@ -308,30 +326,51 @@ export default function ProductDetails() {
                   </p>
                 </div>
               </div>
+{/* highlights */}
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
+                <div className="space-y-6">
+                  <p className="text-base text-gray-900">
+                    
+                    {customersProduct.product?.highlights}
+                  </p>
+                </div>
+              </div>
+{/* specifications */}
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Specifications</h3>
+                <div className="space-y-6">
+                  <p className="text-base text-gray-900">
+                    {customersProduct.product?.specifications}
+                  </p>
+                </div>
+              </div>
 
-              <div className="mt-10">
+              
+
+              {/* <div className="mt-10">
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
 
                 <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
+                    {product.highlights.map((highlights) => (
+                      <li key={highlights} className="text-gray-400">
+                        <span className="text-gray-600">{customersProduct.product?.highlights}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="mt-10">
+              {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
                   <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

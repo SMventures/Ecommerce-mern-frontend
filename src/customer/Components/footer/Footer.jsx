@@ -14,16 +14,25 @@ function Footer() {
             </h5>
             <div className="mt-6 lg:mb-0 mb-6 flex">
               {/* Facebook icon */}
-              <Facebook className="bg-white text-Blue-700 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
-
+              <a href="https://www.facebook.com/your_facebook_id" target="_blank" rel="noopener noreferrer">
+      {/* Facebook icon */}
+      <Facebook className="bg-white text-Blue-700 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
               {/* Instagram icon */}
-              <Instagram className="bg-white text-purple-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
-
+              <a href="https://www.instagram.com/your_instagram_id" target="_blank" rel="noopener noreferrer">
+      {/* Instagram icon */}
+      <Instagram className="bg-white text-purple-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
               {/* WhatsApp icon */}
-              <WhatsApp className="bg-white text-green-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+              <a href="https://wa.me/your_whatsapp_number" target="_blank" rel="noopener noreferrer">
+      {/* WhatsApp icon */}
+      <WhatsApp className="bg-white text-green-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
 
-              {/* Email icon */}
-              <Email className="bg-white text-red-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    <a href="mailto:your_email@example.com">
+      {/* Email icon */}
+      <Email className="bg-white text-red-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
             </div>
           </div>
           <div className="w-full md:w-1/2 px-4">
@@ -67,7 +76,7 @@ function Footer() {
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/">Send your Queries</a>
                   </li>
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Email us</a>
+                  <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="mailto:your_email@example.com">Email us</a>
                   </li>
                   {/* <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Call us</a>
