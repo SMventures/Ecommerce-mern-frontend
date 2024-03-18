@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
+import RateProduct from "../../ReviewProduct/RateProduct";
 
 import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
@@ -393,6 +394,7 @@ export default function ProductDetails() {
               </div>
             </Grid>
             <ProductReviewCard/>
+            <RateProduct/>
          
             {/* Add other components if needed */}
          
