@@ -55,7 +55,7 @@ export default function Product() {
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
 
-  const totalPages = Math.ceil(customersProduct.products?.totalElements / 4);
+  const totalPages = Math.ceil(customersProduct.products?.totalElements / 2);
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
