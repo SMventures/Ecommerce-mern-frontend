@@ -12,7 +12,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
 import Cart from '../Cart/Cart';
-import Wishlist from '../wishlist/wishlist';
+
+
+
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -54,6 +56,7 @@ const CustomButtons = () => {
     const { auth } = useSelector((store) => store);
     const jwt = localStorage.getItem("jwt");
     const [openAuthModal, setOpenAuthModal] = useState(false);
+    const {  cart } = useSelector((store) => store);
 
     const handleOpen = () => {
         setOpenAuthModal(true);
@@ -146,9 +149,16 @@ const CustomButtons = () => {
                 <IconWrapper onClick={handleWishlistClick}>
                     <FavoriteIcon />
                 </IconWrapper>
-                <IconWrapper onClick={handleCartClick}>
-                    <ShoppingCartIcon />
-                </IconWrapper>
+                <IconWrapper onClick={handleCartClick} className="relative">
+    <ShoppingCartIcon />
+    <sup className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
+        {cart.cart?.totalItem}
+    </sup>
+    <span className="sr-only">items in cart, view bag</span>
+</IconWrapper>
+
+
+
             </Container>
             <AuthModal handleClose={handleClose} open={openAuthModal} />
         </Wrapper>

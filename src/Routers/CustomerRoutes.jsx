@@ -15,9 +15,9 @@ import PaymentSuccess from "../customer/Components/paymentSuccess/PaymentSuccess
 import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
 import Search from "../customer/Components/Home/Search";
 import Cart from "../customer/Components/Cart/Cart";
-import Wishlist from "../customer/Components/wishlist/wishlist";
-import SearchResults from "../customer/Components/Home/SearchResults"
-import  MyComponent from "../customer/Components/Home/MyComponent"
+import Wishlist from "../customer/Components/Wishlist/Wishlist";
+import SearchResults from "../customer/Components/Home/SearchResults";
+import  MyComponent from "../customer/Components/Home/MyComponent";
 import FAQ from "../customer/Components/footer/FAQ";
 import About from "../customer/Components/footer/About";
 // import Features from "../customer/Components/footer/Features";
@@ -57,6 +57,7 @@ const CustomerRoutes = () => {
         <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
         <Route path="/product/:productId" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>

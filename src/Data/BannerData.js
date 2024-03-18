@@ -2,7 +2,7 @@ import men from "./Banners/mens.png";
 import electronics from "./Banners/electronics.png";
 import women from "./Banners/women.png";
 import stationery from "./Banners/stationery.png";
-import accessories from "./Banners/accessories.png";
+import accessories from "./Banners/Accessories.png";
 import books from "./Banners/books.png";
 
 export const bannerData = [

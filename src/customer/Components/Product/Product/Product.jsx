@@ -1,6 +1,7 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';// Import the heart icon
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -14,17 +15,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
+import {addItemToWishlist} from '../../../../Redux/Customers/Wishlist/Action'
 
 import { filters, singleFilter, sortOptions } from "./FilterData";
 import ProductCard from "../ProductCard/ProductCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { productdata } from "../../../../data";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import {
-  findProducts,
-  findProductsByCategory,
-} from "../../../../Redux/Customers/Product/Action";
+import { findProducts, findProductsByCategory } from "../../../../Redux/Customers/Product/Action";
 import { deepPurple } from "@mui/material/colors";
 import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
@@ -47,7 +45,6 @@ export default function Product() {
     setIsLoaderOpen(false);
   };
 
-  // const filter = decodeURIComponent(location.search);
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
@@ -58,20 +55,22 @@ export default function Product() {
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
 
-  // console.log("location - ", colorValue, sizeValue,price,disccount);
+  const totalPages = Math.ceil(customersProduct.products?.totalElements / 4);
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
     const query = searchParams.toString();
-    navigate({ search: `?${query}` });     
+    navigate({ search: `?${query}` });
   };
+
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page", value);
+    searchParams.set("page", value.toString()); // Convert value to string
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
+  
 
   useEffect(() => {
     const [minPrice, maxPrice] =
@@ -84,8 +83,8 @@ export default function Product() {
       maxPrice: maxPrice || 10000,
       minDiscount: disccount || 0,
       sort: sortValue || "price_low",
-      pageNumber: pageNumber ,
-      pageSize: 10,
+      pageNumber: pageNumber,
+      pageSize: 4, // Set pageSize to 4 for 4 products per page
       stock: stock,
     };
     dispatch(findProducts(data));
@@ -99,6 +98,7 @@ export default function Product() {
     pageNumber,
     stock,
   ]);
+  
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -114,15 +114,12 @@ export default function Product() {
       }
       console.log("includes");
     } else {
-      // Remove all values for the current section
-      // searchParams.delete(sectionId);
       filterValues.push(value);
     }
 
     if (filterValues.length > 0)
       searchParams.set(sectionId, filterValues.join(","));
 
-    // history.push({ search: searchParams.toString() });
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
@@ -141,6 +138,15 @@ export default function Product() {
       setIsLoaderOpen(false);
     }
   }, [customersProduct.loading]);
+
+  const handleAddToWishlist = (productId) => {
+    if (!jwt) {
+      // Redirect to login or display a message to login
+      return;
+    }
+
+    dispatch(addItemToWishlist({ jwt, data: { productId } }));
+  };
 
   return (
     <div className="bg-white -z-20 ">
@@ -196,7 +202,6 @@ export default function Product() {
                         as="div"
                         key={section.id}
                         className="border-t border-gray-200 px-4 py-6"
-                        // open={false}
                       >
                         {({ open }) => (
                           <>
@@ -241,7 +246,6 @@ export default function Product() {
                                     <label
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                       className="ml-3 min-w-0 flex-1 text-gray-500"
-                                      // onClick={()=>handleFilter(option.value,section.id)}
                                     >
                                       {option.label}
                                     </label>
@@ -338,129 +342,18 @@ export default function Product() {
             <div>
               <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-                {/* Filters */}
-                <form className="hidden lg:block border rounded-md p-5">
-                  {filters.map((section) => (
-                    <Disclosure
-                      // defaultOpen={false}
-                      as="div"
-                      key={section.id}
-                      className="border-b border-gray-200 py-6"
-                    >
-                      {({ open }) => (
-                        <>
-                          <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel className="pt-6">
-                            <div className="space-y-4">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                    onChange={() =>
-                                      handleFilter(option.value, section.id)
-                                    }
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))}
-                  {singleFilter.map((section) => (
-                    <Disclosure
-                      // defaultOpen={true}
-                      as="div"
-                      key={section.id}
-                      className="border-b border-gray-200 py-6"
-                    >
-                      {({ open }) => (
-                        <>
-                          <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel className="pt-6">
-                            <FormControl>
-                              <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="female"
-                                name="radio-buttons-group"
-                              >
-                                {section.options.map((option, optionIdx) => (
-                                  <FormControlLabel
-                                    value={option.value}
-                                    control={<Radio />}
-                                    label={option.label}
-                                    onChange={(e) =>
-                                      handleRadioFilterChange(e, section.id)
-                                    }
-                                  />
-                                ))}
-                              </RadioGroup>
-                            </FormControl>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))}
-                </form>
-
-                {/* Product grid */}
                 <div className="lg:col-span-4 w-full ">
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
-                      <ProductCard product={item} />
+                      <div key={item.id} className="relative">
+                        <ProductCard product={item} />
+                        <button
+                          className="absolute top-2 right-2 text-red-500"
+                          onClick={() => handleAddToWishlist(item.id)}
+                        >
+                          <FavoriteBorderIcon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -470,20 +363,23 @@ export default function Product() {
         </main>
 
         {/* pagination section */}
+        
         <section className="w-full px-[3.6rem]">
           <div className="mx-auto px-4 py-5 flex justify-center shadow-lg border rounded-md">
-            <Pagination
-              count={customersProduct.products?.totalPages}
-              color="primary"
-              className=""
-              onChange={handlePaginationChange}
-            />
+          
+          <Pagination
+  count={totalPages}
+  color="primary"
+  className=""
+  onChange={handlePaginationChange}
+/>
+
           </div>
         </section>
 
         {/* {backdrop} */}
         <section>
-         <BackdropComponent open={isLoaderOpen}/>
+          <BackdropComponent open={isLoaderOpen} />
         </section>
       </div>
     </div>

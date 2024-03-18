@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import ProductReviewCard from "./ProductReviewCard";
+import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
+
+import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
-// import HomeProductCard from "../../Home/HomeProductCard";
+import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {addItemToCart} from "../../../../Redux/Customers/Cart/Action";
@@ -12,8 +14,7 @@ import {
   findProductById,
   getSimilarProducts,
 } from "../../../../Redux/Customers/Product/Action";
-import { mensShoesPage1 } from "../../../../Data/shoes";
-import HomeProductSection from "../../Home/HomeProductSection";
+
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
 
@@ -191,8 +192,8 @@ export default function ProductDetails() {
           </div>
 
           {/* Product info */}
-          <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-          <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
+          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
+            <div className="lg:col-span-2">
               <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                 {customersProduct.product?.brand}
               </h1>
@@ -382,15 +383,19 @@ export default function ProductDetails() {
           </h1>
 
           <div className="border p-5">
-            <Grid container spacing={7}>
-              <Grid item xs={7}>
-                <div className="space-y-5">
-                  { review.reviews?.map((item, i) => (
-                    <ProductReviewCard item={item} />
-                  ))}
-                </div>
-              </Grid>
-
+          <Grid container spacing={7}>
+            <Grid item xs={7}>
+              <div className="space-y-5">
+                {/* Iterate over reviews and render ProductReviewCard for each */}
+                {review.reviews?.map((item, i) => (
+                  <ProductReviewCard key={i} item={item} />
+                ))}
+              </div>
+            </Grid>
+            <ProductReviewCard/>
+         
+            {/* Add other components if needed */}
+         
               <Grid item xs={5}>
                 <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
                 <div className="flex items-center space-x-3 pb-10">
@@ -536,19 +541,16 @@ export default function ProductDetails() {
         </section>
 
         {/* similer product */}
-        {/* <section className=" pt-2"> */}
-          <h1 className="py-2 pb-4 my-4 text-xl font-bold">Similar Products</h1>
-          {/* <div className="flex flex-wrap space-y-5"> */}
-          {/* {similarProducts?.map((product) => (
-          <div key={product.id}> */}
-          <HomeProductSection data={mensShoesPage1}  />
-{/* 
-            </div> */}
-            {/* ))} */}
-       {/* </div> */}
-        {/* </section> */}
+        <section className=" pt-10">
+          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+          <div className="flex flex-wrap space-y-5">
+          {similarProducts?.map((product) => (
+          <div key={product.id}>
+            </div>
+            ))}
+       </div>
+        </section>
       </div>
     </div>
   );
 }
-
