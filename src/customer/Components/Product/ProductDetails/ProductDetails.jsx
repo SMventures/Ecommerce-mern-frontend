@@ -6,8 +6,8 @@ import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 // import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {addItemToCart} from "../../../../Redux/Customers/Cart/Action";
-import {getAllReviews} from "../../../../Redux/Customers/Review/Action";
+import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
+import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
 import {
   findProductById,
   getSimilarProducts,
@@ -16,6 +16,10 @@ import { mensShoesPage1 } from "../../../../Data/shoes";
 import HomeProductSection from "../../Home/HomeProductSection";
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
+import {
+  findProducts,
+} from "../../../../Redux/Customers/Product/Action";
+import HomeProductCard from "../../Home/HomeProductCard";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -70,23 +74,61 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetails() {
+export default function ProductDetails(data) {
   const [selectedSize, setSelectedSize] = useState();
   const [activeImage, setActiveImage] = useState(null);
+  const [simmyProducts, setSimmyProducts] = useState([])
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { customersProduct, review, similarProducts } = useSelector(
+  const { review } = useSelector(
     (store) => store
   );
+  const { customersProduct } = useSelector((store) => store);
+
+
+  const categoryId = "women_tshirts"; // Assuming you have access to the category ID via React Router params
+  // const { similarProducts } = useSelector((store) => store);
+
+  // useEffect(() => {
+  //   dispatch(getSimilarProducts({ category: "women_tshirts" }));
+  // }, [dispatch, categoryId]);
   const { productId } = useParams();
+  const getSimmilarProducts = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const data = await response.json();
+    console.log(data.content);
+    setSimmyProducts(data.content)
+  }
+
+  const getCategoryName = async () => {
+    const res = await fetch(`http://localhost:5454/api/products/id/${productId}`)
+    let data = await res.json()
+    let cardId = await data.category.name
+    console.log(cardId)
+    getSimmilarProducts(cardId)
+
+  }
+
+  useEffect(() => {
+    getCategoryName();
+
+  }, []
+  );
+
+
   const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
     const data = { productId: productId, jwt };
     dispatch(findProductById(data));
     dispatch(getAllReviews(productId));
-    dispatch(getSimilarProducts(productId));
+    // dispatch(getSimilarProducts(productId));
   }, [dispatch, productId, jwt]);
+
+
+  // useEffect(() => {
+  //   dispatch(getSimilarProducts(productId));
+  // }, [dispatch, productId]);
 
   const handleSetActiveImage = (image) => {
     setActiveImage(image);
@@ -168,7 +210,7 @@ export default function ProductDetails() {
 
           {/* Product info */}
           <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-          <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
+            <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
               <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                 {customersProduct.product?.brand}
               </h1>
@@ -290,7 +332,7 @@ export default function ProductDetails() {
                 <Button
                   variant="contained"
                   type="submit"
-                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" , background: "#2874f0"}}
+                  sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
                 >
                   Add To Cart
                 </Button>
@@ -346,7 +388,7 @@ export default function ProductDetails() {
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  { review.reviews?.map((item, i) => (
+                  {review.reviews?.map((item, i) => (
                     <ProductReviewCard item={item} />
                   ))}
                 </div>
@@ -496,18 +538,20 @@ export default function ProductDetails() {
           </div>
         </section>
 
-        {/* similer product */}
-        {/* <section className=" pt-2"> */}
-          <h1 className="py-2 pb-4 my-4 text-xl font-bold">Similar Products</h1>
-          {/* <div className="flex flex-wrap space-y-5"> */}
-          {/* {similarProducts?.map((product) => (
-          <div key={product.id}> */}
-          <HomeProductSection data={mensShoesPage1}  />
-{/* 
-            </div> */}
-            {/* ))} */}
-       {/* </div> */}
-        {/* </section> */}
+        <div>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+            <div className="flex flex-wrap space-y-5">
+              {simmyProducts.slice(0, 5).map((item) => (
+                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
+                  <HomeProductCard product={item} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+
       </div>
     </div>
   );

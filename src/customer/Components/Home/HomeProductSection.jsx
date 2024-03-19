@@ -42,6 +42,7 @@ const responsive = {
 
 const HomeProductSection = ({ section, data }) => {
   const navigate = useNavigate();
+ 
 
   return (
     <Component>

@@ -5,8 +5,8 @@ import About from './About'
 function Footer() {
   return (
     <footer className="relative bg-gray-900 pt-8 pb-6">
-      <div className="container mx-auto px-4">
-      <div className="flex flex-wrap -mx-3 lg:justify-end items-right"> 
+      <div className="">
+      <div className="flex flex-wrap lg:justify-evenly items-right"> 
         <div className="w-full md:w-1/2 px-4">
             <h4 className="text-3xl font-semibold text-white">Let's keep in touch!</h4>
             <h5 className="text-lg mt-0 mb-2 text-white">
@@ -27,7 +27,7 @@ function Footer() {
             </div>
           </div>
           <div className="w-full md:w-1/2 px-4">
-            <div className="flex flex-wrap items-top mb-6">
+            <div className="flex flex-wrap items-top justify-evenly mb-6">
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <span className="block uppercase text-white text-sm font-semibold mb-2">Useful Links</span>
                 <ul className="list-none">
@@ -80,13 +80,6 @@ function Footer() {
             </div>
           </div>
         </div>
-        {/* <hr className="my-6 border-blueGray-300" />
-        <div className="flex flex-wrap items-center md:justify-between ">
-          <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-            <div className="text-sm text-white font-semibold py-1">
-            </div>
-          </div>
-        </div> */}
       </div>
     </footer>
   );

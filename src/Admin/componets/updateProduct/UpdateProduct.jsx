@@ -1,23 +1,9 @@
-import { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import axios from 'axios';
 import { Typography } from "@mui/material";
-import {
-  Grid,
-  TextField,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-
-import { Fragment } from "react";
-// import "./CreateProductForm.css";
+import { Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  findProductById,
-  updateProduct,
-} from "../../../Redux/Customers/Product/Action";
-import { useEffect } from "react";
+import { findProductById, updateProduct } from "../../../Redux/Customers/Product/Action";
 import { useParams } from "react-router-dom";
 
 const initialSizes = [
@@ -28,6 +14,7 @@ const initialSizes = [
 
 const UpdateProductForm = () => {
   const [productData, setProductData] = useState({
+    imageFile: null, // Add image file state
     imageUrl: "",
     brand: "",
     title: "",
@@ -43,70 +30,88 @@ const UpdateProductForm = () => {
     description: "",
   });
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
   const { productId } = useParams();
   const { customersProduct } = useSelector((store) => store);
+  const [sizes, setSizes] = useState(initialSizes);
+  const jwt = localStorage.getItem("jwt");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "imageFile") {
+      setProductData((prevState) => ({
+        ...prevState,
+        [name]: e.target.files[0], // Set image file in productData
+      }));
+    } else {
+      setProductData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSizeChange = (e, index) => {
-    let { name, value } = e.target;
-    name === "size_quantity" ? (name = "quantity") : (name = e.target.name);
-
-    const sizes = [...productData.size];
-    sizes[index][name] = value;
-    setProductData((prevState) => ({
-      ...prevState,
-      size: sizes,
-    }));
+    const { name, value } = e.target;
+    const updatedSizes = [...sizes]; // Make a copy of the sizes array
+    updatedSizes[index][name] = value; // Update the corresponding size object
+    setSizes(updatedSizes); // Update the sizes state
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateProduct());
-    console.log(productData);
+    const formData = new FormData();
+    formData.append("imageFile", productData.imageFile); // Append image file to form data
+    // Append other product data to form data
+    for (const key in productData) {
+      if (key !== "imageFile") {
+        formData.append(key, productData[key]);
+      }
+    }
+   try {
+  const response = await axios.post(`http://localhost:5454/api/admin/products/update/:productId`, formData, {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  
+  console.log("Response data:", response.data); // Log response data
+  
+  // Dispatch updateProduct action
+  dispatch(updateProduct(response.data));
+
+  // Show success message
+  alert("Products updated successfully!");
+} catch (error) {
+  // Handle error
+  console.error("Error updating products:", error);
+  // Show error message if needed
+  alert("Error updating products. Please try again later.");
+}
   };
 
   useEffect(() => {
-    dispatch(findProductById({productId}));
+    dispatch(findProductById(productId));
   }, [productId]);
 
-  useEffect(()=>{
-    if(customersProduct.product){
-        for(let key in productData){
-    setProductData((prev)=>({...prev,[key]:customersProduct.product[key]}))
-    console.log(customersProduct.product[key],"--------",key)
-}
+  useEffect(() => {
+    if (customersProduct.product) {
+      setProductData(customersProduct.product);
     }
-
-  },[customersProduct.product])
+  }, [customersProduct.product]);
 
   return (
-    <Fragment className="createProductContainer ">
-      <Typography
-        variant="h3"
-        sx={{ textAlign: "center" }}
-        className="py-10 text-center "
-      >
+    <Fragment>
+      <Typography variant="h3" sx={{ textAlign: "center" }} className="py-10 text-center ">
         Update Product
       </Typography>
-      <form
-        onSubmit={handleSubmit}
-        className="createProductContainer min-h-screen"
-      >
+      <form onSubmit={handleSubmit} className="createProductContainer min-h-screen">
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Image URL"
-              name="imageUrl"
-              value={productData.imageUrl}
+            <input
+              type="file"
+              accept="image/*"
+              name="imageFile"
               onChange={handleChange}
             />
           </Grid>
@@ -180,7 +185,7 @@ const UpdateProductForm = () => {
             />
           </Grid>
           <Grid item xs={6} sm={4}>
-            <FormControl fullWidth>
+          <FormControl fullWidth>
               <InputLabel>Top Level Category</InputLabel>
               <Select
                 name="topLavelCategory"
@@ -188,8 +193,8 @@ const UpdateProductForm = () => {
                 onChange={handleChange}
                 label="Top Level Category"
               >
-                <MenuItem value="men">Men</MenuItem>
-                <MenuItem value="women">Women</MenuItem>
+                <MenuItem value="Men">Men</MenuItem>
+                <MenuItem value="Women">Women</MenuItem>
                 <MenuItem value="Electronics">Electronics</MenuItem>
                 <MenuItem value="Stationery">Stationery</MenuItem>
                 <MenuItem value="Books">Books</MenuItem>
@@ -207,29 +212,30 @@ const UpdateProductForm = () => {
                 onChange={handleChange}
                 label="Second Level Category"
               >
-                {productData.topLavelCategory === "men" && (
-                
-                    <MenuItem value="Clothing">Clothing</MenuItem>
-                  
+                {productData.topLavelCategory === "Men" && (
+                  <MenuItem value="Clothing">Clothing</MenuItem>
                 )}
-                {productData.topLavelCategory === "women" && (
-                
-                    <MenuItem value="Clothing">Clothing</MenuItem>
-                  
+                {productData.topLavelCategory === "Women" && (
+                  <MenuItem value="Clothing">Clothing</MenuItem>
                 )}
                 {productData.topLavelCategory === "Stationery" && (
                   <MenuItem value="Stationery_Items">Stationery Items</MenuItem>
                 )}
                 {productData.topLavelCategory === "Accessories" && [
-                  
+                
                     <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
                     <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
-          
+                
                 ]}
                 {productData.topLavelCategory === "Electronics" && (
-                  <MenuItem value="Electronic_Items">Electronic Items</MenuItem>
+                  <MenuItem value="Electronics_Items">Electronic Items</MenuItem>
+                )}
+                {productData.topLavelCategory === "Books" && (
+              
+                    <MenuItem value="Trading_Books">Trading Books</MenuItem>
                 )}
               </Select>
+
             </FormControl>
           </Grid>
           <Grid item xs={6} sm={4}>
@@ -243,57 +249,58 @@ const UpdateProductForm = () => {
               >
                 {productData.secondLavelCategory === "Clothing" && [
                   <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
-                  <MenuItem value="men_hoodies">Men Hoodies</MenuItem>,
+                  <MenuItem value="men_hoodies"> Men Hoodies</MenuItem>,
                   <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
                   <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
                 ]}
 
-                if {productData.secondLavelCategory === "Stationery_Items" && [
-                  
+                {productData.secondLavelCategory === "Stationery_Items" && [
 
-                    <MenuItem value="Pen">Pen</MenuItem>,
-                    <MenuItem value="Pencil">Pencil</MenuItem>,
-                    <MenuItem value="Highlighter">Highlighter</MenuItem>,
-                    <MenuItem value="Calender">Calender</MenuItem>,
-                    <MenuItem value="Markers">Markers</MenuItem>,
-                    <MenuItem value="Rulers">Rulers</MenuItem>,
-                    <MenuItem value="Notepad">Notepad</MenuItem>,
-                    <MenuItem value="Diary">Diary</MenuItem>,
-                  
+
+                  <MenuItem value="Pen">Pen</MenuItem>,
+                  <MenuItem value="Pencil">Pencil</MenuItem>,
+                  <MenuItem value="Highlighter">Highlighter</MenuItem>,
+                  <MenuItem value="Calender">Calender</MenuItem>,
+                  <MenuItem value="Markers">Markers</MenuItem>,
+                  <MenuItem value="Rulers">Rulers</MenuItem>,
+                  <MenuItem value="Notepad">Notepad</MenuItem>,
+                  <MenuItem value="Diary">Diary</MenuItem>,
+
                 ]}  {productData.secondLavelCategory === "Electronics_Items" && [
-         
-                    <MenuItem value="Keyboard">Keyboard</MenuItem>,
-                    <MenuItem value="Mouse">Mouse</MenuItem>,
-                    <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
-                    <MenuItem value="Camera">Camera</MenuItem>,
-                    <MenuItem value="Headphones">Headphones</MenuItem>,
 
-            
+                  <MenuItem value="Keyboard">Keyboard</MenuItem>,
+                  <MenuItem value="Mouse">Mouse</MenuItem>,
+                  <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
+                  <MenuItem value="Camera">Camera</MenuItem>,
+                  <MenuItem value="Headphones">Headphones</MenuItem>,
+
+
                 ]}  {productData.secondLavelCategory === "Phone_Accessories" && [
-               
-                    <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
-                    <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
-               
+
+                  <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
+                  <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
+
                 ]}
                 {productData.secondLavelCategory === "Laptop_Accessories" && [
-                
-                    <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
-                    <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
-                    <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
 
-                
+                  <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
+                  <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
+                  <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
+
+
                 ]}
                 {productData.secondLavelCategory === "Trading_Books" && [
-                  
-                    <MenuItem value="Motivational">Motivational</MenuItem>,
-                    <MenuItem value="Biography">Biography</MenuItem>,
-                    <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-                    <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
-                    <MenuItem value="Psychology">Psychology</MenuItem>,
-                    <MenuItem value="Risk_Management">Risk Management</MenuItem>,
-                    <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
-                 
+
+                  <MenuItem value="Motivational">Motivational</MenuItem>,
+                  <MenuItem value="Biography">Biography</MenuItem>,
+                  <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+                  <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
+                  <MenuItem value="Psychology">Psychology</MenuItem>,
+                  <MenuItem value="Risk_Management">Risk Management</MenuItem>,
+                  <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
+
                 ]}
+
 
               </Select>
             </FormControl>
@@ -310,7 +317,7 @@ const UpdateProductForm = () => {
               value={productData.description}
             />
           </Grid>
-          {/* {productData.size.map((size, index) => (
+          {productData.size.map((size, index) => (
             <Grid container item spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -333,7 +340,7 @@ const UpdateProductForm = () => {
                 />
               </Grid>{" "}
             </Grid>
-          ))} */}
+          ))}
           <Grid item xs={12}>
             <Button
               variant="contained"
