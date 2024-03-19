@@ -332,19 +332,19 @@ export default function ProductDetails() {
               <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
                 <div className="space-y-6">
-                  <p className="text-base text-gray-900">
+                  <pre className="text-base text-gray-900">
                     
                     {customersProduct.product?.highlights}
-                  </p>
+                  </pre>
                 </div>
               </div>
 {/* specifications */}
               <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Specifications</h3>
                 <div className="space-y-6">
-                  <p className="text-base text-gray-900">
+                  <pre className="text-base text-gray-900">
                     {customersProduct.product?.specifications}
-                  </p>
+                  </pre>
                 </div>
               </div>
 
@@ -393,7 +393,7 @@ export default function ProductDetails() {
                 ))}
               </div>
             </Grid>
-        
+            <ProductReviewCard/>
             <RateProduct/>
          
             {/* Add other components if needed */}

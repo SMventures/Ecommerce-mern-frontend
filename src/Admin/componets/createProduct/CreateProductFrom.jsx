@@ -343,47 +343,21 @@ const CreateProductForm = () => {
 
           {/* highlights */}
           <Grid item xs={12}>
-  <TextField
-    fullWidth
-    id="outlined-multiline-static"
-    label="highlights"
-    multiline
-    name="highlights"
-    rows={3}
-    variant="outlined"
-    value={`Name: ${productData.Name}\nColor: ${productData.Color}\nType: ${productData.Type}`}
-    InputProps={{
-      readOnly: true,
-    }}
-  />
-</Grid>
-<Grid item xs={12} sm={4}>
-  <TextField
-    fullWidth
-    label="Name"
-    name="Name"
-    value={productData.Name}
-    onChange={handleChange}
-  />
-</Grid>
-<Grid item xs={12} sm={4}>
-  <TextField
-    fullWidth
-    label="Color"
-    name="Color"
-    value={productData.Color}
-    onChange={handleChange}
-  />
-</Grid>
-<Grid item xs={12} sm={4}>
-  <TextField
-    fullWidth
-    label="Type"
-    name="Type"
-    value={productData.Type}
-    onChange={handleChange}
-  />
-</Grid>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="highlights"
+              multiline
+              name="highlights"
+              rows={3}
+              onChange={handleChange}
+              value={productData.highlights}
+            />
+          </Grid>
+
+
+{/* specification */}
+
           <Grid item xs={12}>
             <TextField
               fullWidth
