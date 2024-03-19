@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +19,14 @@ import {
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
+
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -100,6 +109,20 @@ export default function ProductDetails() {
     navigate("/cart");
   };
 
+
+  const [expanded, setExpanded] = React.useState(false);
+ 
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+ 
+ 
+ 
+    const containerStyle = {
+      backgroundColor: '#e0eaf6',
+      padding: '10px',
+      borderRadius: '10px',
+    };
  
   return (
     <div className="bg-white lg:px-20">
@@ -193,6 +216,7 @@ export default function ProductDetails() {
           </div>
 
           {/* Product info */}
+          <Container >
           <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
             <div className="lg:col-span-2">
               <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
@@ -320,16 +344,69 @@ export default function ProductDetails() {
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
               {/* Description and details */}
               <div>
-                <h3 className="text-sm font-bold text-gray-900 mt-2 mb-2">Description</h3>
+                <h3 className="text-sm font-bold text-gray-900 mt-2 mb-4">Description</h3>
 
                 <div className="space-y-6">
-                  <p className="text-base text-gray-900">
+                  <p className="text-base text-gray-900 mb-5">
                     {customersProduct.product?.description}
                   </p>
                 </div>
               </div>
 {/* highlights */}
-              <div>
+
+<Box sx={{ width: '100%' }}>
+<Accordion
+          expanded={expanded === 'panel1'}
+          onChange={handleChange('panel1')}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1d-content"
+            id="panel1d-header"
+          >
+            <Typography component="h3" variant="subtitle2 ">
+             Highlights
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+          <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+  <Typography variant="body2" gutterBottom>
+    <pre className="text-base text-gray-900">
+      {customersProduct.product?.highlights}
+    </pre>
+  </Typography>
+  </Box>
+          </AccordionDetails>
+        </Accordion>
+
+        {/* specification  */}
+           
+<Accordion
+          expanded={expanded === 'panel4'}
+          onChange={handleChange('panel4')}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4d-content"
+            id="panel4d-header"
+          >
+            <Typography component="h3" variant="subtitle2 ">
+            Specifications
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+          <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+  <Typography variant="body2" gutterBottom>
+    <pre className="text-base text-gray-900">
+      {customersProduct.product?.specifications}
+    </pre>
+  </Typography>
+</Box>
+          </AccordionDetails>
+        </Accordion>
+        </Box>
+
+              {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
                 <div className="space-y-6">
                   <pre className="text-base text-gray-900">
@@ -337,16 +414,17 @@ export default function ProductDetails() {
                     {customersProduct.product?.highlights}
                   </pre>
                 </div>
-              </div>
+              </div> */}
 {/* specifications */}
-              <div>
+              {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Specifications</h3>
                 <div className="space-y-6">
                   <pre className="text-base text-gray-900">
                     {customersProduct.product?.specifications}
                   </pre>
                 </div>
-              </div>
+              </div> */}
+              
 
               
 
@@ -375,6 +453,7 @@ export default function ProductDetails() {
               </div> */}
             </div>
           </div>
+          </Container >
         </section>
 
         {/* rating and review section */}
