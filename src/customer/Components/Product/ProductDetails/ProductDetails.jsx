@@ -354,6 +354,7 @@ export default function ProductDetails() {
                 ))}
               </div>
             </Grid>
+            
         
             <RateProduct/>
          
