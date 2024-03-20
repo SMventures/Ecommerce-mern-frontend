@@ -14,16 +14,25 @@ function Footer() {
             </h5>
             <div className="mt-6 lg:mb-0 mb-6 flex">
               {/* Facebook icon */}
-              <Facebook className="bg-white text-Blue-700 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
-
+              <a href="https://www.facebook.com/your_facebook_id" target="_blank" rel="noopener noreferrer">
+      {/* Facebook icon */}
+      <Facebook className="bg-white text-Blue-700 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
               {/* Instagram icon */}
-              <Instagram className="bg-white text-purple-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
-
+              <a href="https://www.instagram.com/digital_dalal_street/?igsh=Nmtnb2pmM2h6emNu" target="_blank" rel="noopener noreferrer">
+      {/* Instagram icon */}
+      <Instagram className="bg-white text-purple-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
               {/* WhatsApp icon */}
-              <WhatsApp className="bg-white text-green-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+              <a href="https://wa.me/your_whatsapp_number" target="_blank" rel="noopener noreferrer">
+      {/* WhatsApp icon */}
+      <WhatsApp className="bg-white text-green-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
 
-              {/* Email icon */}
-              <Email className="bg-white text-red-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    <a href="mailto:smventuresholding@gmail.com">
+      {/* Email icon */}
+      <Email className="bg-white text-red-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2" style={{ fontSize: 24 }} />
+    </a>
             </div>
           </div>
           <div className="w-full md:w-1/2 px-4">
@@ -38,7 +47,7 @@ function Footer() {
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/About">Products</a>
                   </li>
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Services</a>
+                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Team</a>
                   </li>
                   <li>
                     {/* <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free Products</a> */}
@@ -55,7 +64,7 @@ function Footer() {
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/Terms">Terms & Privacy</a>
                   </li>
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Pricing</a>
+                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.smventures.org/">Services</a>
                   </li>
                 </ul>
               </div>
@@ -64,10 +73,10 @@ function Footer() {
                 <ul className="list-none">
                   {/* Contact links */}
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/">Send your Queries</a>
+                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.instagram.com/digital_dalal_street/?igsh=Nmtnb2pmM2h6emNu">Message Us</a>
                   </li>
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Email us</a>
+                  <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="mailto:your_email@example.com">Email us</a>
                   </li>
                   {/* <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Call us</a>

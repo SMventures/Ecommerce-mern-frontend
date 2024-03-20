@@ -41,6 +41,8 @@ const UpdateProductForm = () => {
     secondLavelCategory: "",
     thirdLavelCategory: "",
     description: "",
+    highlights: "",
+    specifications: "",
   });
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
@@ -308,6 +310,30 @@ const UpdateProductForm = () => {
               rows={3}
               onChange={handleChange}
               value={productData.description}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="Description"
+              multiline
+              name="description"
+              rows={3}
+              onChange={handleChange}
+              value={productData.highlights}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="Description"
+              multiline
+              name="description"
+              rows={3}
+              onChange={handleChange}
+              value={productData.specifications}
             />
           </Grid>
           {/* {productData.size.map((size, index) => (

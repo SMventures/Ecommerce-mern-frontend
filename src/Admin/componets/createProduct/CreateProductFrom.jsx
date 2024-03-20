@@ -43,7 +43,14 @@ const CreateProductForm = () => {
     secondLavelCategory: "",
     thirdLavelCategory: "",
     description: "",
+    highlights: "",
+    specifications: "",
+    Name: "", // Added for highlights
+    Color: "", // Added for highlights
+    Type: "", // Added for highlights
   });
+
+  
 
   console.log(productData)
   const [sizes, setSizes] = useState(initialSizes);
@@ -51,21 +58,31 @@ const CreateProductForm = () => {
   const jwt = localStorage.getItem("jwt");
   const [imageFile, setImageFile] = useState(null);
 
+ 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "imageFile") {
-      setImageFile(e.target.files[0]); // Update imageFile state
+  const { name, value } = e.target;
+  if (name === "imageFile") {
+    setImageFile(e.target.files[0]); // Update imageFile state
+    setProductData((prevState) => ({
+      ...prevState,
+      [name]: e.target.files[0], // Set image file in productData
+    }));
+  } else {
+    // Update productData state
+    setProductData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // Update highlights field based on Name, Color, and Type
+    if (name === "Name" || name === "Color" || name === "Type") {
       setProductData((prevState) => ({
         ...prevState,
-        [name]: e.target.files[0], // Set image file in productData
-      }));
-    } else {
-      setProductData((prevState) => ({
-        ...prevState,
-        [name]: value,
+        highlights: `Name: ${prevState.Name}\nColor: ${prevState.Color}\nType: ${prevState.Type}`,
       }));
     }
-  };
+  }
+};
 
   const handleSizeChange = (e, index) => {
     const { name, value } = e.target;
@@ -321,6 +338,36 @@ const CreateProductForm = () => {
               rows={3}
               onChange={handleChange}
               value={productData.description}
+            />
+          </Grid>
+
+          {/* highlights */}
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="highlights"
+              multiline
+              name="highlights"
+              rows={3}
+              onChange={handleChange}
+              value={productData.highlights}
+            />
+          </Grid>
+
+
+{/* specification */}
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="specifications"
+              multiline
+              name="specifications"
+              rows={3}
+              onChange={handleChange}
+              value={productData.specifications}
             />
           </Grid>
 
