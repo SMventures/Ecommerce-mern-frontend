@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation, } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
 import RateProduct from "../../ReviewProduct/RateProduct";
 
@@ -16,6 +16,9 @@ import {
   findProductById,
   getSimilarProducts,
 } from "../../../../Redux/Customers/Product/Action";
+import PaymentSuccess from '../../paymentSuccess/PaymentSuccess';
+
+
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
@@ -26,15 +29,18 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
-
+import Step from "@mui/material/Step";
+import Checkout from '../../Checkout/Checkout';
+import OrderSummary from '../../Checkout/OrderSummary';
+import checkout from '../../Checkout/Checkout';
+import AddDeliveryAddressForm from '../../Checkout/AddAddress';
 
 const product = {
-  name: "Basic Tee 6-Pack",
+  name: "Product",
   price: "₹996",
   href: "#",
   breadcrumbs: [
-    { id: 1, name: "Men", href: "#" },
-    { id: 2, name: "Clothing", href: "#" },
+    { id: 1, name: "Product", href: "#" },
   ],
   images: [
     {
@@ -109,12 +115,39 @@ export default function ProductDetails() {
     navigate("/cart");
   };
 
+  const handleBack = () => {
+      const data = { productId, size: selectedSize.name };
+    dispatch(addItemToCart({ data, jwt }));
+    navigate(`/checkout?step=${step-1}`)
+  };
+  const steps = [
+    "Login",
+    "Delivery Adress",
+    "Order Summary",
+    "Payment",
+  ];
+  const [activeStep, setActiveStep] = React.useState(1);
+  const [skipped, setSkipped] = React.useState(new Set());
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const step = queryParams.get('step');
+  
+
+  // buy now
+  const handleBuyNow = () => {
+    // Navigate to checkout page and pass the selected product as state
+    navigate("/checkout", {
+      state: { product: product, size: selectedSize.name },
+    });
+  };
+
 
   const [expanded, setExpanded] = React.useState(false);
  
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  
  
  
  
@@ -139,7 +172,8 @@ export default function ProductDetails() {
                     href={"/"}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
-                    {breadcrumb.name}
+                    {product.name}
+                  
                   </a>
                   <svg
                     width={16}
@@ -160,7 +194,8 @@ export default function ProductDetails() {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                
+                {customersProduct.product?.title}
               </a>
             </li>
           </ol>
@@ -193,39 +228,42 @@ export default function ProductDetails() {
               
             </div>
 
-          
-            <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
-  <Button
-    variant="contained"
-    type="submit"
-    sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0"}}
-  >
-    Add To Cart
-  </Button>
-  
-  <Button 
-    variant="contained"
-    type="submit"
-    sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0"}}
-  >
-    Buy Now
-  </Button>
-</form>
-
+            <form className="mt-10 flex flex-wrap justify-center">
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ padding: ".8rem 2rem", margin: "0 .5rem", background: "#2874f0"}}
+          onClick={handleSubmit}
+        >
+          Add To Cart
+        </Button>
+        <Button 
+          variant="contained"
+          type="submit"
+          sx={{ padding: ".8rem 2rem", margin: "0 .5rem", background: "#2874f0"}}
+          onClick={handleBuyNow}
+        >
+          Buy Now
+        </Button>
+      </form>
            
           </div>
 
           {/* Product info */}
           <Container >
-          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
-            <div className="lg:col-span-2">
-              <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
-                {customersProduct.product?.brand}
-              </h1>
-              <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
-                {customersProduct.product?.title}
-              </h1>
-            </div>
+          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
+    <div className="lg:col-span-2">
+      <div className="flex flex-col items-start"> {/* Adjusted positioning */}
+        <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900">
+          {customersProduct.product?.brand}
+        </h1>
+        <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
+          {customersProduct.product?.title}
+        </h1>
+      </div>
+    </div>
+
+
 
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
@@ -364,7 +402,7 @@ export default function ProductDetails() {
             aria-controls="panel1d-content"
             id="panel1d-header"
           >
-            <Typography component="h3" variant="subtitle2 ">
+            <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
              Highlights
             </Typography>
           </AccordionSummary>
@@ -390,7 +428,7 @@ export default function ProductDetails() {
             aria-controls="panel4d-content"
             id="panel4d-header"
           >
-            <Typography component="h3" variant="subtitle2 ">
+            <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
             Specifications
             </Typography>
           </AccordionSummary>

@@ -1,3 +1,4 @@
+
 export const color = [
   "white",
   "Black",
