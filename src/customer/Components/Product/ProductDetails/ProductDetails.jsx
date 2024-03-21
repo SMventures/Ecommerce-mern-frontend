@@ -4,6 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
 import RateProduct from "../../ReviewProduct/RateProduct";
+import { Favorite as FavoriteIconOutlined, FavoriteBorder as FavoriteIcon } from '@mui/icons-material';
 
 import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
@@ -26,18 +27,18 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+import { addItemToWishlist, removeWishlistItem } from '../../../../Redux/Customers/Wishlist/Action';
 
 
 const product = {
-    name: "Basic Tee 6-Pack",
-    price: "₹996",
-    href: "#",
-    breadcrumbs: [
-      { id: 1, name: "Men", href: "#" },
-      { id: 2, name: "Clothing", href: "#" },
-    ],
+  name: "Product",
+  price: "₹996",
+  href: "#",
+  breadcrumbs: [
+    { id: 1, name: "Product", href: "#" },
+ 
+  ],
   images: [
     {
       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
@@ -124,9 +125,73 @@ export default function ProductDetails() {
   const handlewishlistSubmit = () => {
     const data = { productId, size: selectedSize.name };
     dispatch(addItemToWishlist({ data, jwt }));
-    navigate("/wishlist");
+    setIsClicked(true); // Toggle the state to change the color
+    setShowNotification(true); // Show the notification
+    setTimeout(() => setShowNotification(false), 3000); // Hide the notification after 3 seconds
+
+    // navigate("/cart");
   };
 
+  const [isClicked, setIsClicked] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  // const handlewishlistSubmit = () => {
+  //   // if (product && product.name) {
+  //   //   // Access the name property only if product and product.name are defined
+  //   //   console.log("Adding product to wishlist:", product.name);
+  //     const data = { productId: product.id, size: selectedSize.name };
+  //     dispatch(addItemToWishlist({ data, jwt }));
+  //     // setIsClicked(true); // Update state to indicate that the icon has been clicked
+  //   // } else {
+  //   //   console.error("Product or product name is undefined");
+  //   // }
+  // };
+  
+  // const [isInWishlist, setIsInWishlist] = useState(false);
+
+  // const handlewishlistSubmit = () => {
+  //   // Toggle the state when the wishlist icon is clicked
+  //   setIsInWishlist(!isInWishlist);
+  //   console.log('Product added to wishlist!');
+  // };
+
+  // const [wishlistClicked, setWishlistClicked] = useState(false);
+
+  // const handleWishlistClick = () => {
+  //   setWishlistClicked(!wishlistClicked);
+  //   // Add your handlewishlistSubmit logic here
+
+  // };
+  // const [clickedIndex, setClickedIndex] = useState(-1);
+
+  // const handlewishlistSubmit = (itemId) => {
+  //   const data = { productId: itemId }; // Use itemId as the product ID
+  //   dispatch(addItemToWishlist({ data, jwt }));
+    // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
+  //   // navigate("/wishlist");
+  // };
+  const isProductInWishlist = (product) => {
+    // Check if customersProduct exists and has a wishlist property
+    if (customersProduct && customersProduct.wishlist) {
+      // Check if the product exists in the wishlist array
+      return customersProduct.wishlist.some((item) => item.id === product.id);
+    }
+    // Return false if customersProduct or wishlist is undefined
+    return false;
+  };
+  
+  const handleWishlistToggle = (product) => {
+    if (!isProductInWishlist(product)) {
+      // If the product is not in the wishlist, add it to the wishlist
+      dispatch(addItemToWishlist({ jwt, data: product }));
+    } else {
+      // If the product is already in the wishlist, do nothing
+      console.log("Item is already in the wishlist");
+    }
+  };
+  
+
+  // Function to check if a product is in the wishlist
+  
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -143,7 +208,9 @@ export default function ProductDetails() {
   };
 
   return (
-    <div className="bg-white lg:px-20">
+    // <div className="bg-white lg:px-20">
+    //   <div className="pt-6">
+      <div className="bg-white lg:px-20">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol
@@ -178,19 +245,44 @@ export default function ProductDetails() {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {customersProduct.product?.title}
               </a>
             </li>
           </ol>
         </nav>
-
         {/* product details */}
         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
-          {/* Image gallery */}
-          <div className="flex flex-col items-center relative">
-            <div className="absolute top-2 right-2 text-red-500 cursor-pointer" onClick={handlewishlistSubmit}>
-              <FavoriteIcon />
-            </div>
+        <div className="relative">
+      {/* Wishlist icon */}
+      <div
+        className="absolute top-2 right-8 cursor-pointer"
+        onClick={() => handlewishlistSubmit(product)}
+        style={{
+          width: '24px',
+          height: '24px',
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill={isClicked ? 'red' : 'none'}
+          stroke={isClicked ? 'red' : 'grey'}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
+        </svg>
+      </div>
+
+      {/* Notification bar */}
+      {showNotification && (
+        <div className="absolute top-0 right-0 mt-8 mr-8 bg-green-500 text-white px-4 py-2 rounded">
+          Item added to wishlist
+        </div>
+      )}
+  
+ 
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
                 src={activeImage?.src || customersProduct.product?.imageUrl}
@@ -212,22 +304,23 @@ export default function ProductDetails() {
                 </div>
               ))}
             </div>
-          
 
 
 
 
 
-          <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-            >
-              Add To Cart
-            </Button>
+            <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+              >
+                Add To Cart
+              </Button>
 
-            <Button
+
+              
+              <Button
               onClick={() => navigate("/checkout?step=2")}
               variant="contained"
               type="submit"
@@ -235,202 +328,200 @@ export default function ProductDetails() {
             >
               Buy Now
             </Button>
-          </form>
-
-
-      </div>
-
-      {/* Product info */}
-      <Container >
-      <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-            <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
-              <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
-                {customersProduct.product?.brand}
-              </h1>
-              <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
-                {customersProduct.product?.title}
-              </h1>
-            </div>
-          {/* Options */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
-            <h2 className="sr-only">Product information</h2>
-            <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
-              <p className="font-semibold">
-                ₹{customersProduct.product?.discountedPrice}
-              </p>
-              <p className="opacity-50 line-through">
-                ₹{customersProduct.product?.price}
-              </p>
-              <p className="text-green-600 font-semibold">
-                {customersProduct.product?.discountPersent}% Off
-              </p>
-            </div>
-
-            {/* Reviews */}
-            <div className="mt-6">
-              <h3 className="sr-only">Reviews</h3>
-
-              <div className="flex items-center space-x-3">
-                <Rating
-                  name="read-only"
-                  value={4.6}
-                  precision={0.5}
-                  readOnly
-                />
-
-                <p className="opacity-60 text-sm">42807 Ratings</p>
-                <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
-                  {reviews.totalCount} reviews
-                </p>
-              </div>
-            </div>
-
-            <form className="mt-10" onSubmit={handleSubmit}>
-              {/* Sizes */}
-              <div className="mt-10">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                </div>
-
-                <RadioGroup
-                  value={selectedSize}
-                  onChange={setSelectedSize}
-                  className="mt-4"
-                >
-                  <RadioGroup.Label className="sr-only">
-                    Choose a size
-                  </RadioGroup.Label>
-                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
-                    {product.sizes.map((size) => (
-                      <RadioGroup.Option
-                        key={size.name}
-                        value={size}
-                        disabled={!size.inStock}
-                        className={({ active }) =>
-                          classNames(
-                            size.inStock
-                              ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                              : "cursor-not-allowed bg-gray-50 text-gray-200",
-                            active ? "ring-1 ring-indigo-500" : "",
-                            "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
-                          )
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <RadioGroup.Label as="span">
-                              {size.name}
-                            </RadioGroup.Label>
-                            {size.inStock ? (
-                              <span
-                                className={classNames(
-                                  active ? "border" : "border-2",
-                                  checked
-                                    ? "border-indigo-500"
-                                    : "border-transparent",
-                                  "pointer-events-none absolute -inset-px rounded-md"
-                                )}
-                                aria-hidden="true"
-                              />
-                            ) : (
-                              <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                              >
-                                <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                  viewBox="0 0 100 100"
-                                  preserveAspectRatio="none"
-                                  stroke="currentColor"
-                                >
-                                  <line
-                                    x1={0}
-                                    y1={100}
-                                    x2={100}
-                                    y2={0}
-                                    vectorEffect="non-scaling-stroke"
-                                  />
-                                </svg>
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-
-
             </form>
           </div>
 
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-            {/* Description and details */}
-            <div>
-              <h3 className="text-sm font-bold text-gray-900 mt-2 mb-4">Description</h3>
-
-              <div className="space-y-6">
-                <p className="text-base text-gray-900 mb-5">
-                  {customersProduct.product?.description}
-                </p>
+          {/* Product info */}
+          <Container >
+            <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
+              <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
+                <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
+                  {customersProduct.product?.brand}
+                </h1>
+                <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
+                  {customersProduct.product?.title}
+                </h1>
               </div>
-            </div>
-            {/* highlights */}
+              {/* Options */}
+              <div className="mt-4 lg:row-span-3 lg:mt-0">
+                <h2 className="sr-only">Product information</h2>
+                <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
+                  <p className="font-semibold">
+                    ₹{customersProduct.product?.discountedPrice}
+                  </p>
+                  <p className="opacity-50 line-through">
+                    ₹{customersProduct.product?.price}
+                  </p>
+                  <p className="text-green-600 font-semibold">
+                    {customersProduct.product?.discountPersent}% Off
+                  </p>
+                </div>
 
-            <Box sx={{ width: '100%' }}>
-              <Accordion
-                expanded={expanded === 'panel1'}
-                onChange={handleChange('panel1')}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1d-content"
-                  id="panel1d-header"
-                >
-                  <Typography component="h3" variant="subtitle2 ">
-                    Highlights
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
-                    <Typography variant="body2" gutterBottom>
-                      <pre className="text-base text-gray-900">
-                        {customersProduct.product?.highlights}
-                      </pre>
-                    </Typography>
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
+                {/* Reviews */}
+                <div className="mt-6">
+                  <h3 className="sr-only">Reviews</h3>
 
-              {/* specification  */}
+                  <div className="flex items-center space-x-3">
+                    <Rating
+                      name="read-only"
+                      value={4.6}
+                      precision={0.5}
+                      readOnly
+                    />
 
-              <Accordion
-                expanded={expanded === 'panel4'}
-                onChange={handleChange('panel4')}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel4d-content"
-                  id="panel4d-header"
-                >
-                  <Typography component="h3" variant="subtitle2 ">
-                    Specifications
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
-                    <Typography variant="body2" gutterBottom>
-                      <pre className="text-base text-gray-900">
-                        {customersProduct.product?.specifications}
-                      </pre>
-                    </Typography>
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
+                    <p className="opacity-60 text-sm">42807 Ratings</p>
+                    <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
+                      {reviews.totalCount} reviews
+                    </p>
+                  </div>
+                </div>
 
-            {/* <div>
+                <form className="mt-10" onSubmit={handleSubmit}>
+                  {/* Sizes */}
+                  <div className="mt-10">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                    </div>
+
+                    <RadioGroup
+                      value={selectedSize}
+                      onChange={setSelectedSize}
+                      className="mt-4"
+                    >
+                      <RadioGroup.Label className="sr-only">
+                        Choose a size
+                      </RadioGroup.Label>
+                      <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
+                        {product.sizes.map((size) => (
+                          <RadioGroup.Option
+                            key={size.name}
+                            value={size}
+                            disabled={!size.inStock}
+                            className={({ active }) =>
+                              classNames(
+                                size.inStock
+                                  ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                                  : "cursor-not-allowed bg-gray-50 text-gray-200",
+                                active ? "ring-1 ring-indigo-500" : "",
+                                "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label as="span">
+                                  {size.name}
+                                </RadioGroup.Label>
+                                {size.inStock ? (
+                                  <span
+                                    className={classNames(
+                                      active ? "border" : "border-2",
+                                      checked
+                                        ? "border-indigo-500"
+                                        : "border-transparent",
+                                      "pointer-events-none absolute -inset-px rounded-md"
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
+                                  >
+                                    <svg
+                                      className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                      viewBox="0 0 100 100"
+                                      preserveAspectRatio="none"
+                                      stroke="currentColor"
+                                    >
+                                      <line
+                                        x1={0}
+                                        y1={100}
+                                        x2={100}
+                                        y2={0}
+                                        vectorEffect="non-scaling-stroke"
+                                      />
+                                    </svg>
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                        ))}
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+
+                </form>
+              </div>
+
+              <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+                {/* Description and details */}
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900 mt-2 mb-4">Description</h3>
+
+                  <div className="space-y-6">
+                    <p className="text-base text-gray-900 mb-5">
+                      {customersProduct.product?.description}
+                    </p>
+                  </div>
+                </div>
+                {/* highlights */}
+
+                <Box sx={{ width: '100%' }}>
+                  <Accordion
+                    expanded={expanded === 'panel1'}
+                    onChange={handleChange('panel1')}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1d-content"
+                      id="panel1d-header"
+                    >
+                      <Typography component="h3" variant="subtitle2" className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                        Highlights
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                        <Typography variant="body2" gutterBottom>
+                          <pre className="text-base text-gray-900">
+                            {customersProduct.product?.highlights}
+                          </pre>
+                        </Typography>
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
+
+                  {/* specification  */}
+
+                  <Accordion
+                    expanded={expanded === 'panel4'}
+                    onChange={handleChange('panel4')}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel4d-content"
+                      id="panel4d-header"
+                    >
+                      <Typography component="h3" variant="subtitle2" className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                        Specifications
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                        <Typography variant="body2" gutterBottom>
+                          <pre className="text-base text-gray-900">
+                            {customersProduct.product?.specifications}
+                          </pre>
+                        </Typography>
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+
+                {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
                 <div className="space-y-6">
                   <pre className="text-base text-gray-900">
@@ -439,8 +530,8 @@ export default function ProductDetails() {
                   </pre>
                 </div>
               </div> */}
-            {/* specifications */}
-            {/* <div>
+                {/* specifications */}
+                {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Specifications</h3>
                 <div className="space-y-6">
                   <pre className="text-base text-gray-900">
@@ -452,7 +543,7 @@ export default function ProductDetails() {
 
 
 
-            {/* <div className="mt-10">
+                {/* <div className="mt-10">
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
@@ -468,40 +559,40 @@ export default function ProductDetails() {
                 </div>
               </div> */}
 
-            {/* <div className="mt-10">
+                {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
                   <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
               </div> */}
-          </div>
-        </div>
-      </Container >
-    </section>
+              </div>
+            </div>
+          </Container >
+        </section>
 
-        {/* rating and review section */ }
-  <section className="">
-    <h1 className="font-semibold text-lg pb-4">
-      Recent Review & Ratings
-    </h1>
+        {/* rating and review section */}
+        <section className="">
+          <h1 className="font-semibold text-lg pb-4">
+            Recent Review & Ratings
+          </h1>
 
-    <div className="border p-5">
-      <Grid container spacing={7}>
-        <Grid item xs={7}>
-          <div className="space-y-5">
-            {/* Iterate over reviews and render ProductReviewCard for each */}
-            {review.reviews?.map((item, i) => (
-              <ProductReviewCard key={i} item={item} />
-            ))}
-          </div>
-        </Grid>
-        <ProductReviewCard />
-        <RateProduct />
+          <div className="border p-5">
+            <Grid container spacing={7}>
+              <Grid item xs={7}>
+                <div className="space-y-5">
+                  {/* Iterate over reviews and render ProductReviewCard for each */}
+                  {review.reviews?.map((item, i) => (
+                    <ProductReviewCard key={i} item={item} />
+                  ))}
+                </div>
+              </Grid>
+              <ProductReviewCard />
+              <RateProduct />
 
-        {/* Add other components if needed */}
+              {/* Add other components if needed */}
 
-        {/* <Grid item xs={5}>
+              {/* <Grid item xs={5}>
                 <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
                 <div className="flex items-center space-x-3 pb-10">
                   <Rating
@@ -639,12 +730,12 @@ export default function ProductDetails() {
                       <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid> */}
-        {/* </Box> */}
-      </Grid>
-    </div>
-  </section>
+              {/* </Box> */}
+            </Grid>
+          </div>
+        </section>
 
-  {/* Similar Products */ }
+        {/* Similar Products */}
         <div>
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">Similar Products</h1>

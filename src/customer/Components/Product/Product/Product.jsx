@@ -9,7 +9,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action'; // Import the action creator for adding items to the wishlist
+// import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action'; // Import the action creator for adding items to the wishlist
 import { addItemToCart } from '../../../../Redux/Customers/Cart/Action'; // Import the action creator for adding items to the wishlist
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -32,7 +32,7 @@ import { deepPurple } from "@mui/material/colors";
 import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
 
-import {addItemToWishlist,removeWishlistItem} from "../../../../Redux/Customers/Wishlist/Action"
+import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -92,7 +92,7 @@ export default function Product() {
     // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
     // navigate("/wishlist");
   };
-  
+
 
 
 
@@ -178,18 +178,18 @@ export default function Product() {
     }
   }, [customersProduct.loading]);
 
-  const handleWishlistToggle = (product) => {
-    if (isProductInWishlist(product)) {
-      dispatch(removeWishlistItem({ jwt, wishlistItemId: product.id }));
-    } else {
-      dispatch(addItemToWishlist({ jwt, data: product }));
-    }
-  };
+  // const handleWishlistToggle = (product) => {
+  //   if (isProductInWishlist(product)) {
+  //     dispatch(removeWishlistItem({ jwt, wishlistItemId: product.id }));
+  //   } else {
+  //     dispatch(addItemToWishlist({ jwt, data: product }));
+  //   }
+  // };
 
-  // Function to check if a product is in the wishlist
-  const isProductInWishlist = (product) => {
-    return customersProduct.wishlist.some((item) => item.id === product.id);
-  };
+  // // Function to check if a product is in the wishlist
+  // const isProductInWishlist = (product) => {
+  //   return customersProduct.wishlist.some((item) => item.id === product.id);
+  // };
 
   return (
     <div className="bg-white -z-20 ">
@@ -508,41 +508,41 @@ export default function Product() {
                 <div className="lg:col-span-4 w-full">
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
-                      <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
-                        {/* Favorite icon */}
-                        <div 
-      className="absolute top-2 right-2 cursor-pointer" 
-      onClick={handlewishlistSubmit}
-      style={{
-        width: '24px', // Adjust the width and height as needed
-        height: '24px',
-        position: 'relative' // Make sure the position is relative for absolute positioning of SVG
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill={isClicked ? 'red' : 'none'} // Fill red when clicked, otherwise none (transparent)
-        stroke={isClicked ? 'red' : 'grey'}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        style={{
-          position: 'absolute', // Position the SVG
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
-      </svg>
-    </div>     {/* Product card content */}
+                      // <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
+                      //   {/* Favorite icon */}
+                      //   <div
+                      //     className="absolute top-2 right-2 cursor-pointer"
+                      //     onClick={handlewishlistSubmit}
+                      //     style={{
+                      //       width: '24px', // Adjust the width and height as needed
+                      //       height: '24px',
+                      //       position: 'relative' // Make sure the position is relative for absolute positioning of SVG
+                      //     }}
+                      //   >
+                      //     <svg
+                      //       xmlns="http://www.w3.org/2000/svg"
+                      //       viewBox="0 0 24 24"
+                      //       fill={isClicked ? 'red' : 'none'} // Fill red when clicked, otherwise none (transparent)
+                      //       stroke={isClicked ? 'red' : 'grey'}
+                      //       strokeWidth="2"
+                      //       strokeLinecap="round"
+                      //       strokeLinejoin="round"
+                      //       style={{
+                      //         position: 'absolute', // Position the SVG
+                      //         top: 0,
+                      //         left: 0,
+                      //         width: '100%',
+                      //         height: '100%'
+                      //       }}
+                      //     >
+                      //       <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
+                      //     </svg>
+                      //   </div>     {/* Product card content */}
                         <ProductCard product={item} />
-                      </div>
+                      // </div>
 
                     ))}
-                    
+
                   </div>
                 </div>
               </div>

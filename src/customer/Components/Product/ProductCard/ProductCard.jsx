@@ -1,14 +1,23 @@
-import React from "react";
+import React from 'react';
+import "./ProductCard.css";
+import{useLocation, useNavigate} from "react-router-dom";
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+const ProductCard = ({ product }) => {
+  const { title, brand, imageUrl, price ,discountedPrice,color,discountPersent} = product;
+  const navigate= useNavigate();
+  
 
-const ProductCard = ({
-  product,
-  isAddedToWishlist,
-  onWishlistToggle,
-  handleNavigate,
-}) => {
-  const { imageUrl, brand, title, color, discountedPrice, price, discountPersent } = product;
+  const handleNavigate=()=>{
+    navigate(`/product/${product?._id}`)
+  }
+// const ProductCard = ({
+//   product,
+//   isAddedToWishlist,
+//   onWishlistToggle,
+//   handleNavigate,
+// }) => {
+//   const { imageUrl, brand, title, color, discountedPrice, price, discountPersent } = product;
 
   return (
     <div onClick={handleNavigate} className="productCard w-[15rem] border m-3 transition-all cursor-pointer">
@@ -29,13 +38,13 @@ const ProductCard = ({
       </div>
       <div className="product-card">
         {/* Other product information */}
-        <button onClick={() => onWishlistToggle(product)}>
+        {/* <button onClick={() => onWishlistToggle(product)}>
           {isAddedToWishlist ? (
             < FavoriteBorderIcon className="text-red-500" />
           ) : (
             < FavoriteBorderIcon className="text-gray-500" />
           )}
-        </button>
+        </button> */}
       </div>
     </div>
   );
