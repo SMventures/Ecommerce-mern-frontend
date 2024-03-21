@@ -32,6 +32,8 @@ import { deepPurple } from "@mui/material/colors";
 import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
 
+import {addItemToWishlist,removeWishlistItem} from "../../../../Redux/Customers/Wishlist/Action"
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -175,6 +177,19 @@ export default function Product() {
       setIsLoaderOpen(false);
     }
   }, [customersProduct.loading]);
+
+  const handleWishlistToggle = (product) => {
+    if (isProductInWishlist(product)) {
+      dispatch(removeWishlistItem({ jwt, wishlistItemId: product.id }));
+    } else {
+      dispatch(addItemToWishlist({ jwt, data: product }));
+    }
+  };
+
+  // Function to check if a product is in the wishlist
+  const isProductInWishlist = (product) => {
+    return customersProduct.wishlist.some((item) => item.id === product.id);
+  };
 
   return (
     <div className="bg-white -z-20 ">
