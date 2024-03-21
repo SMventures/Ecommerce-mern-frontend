@@ -17,7 +17,7 @@ export const Fashion = [
         "color": "Purple",
         "discountedPrice": "789",
         "price": "3,999",
-        "discountPersent": "80% off"
+        "discountPersent": "80% "
     },
     {
         "image": white_hoodie,
@@ -26,7 +26,7 @@ export const Fashion = [
         "color": "Pink",
         "discountedPrice": "996",
         "price": "3,500",
-        "discountPersent": "71% off"
+        "discountPersent": "71% "
     },
     {
         "image": womenwhittshirt,
@@ -35,7 +35,7 @@ export const Fashion = [
         "color": "White",
         "discountedPrice": "374",
         "price": "1,798",
-        "discountPersent": "79% off"
+        "discountPersent": "79% "
     },
     {
         "image": blackstocktshirt,
@@ -71,7 +71,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "479",
         "price": "3,999",
-        "discountPersent": "88% off"
+        "discountPersent": "88% "
     },
     {
         "image": bluehoodie,
@@ -89,7 +89,7 @@ export const Fashion = [
         "color": "Blue",
         "discountedPrice": "295",
         "price": "2,007",
-        "discountPersent": "85% off"
+        "discountPersent": "85% "
     },
     {
         "image": blackhoodie2,
@@ -98,7 +98,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "296",
         "price": "1,999",
-        "discountPersent": "85% off"
+        "discountPersent": "85% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/g/m/i/free-60-gram-gulab-saree-adirotz-unstitched-original-imagz88maq2psggy.jpeg?q=70",
@@ -107,7 +107,7 @@ export const Fashion = [
         "color": "Magenta",
         "discountedPrice": "479",
         "price": "2,599",
-        "discountPersent": "81% off"
+        "discountPersent": "81% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/l3xcr680/sari/o/h/t/free-if-rgtg-red-pisara-unstitched-original-imagexza4cnczdzj.jpeg?q=70",
@@ -116,7 +116,7 @@ export const Fashion = [
         "color": "Multicolor",
         "discountedPrice": "1,329",
         "price": "4,997",
-        "discountPersent": "73% off"
+        "discountPersent": "73% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/w/5/n/free-pattu-saree-ejoty-fashion-unstitched-original-imag4abzywzyk5ry-bb.jpeg?q=70",
@@ -125,7 +125,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "289",
         "price": "2,999",
-        "discountPersent": "90% off"
+        "discountPersent": "90% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/7/i/7/free-sari-onestacreation-stitched-original-imagk7kgquderuqk.jpeg?q=70",
@@ -134,7 +134,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "649",
         "price": "2,499",
-        "discountPersent": "74% off"
+        "discountPersent": "74% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/l0zm64w0/sari/x/l/p/free-mc-50-rani-kartvya-unstitched-original-imagcnksmzyktamm.jpeg?q=70",
@@ -143,7 +143,7 @@ export const Fashion = [
         "color": "Pink",
         "discountedPrice": "373",
         "price": "1,699",
-        "discountPersent": "78% off"
+        "discountPersent": "78% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/n/5/n/free-2739s251-samah-unstitched-original-imagzj99zuqvmcg6.jpeg?q=70",
@@ -152,7 +152,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "273",
         "price": "1,233",
-        "discountPersent": "77% off"
+        "discountPersent": "77% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/6/r/h/free-sequencee-blackk-radadiyatrd-unstitched-original-imagz4yqwa2vschj.jpeg?q=70",
@@ -161,7 +161,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "699",
         "price": "2,999",
-        "discountPersent": "76% off"
+        "discountPersent": "76% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/z/r/t/free-embellished-daily-wear-georgette-saree-black-famous-zone-original-imaghpqzthrass5u.jpeg?q=70",
@@ -170,7 +170,7 @@ export const Fashion = [
         "color": "Black",
         "discountedPrice": "1,299",
         "price": "1,999",
-        "discountPersent": "35% off"
+        "discountPersent": "35% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/l1fc0i80/sari/8/b/s/free-sari-fabwoman-unstitched-original-imagcztprwg9dgvz.jpeg?q=70",
@@ -179,7 +179,7 @@ export const Fashion = [
         "color": "Red",
         "discountedPrice": "499",
         "price": "2,999",
-        "discountPersent": "83% off"
+        "discountPersent": "83% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/saree-fall/l/e/2/medium-embroidered-daily-wear-art-silk-saree-yellow-angelarts-original-imag5cdh6xsfkgyy-bb.jpeg?q=70",
@@ -188,7 +188,7 @@ export const Fashion = [
         "color": "Yellow",
         "discountedPrice": "478",
         "price": "999",
-        "discountPersent": "52% off"
+        "discountPersent": "52% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/ksyz8280/sari/f/j/2/free-jlk-peacock-4-pink-ab-kayimi-unstitched-original-imag6f5jkgadnhgx.jpeg?q=70",
@@ -197,7 +197,7 @@ export const Fashion = [
         "color": "Pink, Beige",
         "discountedPrice": "349",
         "price": "1,663",
-        "discountPersent": "79% off"
+        "discountPersent": "79% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/x/g/i/free-fl-1199-jsitaliya-unstitched-original-imagc4q5csjac5bq-bb.jpeg?q=70",
@@ -206,7 +206,7 @@ export const Fashion = [
         "color": "White",
         "discountedPrice": "449",
         "price": "1,999",
-        "discountPersent": "77% off"
+        "discountPersent": "77% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/krkyt8w0/saree-fall/f/n/0/medium-embroidered-daily-wear-art-silk-saree-maroon-angelarts-original-imag5ccj7yfkpv5b.jpeg?q=70",
@@ -215,7 +215,7 @@ export const Fashion = [
         "color": "Maroon",
         "discountedPrice": "492",
         "price": "999",
-        "discountPersent": "50% off"
+        "discountPersent": "50% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shopsy-sari/m/n/n/free-mineral-chiffon-aishwarya-unstitched-original-imaghd3e53zfgrzu.jpeg?q=70",
@@ -224,7 +224,7 @@ export const Fashion = [
         "color": "Yellow",
         "discountedPrice": "449",
         "price": "1,999",
-        "discountPersent": "77% off"
+        "discountPersent": "77% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/k7xnukw0/sari/e/8/d/free-khusi-krishna-r-fashion-unstitched-original-imafq22gfteg5gzh.jpeg?q=70",
@@ -233,7 +233,7 @@ export const Fashion = [
         "color": "Pink, Grey",
         "discountedPrice": "469",
         "price": "3,999",
-        "discountPersent": "88% off"
+        "discountPersent": "88% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/kshtxu80/shopsy-sari/h/i/r/free-1077-red-dhnik-creation-unstitched-original-imag6fnkhgmmqzkx.jpeg?q=70",
@@ -242,7 +242,7 @@ export const Fashion = [
         "color": "Dark Blue",
         "discountedPrice": "349",
         "price": "1,999",
-        "discountPersent": "82% off"
+        "discountPersent": "82% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/s/g/o/free-lfs-44-cream-lasfira-unstitched-original-imagzranmgc79zn2.jpeg?q=70",
@@ -251,7 +251,7 @@ export const Fashion = [
         "color": "Cream",
         "discountedPrice": "489",
         "price": "2,499",
-        "discountPersent": "80% off"
+        "discountPersent": "80% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/d/n/n/free-60-gram-gulab-saree-adirotz-unstitched-original-imagz88mju9uj3h7.jpeg?q=70",
@@ -260,7 +260,7 @@ export const Fashion = [
         "color": "Blue",
         "discountedPrice": "479",
         "price": "2,599",
-        "discountPersent": "81% off"
+        "discountPersent": "81% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/b/b/w/free-braso2-o-combo-lorofy-unstitched-original-imagkymbfmjbfeqj.jpeg?q=70",
@@ -269,7 +269,7 @@ export const Fashion = [
         "color": "Red",
         "discountedPrice": "294",
         "price": "1,599",
-        "discountPersent": "81% off"
+        "discountPersent": "81% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/l4ln8nk0/sari/p/2/u/free-2535s934-samah-unstitched-original-imagfgq7pc2mc4vz.jpeg?q=70",
@@ -278,7 +278,7 @@ export const Fashion = [
         "color": "Green, Pink",
         "discountedPrice": "289",
         "price": "1,563",
-        "discountPersent": "81% off"
+        "discountPersent": "81% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/e/a/t/free-lfs-44-light-green-lasfira-unstitched-original-imagzrarausz9jef.jpeg?q=70",
@@ -287,7 +287,7 @@ export const Fashion = [
         "color": "Light Green",
         "discountedPrice": "471",
         "price": "2,499",
-        "discountPersent": "81% off"
+        "discountPersent": "81% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/ktep2fk0/sari/9/b/g/free-s-01-signagraph-unstitched-original-imag6raqrxtuhgkm.jpeg?q=70",
@@ -296,7 +296,7 @@ export const Fashion = [
         "color": "Maroon",
         "discountedPrice": "379",
         "price": "3,999",
-        "discountPersent": "90% off"
+        "discountPersent": "90% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/krkyt8w0/sari/y/p/v/free-wedding-saree-ecolors-fab-unstitched-original-imag5c8efuhrjz9t.jpeg?q=70",
@@ -305,7 +305,7 @@ export const Fashion = [
         "color": "Light Blue, Blue",
         "discountedPrice": "387",
         "price": "3,999",
-        "discountPersent": "90% off"
+        "discountPersent": "90% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/kflftzk0-0/sari/o/y/c/free-hitesh2series-fumvel-unstitched-original-imafwypg4fwky3a7.jpeg?q=70",
@@ -314,7 +314,7 @@ export const Fashion = [
         "color": "Maroon, Black",
         "discountedPrice": "249",
         "price": "2,497",
-        "discountPersent": "90% off"
+        "discountPersent": "90% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/l3929ow0/sari/s/g/u/free-sds030-sadika-unstitched-original-imageev4hm7sxdbc.jpeg?q=70",
@@ -323,7 +323,7 @@ export const Fashion = [
         "color": "Yellow",
         "discountedPrice": "296",
         "price": "1,999",
-        "discountPersent": "85% off"
+        "discountPersent": "85% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/e/u/x/free-silk-samruddhi-unstitched-original-imagg9f2cagzstgz.jpeg?q=70",
@@ -332,7 +332,7 @@ export const Fashion = [
         "color": "Red",
         "discountedPrice": "441",
         "price": "5,999",
-        "discountPersent": "92% off"
+        "discountPersent": "92% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/ksyz8280/sari/3/h/m/free-jlk-peacock-4-red-ab-kayimi-unstitched-original-imag6f5jqghhxdpr.jpeg?q=70",
@@ -341,7 +341,7 @@ export const Fashion = [
         "color": "Red, Beige",
         "discountedPrice": "349",
         "price": "1,663",
-        "discountPersent": "79% off"
+        "discountPersent": "79% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/sari/8/9/s/free-lfs-60-light-pink-lasfira-unstitched-original-imagnas2g6yhuscx.jpeg?q=70",
@@ -350,7 +350,7 @@ export const Fashion = [
         "color": "Pink",
         "discountedPrice": "499",
         "price": "2,999",
-        "discountPersent": "83% off"
+        "discountPersent": "83% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/kxaq7ww0/sari/o/k/q/free-grey-1692-6-kashvi-sarees-unstitched-original-imag9s7ggsjw2gcn.jpeg?q=70",
@@ -359,7 +359,7 @@ export const Fashion = [
         "color": "White, Black",
         "discountedPrice": "299",
         "price": "1,299",
-        "discountPersent": "76% off"
+        "discountPersent": "76% "
     },
     {
         "image": "https://rukminim1.flixcart.com/image/612/612/kqgyhe80/sari/z/j/t/free-greyt-1152-1-kashvi-sarees-unstitched-original-imag4h6mft9kydgv.jpeg?q=70",
@@ -368,6 +368,6 @@ export const Fashion = [
         "color": "Red",
         "discountedPrice": "299",
         "price": "1,299",
-        "discountPersent": "76% off"
+        "discountPersent": "76% "
     }
 ]

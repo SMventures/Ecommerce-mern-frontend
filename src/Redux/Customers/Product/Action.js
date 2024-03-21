@@ -43,7 +43,6 @@ export const findProducts = (reqData) => async (dispatch) => {
       `/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 
-    console.log("get product by category - ", data);
     dispatch({
       type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
       payload: data,
@@ -58,11 +57,18 @@ export const findProducts = (reqData) => async (dispatch) => {
     });
   }
 };
-export const getSimilarProducts = (category) => async (dispatch) => {
+export const getSimilarProducts = (reqData) => async (dispatch) => {
+  const {
+    category,
+   
+  } = reqData;
+
   try {
       dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
 
-      const { data } = await api.get('/api/products/:category/similar');
+      const { data } = await api.get(`/api/products?category=${category}`);
+      // const { data } = await api.get('/api/products/:category/similar');
+
       console.log("products by category: ", data);
 
       dispatch({
@@ -151,29 +157,26 @@ export const createProduct = (product) => async (dispatch) => {
   }
 };
 
-export const updateProduct = (product) => async (dispatch) => {
+export const updateProduct = (productId, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-
-    const { data } = await api.put(
-      `${API_BASE_URL}/api/admin/products/${product.productId}`,
-      product
-    );
-console.log("update product ",data)
+    console.log('Updating product with ID:', productId);
+    console.log('Product data:', productData); // Log the product data being sent
+    const { data } = await api.put(`${API_BASE_URL}/api/admin/products/update/${productId}`, productData); // Make sure productId is correctly included in the URL
+    console.log('Update response:', data); // Log the response from the API
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
       payload: data,
     });
   } catch (error) {
+    console.error('Error updating product:', error);
     dispatch({
       type: UPDATE_PRODUCT_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
+
 
 export const deleteProduct = (productId) => async (dispatch) => {
   console.log("delete product action",productId)

@@ -8,15 +8,15 @@ import mouse4_Islr2hH from '../media/product/mouse4_Islr2hH.jpg'
 import usb from '../media/product/usb.jpg'
 
 export const men_kurta=[
-    {
-        "image": camera.jpg,
-        "brand": "Sm Ventures",
-        "title": "Camera",
-        "color": "Black",
-        "discountedPrice": "466",
-        "price": "999",
-        "discountPersent": "53% ",
-       "size": [
+ {   
+  "imageUrl": camera,
+  "brand": "SM Ventures",
+  "title": "Camera",
+  "color": "black",
+  "discountedPrice": 299,
+  "price": 1299,
+  "discountPersent": 76,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -31,21 +31,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": headphn.jpg,
-        "brand": "Sm Ventures",
-        "title": "Headphones",
-        "color": "Red",
-        "discountedPrice": "449",
-        "price": "1,099",
-        "disscount": "59% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": keyboard,
+  "brand": "SM Ventures",
+  "title": "Keyboard",
+  "color": "Black",
+  "discountedPrice": 299,
+  "price": 899,
+  "discountPersent": 66,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -60,21 +59,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": keyboard.jpg,
-        "brand": "Sm Ventures",
-        "title": "Stylish Keyboard",
-        "color": "Black",
-        "discountedPrice": "298",
-        "price": "1,599",
-        "disscount": "81% ",
-       "size": [
+    "topLavelCategory": "Electronics",
+    "secondLavelCategory": "Electronic_Items",
+    "thirdLavelCategory": "keyboard",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": headphn,
+  "brand": "SM Ventures",
+  "title": "Headphones",
+  "color": "white",
+  "discountedPrice": 299,
+  "price": 1299,
+  "discountPersent": 76,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -89,21 +87,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": mouse1.jpg,
-        "brand": "Sm Ventures",
-        "title": "Mouse",
-        "color": "Beige",
-        "discountedPrice": "298",
-        "price": "1,599",
-        "disscount": "81% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": mouse1,
+  "brand": "SM Ventures",
+  "title": "Mouse",
+  "color": "white",
+  "discountedPrice": 879,
+  "price": 1599,
+  "discountPersent": 45,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -118,21 +115,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": mouse2_sJZ6cc4.jpg,
-        "brand": "Sm Ventures",
-        "title": "Mouse",
-        "color": "Light Green",
-        "discountedPrice": "284",
-        "price": "1,599",
-        "disscount": "82% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": mouse3_4EO7OJV,
+  "brand": "Mouse",
+  "title": "SM Ventures",
+  "color": "white",
+  "discountedPrice": 419,
+  "price": 1648,
+  "discountPersent": 74,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -147,21 +143,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": mouse3_4EO7OJV.jpg,
-        "brand": "Sm Ventures",
-        "title": "Mouse",
-        "color": "Dark Blue",
-        "discountedPrice": "298",
-        "price": "1,599",
-        "disscount": "81% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": mouse4_Islr2hH,
+  "brand": "SM Ventures",
+  "title": "Mouse",
+  "color": "white",
+  "discountedPrice": 399,
+  "price": 1299,
+  "discountPersent": 69,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -176,21 +171,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": mouse4_Islr2hH.jpg,
-        "brand": "Sm Ventures",
-        "title": "Mouse",
-        "color": "Pink",
-        "discountedPrice": "499",
-        "price": "2,099",
-        "disscount": "76% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": mouse2_sJZ6cc4,
+  "brand": "SM Ventures",
+  "title": "Mouse",
+  "color": "white",
+  "discountedPrice": 379,
+  "price": 1849,
+  "discountPersent": 79,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -205,21 +199,20 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": usb.jpg,
-        "brand": "Sm Ventures",
-        "title": "Usb Cable",
-        "color": "Grey",
-        "discountedPrice": "689",
-        "price": "1,199",
-        "disscount": "42% ",
-       "size": [
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+  "imageUrl": usb,
+  "brand": "SM Ventures",
+  "title": "Usb Cable",
+  "color": "black",
+  "discountedPrice": 498,
+  "price": 999,
+  "discountPersent": 50,
+  "size": [
       {
         "name": "S",
         "quantity": 20
@@ -234,183 +227,13 @@ export const men_kurta=[
       }
     ],
     "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "image": "https://th.bing.com/th/id/OIP.n29innqB_lGtNhLKGSdvoAHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-        "brand": "Zinariya Fab",
-        "title": "Embroidered Net Semi Stitched Anarkali Gown",
-        "color": "Pink",
-        "discountedPrice": "499",
-        "price": "3,099",
-        "disscount": "83% ",
-       "size": [
-      {
-        "name": "S",
-        "quantity": 20
-      },
-      {
-        "name": "M",
-        "quantity": 30
-      },
-      {
-        "name": "L",
-        "quantity": 50
-      }
-    ],
-    "quantity": 100,
-    "topLavelCategory": "Books",
-    "secondLavelCategory": "Trading Books",
-    "thirdLavelCategory": "Dress",
-    "description":
-      "Make a statement with this stylish purple A-line dress from ZWERLON. Made with high-quality fabric, this dress is perfect for any occasion."
-  },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/kpodocw0/t-shirt/x/o/4/xl-wr-64-wrodss-original-imag3upwgq9n9fbv.jpeg?q=70",
-        "brand": "WRODSS",
-        "title": "Men Solid Cotton Blend Straight Kurta",
-        "color": "Black",
-        "discountedPrice": 277,
-        "price": 999,
-        "discountPersent": 72,
-        "size": [
-            {
-              "name": "S",
-              "quantity": 20
-            },
-            {
-              "name": "M",
-              "quantity": 30
-            },
-            {
-              "name": "L",
-              "quantity": 50
-            }
-          ],
-          "quantity": 100,
-          "topLavelCategory": "Men",
-          "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "mens_kurta",
-          "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
-    },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/l4zxn680/kurta/i/g/u/s-mtml0039-341-manthan-original-imagfrz3gwgdtczm.jpeg?q=70",
-        "brand": "Manthan",
-        "title": "Men Printed Cotton Blend Straight Kurta",
-        "color": "Blue",
-        "discountedPrice": 765,
-        "price": 1049,
-        "discountPersent": 27,
-        "size": [
-            {
-              "name": "S",
-              "quantity": 20
-            },
-            {
-              "name": "M",
-              "quantity": 30
-            },
-            {
-              "name": "L",
-              "quantity": 50
-            }
-          ],
-          "quantity": 100,
-          "topLavelCategory": "Men",
-          "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "mens_kurta",
-          "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
-    },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/m/e/e/s-kurta-rahul-look-original-imaga2g6qmhbywdf-bb.jpeg?q=70",
-        "brand": "RAHUL LOOK",
-        "title": "Men Solid Pure Cotton Straight Kurta",
-        "color": "Green",
-        "discountedPrice": 499,
-        "price": 1599,
-        "discountPersent": 68,
-        "size": [
-            {
-              "name": "S",
-              "quantity": 20
-            },
-            {
-              "name": "M",
-              "quantity": 30
-            },
-            {
-              "name": "L",
-              "quantity": 50
-            }
-          ],
-          "quantity": 100,
-          "topLavelCategory": "Men",
-          "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "mens_kurta",
-          "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
-    },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/u/v/m/l-grey-106-yellow-freluro-original-imagc26vdpwxgztu-bb.jpeg?q=70",
-        "brand": "FRELURO",
-        "title": "Men Printed Cotton Blend Straight Kurta",
-        "color": "Yellow",
-        "discountedPrice": 429,
-        "price": 999,        
-        "discountPersent": 57,
-        "size": [
-            {
-              "name": "S",
-              "quantity": 20
-            },
-            {
-              "name": "M",
-              "quantity": 30
-            },
-            {
-              "name": "L",
-              "quantity": 50
-            }
-          ],
-          "quantity": 100,
-          "topLavelCategory": "Men",
-          "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "mens_kurta",
-          "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
-    },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/jsj90280/kurta/j/z/g/l-mtmkos0004-326-manthan-original-imafe35wha5ry36p.jpeg?q=70",
-        "brand": "Manthan",
-        "title": "Men Self Design Cotton Blend Straight Kurta",
-        "color": "Light Blue",
-        "discountedPrice": 729,
-        "price": 909,        
-        "discountPersent": 27,
-        "size": [
-            {
-              "name": "S",
-              "quantity": 20
-            },
-            {
-              "name": "M",
-              "quantity": 30
-            },
-            {
-              "name": "L",
-              "quantity": 50
-            }
-          ],
-          "quantity": 100,
-          "topLavelCategory": "Men",
-          "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "mens_kurta",
-          "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
-    },
-    {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/g/f/f/xl-grey-sws4503-allan-peter-original-imag6xxgvvh59gh5-bb.jpeg?q=70",
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "shirt",
+    "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
+},
+{
+        "imageUrl": "https://rukminim2.flixcart.com/image/300/300/l0jwbrk0/data-cable/magnetic-charging-cable/w/z/b/itx43-itronix-original-imagcbyqudqguzn6.jpeg?q=90",
         "brand": "allan peter",
         "title": "Men Solid Pure Cotton Straight Kurta",
         "color": "Green",
@@ -438,9 +261,9 @@ export const men_kurta=[
           "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/u/g/z/xl-8button-kurta-elepants-original-imagk57kfg2bwvhd.jpeg?q=70",
-        "brand": "COMBRAIDED",
-        "title": "Men Solid Cotton Blend Straight Kurta",
+        "imageUrl": "https://rukminim2.flixcart.com/image/612/612/xif0q/keyboard/gaming-keyboard/m/m/y/mk1400-ant-esports-original-imagztekza9rkujp.jpeg?q=70",
+        "brand": "SM Ventures",
+        "title": "Keyboard",
         "color": "Dark Blue",
         "discountedPrice": 449,
         "price": 1499,
@@ -1221,4 +1044,5 @@ export const men_kurta=[
           "thirdLavelCategory": "mens_kurta",
           "description":"A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style."
     }
+  
 ]
