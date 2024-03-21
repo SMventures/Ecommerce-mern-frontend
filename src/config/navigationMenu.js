@@ -28,8 +28,8 @@ export const navigation = {
             name: 'Clothing',
             items: [
           
-              { name: 'Tshirts', id: 'women_tshirts',href: 'women/clothing/Tshirts' },
-              { name: 'Hoodies', id: 'women_hoodies', href: 'women/clothing/Hoodies'},
+              { name: 'Women Tshirts', id: 'women_tshirts' },
+              { name: 'Women Hoodies', id: 'women_hoodies'},
             
             ],
           },

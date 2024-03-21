@@ -1,5 +1,5 @@
 .search-results {
-    margin-top: 16px;
+    margin-top: 20px;
     margin-bottom: 4px;
 }
 
@@ -12,17 +12,17 @@
 }
 
 .product-image {
-    flex: 0 0 30%;
+    flex: 0 0 20%;
     display: flex;
     align-items: center; /* Center the image vertically */
-    justify-content: flex
+    /* justify-content: flex-centerAlign the image to the left */
 }
 
 .image-container {
     background-color: #f0f0f0; /* Grey background color */
     padding: 20px; /* Adjust padding as needed */
     border-radius: 5px; /* Optional: Add border-radius for rounded corners */
-    background-position: 10px center; /* Shift background position to the right */
+    background-position: 20px center; /* Shift background position to the right */
     margin-left: 50px;
 }
 
@@ -31,7 +31,7 @@
     height: auto; /* Allow the image to adjust its height */
     max-width: 120px; /* Increase the maximum width of the image */
     max-height: 120px; /* Increase the maximum height of the image */
-    object-fit: contain; /* Ensures the image fits inside the container */
+    object-fit: cover; /* Ensures the image fits inside the container */
     object-position: top; /* Positions the image at the top */
 }
 

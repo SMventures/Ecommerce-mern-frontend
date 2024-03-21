@@ -28,6 +28,8 @@ const UpdateProductForm = () => {
     secondLavelCategory: "",
     thirdLavelCategory: "",
     description: "",
+    highlights: "",
+    specifications: "",
   });
   const dispatch = useDispatch();
   const { productId } = useParams();
@@ -40,7 +42,7 @@ const UpdateProductForm = () => {
     if (name === "imageFile") {
       setProductData((prevState) => ({
         ...prevState,
-        [name]: e.target.files[0], // Set image file in productData
+        imageFile: e.target.files[0], // Set image file in productData
       }));
     } else {
       setProductData((prevState) => ({
@@ -57,38 +59,35 @@ const UpdateProductForm = () => {
     setSizes(updatedSizes); // Update the sizes state
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("imageFile", productData.imageFile); // Append image file to form data
-    // Append other product data to form data
+    formData.append("imageFile", productData.imageFile);
     for (const key in productData) {
       if (key !== "imageFile") {
         formData.append(key, productData[key]);
       }
     }
-   try {
-  const response = await axios.post(`http://localhost:5454/api/admin/products/update/:productId`, formData, {
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
   
-  console.log("Response data:", response.data); // Log response data
+    console.log("Product Data:", productData); // Log productData before making the request
   
-  // Dispatch updateProduct action
-  dispatch(updateProduct(response.data));
-
-  // Show success message
-  alert("Products updated successfully!");
-} catch (error) {
-  // Handle error
-  console.error("Error updating products:", error);
-  // Show error message if needed
-  alert("Error updating products. Please try again later.");
-}
+    try {
+      const response = await axios.put(`http://localhost:5454/api/admin/products/update/${productId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      dispatch(updateProduct(response.data));
+      alert("Product updated successfully!");
+    } catch (error) {
+      console.error("Error updating product:", error);
+      alert("Error updating product. Please try again later.");
+    }
   };
+  
+
 
   useEffect(() => {
     dispatch(findProductById(productId));
@@ -105,15 +104,16 @@ const UpdateProductForm = () => {
       <Typography variant="h3" sx={{ textAlign: "center" }} className="py-10 text-center ">
         Update Product
       </Typography>
-      <form onSubmit={handleSubmit} className="createProductContainer min-h-screen">
+      <form onSubmit={handleSubmit} className="UpdateProductContainer min-h-screen">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <input
               type="file"
               accept="image/*"
-              name="imageFile"
+              name="imageFile" // Ensure this matches the key used in FormData
               onChange={handleChange}
             />
+
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -185,7 +185,7 @@ const UpdateProductForm = () => {
             />
           </Grid>
           <Grid item xs={6} sm={4}>
-          <FormControl fullWidth>
+            <FormControl fullWidth>
               <InputLabel>Top Level Category</InputLabel>
               <Select
                 name="topLavelCategory"
@@ -222,17 +222,17 @@ const UpdateProductForm = () => {
                   <MenuItem value="Stationery_Items">Stationery Items</MenuItem>
                 )}
                 {productData.topLavelCategory === "Accessories" && [
-                
-                    <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
-                    <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
-                
+
+                  <MenuItem value="Phone_Accessories">Phone Accessories</MenuItem>,
+                  <MenuItem value="Laptop_Accessories">Laptop Accessories</MenuItem>,
+
                 ]}
                 {productData.topLavelCategory === "Electronics" && (
                   <MenuItem value="Electronics_Items">Electronic Items</MenuItem>
                 )}
                 {productData.topLavelCategory === "Books" && (
-              
-                    <MenuItem value="Trading_Books">Trading Books</MenuItem>
+
+                  <MenuItem value="Trading_Books">Trading Books</MenuItem>
                 )}
               </Select>
 

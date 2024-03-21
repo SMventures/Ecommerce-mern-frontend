@@ -157,29 +157,26 @@ export const createProduct = (product) => async (dispatch) => {
   }
 };
 
-export const updateProduct = (product) => async (dispatch) => {
+export const updateProduct = (productId, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-
-    const { data } = await api.put(
-      `${API_BASE_URL}/api/admin/products/${product.productId}`,
-      product
-    );
-console.log("update product ",data)
+    console.log('Updating product with ID:', productId);
+    console.log('Product data:', productData); // Log the product data being sent
+    const { data } = await api.put(`${API_BASE_URL}/api/admin/products/update/${productId}`, productData); // Make sure productId is correctly included in the URL
+    console.log('Update response:', data); // Log the response from the API
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
       payload: data,
     });
   } catch (error) {
+    console.error('Error updating product:', error);
     dispatch({
       type: UPDATE_PRODUCT_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
+
 
 export const deleteProduct = (productId) => async (dispatch) => {
   console.log("delete product action",productId)
