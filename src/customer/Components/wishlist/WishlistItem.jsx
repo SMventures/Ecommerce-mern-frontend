@@ -24,7 +24,7 @@ const WishlistItem = ({ item }) => {
         </div>
         <div className="ml-5 space-y-1">
           <p className="font-semibold">{item?.product?.title}</p>
-          <p className="opacity-70">Size: {item?.size}, White</p>
+          <p className="opacity-70">Size: {item?.size}</p>
           <p className="opacity-70 mt-2">Seller: {item?.product?.brand}</p>
           <div className="flex space-x-2 items-center pt-3">
             <p className="opacity-50 line-through">₹{item?.product?.price}</p>
@@ -38,9 +38,14 @@ const WishlistItem = ({ item }) => {
         </div>
       </div>
       <div className="flex text-sm lg:text-base mt-5">
-        <Button onClick={handleRemoveItemFromWishlist} variant="text">
-          Remove from Wishlist
+        <Button
+          onClick={handleRemoveItemFromWishlist}
+          variant="text"
+          sx={{ color: 'blue' }}
+        >
+          Remove 
         </Button>
+
       </div>
     </div>
   );

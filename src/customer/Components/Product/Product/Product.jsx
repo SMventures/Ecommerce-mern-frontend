@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -8,6 +9,8 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action'; // Import the action creator for adding items to the wishlist
+import { addItemToCart } from '../../../../Redux/Customers/Cart/Action'; // Import the action creator for adding items to the wishlist
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -59,16 +62,45 @@ export default function Product() {
   const sortValue = searchParams.get("sort");
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
+  const { productId } = useParams();
 
   const totalPages = Math.ceil(customersProduct.products?.totalElements / 2);
 
   // console.log("location - ", colorValue, sizeValue,price,disccount);
+  // const handleCartSubmit = () => {
+  //   const data = { ItemId, size: selectedSize.name };
+  //   dispatch(addItemToCart({ data, jwt }));
+  //   navigate("/cart");
+  // };
+  // const handleWishlistSubmit = async (itemId) => {
+  //   const data = { itemId };
+
+  //   try {
+  //     await dispatch(addItemToWishlist({ data, jwt }));
+  //     navigate("/wishlist"); // Move navigation inside the try block to ensure it's only triggered after successful dispatch
+  //   } catch (error) {
+  //     console.error("Error adding item to wishlist:", error);
+  //     // Optionally, you can display a user-friendly error message here
+  //   }
+  // };
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickedIndex, setClickedIndex] = useState(-1);
+
+  const handlewishlistSubmit = (itemId) => {
+    const data = { productId: itemId }; // Use itemId as the product ID
+    dispatch(addItemToWishlist({ data, jwt }));
+    // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
+    // navigate("/wishlist");
+  };
+  
+
+
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
     const query = searchParams.toString();
-    navigate({ search: `?${query}` });     
+    navigate({ search: `?${query}` });
   };
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
@@ -76,7 +108,7 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-  
+
   useEffect(() => {
     const [minPrice, maxPrice] =
       price === null ? [0, 0] : price.split("-").map(Number);
@@ -213,7 +245,7 @@ export default function Product() {
                         as="div"
                         key={section.id}
                         className="border-t border-gray-200 px-4 py-6"
-                        // open={false}
+                      // open={false}
                       >
                         {({ open }) => (
                           <>
@@ -258,7 +290,7 @@ export default function Product() {
                                     <label
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                       className="ml-3 min-w-0 flex-1 text-gray-500"
-                                      // onClick={()=>handleFilter(option.value,section.id)}
+                                    // onClick={()=>handleFilter(option.value,section.id)}
                                     >
                                       {option.label}
                                     </label>
@@ -473,16 +505,44 @@ export default function Product() {
                   ))}
                 </form>
 
-                {/* Product grid */}
-                <div className="lg:col-span-4 w-full ">
+                <div className="lg:col-span-4 w-full">
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
-                      <ProductCard product={item} 
-                      isAddedToWishlist={isProductInWishlist(item)}
-                      onWishlistToggle={handleWishlistToggle}
-                      />
-                      
+                      <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
+                        {/* Favorite icon */}
+                        <div 
+      className="absolute top-2 right-2 cursor-pointer" 
+      onClick={handlewishlistSubmit}
+      style={{
+        width: '24px', // Adjust the width and height as needed
+        height: '24px',
+        position: 'relative' // Make sure the position is relative for absolute positioning of SVG
+      }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={isClicked ? 'red' : 'none'} // Fill red when clicked, otherwise none (transparent)
+        stroke={isClicked ? 'red' : 'grey'}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{
+          position: 'absolute', // Position the SVG
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
+      </svg>
+    </div>     {/* Product card content */}
+                        <ProductCard product={item} />
+                      </div>
+
                     ))}
+                    
                   </div>
                 </div>
               </div>
@@ -491,25 +551,25 @@ export default function Product() {
         </main>
 
         {/* pagination section */}
-        
+
         <section className="w-full px-[3.6rem]">
           <div className="mx-auto px-4 py-5 flex justify-center shadow-lg border rounded-md">
-          
-          <Pagination
-  count={totalPages}
-  color="primary"
-  className=""
-  onChange={handlePaginationChange}
-/>
+
+            <Pagination
+              count={totalPages}
+              color="primary"
+              className=""
+              onChange={handlePaginationChange}
+            />
 
           </div>
         </section>
 
         {/* {backdrop} */}
         <section>
-         <BackdropComponent open={isLoaderOpen}/>
+          <BackdropComponent open={isLoaderOpen} />
         </section>
       </div>
-    </div>
+    </div >
   );
 }

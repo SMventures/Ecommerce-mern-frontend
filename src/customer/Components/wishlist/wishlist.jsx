@@ -9,16 +9,35 @@ const Wishlist = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const { wishlist } = useSelector((store) => store);
-  console.log("wishlist ", wishlist);
+
+  // Accessing wishlist slice of state from the store
+  const { wishlist, loading, error } = useSelector((store) => store);
+
+  console.log("Wishlist component rendering...");
 
   useEffect(() => {
-    dispatch(getWishlist(jwt));
-  }, [jwt]);
+    console.log("Dispatching getWishlist action...");
+    if (jwt) {
+      dispatch(getWishlist(jwt));
+    }
+  }, [dispatch, jwt]);
 
-  // Add a null check to prevent accessing undefined properties
-  if (!wishlist || !wishlist.wishlistItems) {
+  useEffect(() => {
+    console.log("Wishlist state changed:", wishlist);
+    console.log("Loading:", loading);
+    console.log("Error:", error);
+  }, [wishlist, loading, error]);
+
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!wishlist || !wishlist.wishlistItems) {
+    return <div>No wishlist items found.</div>;
   }
 
   return (
@@ -30,30 +49,6 @@ const Wishlist = () => {
               {wishlist.wishlistItems.map((item) => (
                 <WishlistItem key={item.id} item={item} />
               ))}
-            </div>
-          </div>
-          <div className="px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0 ">
-            <div className="border p-5 bg-white shadow-lg rounded-md">
-              <p className="font-bold opacity-60 pb-4">WISHLIST DETAILS</p>
-              <hr />
-
-              <div className="space-y-3 font-semibold">
-                <div className="flex justify-between pt-3 text-black ">
-                  <span>Items ({wishlist.totalItems})</span>
-                  {/* You can add more details here like total price, discounts, etc. */}
-                </div>
-                {/* Add more details about wishlist items if necessary */}
-                <hr />
-              </div>
-
-              <Button
-                onClick={() => navigate("/checkout?step=2")}
-                variant="contained"
-                type="submit"
-                sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
-              >
-                Proceed to Checkout
-              </Button>
             </div>
           </div>
         </div>

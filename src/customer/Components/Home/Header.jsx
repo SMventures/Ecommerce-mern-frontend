@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import smlogo from "../../../smlogo.png"
 import { AppBar, Toolbar, Box, Typography, styled } from '@mui/material';
 import CustomButtons from './CustomButtons';
-import Search from './Search';
+import Search from './Search/Search';
 
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
