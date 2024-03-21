@@ -155,9 +155,11 @@ export default function Product() {
   };
 
   // Function to check if a product is in the wishlist
-  const isProductInWishlist = (product) => {
-    return customersProduct.wishlist.some((item) => item.id === product.id);
-  };
+ // Function to check if a product is in the wishlist
+const isProductInWishlist = (product) => {
+  return customersProduct && customersProduct.wishlist && customersProduct.wishlist.some((item) => item.id === product.id);
+};
+
 
   return (
     <div className="bg-white -z-20 ">

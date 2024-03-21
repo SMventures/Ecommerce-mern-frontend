@@ -472,12 +472,7 @@ export default function ProductDetails() {
                 ))}
               </div>
             </Grid>
-<<<<<<< HEAD
-            
-        
-=======
             <ProductReviewCard/>
->>>>>>> f3986bc83c0a001be07948a2d7ea3310beae5255
             <RateProduct/>
          
             {/* Add other components if needed */}
