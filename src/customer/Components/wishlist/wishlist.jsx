@@ -14,7 +14,7 @@ const Wishlist = () => {
   const { wishlist, loading, error } = useSelector((store) => store);
 
   console.log("Wishlist component rendering...");
-
+  
   useEffect(() => {
     console.log("Dispatching getWishlist action...");
     if (jwt) {
