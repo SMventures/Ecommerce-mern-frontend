@@ -208,58 +208,52 @@ export default function ProductDetails() {
         {/* product details */}
         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
           {/* Image gallery */}
-          <div className="flex flex-col items-center relative">
-            <div className="absolute top-2 right-2 text-red-500 cursor-pointer" onClick={handlewishlistSubmit}>
-              <FavoriteIcon />
-            </div>
-            <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-              <img
-                src={activeImage?.src || customersProduct.product?.imageUrl}
-                alt={product.images[0].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="flex flex-wrap space-x-5 justify-center">
-              {product.images.map((image) => (
-                <div
-                  onClick={() => handleSetActiveImage(image)}
-                  className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
-                >
-                  <img
-                    src={image.src}
-                    alt={product.images[1].alt}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              ))}
-            </div>
-          
+          <div className="flex flex-col items-center relative border border-gray-200 rounded-lg p-4">
+  <div className="absolute top-2 right-2 text-red-500 cursor-pointer" onClick={handlewishlistSubmit}>
+    <FavoriteIcon />
+  </div>
+  <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
+  <img
+    src={activeImage?.src || customersProduct.product?.imageUrl}
+    alt={product.images[0].alt}
+    className="h-full w-full object-cover object-center"
+  />
+</div>
+<div className="flex flex-wrap space-x-5 justify-center">
+  {product.images.map((image) => (
+    <div
+      onClick={() => handleSetActiveImage(image)}
+      className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
+      key={image.id}
+    >
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="h-full w-full object-cover object-center"
+      />
+    </div>
+  ))}
+</div>
 
+  <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
+    <Button
+      variant="contained"
+      type="submit"
+      sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+    >
+      Add To Cart
+    </Button>
 
-
-
-
-          <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-            >
-              Add To Cart
-            </Button>
-
-            <Button
-              onClick={() => navigate("/checkout?step=2")}
-              variant="contained"
-              type="submit"
-              sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-            >
-              Buy Now
-            </Button>
-          </form>
-
-
-      </div>
+    <Button
+      onClick={() => navigate("/checkout?step=2")}
+      variant="contained"
+      type="submit"
+      sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+    >
+      Buy Now
+    </Button>
+  </form>
+</div>
 
       {/* Product info */}
       <Container >
@@ -501,6 +495,14 @@ export default function ProductDetails() {
       </Container >
     </section>
 
+
+      {/* Add the provided HTML code for the image */}
+      <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
+          <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
+            <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
+          </div>
+        </div>
+
         {/* rating and review section */ }
   <section className="">
     <h1 className="font-semibold text-lg pb-4">
@@ -668,25 +670,25 @@ export default function ProductDetails() {
   {/* Similar Products */ }
  
         <div>
-          <section className="pt-10">
-            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-            <div className="flex flex-wrap space-y-5">
-              {simmyProducts.slice(0, 5).map((item) => (
-                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
-                  <HomeProductCard product={item} />
-                </div>
-              ))}
-            </div>
-          </section>
+        <section className="pt-10">
+  <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+  <div className="flex flex-wrap space-y-5">
+    {simmyProducts.slice(0, 4).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </div>
+</section>
         </div>
         <div>
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">Things Bought Together</h1>
             <div className="flex flex-wrap space-y-5">
-              {BoughtTogether.slice(0, 6).map((item) => (
-                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
-                  <HomeProductCard product={item} />
-                </div>
+              {BoughtTogether.slice(5, 9).map((item) => (
+               <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+               <HomeProductCard product={item} />
+             </a>
               ))}
             </div>
           </section>
@@ -695,10 +697,10 @@ export default function ProductDetails() {
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
             <div className="flex flex-wrap space-y-5">
-              {interestedProducts.slice(0, 10).map((item) => (
-                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
-                  <HomeProductCard product={item} />
-                </div>
+              {interestedProducts.slice(5, 9).map((item) => (
+               <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+               <HomeProductCard product={item} />
+             </a>
               ))}
             </div>
           </section>
