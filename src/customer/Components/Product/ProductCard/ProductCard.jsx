@@ -1,13 +1,12 @@
 import React from 'react';
 import "./ProductCard.css";
 import{useLocation, useNavigate} from "react-router-dom";
- 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const ProductCard = ({ product }) => {
   const { title, brand, imageUrl, price ,discountedPrice,color,discountPersent} = product;
   const navigate= useNavigate();
- 
- 
+  
+
   const handleNavigate=()=>{
     navigate(`/product/${product?._id}`)
   }
@@ -18,7 +17,6 @@ const ProductCard = ({ product }) => {
 //   handleNavigate,
 // }) => {
 //   const { imageUrl, brand, title, color, discountedPrice, price, discountPersent } = product;
- 
   return (
     <div onClick={handleNavigate} className="productCard w-[15rem] border m-3 transition-all cursor-pointer">
       <div className="h-[20rem] flex justify-center items-center"> {/* Center the image */}

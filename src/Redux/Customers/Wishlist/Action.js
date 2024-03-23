@@ -81,7 +81,7 @@ export const removeWishlistItem = (reqData) => async (dispatch) => {
             },
         };
         await axios.delete(
-            `${API_BASE_URL}/api/wishlist/${reqData.wishlistItemId}`,
+            `${API_BASE_URL}/api/wishlist_items/${reqData.wishlistItemId}`,
             config
         );
         dispatch({
