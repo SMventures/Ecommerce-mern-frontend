@@ -123,7 +123,7 @@ export default function ProductDetails() {
   };
 
   const getInterested = async (category) => {
-    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const response = await fetch(`http://localhost:5454/api/products?=${category}`);
     const data = await response.json();
     setInterested(data.content);
   };
@@ -695,7 +695,7 @@ export default function ProductDetails() {
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
             <div className="flex flex-wrap space-y-5">
-              {interestedProducts.slice(0, 8).map((item) => (
+              {interestedProducts.slice(0, 10).map((item) => (
                 <div key={item._id} className="mb-5"> {/* Add margin bottom */}
                   <HomeProductCard product={item} />
                 </div>
