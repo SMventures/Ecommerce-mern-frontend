@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import  './SlideComponent.css'
+import { Link } from 'react-router-dom'; // Import Link for React Router navigation
 
 const Component = styled(Box)`
   margin-top: 10px;
@@ -70,10 +71,8 @@ const HomeProductSection = ({ section, data }) => {
         itemClass="carousel-item-padding-40-px"
       >
         {data.slice(0, 10).map(product => (
-           <div
-           onClick={() => navigate(`/men/clothing/mens_kurta`)}
-           className="cursor-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem] mx-3"
-         >
+           <div key={product._id} className="mb-5 cursor-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem] mx-3">
+           <Link to={`/product/${product._id}`}> 
            <div className="h-[13rem] w-[10rem]">
              <img
                className="object-cover object-top w-full h-full"
@@ -81,7 +80,7 @@ const HomeProductSection = ({ section, data }) => {
                alt={product?.title}
              />
            </div>
-     
+     </Link>
            <div className="p-4 items-center">
              <h3 className="text-lg items-center font-medium font-weight-600 text-gray-900">
              {product?.title}

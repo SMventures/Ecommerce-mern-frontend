@@ -86,7 +86,7 @@ function classNames(...classes) {
 
 
 export default function ProductDetails() {
-  const [selectedSize, setSelectedSize] = useState();
+  const [selectedSize, setSelectedSize] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
   const [simmyProducts, setSimmyProducts] = useState([]);
   const navigate = useNavigate();
@@ -369,7 +369,7 @@ export default function ProductDetails() {
                       readOnly
                     />
 
-                    <p className="opacity-60 text-sm">42807 Ratings</p>
+                    <p className="opacity-60 text-sm">Ratings</p>
                     <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
                       {reviews.totalCount} reviews
                     </p>
@@ -568,8 +568,19 @@ export default function ProductDetails() {
               </div> */}
               </div>
             </div>
-          </Container >
-        </section>
+            </Container >
+            </section>
+        {/* Add the provided HTML code for the image */}
+        <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
+          <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
+            <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
+          </div>
+        </div>
+
+        
+       
+    
+
 
         {/* rating and review section */}
         <section className="">
@@ -737,16 +748,17 @@ export default function ProductDetails() {
 
         {/* Similar Products */}
         <div>
-          <section className="pt-10">
-            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-            <div className="flex flex-wrap space-y-5">
-              {simmyProducts.slice(0, 5).map((item) => (
-                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
-                  <HomeProductCard product={item} />
-                </div>
-              ))}
-            </div>
-          </section>
+        <section className="pt-10">
+  <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+  <div className="flex flex-wrap space-y-5">
+    {simmyProducts.slice(0, 5).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </div>
+</section>
+
         </div>
         <div>
           <section className="pt-10">

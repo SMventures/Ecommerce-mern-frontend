@@ -2,7 +2,7 @@ import { styled } from '@mui/material';
 import { bannerData } from '../../../Data/BannerData';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
-
+import { Link } from 'react-router-dom';
 const Image = styled('img')({
     width: '96%',
     height: '320',
@@ -40,8 +40,13 @@ const Banner = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
         >
-            {bannerData.map(data => (
+            {/* {bannerData.map(data => (
                 <Image src={data.img} alt="banner" key={data.id} />
+            ))} */}
+             {bannerData.map((item) => (
+                <Link key={item.id} to={item.href}>
+                    <Image src={item.img} alt={`Banner ${item.id}`} />
+                </Link>
             ))}
         </Carousel>
     );

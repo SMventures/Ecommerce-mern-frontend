@@ -150,14 +150,14 @@ const CustomButtons = () => {
             )}
             <Container>
             <IconWrapper onClick={handleWishlistClick} className="relative">
-    <FavoriteIcon />
-    {wishlist && wishlist.wishlistItems && wishlist.wishlistItems.length > 0 && (
-        <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-            {wishlist.wishlistItems.length}
-        </span>
-    )}
-    <span className="sr-only">items in wishlist</span>
-</IconWrapper>
+          <FavoriteIcon />
+          {wishlist && wishlist.wishlistItems && ( /* Remove the conditional here */
+            <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
+              {wishlist.wishlistItems.length}
+            </span>
+          )}
+          <span className="sr-only">items in wishlist</span>
+        </IconWrapper>
 
 
 
