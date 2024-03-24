@@ -73,13 +73,8 @@ const UpdateProductForm = () => {
     console.log("Product Data:", productData); // Log productData before making the request
   
     try {
-      const response = await axios.put(`http://localhost:5454/api/admin/products/update/${productId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      dispatch(updateProduct(response.data));
+      console.log(productId)
+      dispatch(updateProduct(productId,productData));
       alert("Product updated successfully!");
     } catch (error) {
       console.error("Error updating product:", error);

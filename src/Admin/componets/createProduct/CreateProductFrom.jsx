@@ -43,6 +43,8 @@ const CreateProductForm = () => {
     secondLavelCategory: "",
     thirdLavelCategory: "",
     description: "",
+    highlights: "",
+    specifications: "",
   });
 
   console.log(productData)
@@ -321,6 +323,32 @@ const CreateProductForm = () => {
               rows={3}
               onChange={handleChange}
               value={productData.description}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label="highlights"
+              multiline
+              name="highlights"
+              rows={3}
+              onChange={handleChange}
+              value={productData.highlights}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="outlined-multiline-static"
+              label=" specifications"
+              multiline
+              name=" specifications"
+              rows={3}
+              onChange={handleChange}
+              value={productData. specifications}
             />
           </Grid>
 

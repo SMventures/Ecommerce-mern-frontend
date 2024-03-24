@@ -84,9 +84,9 @@ const HomeProductSection = ({ section, data }) => {
      
            <div className="p-4 items-center">
              <h3 className="text-lg items-center font-medium font-weight-600 text-gray-900">
-               {product?.brand || product?.title}
+             {product?.title}
              </h3>
-             <p className="mt-2 text-sm text-gray-500">{product?.title}</p>
+             {/* <p className="mt-2 text-sm text-gray-500">{product?.title}</p> */}
            </div>
            <div className='flex items-center space-x-2 '>
           <p className='font-semibold'>₹{product?.discountedPrice}</p>

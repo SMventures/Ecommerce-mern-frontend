@@ -83,6 +83,58 @@ export const getSimilarProducts = (reqData) => async (dispatch) => {
   }
 };
 
+export const  getBoughtTogether = (reqData) => async (dispatch) => {
+  const {
+    category,
+   
+  } = reqData;
+
+  try {
+      dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+
+      const { data } = await api.get(`/api/products?category=${category}`);
+      // const { data } = await api.get('/api/products/:category/similar');
+
+      console.log("products by category: ", data);
+
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
+          payload: data,
+      });
+  } catch (error) {
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
+          payload: error.response.data.message,
+      });
+  }
+};
+
+export const  getInterested = (reqData) => async (dispatch) => {
+  const {
+    category,
+   
+  } = reqData;
+
+  try {
+      dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+
+      const { data } = await api.get(`/api/products?category=${category}`);
+      // const { data } = await api.get('/api/products/:category/similar');
+
+      console.log("products by category: ", data);
+
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
+          payload: data,
+      });
+  } catch (error) {
+      dispatch({
+          type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
+          payload: error.response.data.message,
+      });
+  }
+};
+
 export const findProductById = (reqData) => async (dispatch) => {
   try {
     dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });

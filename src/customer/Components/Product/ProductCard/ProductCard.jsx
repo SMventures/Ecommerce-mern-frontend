@@ -8,6 +8,8 @@ const ProductCard = ({ product }) => {
   const navigate= useNavigate();
  
  
+  
+
   const handleNavigate=()=>{
     navigate(`/product/${product?._id}`)
   }

@@ -72,9 +72,9 @@ function Footer() {
                 <span className="block uppercase text-white text-sm font-semibold mb-2">CONTACT US</span>
                 <ul className="list-none">
                   {/* Contact links */}
-                  <li>
+                  {/* <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.instagram.com/digital_dalal_street/?igsh=Nmtnb2pmM2h6emNu">Message Us</a>
-                  </li>
+                  </li> */}
                   <li>
                   <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="mailto:your_email@example.com">Email us</a>
                   </li>
