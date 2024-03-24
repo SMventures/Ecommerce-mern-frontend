@@ -12,8 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
 import Cart from '../Cart/Cart';
-import WishlistItem from '../wishlist/WishlistItem';
-import Wishlist from '../wishlist/wishlist';
+import WishlistItem from '../Wishlist/WishlistItem';
+import Wishlist from '../Wishlist/wishlist';
 
 
 
