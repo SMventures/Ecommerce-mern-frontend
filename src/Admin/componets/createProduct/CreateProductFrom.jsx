@@ -335,18 +335,6 @@ const CreateProductForm = () => {
 ]}
 
 
-              {productData.secondLavelCategory === "Trading_Books" && [
-    <MenuItem key="motivational" value="Motivational">Motivational</MenuItem>,
-    <MenuItem key="biography" value="Biography">Biography</MenuItem>,
-    <MenuItem key="fundamental_analysis" value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-    <MenuItem key="technical_analysis" value="Technical_Analysis">Technical Analysis</MenuItem>,
-    <MenuItem key="psychology" value="Psychology">Psychology</MenuItem>,
-    <MenuItem key="risk_management" value="Risk_Management">Risk Management</MenuItem>,
-    <MenuItem key="economic_analysis" value="Economic_Analysis">Economic Analysis</MenuItem>,
-    console.log("THIRD Level Category:", productData.thirdLavelCategory),
-
-]}
-
 
 
               </Select>

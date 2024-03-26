@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
 import RateProduct from "../../ReviewProduct/RateProduct";
 import { Favorite as FavoriteIconOutlined, FavoriteBorder as FavoriteIcon } from '@mui/icons-material';
-
+import axios from 'axios';
 import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
@@ -99,17 +99,29 @@ export default function ProductDetails() {
   const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
+
   const [showRatingReview, setShowRatingReview] = useState(false);
 
   const getCategoryName = async () => {
-    const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
-    const data = await res.json();
-    const cardId = data.category.name;
-    getSimilarProducts(cardId);
-    getBoughtTogether(cardId);
-    getInterested(cardId);
+    try {
+      const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
+      const data = await res.json();
+      const cardId = data.category.name;
+      console.log('Category Name:', cardId); // Log the fetched category name
 
-  };
+      if (cardId === 'men_hoodies' || cardId === 'men_tshirts' || cardId === 'women_hoodies' || cardId === 'women_tshirts') {
+        setShowSizes(true); // Set showSizes to true for the specified category names
+      }
+      
+    
+      getSimilarProducts(cardId);
+      getBoughtTogether(cardId);
+      getInterested(cardId);
+    } catch (error) {
+      console.error('Error fetching category name:', error);
+    }
+  }
+  
 
   const getSimilarProducts = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
@@ -139,12 +151,13 @@ export default function ProductDetails() {
     setActiveImage(image);
   };
   const handleSubmit = () => {
-    const data = { productId, size: selectedSize.name };
+    const data = { productId, size: selectedSize ? selectedSize.name : null };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
+  
   const handlewishlistSubmit = () => {
-    const data = { productId, size: selectedSize.name };
+    const data = { productId };
     dispatch(addItemToWishlist({ data, jwt }));
     setIsClicked(true); // Toggle the state to change the color
     setShowNotification(true); // Show the notification
@@ -213,6 +226,62 @@ export default function ProductDetails() {
 
   // Function to check if a product is in the wishlist
 
+  const [showSizes, setShowSizes] = useState(false);
+  // useEffect(() => {
+  //   // Check if lavelTwo is "Clothing" and lavelOne is "Men" or "Women"
+  //   const isClothingCategory = param.lavelTwo === "Clothing" && (param.lavelOne === "Men" || param.lavelOne === "Women");
+  //   setShowSizes(isClothingCategory);
+  // }, [param.lavelOne, param.lavelTwo]);
+  // useEffect(() => {
+  //   // Check if product name is "T-Shirt" or "Hoodies"
+  //   const isProductWithSizes = product.title === "TShirt" || product.title === "hoodie"
+  // }, [product]);
+  // useEffect(() => {
+  //   // Fetch product data from the backend API
+  //   const fetchProduct = async (product) => {
+  //     try {
+  //       const response = await axios.get(`/api/products/id/${productId}`);
+  //       const product = await response.json();
+
+  //      console.log("response data is ", response.product)
+  //       // Log productId and parentCategory for debugging
+  //       console.log("Product ID:", productId);
+  //       console.log("Parent Category:", product.parentCategory);
+
+  //       // Check if the category corresponds to a clothing category
+  //       const isClothingProduct = product.parentCategory === 'clothing';
+
+  //       // Log whether it's a clothing product or not
+  //       console.log("Is Clothing Product:", isClothingProduct);
+
+  //       setShowSizes(isClothingProduct);
+  //     } catch (error) {
+  //       console.error('Error fetching product:', error);
+  //     }
+  //   };
+
+  //   fetchProduct();
+  // }, [productId]);
+  
+  // useEffect(() => {
+  //   dispatch(findProductById({ productId }));
+  // }, [dispatch, productId]);
+
+  // useEffect(() => {
+  //   if (product) {
+  //     // Log productId and parentCategory for debugging
+  //     console.log("Product ID:", productId);
+  //     console.log("Parent Category:", product.parentCategory);
+
+  //     // Check if the category corresponds to a clothing category
+  //     const isClothingProduct = product.parentCategory === 'clothing';
+
+  //     // Log whether it's a clothing product or not
+  //     console.log("Is Clothing Product:", isClothingProduct);
+
+  //     setShowSizes(isClothingProduct);
+  //   }
+  // }, [productId, product]);
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -349,7 +418,7 @@ export default function ProductDetails() {
           {/* Product info */}
           <Container >
             <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-              <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
+              <div className="lg:col-span-2 flex flex-col justify-start -ml-8 items-start"> {/* Apply flexbox properties */}
                 <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                   {customersProduct.product?.brand}
                 </h1>
@@ -390,7 +459,7 @@ export default function ProductDetails() {
                     </p>
                   </div>
                 </div>
-
+                {showSizes && (
                 <form className="mt-10" onSubmit={handleSubmit}>
                   {/* Sizes */}
                   <div className="mt-10">
@@ -469,6 +538,7 @@ export default function ProductDetails() {
 
 
                 </form>
+                )}
               </div>
 
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
