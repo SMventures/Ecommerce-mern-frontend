@@ -1,29 +1,47 @@
+import * as React from 'react';
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import ProductReviewCard from "./ProductReviewCard";
+import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
+import RateProduct from "../../ReviewProduct/RateProduct";
+
+import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {addItemToCart} from "../../../../Redux/Customers/Cart/Action";
-import {getAllReviews} from "../../../../Redux/Customers/Review/Action";
+import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
+import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
 import {
   findProductById,
   getSimilarProducts,
+  getBoughtTogether,
+  getInterested,
+
 } from "../../../../Redux/Customers/Product/Action";
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action';
+
+
 
 const product = {
-  name: "Basic Tee 6-Pack",
-  price: "₹996",
-  href: "#",
-  breadcrumbs: [
-    { id: 1, name: "Men", href: "#" },
-    { id: 2, name: "Clothing", href: "#" },
-  ],
+    name: "Product",
+    price: "₹996",
+    href: "#",
+    breadcrumbs: [
+      { id: 1, name: "Product", href: "#" },
+    
+    ],
   images: [
     {
       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
@@ -69,33 +87,83 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
 export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState();
   const [activeImage, setActiveImage] = useState(null);
+  const [simmyProducts, setSimmyProducts] = useState([]);
+  const [BoughtTogether, setBoughtTogether] = useState([]);
+  const [interestedProducts, setInterested] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { customersProduct, review, similarProducts } = useSelector(
-    (store) => store
-  );
+  const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
+  const [showRatingReview, setShowRatingReview] = useState(false);
+
+  const getCategoryName = async () => {
+    const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
+    const data = await res.json();
+    const cardId = data.category.name;
+    getSimilarProducts(cardId);
+    getBoughtTogether(cardId);
+    getInterested(cardId);
+    
+  };
+
+  const getSimilarProducts = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const data = await response.json();
+    setSimmyProducts(data.content);
+  };
+
+  const getBoughtTogether = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const data = await response.json();
+    setBoughtTogether(data.content);
+  };
+
+  const getInterested = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?=${category}`);
+    const data = await response.json();
+    setInterested(data.content);
+  };
 
   useEffect(() => {
-    const data = { productId: productId, jwt };
-    dispatch(findProductById(data));
+    getCategoryName();
+    dispatch(findProductById({ productId }));
     dispatch(getAllReviews(productId));
-    dispatch(getSimilarProducts(productId));
-  }, [dispatch, productId, jwt]);
+  }, [dispatch, productId]);
 
   const handleSetActiveImage = (image) => {
     setActiveImage(image);
   };
-
   const handleSubmit = () => {
     const data = { productId, size: selectedSize.name };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
+  const handlewishlistSubmit = () => {
+    const data = { productId, size: selectedSize.name };
+    dispatch(addItemToWishlist({ data, jwt }));
+    navigate("/wishlist");
+  };
+
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+
+
+  const containerStyle = {
+    backgroundColor: '#e0eaf6',
+    padding: '10px',
+    borderRadius: '10px',
+  };
+
   return (
     <div className="bg-white lg:px-20">
       <div className="pt-6">
@@ -132,7 +200,7 @@ export default function ProductDetails() {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {customersProduct.product?.title}
               </a>
             </li>
           </ol>
@@ -141,33 +209,57 @@ export default function ProductDetails() {
         {/* product details */}
         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
           {/* Image gallery */}
-          <div className="flex flex-col items-center ">
-            <div className=" overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-              <img
-                src={activeImage?.src || customersProduct.product?.imageUrl}
-                alt={product.images[0].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="flex flex-wrap space-x-5 justify-center">
-              {product.images.map((image) => (
-                <div
-                  onClick={() => handleSetActiveImage(image)}
-                  className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
-                >
-                  <img
-                    src={image.src}
-                    alt={product.images[1].alt}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <div className="flex flex-col items-center relative border border-gray-200 rounded-lg p-4">
+  <div className="absolute top-2 right-2 text-red-500 cursor-pointer" onClick={handlewishlistSubmit}>
+    <FavoriteIcon />
+  </div>
+  <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
+  <img
+    src={activeImage?.src || customersProduct.product?.imageUrl}
+    alt={product.images[0].alt}
+    className="h-full w-full object-cover object-center"
+  />
+</div>
+<div className="flex flex-wrap space-x-5 justify-center">
+  {product.images.map((image) => (
+    <div
+      onClick={() => handleSetActiveImage(image)}
+      className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
+      key={image.id}
+    >
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="h-full w-full object-cover object-center"
+      />
+    </div>
+  ))}
+</div>
 
-          {/* Product info */}
-          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
-            <div className="lg:col-span-2">
+  <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
+    <Button
+      variant="contained"
+      type="submit"
+      sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+    >
+      Add To Cart
+    </Button>
+
+    <Button
+      onClick={() => navigate("/checkout?step=2")}
+      variant="contained"
+      type="submit"
+      sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+    >
+      Buy Now
+    </Button>
+  </form>
+</div>
+
+      {/* Product info */}
+      <Container >
+      <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
+            <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
               <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                 {customersProduct.product?.brand}
               </h1>
@@ -175,338 +267,337 @@ export default function ProductDetails() {
                 {customersProduct.product?.title}
               </h1>
             </div>
-
-            {/* Options */}
-            <div className="mt-4 lg:row-span-3 lg:mt-0">
-              <h2 className="sr-only">Product information</h2>
-              <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
-                <p className="font-semibold">
-                  ₹{customersProduct.product?.discountedPrice}
-                </p>
-                <p className="opacity-50 line-through">
-                  ₹{customersProduct.product?.price}
-                </p>
-                <p className="text-green-600 font-semibold">
-                  {customersProduct.product?.discountPersent}% Off
-                </p>
-              </div>
-
-              {/* Reviews */}
-              <div className="mt-6">
-                <h3 className="sr-only">Reviews</h3>
-
-                <div className="flex items-center space-x-3">
-                  <Rating
-                    name="read-only"
-                    value={4.6}
-                    precision={0.5}
-                    readOnly
-                  />
-
-                  <p className="opacity-60 text-sm">42807 Ratings</p>
-                  <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
-                    {reviews.totalCount} reviews
-                  </p>
-                </div>
-              </div>
-
-              <form className="mt-10" onSubmit={handleSubmit}>
-                {/* Sizes */}
-                <div className="mt-10">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  </div>
-
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-4"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
-                      {product.sizes.map((size) => (
-                        <RadioGroup.Option
-                          key={size.name}
-                          value={size}
-                          disabled={!size.inStock}
-                          className={({ active }) =>
-                            classNames(
-                              size.inStock
-                                ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                                : "cursor-not-allowed bg-gray-50 text-gray-200",
-                              active ? "ring-1 ring-indigo-500" : "",
-                              "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label as="span">
-                                {size.name}
-                              </RadioGroup.Label>
-                              {size.inStock ? (
-                                <span
-                                  className={classNames(
-                                    active ? "border" : "border-2",
-                                    checked
-                                      ? "border-indigo-500"
-                                      : "border-transparent",
-                                    "pointer-events-none absolute -inset-px rounded-md"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <span
-                                  aria-hidden="true"
-                                  className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                >
-                                  <svg
-                                    className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                    stroke="currentColor"
-                                  >
-                                    <line
-                                      x1={0}
-                                      y1={100}
-                                      x2={100}
-                                      y2={0}
-                                      vectorEffect="non-scaling-stroke"
-                                    />
-                                  </svg>
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" , background: "#2874f0"}}
-                >
-                  Add To Cart
-                </Button>
-              </form>
+          {/* Options */}
+          <div className="mt-4 lg:row-span-3 lg:mt-0">
+            <h2 className="sr-only">Product information</h2>
+            <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
+              <p className="font-semibold">
+                ₹{customersProduct.product?.discountedPrice}
+              </p>
+              <p className="opacity-50 line-through">
+                ₹{customersProduct.product?.price}
+              </p>
+              <p className="text-green-600 font-semibold">
+                {customersProduct.product?.discountPersent}% Off
+              </p>
             </div>
 
-            <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-              {/* Description and details */}
-              <div>
-                <h3 className="sr-only">Description</h3>
+            {/* Reviews */}
+            <div className="mt-6">
+              <h3 className="sr-only">Reviews</h3>
 
-                <div className="space-y-6">
-                  <p className="text-base text-gray-900">
-                    {customersProduct.product?.description}
-                  </p>
+              <div className="flex items-center space-x-3">
+                <Rating
+                  name="read-only"
+                  value={4.6}
+                  precision={0.5}
+                  readOnly
+                />
+
+                <p className="opacity-60 text-sm">42807 Ratings</p>
+                <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
+                  {reviews.totalCount} reviews
+                </p>
+              </div>
+            </div>
+
+            <form className="mt-10" onSubmit={handleSubmit}>
+              {/* Sizes */}
+              <div className="mt-10">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
                 </div>
+
+                <RadioGroup
+                  value={selectedSize}
+                  onChange={setSelectedSize}
+                  className="mt-4"
+                >
+                  <RadioGroup.Label className="sr-only">
+                    Choose a size
+                  </RadioGroup.Label>
+                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
+                    {product.sizes.map((size) => (
+                      <RadioGroup.Option
+                        key={size.name}
+                        value={size}
+                        disabled={!size.inStock}
+                        className={({ active }) =>
+                          classNames(
+                            size.inStock
+                              ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                              : "cursor-not-allowed bg-gray-50 text-gray-200",
+                            active ? "ring-1 ring-indigo-500" : "",
+                            "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                          )
+                        }
+                      >
+                        {({ active, checked }) => (
+                          <>
+                            <RadioGroup.Label as="span">
+                              {size.name}
+                            </RadioGroup.Label>
+                            {size.inStock ? (
+                              <span
+                                className={classNames(
+                                  active ? "border" : "border-2",
+                                  checked
+                                    ? "border-indigo-500"
+                                    : "border-transparent",
+                                  "pointer-events-none absolute -inset-px rounded-md"
+                                )}
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
+                              >
+                                <svg
+                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                  viewBox="0 0 100 100"
+                                  preserveAspectRatio="none"
+                                  stroke="currentColor"
+                                >
+                                  <line
+                                    x1={0}
+                                    y1={100}
+                                    x2={100}
+                                    y2={0}
+                                    vectorEffect="non-scaling-stroke"
+                                  />
+                                </svg>
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
               </div>
 
-              <div className="mt-10">
+
+            </form>
+          </div>
+
+          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+            {/* Description and details */}
+            <div>
+              <h3 className="text-sm font-bold text-gray-900 mt-2 mb-4">Description</h3>
+
+              <div className="space-y-6">
+                <p className="text-base text-gray-900 mb-5">
+                  {customersProduct.product?.description}
+                </p>
+              </div>
+            </div>
+            {/* highlights */}
+
+            <Box sx={{ width: '100%' }}>
+              <Accordion
+                expanded={expanded === 'panel1'}
+                onChange={handleChange('panel1')}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1d-content"
+                  id="panel1d-header"
+                >
+                  <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                    Highlights
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                    <Typography variant="body2" gutterBottom>
+                      <pre className="text-base text-gray-900">
+                        {customersProduct.product?.highlights}
+                      </pre>
+                    </Typography>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+
+              {/* specification  */}
+
+              <Accordion
+                expanded={expanded === 'panel4'}
+                onChange={handleChange('panel4')}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel4d-content"
+                  id="panel4d-header"
+                >
+                  <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                    Specifications
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                    <Typography variant="body2" gutterBottom>
+                      <pre className="text-base text-gray-900">
+                        {customersProduct.product?.specifications}
+                      </pre>
+                    </Typography>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            </Box>
+
+            {/* <div>
+                <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
+                <div className="space-y-6">
+                  <pre className="text-base text-gray-900">
+                    
+                    {customersProduct.product?.highlights}
+                  </pre>
+                </div>
+              </div> */}
+            {/* specifications */}
+            {/* <div>
+                <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Specifications</h3>
+                <div className="space-y-6">
+                  <pre className="text-base text-gray-900">
+                    {customersProduct.product?.specifications}
+                  </pre>
+                </div>
+              </div> */}
+
+
+
+
+            {/* <div className="mt-10">
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
 
                 <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
+                    {product.highlights.map((highlights) => (
+                      <li key={highlights} className="text-gray-400">
+                        <span className="text-gray-600">{customersProduct.product?.highlights}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="mt-10">
+            {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
                   <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
-              </div>
-            </div>
+              </div> */}
           </div>
-        </section>
+        </div>
+      </Container >
+    </section>
 
-        {/* rating and review section */}
-        <section className="">
-          <h1 className="font-semibold text-lg pb-4">
-            Recent Review & Ratings
-          </h1>
 
-          <div className="border p-5">
-            <Grid container spacing={7}>
-              <Grid item xs={7}>
-                <div className="space-y-5">
-                  { review.reviews?.map((item, i) => (
-                    <ProductReviewCard item={item} />
-                  ))}
-                </div>
-              </Grid>
-
-              <Grid item xs={5}>
-                <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
-                <div className="flex items-center space-x-3 pb-10">
-                  <Rating
-                    name="read-only"
-                    value={4.6}
-                    precision={0.5}
-                    readOnly
-                  />
-
-                  <p className="opacity-60">42807 Ratings</p>
-                </div>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Excellent</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={40}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Very Good</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={30}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Good</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className="bg-[#885c0a]"
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={25}
-                        color="orange"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Avarage</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{
-                          bgcolor: "#d0d0d0",
-                          borderRadius: 4,
-                          height: 7,
-                          "& .MuiLinearProgress-bar": {
-                            bgcolor: "#885c0a", // stroke color
-                          },
-                        }}
-                        variant="determinate"
-                        value={21}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Poor</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={10}
-                        color="error"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Grid>
-            </Grid>
+      {/* Add the provided HTML code for the image */}
+      <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
+          <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
+            <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
           </div>
-        </section>
+        </div>
 
-        {/* similer product */}
-        <section className=" pt-10">
-          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-          <div className="flex flex-wrap space-y-5">
-          {similarProducts?.map((product) => (
-          <div key={product.id}>
-            </div>
-            ))}
-       </div>
-        </section>
+        {/* rating and review section */ }
+        <div className="mt-6 flex justify-center">
+        <button
+          onClick={() => setShowRatingReview(!showRatingReview)}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+        >
+          Add a review
+        </button>
       </div>
+
+      {/* Conditionally render the rating and review section */}
+      {showRatingReview && (
+  <section className="">
+    {/* Rating and review section */}
+    <h1 className="text-xl p-5 shadow-lg mb-8 font-bold">
+        Rate & Review Product
+      </h1>
+    {/* Rating and review content */}
+    <div className="border p-5">
+      <Grid container spacing={7}>
+        <Grid item xs={5}>
+          <div className="space-y-5">
+            {/* Iterate over reviews and render ProductReviewCard for each */}
+            {review.reviews?.map((item, i) => (
+              <ProductReviewCard key={i} item={item} />
+            ))}
+          </div>
+        </Grid>
+        <Grid item xs={7}>
+          <ProductReviewCard />
+          <RateProduct />
+        </Grid>
+      </Grid>
     </div>
+  </section>
+)}
+
+  {/* Similar Products */ }
+ 
+        <div>
+        <section className="pt-10">
+  <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+  <div className="flex flex-wrap space-y-5">
+    {simmyProducts.slice(0, 4).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </div>
+</section>
+        </div>
+        <div>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Things Bought Together</h1>
+            <div className="flex flex-wrap space-y-5">
+              {BoughtTogether.slice(5, 9).map((item) => (
+               <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+               <HomeProductCard product={item} />
+             </a>
+              ))}
+            </div>
+          </section>
+        </div>
+        <div>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
+            <div className="flex flex-wrap space-y-5">
+              {BoughtTogether.slice(0, 6).map((item) => (
+                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
+                  <HomeProductCard product={item} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+        <div>
+        <section className="pt-10">
+  <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
+  <div className="flex flex-wrap space-y-5">
+    {interestedProducts.slice(0, 5).map((item) => (
+      <div key={item._id} className="mb-5">
+        <HomeProductCard product={item} />
+      </div>
+    ))}
+    {interestedProducts.slice(5, 9).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </div>
+</section>
+
+        </div>
+      </div >
+    </div >
   );
 }
-

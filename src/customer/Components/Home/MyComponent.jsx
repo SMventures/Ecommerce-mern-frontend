@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchResults from './SearchResults';
+import SearchResults from './Search/SearchResults';
 
 const MyComponent = ({ location }) => {
   // Check if location is defined before accessing its properties

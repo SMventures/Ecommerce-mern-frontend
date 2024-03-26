@@ -12,7 +12,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
 import Cart from '../Cart/Cart';
-import Wishlist from '../wishlist/wishlist';
+import WishlistItem from '../Wishlist/WishlistItem';
+import Wishlist from '../Wishlist/wishlist';
+
+
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -54,6 +57,9 @@ const CustomButtons = () => {
     const { auth } = useSelector((store) => store);
     const jwt = localStorage.getItem("jwt");
     const [openAuthModal, setOpenAuthModal] = useState(false);
+
+    const { cart } = useSelector((store) => store);
+    const { wishlist } = useSelector((store) => store);
 
     const handleOpen = () => {
         setOpenAuthModal(true);
@@ -143,12 +149,29 @@ const CustomButtons = () => {
                 </LoginButton>
             )}
             <Container>
-                <IconWrapper onClick={handleWishlistClick}>
-                    <FavoriteIcon />
-                </IconWrapper>
-                <IconWrapper onClick={handleCartClick}>
+            <IconWrapper onClick={handleWishlistClick} className="relative">
+    <FavoriteIcon />
+    {wishlist && wishlist.wishlistItems && wishlist.wishlistItems.length > 0 && (
+        <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
+            {wishlist.wishlistItems.length}
+        </span>
+    )}
+    <span className="sr-only">items in wishlist</span>
+</IconWrapper>
+
+
+
+
+                <IconWrapper onClick={handleCartClick} className="relative">
                     <ShoppingCartIcon />
+                    <sup className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
+                        {cart.cart?.totalItem}
+                    </sup>
+                    <span className="sr-only">items in cart, view bag</span>
                 </IconWrapper>
+
+
+
             </Container>
             <AuthModal handleClose={handleClose} open={openAuthModal} />
         </Wrapper>

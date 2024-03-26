@@ -7,16 +7,32 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-export default function FAQ() {
+import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
+ 
+export default function FAQ()
+ 
+{
   const [expanded, setExpanded] = React.useState(false);
-
+ 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
+ 
+ 
+ 
+    const containerStyle = {
+      backgroundColor: '#e0eaf6',
+      padding: '10px',
+      borderRadius: '10px',
+    };
+ 
+    const headingStyle = {
+      color: '#005a8d',
+      fontSize: '2rem',
+     
+    };
   return (
-    <Container
+    <Container  style={containerStyle}
       id="faq"
       sx={{
         pt: { xs: 4, sm: 12 },
@@ -28,7 +44,7 @@ export default function FAQ() {
         gap: { xs: 3, sm: 6 },
       }}
     >
-      <Typography
+      <Typography style={headingStyle}
         component="h2"
         variant="h4"
         color="text.primary"
@@ -37,7 +53,7 @@ export default function FAQ() {
           textAlign: { sm: 'left', md: 'center' },
         }}
       >
-        Digital Dalal Street – Frequently Asked Questions 
+        Digital Dalal Street – Frequently Asked Questions
       </Typography>
       <Box sx={{ width: '100%' }}>
         <Accordion
@@ -50,7 +66,7 @@ export default function FAQ() {
             id="panel1d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            1. What is Digital Dalal Street? 
+            <ContentCopyTwoToneIcon /> .What is Digital Dalal Street?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -59,9 +75,9 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                 Digital Dalal Street is an e-commerce platform dedicated to providing customized products for traders in the stock market. Our offerings include financial books, electronic items, personalized merchandise, trading-related decor items, posters, and trading flashcards. 
+                 Digital Dalal Street is an e-commerce platform dedicated to providing customized products for traders in the stock market. Our offerings include financial books, electronic items, personalized merchandise, trading-related decor items, posters, and trading flashcards.
               <Link> </Link>
-              
+             
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -75,7 +91,7 @@ export default function FAQ() {
             id="panel2d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            2. Who is Digital Dalal Street designed for? 
+            <ContentCopyTwoToneIcon />. Who is Digital Dalal Street designed for?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -84,7 +100,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                Digital Dalal Street caters to traders of all levels, from fresher/novice to experienced and successful/unsuccessful traders. Our goal is to be a one-stop solution for a trader's diverse needs. 
+                Digital Dalal Street caters to traders of all levels, from fresher/novice to experienced and successful/unsuccessful traders. Our goal is to be a one-stop solution for a trader's diverse needs.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -98,7 +114,7 @@ export default function FAQ() {
             id="panel3d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            3. Are the products customizable? 
+            <ContentCopyTwoToneIcon />. Are the products customizable?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -107,7 +123,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                 Yes, many of our products are customizable. Whether it's adding a personal touch to merchandise or selecting preferences for electronic items, we offer customization options to suit individual tastes. 
+                 Yes, many of our products are customizable. Whether it's adding a personal touch to merchandise or selecting preferences for electronic items, we offer customization options to suit individual tastes.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -121,7 +137,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            4. What types of products does Digital Dalal Street offer? 
+            <ContentCopyTwoToneIcon />. What types of products does Digital Dalal Street offer?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -130,11 +146,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                Digital Dalal Street offers a wide range of products, including financial books, electronic items, customized merchandise, trading-related decor items, posters, and trading flashcards. Our collection is curated to meet the unique requirements of the trading community. 
+                Digital Dalal Street offers a wide range of products, including financial books, electronic items, customized merchandise, trading-related decor items, posters, and trading flashcards. Our collection is curated to meet the unique requirements of the trading community.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -145,7 +161,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            5. How can I place an order? 
+            <ContentCopyTwoToneIcon />. How can I place an order?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -154,11 +170,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                Placing an order is easy. Simply browse our product catalog, select the items you want, and follow the checkout process. Provide your shipping details and make a secure payment to complete your order. 
+                Placing an order is easy. Simply browse our product catalog, select the items you want, and follow the checkout process. Provide your shipping details and make a secure payment to complete your order.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -169,7 +185,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            6. Is there educational content available on Digital Dalal Street? 
+            <ContentCopyTwoToneIcon />. Is there educational content available on Digital Dalal Street?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -178,11 +194,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                   Absolutely! We offer a variety of educational resources, including financial books and trading flashcards, to help traders enhance their knowledge and skills in the stock market. 
+                   Absolutely! We offer a variety of educational resources, including financial books and trading flashcards, to help traders enhance their knowledge and skills in the stock market.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -194,8 +210,8 @@ export default function FAQ() {
           >
             <Typography component="h3" variant="subtitle2">
              
-
-7. Can I track my order?  
+ 
+            <ContentCopyTwoToneIcon />. Can I track my order?  
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -208,7 +224,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -219,7 +235,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            8. What if I encounter issues with my order? 
+            <ContentCopyTwoToneIcon />. What if I encounter issues with my order?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -228,11 +244,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                   If you have any issues with your order, please contact our customer support team at [customer support email/phone number]. We are here to assist you and ensure your satisfaction. 
+                   If you have any issues with your order, please contact our customer support team at [customer support email/phone number]. We are here to assist you and ensure your satisfaction.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -243,7 +259,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            9. Do you ship internationally? 
+            <ContentCopyTwoToneIcon />. Do you ship internationally?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -256,7 +272,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -267,7 +283,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            10. How can I stay updated on new products and promotions? 
+            <ContentCopyTwoToneIcon />. How can I stay updated on new products and promotions?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -280,7 +296,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -291,7 +307,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            11. Can I return or exchange a product? 
+            <ContentCopyTwoToneIcon />. Can I return or exchange a product?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -300,11 +316,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                   Yes, we have a hassle-free return and exchange policy. If you’re not satisfied with your purchase, please refer to our [return and exchange policy page] for detailed instructions. 
+                   Yes, we have a hassle-free return and exchange policy. If you’re not satisfied with your purchase, please refer to our [return and exchange policy page] for detailed instructions.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -315,7 +331,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            12. Are there any membership or subscription programs? 
+            <ContentCopyTwoToneIcon />. Are there any membership or subscription programs?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -324,11 +340,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                    Currently, we do not offer a membership or subscription program. However, stay tuned for updates, as we may introduce loyalty programs or exclusive memberships in the future. 
+                    Currently, we do not offer a membership or subscription program. However, stay tuned for updates, as we may introduce loyalty programs or exclusive memberships in the future.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -339,7 +355,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            13. How are shipping costs determined? 
+            <ContentCopyTwoToneIcon />. How are shipping costs determined?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -352,7 +368,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -363,7 +379,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            14. Do you offer gift cards? 
+            <ContentCopyTwoToneIcon />. Do you offer gift cards?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -372,11 +388,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                    Yes, we offer digital gift cards of varying denominations. These make for great gifts and can be redeemed for any product on our platform. 
+                    Yes, we offer digital gift cards of varying denominations. These make for great gifts and can be redeemed for any product on our platform.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -387,7 +403,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            15. Can I cancel my order after placing it? 
+            <ContentCopyTwoToneIcon />. Can I cancel my order after placing it?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -396,11 +412,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                     Once an order is placed, it is processed promptly to ensure quick dispatch. Therefore, we recommend reviewing your order carefully before confirming. If you need assistance, contact our customer support team as soon as possible. 
+                     Once an order is placed, it is processed promptly to ensure quick dispatch. Therefore, we recommend reviewing your order carefully before confirming. If you need assistance, contact our customer support team as soon as possible.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -411,7 +427,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            16. Are the financial books suitable for all levels of traders? 
+            <ContentCopyTwoToneIcon />. Are the financial books suitable for all levels of traders?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -424,7 +440,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -435,7 +451,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            17. How can I suggest a new product or feature? 
+            <ContentCopyTwoToneIcon />. How can I suggest a new product or feature?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -448,7 +464,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -459,7 +475,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            18. What payment methods do you accept? 
+            <ContentCopyTwoToneIcon />. What payment methods do you accept?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -468,11 +484,11 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                      We accept a variety of payment methods, including credit/debit cards, digital wallets, and other secure online payment options. All transactions are processed with the utmost security.
+                      We accept a variety of payment methods, including credit/debit cards, digital wallets, and other secure online payment options. All transactions are processed with the utmost security.
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -483,7 +499,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            19. Are the electronic items on Digital Dalal Street branded or generic?  
+            <ContentCopyTwoToneIcon />. Are the electronic items on Digital Dalal Street branded or generic?  
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -496,7 +512,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
+ 
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -508,8 +524,8 @@ export default function FAQ() {
           >
             <Typography component="h3" variant="subtitle2">
              
-
-20. How can I stay informed about product restocks? 
+ 
+            <ContentCopyTwoToneIcon />. How can I stay informed about product restocks?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -522,7 +538,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        
+       
         <Accordion
           expanded={expanded === 'panel4'}
           onChange={handleChange('panel4')}
@@ -533,7 +549,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            14. Do you offer gift cards? 
+            <ContentCopyTwoToneIcon />. Do you offer gift cards?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -542,7 +558,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-                    Yes, we offer digital gift cards of varying denominations. These make for great gifts and can be redeemed for any product on our platform. 
+                    Yes, we offer digital gift cards of varying denominations. These make for great gifts and can be redeemed for any product on our platform.
             </Typography>
           </AccordionDetails>
         </Accordion>

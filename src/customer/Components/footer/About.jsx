@@ -101,10 +101,11 @@ export default function About() {
 
         <div id="fourth" className="reveal">
           
-         
+        <h1 style={{ textAlign: "center",fontSize: "2rem", color:"white" }}>Our Products</h1>
         </div>
 
         <div id="second" className="reveal">
+      
           <div className="container">
             <div>
               <h1>Trading Education</h1>
