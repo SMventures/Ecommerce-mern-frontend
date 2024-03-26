@@ -16,6 +16,9 @@ import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
 import {
   findProductById,
   getSimilarProducts,
+  getBoughtTogether,
+  getInterested,
+
 } from "../../../../Redux/Customers/Product/Action";
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
@@ -37,7 +40,7 @@ const product = {
   href: "#",
   breadcrumbs: [
     { id: 1, name: "Product", href: "#" },
- 
+
   ],
   images: [
     {
@@ -89,23 +92,41 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
   const [simmyProducts, setSimmyProducts] = useState([]);
+  const [BoughtTogether, setBoughtTogether] = useState([]);
+  const [interestedProducts, setInterested] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
+  const [showRatingReview, setShowRatingReview] = useState(false);
 
   const getCategoryName = async () => {
     const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
     const data = await res.json();
     const cardId = data.category.name;
     getSimilarProducts(cardId);
+    getBoughtTogether(cardId);
+    getInterested(cardId);
+
   };
 
   const getSimilarProducts = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
     const data = await response.json();
     setSimmyProducts(data.content);
+  };
+
+  const getBoughtTogether = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const data = await response.json();
+    setBoughtTogether(data.content);
+  };
+
+  const getInterested = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?=${category}`);
+    const data = await response.json();
+    setInterested(data.content);
   };
 
   useEffect(() => {
@@ -145,7 +166,7 @@ export default function ProductDetails() {
   //   //   console.error("Product or product name is undefined");
   //   // }
   // };
-  
+
   // const [isInWishlist, setIsInWishlist] = useState(false);
 
   // const handlewishlistSubmit = () => {
@@ -166,7 +187,7 @@ export default function ProductDetails() {
   // const handlewishlistSubmit = (itemId) => {
   //   const data = { productId: itemId }; // Use itemId as the product ID
   //   dispatch(addItemToWishlist({ data, jwt }));
-    // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
+  // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
   //   // navigate("/wishlist");
   // };
   const isProductInWishlist = (product) => {
@@ -178,7 +199,7 @@ export default function ProductDetails() {
     // Return false if customersProduct or wishlist is undefined
     return false;
   };
-  
+
   const handleWishlistToggle = (product) => {
     if (!isProductInWishlist(product)) {
       // If the product is not in the wishlist, add it to the wishlist
@@ -188,10 +209,10 @@ export default function ProductDetails() {
       console.log("Item is already in the wishlist");
     }
   };
-  
+
 
   // Function to check if a product is in the wishlist
-  
+
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -208,9 +229,7 @@ export default function ProductDetails() {
   };
 
   return (
-    // <div className="bg-white lg:px-20">
-    //   <div className="pt-6">
-      <div className="bg-white lg:px-20">
+    <div className="bg-white lg:px-20">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol
@@ -250,40 +269,41 @@ export default function ProductDetails() {
             </li>
           </ol>
         </nav>
+
         {/* product details */}
         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
-        <div className="relative">
-      {/* Wishlist icon */}
-      <div
-        className="absolute top-2 right-8 cursor-pointer"
-        onClick={() => handlewishlistSubmit(product)}
-        style={{
-          width: '24px',
-          height: '24px',
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill={isClicked ? 'red' : 'none'}
-          stroke={isClicked ? 'red' : 'grey'}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
-        </svg>
-      </div>
+          {/* Image gallery */}
+          <div className="flex flex-col items-center relative border border-gray-200 rounded-lg p-4">
+            <div
+              className="absolute top-2 right-8 cursor-pointer"
+              onClick={() => handlewishlistSubmit(product)}
+              style={{
+                width: '24px',
+                height: '24px',
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill={isClicked ? 'red' : 'none'}
+                stroke={isClicked ? 'red' : 'grey'}
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
+              </svg>
+            </div>
 
-      {/* Notification bar */}
-      {showNotification && (
-        <div className="absolute top-0 right-0 mt-8 mr-8 bg-green-500 text-white px-4 py-2 rounded">
-          Item added to wishlist
-        </div>
-      )}
-  
- 
-            <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
+            {/* Notification bar */}
+            {showNotification && (
+              <div className="absolute top-0 right-0 mt-8 mr-8 bg-green-500 text-white px-4 py-2 rounded">
+                Item added to wishlist
+              </div>
+            )}
+
+
+            <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
               <img
                 src={activeImage?.src || customersProduct.product?.imageUrl}
                 alt={product.images[0].alt}
@@ -295,19 +315,16 @@ export default function ProductDetails() {
                 <div
                   onClick={() => handleSetActiveImage(image)}
                   className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
+                  key={image.id}
                 >
                   <img
                     src={image.src}
-                    alt={product.images[1].alt}
+                    alt={image.alt}
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
               ))}
             </div>
-
-
-
-
 
             <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
               <Button
@@ -318,16 +335,14 @@ export default function ProductDetails() {
                 Add To Cart
               </Button>
 
-
-              
               <Button
-              onClick={() => navigate("/checkout?step=2")}
-              variant="contained"
-              type="submit"
-              sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-            >
-              Buy Now
-            </Button>
+                onClick={() => navigate("/checkout?step=2")}
+                variant="contained"
+                type="submit"
+                sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+              >
+                Buy Now
+              </Button>
             </form>
           </div>
 
@@ -479,7 +494,7 @@ export default function ProductDetails() {
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                     >
-                      <Typography component="h3" variant="subtitle2" className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
                         Highlights
                       </Typography>
                     </AccordionSummary>
@@ -496,6 +511,7 @@ export default function ProductDetails() {
 
                   {/* specification  */}
 
+
                   <Accordion
                     expanded={expanded === 'panel4'}
                     onChange={handleChange('panel4')}
@@ -505,7 +521,7 @@ export default function ProductDetails() {
                       aria-controls="panel4d-content"
                       id="panel4d-header"
                     >
-                      <Typography component="h3" variant="subtitle2" className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
                         Specifications
                       </Typography>
                     </AccordionSummary>
@@ -568,8 +584,8 @@ export default function ProductDetails() {
               </div> */}
               </div>
             </div>
-            </Container >
-            </section>
+          </Container >
+        </section>
         {/* Add the provided HTML code for the image */}
         <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
           <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
@@ -577,9 +593,9 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        
-       
-    
+
+
+
 
 
         {/* rating and review section */}
@@ -590,16 +606,16 @@ export default function ProductDetails() {
 
           <div className="border p-5">
             <Grid container spacing={7}>
-              <Grid item xs={7}>
+              {/* <Grid item xs={7}>
                 <div className="space-y-5">
-                  {/* Iterate over reviews and render ProductReviewCard for each */}
+                  Iterate over reviews and render ProductReviewCard for each
                   {review.reviews?.map((item, i) => (
                     <ProductReviewCard key={i} item={item} />
                   ))}
                 </div>
-              </Grid>
-              <ProductReviewCard />
-              <RateProduct />
+              </Grid> */}
+              {/* <ProductReviewCard />
+              <RateProduct /> */}
 
               {/* Add other components if needed */}
 
@@ -746,31 +762,80 @@ export default function ProductDetails() {
           </div>
         </section>
 
+
+       
+
+        {/* rating and review section */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setShowRatingReview(!showRatingReview)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+          >
+            Add a review
+          </button>
+        </div>
+
+        {/* Conditionally render the rating and review section */}
+      
+           {showRatingReview && (
+              <Grid container spacing={7}>
+              <Grid item xs={7}>
+                <div className="space-y-5">
+                  {review.reviews?.map((item, i) => (
+                    <ProductReviewCard key={i} item={item} />
+                  ))}
+                </div>
+              </Grid>
+             
+              <RateProduct />
+            </Grid>
+        )}
+
         {/* Similar Products */}
+
         <div>
-        <section className="pt-10">
-  <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-  <div className="flex flex-wrap space-y-5">
-    {simmyProducts.slice(0, 5).map((item) => (
-      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-        <HomeProductCard product={item} />
-      </a>
-    ))}
-  </div>
-</section>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+            <div className="flex flex-wrap space-y-5">
+              {simmyProducts.slice(0, 5).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))}
+            </div>
+          </section>
 
         </div>
         <div>
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">Things Bought Together</h1>
             <div className="flex flex-wrap space-y-5">
-              {simmyProducts.slice(0, 5).map((item) => (
-                <div key={item._id} className="mb-5"> {/* Add margin bottom */}
+              {BoughtTogether.slice(5, 9).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
                   <HomeProductCard product={item} />
-                </div>
+                </a>
               ))}
             </div>
           </section>
+        </div>
+       
+        <div>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
+            <div className="flex flex-wrap space-y-5">
+              {interestedProducts.slice(0, 5).map((item) => (
+                <div key={item._id} className="mb-5">
+                  <HomeProductCard product={item} />
+                </div>
+              ))}
+              {/* {interestedProducts.slice(0, 5).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))} */}
+            </div>
+          </section>
+
         </div>
       </div >
     </div >

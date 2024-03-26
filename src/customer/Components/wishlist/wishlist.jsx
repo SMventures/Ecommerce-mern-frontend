@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import WishlistItem from "./WishlistItem";
+import WishlistItem from "./WishlistItem"
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

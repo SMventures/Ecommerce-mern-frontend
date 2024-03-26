@@ -64,7 +64,6 @@ const CustomerRoutes = () => {
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
         {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
-        <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/SearchResults/:query" element ={<SearchResults />} />
 
         <Route path="/my-component" element={<MyComponent />} />

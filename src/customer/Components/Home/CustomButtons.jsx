@@ -13,8 +13,7 @@ import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
 import Cart from '../Cart/Cart';
 import WishlistItem from '../wishlist/WishlistItem';
-import Wishlist from '../wishlist/wishlist';
-
+import Wishlist from "../wishlist/wishlist"
 
 
 const Wrapper = styled(Box)`

@@ -9,6 +9,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+// Import the action creator for adding items to the wishlist
 // import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action'; // Import the action creator for adding items to the wishlist
 import { addItemToCart } from '../../../../Redux/Customers/Cart/Action'; // Import the action creator for adding items to the wishlist
 import Radio from "@mui/material/Radio";
