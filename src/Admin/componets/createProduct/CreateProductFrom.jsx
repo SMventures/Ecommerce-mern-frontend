@@ -84,18 +84,25 @@ const CreateProductForm = () => {
     formData.append("imageFile", productData.imageFile); // Append image file to form data
     // Append other product data to form data
     for (const key in productData) {
-      if (key !== "imageFile") {
-        formData.append(key, productData[key]);
-      }
+        if (key !== "imageFile") {
+            formData.append(key, productData[key]);
+        }
     }
     try {
-      const response = await axios.post("http://localhost:5454/api/admin/products/", formData, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          "Content-Type": "multipart/form-data",
-        },
+        const response = await axios.post("http://localhost:5454/api/admin/products/", formData, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                "Content-Type": "multipart/form-data",
+            }
+        });
+        alert("Product added successfully!");
+    } catch (error) {
+        console.error("Error adding product:", error);
+        // Handle error appropriately, e.g., show error message to the user
+    }
+};
 
-      });
+
       // setSnackbarOpen(true); // Open Snackbar on success
       // // Clear form data after successful submission
       // setProductData({
@@ -117,14 +124,14 @@ const CreateProductForm = () => {
       //   specifications: "",
       // });
       // // Handle success
-    } catch (error) {
-      // Handle error
-      // enqueueSnackbar("Error occurred while creating the product", { variant: 'error' });
+  //   } catch (error) {
+  //     // Handle error
+  //     // enqueueSnackbar("Error occurred while creating the product", { variant: 'error' });
     
 
-    }
-  };
-  // const handleSnackbarClose = () => {
+  //   }
+  // };
+  // // const handleSnackbarClose = () => {
   //   setSnackbarOpen(false);
   // };
 
@@ -284,12 +291,17 @@ const CreateProductForm = () => {
                 onChange={handleChange}
                 label="Third Level Category"
               >
-                {productData.secondLavelCategory === "Clothing" && [
-                  <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
-                  <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
+               {productData.topLavelCategory === "Men" && productData.secondLavelCategory === "Clothing" && [
+              
                 <MenuItem value="men_hoodies"> Men Hoodies</MenuItem>,
                 <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
 
+              ]},
+              {productData.topLavelCategory === "Women" && productData.secondLavelCategory === "Clothing" && [
+              
+                  <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
+                  <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
+                  
               ]},
 
                 {productData.secondLavelCategory === "Stationery_Items" && [
@@ -325,13 +337,13 @@ const CreateProductForm = () => {
     <MenuItem value="Laptop_Sleeves">Laptop Sleeves</MenuItem>,
 ]}
 {productData.secondLavelCategory === "Trading_Books" && [
-    <MenuItem key="motivational" value="Motivational">Motivational</MenuItem>,
-    <MenuItem key="biography" value="Biography">Biography</MenuItem>,
-    <MenuItem key="fundamental_analysis" value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-    <MenuItem key="technical_analysis" value="Technical_Analysis">Technical Analysis</MenuItem>,
-    <MenuItem key="psychology" value="Psychology">Psychology</MenuItem>,
-    <MenuItem key="risk_management" value="Risk_Management">Risk Management</MenuItem>,
-    <MenuItem key="economic_analysis" value="Economic_Analysis">Economic Analysis</MenuItem>,
+    <MenuItem  value="Motivational">Motivational</MenuItem>,
+    <MenuItem value="Biography">Biography</MenuItem>,
+    <MenuItem  value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+    <MenuItem  value="Technical_Analysis">Technical Analysis</MenuItem>,
+    <MenuItem  value="Psychology">Psychology</MenuItem>,
+    <MenuItem  value="Risk_Management">Risk Management</MenuItem>,
+    <MenuItem  value="Economic_Analysis">Economic Analysis</MenuItem>,
 ]}
 
 

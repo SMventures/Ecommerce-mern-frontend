@@ -38,17 +38,22 @@ export const findProducts = (reqData) => async (dispatch) => {
 
   try {
     dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+    console.log("this is the dispatch category funct",category)
 
     const { data } = await api.get(
+   
       `/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
+
 
     dispatch({
       type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
       payload: data,
     });
   } catch (error) {
+    console.log("product category failure",error)
     dispatch({
+     
       type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
       payload:
         error.response && error.response.data.message
@@ -118,7 +123,7 @@ export const  getInterested = (reqData) => async (dispatch) => {
   try {
       dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
 
-      const { data } = await api.get(`/api/products?category=${category}`);
+      const { data } = await api.get(`/api/products`);
       // const { data } = await api.get('/api/products/:category/similar');
 
       console.log("products by category: ", data);
