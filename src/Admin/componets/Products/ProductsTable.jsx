@@ -47,7 +47,7 @@ const ProductsTable = () => {
 
 
   const handlePaginationChange = (event, value) => {
-    searchParams.set("page", value-1);
+    searchParams.set("page", value - 1);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
@@ -55,19 +55,19 @@ const ProductsTable = () => {
   useEffect(() => {
     // setFilterValue({ availability, category, sort });
     const data = {
-      category:category || "",
+      category: category || "",
       colors: [],
       sizes: [],
       minPrice: 0,
       maxPrice: 100000,
       minDiscount: 0,
       sort: sort || "price_low",
-      pageNumber:page || 1,
+      pageNumber: page || 1,
       pageSize: 10,
       stock: availability,
     };
     dispatch(findProducts(data));
-  }, [availability, category, sort,page,customersProduct.deleteProduct]);
+  }, [availability, category, sort, page, customersProduct.deleteProduct]);
 
   const handleFilterChange = (e, sectionId) => {
     console.log(e.target.value, sectionId);
@@ -77,8 +77,8 @@ const ProductsTable = () => {
     navigate({ search: `?${query}` });
   };
 
-  const handleDeleteProduct=(productId)=>{
-    console.log("delete product ",productId)
+  const handleDeleteProduct = (productId) => {
+    console.log("delete product ", productId)
     dispatch(deleteProduct(productId))
   }
 
@@ -104,45 +104,45 @@ const ProductsTable = () => {
                 label="Category"
                 onChange={(e) => handleFilterChange(e, "category")}
               >
-                  <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
-                  <MenuItem value="men_hoodies">Men Hoodies</MenuItem>,
-                  <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
-                  <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
+                <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
+                <MenuItem value="men_hoodies">Men Hoodies</MenuItem>,
+                <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
+                <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
 
-                    <MenuItem value="Pen">Pen</MenuItem>,
-                    <MenuItem value="Pencil">Pencil</MenuItem>,
-                    <MenuItem value="Highlighter">Highlighter</MenuItem>,
-                    <MenuItem value="Calender">Calender</MenuItem>,
-                    <MenuItem value="Markers">Markers</MenuItem>,
-                    <MenuItem value="Ruler">Ruler</MenuItem>,
-                    <MenuItem value="Notepad">Notepad</MenuItem>,
-                    <MenuItem value="Diary">Diary</MenuItem>,
-                  
-         
-                    <MenuItem value="Keyboard">Keyboard</MenuItem>,
-                    <MenuItem value="Mouse">Mouse</MenuItem>,
-                    <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
-                    <MenuItem value="Camera">Camera</MenuItem>,
-                    <MenuItem value="Headphones">Headphones</MenuItem>,
+                <MenuItem value="Pen">Pen</MenuItem>,
+                <MenuItem value="Pencil">Pencil</MenuItem>,
+                <MenuItem value="Highlighter">Highlighter</MenuItem>,
+                <MenuItem value="Calender">Calender</MenuItem>,
+                <MenuItem value="Markers">Markers</MenuItem>,
+                <MenuItem value="Ruler">Ruler</MenuItem>,
+                <MenuItem value="Notepad">Notepad</MenuItem>,
+                <MenuItem value="Diary">Diary</MenuItem>,
 
-            
-               
-                    <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
-                    <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
-                
-                    <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
-                    <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
-                    <MenuItem value="Laptop_Sleeves">Laptop Sleeves</MenuItem>,
-                  
-                    <MenuItem value="Motivational">Motivational</MenuItem>,
-                    <MenuItem value="Biography">Biography</MenuItem>,
-                    <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-                    <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
-                    <MenuItem value="Psychology">Psychology</MenuItem>,
-                    <MenuItem value="Risk_Management">Risk Management</MenuItem>,
-                    <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
-                 
-            
+
+                <MenuItem value="Keyboard">Keyboard</MenuItem>,
+                <MenuItem value="Mouse">Mouse</MenuItem>,
+                <MenuItem value="Usb_Cable">Usb Cable</MenuItem>,
+                <MenuItem value="Camera">Camera</MenuItem>,
+                <MenuItem value="Headphones">Headphones</MenuItem>,
+
+
+
+                <MenuItem value="Phone_Covers">Phone Covers</MenuItem>,
+                <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
+
+                <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
+                <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
+                <MenuItem value="Laptop_Sleeves">Laptop Sleeves</MenuItem>,
+
+                <MenuItem value="Motivational">Motivational</MenuItem>,
+                <MenuItem value="Biography">Biography</MenuItem>,
+                <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+                <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
+                <MenuItem value="Psychology">Psychology</MenuItem>,
+                <MenuItem value="Risk_Management">Risk Management</MenuItem>,
+                <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
+
+
 
               </Select>
             </FormControl>
@@ -206,12 +206,12 @@ const ProductsTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-            {customersProduct?.products?.content?.map((item) => (
+              {customersProduct?.products?.content?.map((item) => (
                 <TableRow
                   hover
                   key={item.name}
                   sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}
-                  
+
                 >
                   <TableCell>
                     {" "}
@@ -233,12 +233,14 @@ const ProductsTable = () => {
                       <Typography variant="caption">{item.brand}</Typography>
                     </Box>
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>{item.category.name}</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>{item.discountedPrice}</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>{item.quantity}</TableCell>
-              
                   <TableCell sx={{ textAlign: "center" }}>
-                    <Button variant="text" onClick={()=>handleDeleteProduct(item._id)}>Delete</Button>
+                    {item.category ? item.category.name : "N/A"}
+                  </TableCell>                 
+                   <TableCell sx={{ textAlign: "center" }}>{item.discountedPrice}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{item.quantity}</TableCell>
+
+                  <TableCell sx={{ textAlign: "center" }}>
+                    <Button variant="text" onClick={() => handleDeleteProduct(item._id)}>Delete</Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -261,7 +263,7 @@ const ProductsTable = () => {
             color="primary"
             className=""
             onChange={handlePaginationChange}
-            // value={page}
+          // value={page}
           />
         </div>
       </Card>
