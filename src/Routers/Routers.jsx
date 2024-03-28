@@ -14,6 +14,7 @@ import DemoAdmin from "../Admin/Views/DemoAdmin";
 import AdminPannel from "../Admin/AdminPannel";
 import Navigation from "../customer/Components/Navbar/Navigation";
 
+
 const Routers = () => {
   return (
     <div>
@@ -26,6 +27,7 @@ const Routers = () => {
         <Route path="/" element={<Homepage/>}></Route>
         <Route path="/home" element={<Homepage/>}></Route>
         <Route path="/about" element={<About/>}></Route>
+        <Route path="/Prod" element={<Prod/>}></Route>
         <Route path="/privaciy-policy" element={<PrivacyPolicy/>}></Route>
         <Route path="/terms-condition" element={<TearmsCondition/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import "./styles.css";
+import "./styles1.css";
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 
 export default function Prod() {
@@ -43,32 +43,12 @@ export default function Prod() {
       <header id="head">
         <a href="#">
           <span></span>
-          <span id="c_name">About Us</span>
+          <span id="c_name"></span>
         </a>
       </header>
       <main>
-        <div id="front">
-          <h1 style={{ textAlign: "center" }}>Welcome to Digital Dalal Street, where the world of stock trading meets style and functionality.</h1>
-          <img
-            src="https://cdni.iconscout.com/illustration/premium/thumb/about-us-1805547-1537820.png"
-            alt="font"
-          />
-          <p>
-            <h1 >Our Mission</h1>
-            At Digital Dalal Street, we are on a mission to revolutionize the way traders experience the stock market. We believe that trading should not only be profitable but also enjoyable and stylish. Our curated collection of products is designed to make your trading journey easy, comfortable, affordable, and undeniably fashionable.
-          </p>
-        </div>
-
-        <div id="first" className="reveal">
-          
-          <div>
-            
-            
-            
-           
-            
-          </div>
-        </div>
+        
+       
 
         <div id="fourth" className="reveal">
           
@@ -148,55 +128,11 @@ export default function Prod() {
           
         </div>
 
-        <div id="third" className="reveal">
-          <h1 id="front" style={{ textAlign: "center",fontSize: "2rem" }}>Why choose Digital Dalal Street?</h1>
-          <h1 style={{ textAlign: "center" }}>
-            
-          </h1>
-          <div id="third_cards">
-            <div>
-              <h2>Easy Shopping Experience</h2>
-              <p>
-              Navigating our online store is as seamless as executing a well-planned trade. Our user-friendly interface ensures that you find what you need effortlessly.
-              </p>
-            </div>
-            <div>
-              <h2>Comfortable and Affordable</h2>
-              <p>
-              We believe that a comfortable and stylish trading experience shouldn't break the bank. That's why we offer a range of affordable products without compromising on quality.
-              </p>
-            </div>
-            <div>
-              <h2>Fashionable Trading</h2>
-              <p>
-              Why settle for the ordinary when you can trade in style? Our fashionable merchandise lets you showcase your love for the stock market with flair.
-              </p>
-            </div>
-          </div>
-        </div>
+       
 
+      
 
-        <div className="container" style={{ textAlign: 'center' }}>
-  <div>
-    <h1>  <FolderCopyIcon/> Join the Digital Dalal Street Community</h1>
-    <p style={{ textAlign: 'center' }}>
-      Digital Dalal Street is more than a marketplace; it's a community of traders who share a passion for success and a love for all things in the stock market. Connect with like-minded individuals, share trading tips, and showcase your unique style within our growing community.
-    </p>
-  </div>
-</div>
-
-          <div className="container" style={{ textAlign: 'center' }}>
-            <div>
-              
-              <h1>  <FolderCopyIcon/> Explore the Future of Trading with Digital Dalal Street
-</h1>
-              
-              <p>
-              Discover a world where trading meets fashion, education meets style, and your trading journey is transformed. Join us at Digital Dalal Street and elevate your trading experience today.
-              </p>
-            </div>
-            
-          </div>
+          
 
         
       </main>
