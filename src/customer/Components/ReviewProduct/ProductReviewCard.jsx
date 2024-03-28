@@ -66,7 +66,7 @@ const ProductReviewCard = ({ item, totalReviews }) => {
       </Grid>
       <div className="col-span-1 flex"></div>
       <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
-        {totalReviews} reviews
+        {totalReviews} 
       </p>
     </div>
   );

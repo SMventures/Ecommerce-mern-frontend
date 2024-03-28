@@ -161,8 +161,8 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+            href: "Books/Trading_Books/Risk_Management",
+            imageSrc: 'https://th.bing.com/th/id/OIP.-UrR4XN5e4Y7Vuwo8X7vZQAAAA?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
           {
@@ -198,8 +198,8 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+            href: "Electronics/Electronics_Items/Mouse",
+            imageSrc: 'https://th.bing.com/th/id/OIP.8Weor-i2kcIYRpxjIk0mggHaEK?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
           {
