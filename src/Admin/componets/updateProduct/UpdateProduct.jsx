@@ -52,13 +52,20 @@ const UpdateProductForm = () => {
     }
   };
 
+  // const handleSizeChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const updatedSizes = [...sizes]; // Make a copy of the sizes array
+  //   updatedSizes[index][name] = value; // Update the corresponding size object
+  //   setSizes(updatedSizes); // Update the sizes state
+  // };
   const handleSizeChange = (e, index) => {
     const { name, value } = e.target;
-    const updatedSizes = [...sizes]; // Make a copy of the sizes array
-    updatedSizes[index][name] = value; // Update the corresponding size object
-    setSizes(updatedSizes); // Update the sizes state
+    const updatedProductData = { ...productData }; // Create a copy of productData
+    updatedProductData.size[index][name] = value; // Update the corresponding size object
+    setProductData(updatedProductData); // Update the productData state
   };
-
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,7 +103,7 @@ const UpdateProductForm = () => {
 
   return (
     <Fragment>
-      <Typography variant="h3" sx={{ textAlign: "center" }} className="py-10 text-center ">
+      <Typography variant="h3" sx={{ textAlign: "center", color:"white" }} className="py-10 text-center color-white">
         Update Product
       </Typography>
       <form onSubmit={handleSubmit} className="UpdateProductContainer min-h-screen">

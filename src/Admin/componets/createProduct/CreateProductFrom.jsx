@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { Typography } from "@mui/material";
+import { Typography,Snackbar } from "@mui/material";
 import {
   Grid,
   TextField,
@@ -26,6 +26,8 @@ const initialSizes = [
 
 
 const CreateProductForm = () => {
+  const { enqueueSnackbar } = useSnackbar(); // Snackbar hook
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
 
   const [productData, setProductData] = useState({
@@ -92,13 +94,39 @@ const CreateProductForm = () => {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "multipart/form-data",
         },
-      });
 
-      // Handle success
+      });
+      // setSnackbarOpen(true); // Open Snackbar on success
+      // // Clear form data after successful submission
+      // setProductData({
+      //   imageFile: null,
+      //   imageUrl: "",
+      //   brand: "",
+      //   title: "",
+      //   color: "",
+      //   discountedPrice: "",
+      //   price: "",
+      //   discountPersent: "",
+      //   size: initialSizes,
+      //   quantity: "",
+      //   topLavelCategory: "",
+      //   secondLavelCategory: "",
+      //   thirdLavelCategory: "",
+      //   description: "",
+      //   highlights: "",
+      //   specifications: "",
+      // });
+      // // Handle success
     } catch (error) {
       // Handle error
+      // enqueueSnackbar("Error occurred while creating the product", { variant: 'error' });
+    
+
     }
   };
+  // const handleSnackbarClose = () => {
+  //   setSnackbarOpen(false);
+  // };
 
   return (
     <Fragment className="createProductContainer ">
@@ -114,6 +142,7 @@ const CreateProductForm = () => {
         enctype="multipart/form-data"
         className="createProductContainer min-h-screen"
       >
+       
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <input
@@ -257,10 +286,11 @@ const CreateProductForm = () => {
               >
                 {productData.secondLavelCategory === "Clothing" && [
                   <MenuItem value="women_tshirts">Women Tshirts</MenuItem>,
-                  <MenuItem value="men_hoodies"> Men Hoodies</MenuItem>,
                   <MenuItem value="women_hoodies">Women Hoodies</MenuItem>,
-                  <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
-                ]}
+                <MenuItem value="men_hoodies"> Men Hoodies</MenuItem>,
+                <MenuItem value="men_tshirts">Men Tshirts</MenuItem>
+
+              ]},
 
                 {productData.secondLavelCategory === "Stationery_Items" && [
 
@@ -270,7 +300,7 @@ const CreateProductForm = () => {
                   <MenuItem value="Highlighter">Highlighter</MenuItem>,
                   <MenuItem value="Calender">Calender</MenuItem>,
                   <MenuItem value="Markers">Markers</MenuItem>,
-                  <MenuItem value="Rulers">Rulers</MenuItem>,
+                  <MenuItem value="Ruler">Ruler</MenuItem>,
                   <MenuItem value="Notepad">Notepad</MenuItem>,
                   <MenuItem value="Diary">Diary</MenuItem>,
 
@@ -289,25 +319,34 @@ const CreateProductForm = () => {
                   <MenuItem value="Phone_Skins">Phone Skins</MenuItem>,
 
                 ]}
-                {productData.secondLavelCategory === "Laptop_Accessories" && [
+             {productData.secondLavelCategory === "Laptop_Accessories" && [
+    <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
+    <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
+    <MenuItem value="Laptop_Sleeves">Laptop Sleeves</MenuItem>,
+]}
+{productData.secondLavelCategory === "Trading_Books" && [
+    <MenuItem key="motivational" value="Motivational">Motivational</MenuItem>,
+    <MenuItem key="biography" value="Biography">Biography</MenuItem>,
+    <MenuItem key="fundamental_analysis" value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+    <MenuItem key="technical_analysis" value="Technical_Analysis">Technical Analysis</MenuItem>,
+    <MenuItem key="psychology" value="Psychology">Psychology</MenuItem>,
+    <MenuItem key="risk_management" value="Risk_Management">Risk Management</MenuItem>,
+    <MenuItem key="economic_analysis" value="Economic_Analysis">Economic Analysis</MenuItem>,
+]}
 
-                  <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
-                  <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
-                  <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
 
+              {productData.secondLavelCategory === "Trading_Books" && [
+    <MenuItem key="motivational" value="Motivational">Motivational</MenuItem>,
+    <MenuItem key="biography" value="Biography">Biography</MenuItem>,
+    <MenuItem key="fundamental_analysis" value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
+    <MenuItem key="technical_analysis" value="Technical_Analysis">Technical Analysis</MenuItem>,
+    <MenuItem key="psychology" value="Psychology">Psychology</MenuItem>,
+    <MenuItem key="risk_management" value="Risk_Management">Risk Management</MenuItem>,
+    <MenuItem key="economic_analysis" value="Economic_Analysis">Economic Analysis</MenuItem>,
+    console.log("THIRD Level Category:", productData.thirdLavelCategory),
 
-                ]}
-                {productData.secondLavelCategory === "Trading_Books" && [
+]}
 
-                  <MenuItem value="Motivational">Motivational</MenuItem>,
-                  <MenuItem value="Biography">Biography</MenuItem>,
-                  <MenuItem value="Fundamental_Analysis">Fundamental Analysis</MenuItem>,
-                  <MenuItem value="Technical_Analysis">Technical Analysis</MenuItem>,
-                  <MenuItem value="Psychology">Psychology</MenuItem>,
-                  <MenuItem value="Risk_Management">Risk Management</MenuItem>,
-                  <MenuItem value="Economic_Analysis">Economic Analysis</MenuItem>,
-
-                ]}
 
 
               </Select>
@@ -404,7 +443,17 @@ const CreateProductForm = () => {
           </Grid>
         </Grid>
       </form>
-
+      {/* <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        message="Product has been created!"
+        action={
+          <Button color="inherit" size="small" onClick={handleSnackbarClose}>
+            Close
+          </Button>
+        }
+      /> */}
     </Fragment>
   );
 };

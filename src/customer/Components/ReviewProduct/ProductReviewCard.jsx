@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Rating, Box, Typography, Grid } from "@mui/material";
 
-const ProductReviewCard = ({ item }) => {
-  const [value, setValue] = useState(item?.rating || 0);
+const ProductReviewCard = ({ item, totalReviews }) => {
+  const [value, setValue] = useState(null); // State to hold the rating value
+  const [showRating, setShowRating] = useState(false); // State to control showing the rating section
   const [firstName, setFirstName] = useState(item?.user?.firstName || "Anonymous");
 
   useEffect(() => {
     if (item?.user) {
       setFirstName(item?.user?.firstName || "Anonymous");
     }
+    // Show the rating section after 2 seconds
+    const timeout = setTimeout(() => {
+      setShowRating(true);
+    }, 2000);
+    return () => clearTimeout(timeout); // Clear timeout on unmount
   }, [item]);
+
+  // Function to handle rating change
+  const handleRatingChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className="">
@@ -32,22 +43,31 @@ const ProductReviewCard = ({ item }) => {
               <p className="font-semibold text-lg">{firstName ? firstName : "Loading..."}</p>
               <p className="opacity-70">{new Date().toLocaleDateString()}</p> {/* Display today's date */}
             </div>
-            <div>
-              <Rating
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                name="product-rating"
-                precision={0.5}
-              />
-              <p>Rating: {value}</p> {/* Display the rating value */}
-            </div>
             <p>{item?.review}</p>
+            {showRating && ( // Show rating section after 2 seconds
+              <div>
+                {value === null ? ( // If rating is not provided
+                  <div>
+                    <Typography>Rate a product:</Typography>
+                    <Rating
+                      value={value}
+                      onChange={handleRatingChange}
+                      name="product-rating"
+                      precision={0.5}
+                    />
+                  </div>
+                ) : ( // If rating is provided, display the rating value
+                  <p>Rating: {value}</p>
+                )}
+              </div>
+            )}
           </div>
         </Grid>
       </Grid>
       <div className="col-span-1 flex"></div>
+      <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
+        {totalReviews} reviews
+      </p>
     </div>
   );
 };

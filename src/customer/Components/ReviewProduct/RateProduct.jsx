@@ -68,18 +68,7 @@ const RateProduct = () => {
         </Grid>
         <Grid item xs={12} lg={6}>
           <div className={`${!isLargeScreen ? "py-10" : ""} space-y-5`}>
-            <div className="shadow-md border rounded-md p-5">
-              <Typography className="font-semibold" component="legend">
-                Rate This Product
-              </Typography>
-              <Rating
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, newValue) => {
-                  setRating(newValue);
-                }}
-              />
-            </div>
+           
             <form
               onSubmit={handleSubmit}
               className="space-y-5 p-5 shadow-md border rounded-md"
@@ -111,7 +100,7 @@ const RateProduct = () => {
           </div>
         </Grid>
       </Grid>
-      <ProductReviewCard item={{ rating: rating }} />
+      
     </div>
   );
 };

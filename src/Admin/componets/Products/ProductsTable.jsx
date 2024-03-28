@@ -114,7 +114,7 @@ const ProductsTable = () => {
                     <MenuItem value="Highlighter">Highlighter</MenuItem>,
                     <MenuItem value="Calender">Calender</MenuItem>,
                     <MenuItem value="Markers">Markers</MenuItem>,
-                    <MenuItem value="Rulers">Rulers</MenuItem>,
+                    <MenuItem value="Ruler">Ruler</MenuItem>,
                     <MenuItem value="Notepad">Notepad</MenuItem>,
                     <MenuItem value="Diary">Diary</MenuItem>,
                   
@@ -132,7 +132,7 @@ const ProductsTable = () => {
                 
                     <MenuItem value="Laptop_Bags">Laptop Bags</MenuItem>,
                     <MenuItem value="Laptop_Skins">Laptop Skins</MenuItem>,
-                    <MenuItem value="Laptop_Sleevess">Laptop Sleeves</MenuItem>,
+                    <MenuItem value="Laptop_Sleeves">Laptop Sleeves</MenuItem>,
                   
                     <MenuItem value="Motivational">Motivational</MenuItem>,
                     <MenuItem value="Biography">Biography</MenuItem>,

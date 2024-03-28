@@ -34,8 +34,8 @@ export const kurtaPage1=[
           "quantity": 100,
           "topLavelCategory": "Men",
           "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "Pant",
-          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+          "thirdLavelCategory": "mens_tshirt",
+          "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
 ,        "discountPersent": "80 "
         
     },
@@ -63,8 +63,8 @@ export const kurtaPage1=[
           "quantity": 100,
           "topLavelCategory": "Men",
           "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "Pant",
-          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+          "thirdLavelCategory": "mens_tshirt",
+          "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
 ,        "discountPersent": "80 "
    },
     {
@@ -91,17 +91,17 @@ export const kurtaPage1=[
           "quantity": 100,
           "topLavelCategory": "Men",
           "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "Pant",
-          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+          "thirdLavelCategory": "mens_tshirts",
+          "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
 ,        "discountPersent": "80 "
         
     },
    
  
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/n/q/y/-original-imaghzuqgugbczzc.jpeg?q=70",
+        "imageUrl": black_stock_tshirt,
         "brand": "Pepe Jeans",
-        "title": "Men Regular Low Rise Blue Jeans",
+        "title": "Black Stock Tshirt",
         "color": "",
         "discountedPrice": 1099,
         "price": 3599,
@@ -122,15 +122,15 @@ export const kurtaPage1=[
           "quantity": 100,
           "topLavelCategory": "Men",
           "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "Pant",
-          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+          "thirdLavelCategory": "mens_tshirt",
+          "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
 ,        "discountPersent": "80 "
         
     },
     {
-        "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/s/c/o/30-5669588-roadster-original-imafw2g8cujdwg7j-bb.jpeg?q=70",
+        "imageUrl":camera,
         "brand": "Roadster",
-        "title": "Men Regular Mid Rise Blue Jeans",
+        "title": "Traders favorite Camera",
         "color": "",
         "discountedPrice": 644,
         "price": 1499,
@@ -151,11 +151,185 @@ export const kurtaPage1=[
           "quantity": 100,
           "topLavelCategory": "Men",
           "secondLavelCategory": "Clothing",
-          "thirdLavelCategory": "Pant",
-          "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
+          "thirdLavelCategory": "mens_tshirt",
+          "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
 ,        "discountPersent": "80 "
         
     },
-   
+    {
+      "imageUrl": calender,
+      "brand": "Roadster",
+      "title": "Calender",
+      "color": "",
+      "discountedPrice": 644,
+      "price": 1499,
+      "size": [
+          {
+            "name": "S",
+            "quantity": 20
+          },
+          {
+            "name": "M",
+            "quantity": 30
+          },
+          {
+            "name": "L",
+            "quantity": 50
+          }
+        ],
+        "quantity": 100,
+        "topLavelCategory": "Men",
+        "secondLavelCategory": "Clothing",
+        "thirdLavelCategory": "mens_tshirt",
+        "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+      
+  },
+  {
+    "imageUrl": blue_hoodie,
+    "brand": "Roadster",
+    "title": "Blue Men's Hoodie",
+    "color": "",
+    "discountedPrice": 644,
+    "price": 1499,
+    "size": [
+        {
+          "name": "S",
+          "quantity": 20
+        },
+        {
+          "name": "M",
+          "quantity": 30
+        },
+        {
+          "name": "L",
+          "quantity": 50
+        }
+      ],
+      "quantity": 100,
+      "topLavelCategory": "Men",
+      "secondLavelCategory": "Clothing",
+      "thirdLavelCategory": "mens_tshirt",
+      "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+    
+},
+{
+  "imageUrl": diary1,
+  "brand": "R",
+  "title": "Traders Den Diary",
+  "color": "",
+  "discountedPrice": 644,
+  "price": 1499,
+  "size": [
+      {
+        "name": "S",
+        "quantity": 20
+      },
+      {
+        "name": "M",
+        "quantity": 30
+      },
+      {
+        "name": "L",
+        "quantity": 50
+      }
+    ],
+    "quantity": 100,
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "mens_tshirt",
+    "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+  
+},
+{
+  "imageUrl": keyboard,
+  "brand": "Roadster",
+  "title": "Tech Smart Keyboard",
+  "color": "",
+  "discountedPrice": 644,
+  "price": 1499,
+  "size": [
+      {
+        "name": "S",
+        "quantity": 20
+      },
+      {
+        "name": "M",
+        "quantity": 30
+      },
+      {
+        "name": "L",
+        "quantity": 50
+      }
+    ],
+    "quantity": 100,
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "mens_tshirt",
+    "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+  
+},
+{
+  "imageUrl": headphn,
+  "brand": "Roadster",
+  "title": "Traders Headphones",
+  "color": "",
+  "discountedPrice": 644,
+  "price": 1499,
+  "size": [
+      {
+        "name": "S",
+        "quantity": 20
+      },
+      {
+        "name": "M",
+        "quantity": 30
+      },
+      {
+        "name": "L",
+        "quantity": 50
+      }
+    ],
+    "quantity": 100,
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "mens_tshirt",
+    "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+  
+},
+{
+  "imageUrl": blue_hoodie,
+  "brand": "Roadster",
+  "title": "Blue Men's Hoodie",
+  "color": "",
+  "discountedPrice": 644,
+  "price": 1499,
+  "size": [
+      {
+        "name": "S",
+        "quantity": 20
+      },
+      {
+        "name": "M",
+        "quantity": 30
+      },
+      {
+        "name": "L",
+        "quantity": 50
+      }
+    ],
+    "quantity": 100,
+    "topLavelCategory": "Men",
+    "secondLavelCategory": "Clothing",
+    "thirdLavelCategory": "mens_tshirt",
+    "description":"Discover stylish men's mens_tshirts that exude both comfort and fashion-forward design. These meticulously crafted mens_tshirts are perfect for any occasion, providing a perfect blend of style and versatility."
+,        "discountPersent": "80 "
+  
+},
+
  
 ]
