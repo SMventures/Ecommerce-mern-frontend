@@ -15,7 +15,6 @@
     flex: 0 0 20%;
     display: flex;
     align-items: center; /* Center the image vertically */
-    /* justify-content: flex-centerAlign the image to the left */
 }
 
 .image-container {
@@ -25,6 +24,7 @@
     background-position: 20px center; /* Shift background position to the right */
     margin-left: 50px;
 }
+
 
 .image-container .s-image {
     width: auto; /* Allow the image to adjust its width */

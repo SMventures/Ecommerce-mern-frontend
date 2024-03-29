@@ -20,6 +20,7 @@ import SearchResults from "../customer/Components/Home/Search/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
 import About from "../customer/Components/footer/About";
+import Prod from "../customer/Components/footer/Prod";
 // import Features from "../customer/Components/footer/Features";
 // import Pricing from "../customer/Components/footer/Pricing";
 // import { Highlight } from "@mui/icons-material";
@@ -50,6 +51,8 @@ const CustomerRoutes = () => {
         <Route path="/FAQ" element={<FAQ />}></Route>
         <Route path="/About" element={<About />}></Route>
         <Route path="/Terms" element={<Terms/>}></Route>
+        <Route path="/Prod" element={<Prod/>}></Route>
+
      
         {/* <Route path="/Features" element={<Features />}></Route>
         <Route path="/Pricing" element={<Pricing />}></Route>

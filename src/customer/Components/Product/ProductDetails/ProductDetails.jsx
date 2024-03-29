@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useState } from "react";
+import "./styles2.css";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
 import RateProduct from "../../ReviewProduct/RateProduct";
 import { Favorite as FavoriteIconOutlined, FavoriteBorder as FavoriteIcon } from '@mui/icons-material';
-
+import axios from 'axios';
 import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
@@ -32,6 +33,17 @@ import Typography from '@mui/material/Typography';
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addItemToWishlist, removeWishlistItem } from '../../../../Redux/Customers/Wishlist/Action';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Checkout from '../../Checkout/Checkout';
+import OrderSummary from '../../Checkout/OrderSummary';
+import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
+import { FaRupeeSign } from 'react-icons/fa';
+import { FaUndo } from 'react-icons/fa';
+import { FaTools } from 'react-icons/fa';
+// import DeliveryDate from './DeliveryDate';
+import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
 
 
 const product = {
@@ -91,6 +103,8 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
+  const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
+  const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000));
   const [simmyProducts, setSimmyProducts] = useState([]);
   const [BoughtTogether, setBoughtTogether] = useState([]);
   const [interestedProducts, setInterested] = useState([]);
@@ -99,18 +113,29 @@ export default function ProductDetails() {
   const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
+
   const [showRatingReview, setShowRatingReview] = useState(false);
-  const totalReviews = review.reviews.length; 
 
   const getCategoryName = async () => {
-    const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
-    const data = await res.json();
-    const cardId = data.category.name;
-    getSimilarProducts(cardId);
-    getBoughtTogether(cardId);
-    getInterested(cardId);
+    try {
+      const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
+      const data = await res.json();
+      const cardId = data.category.name;
+      console.log('Category Name:', cardId); // Log the fetched category name
 
-  };
+      if (cardId === 'men_hoodies' || cardId === 'men_tshirts' || cardId === 'women_hoodies' || cardId === 'women_tshirts') {
+        setShowSizes(true); // Set showSizes to true for the specified category names
+      }
+
+
+      getSimilarProducts(cardId);
+      getBoughtTogether(cardId);
+      getInterested(cardId);
+    } catch (error) {
+      console.error('Error fetching category name:', error);
+    }
+  }
+
 
   const getSimilarProducts = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
@@ -125,7 +150,7 @@ export default function ProductDetails() {
   };
 
   const getInterested = async (category) => {
-    const response = await fetch(`http://localhost:5454/api/products?=${category}`);
+    const response = await fetch(`http://localhost:5454/api/products`);
     const data = await response.json();
     setInterested(data.content);
   };
@@ -140,12 +165,13 @@ export default function ProductDetails() {
     setActiveImage(image);
   };
   const handleSubmit = () => {
-    const data = { productId, size: selectedSize.name };
+    const data = { productId, size: selectedSize ? selectedSize.name : null };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
+
   const handlewishlistSubmit = () => {
-    const data = { productId, size: selectedSize.name };
+    const data = { productId };
     dispatch(addItemToWishlist({ data, jwt }));
     setIsClicked(true); // Toggle the state to change the color
     setShowNotification(true); // Show the notification
@@ -153,44 +179,14 @@ export default function ProductDetails() {
 
     // navigate("/cart");
   };
-
+  const handleBuyNow = () => {
+    const data = { productId };
+    dispatch(addItemToCart({ data, jwt }));
+    navigate("/checkout?step=2");
+  };
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  // const handlewishlistSubmit = () => {
-  //   // if (product && product.name) {
-  //   //   // Access the name property only if product and product.name are defined
-  //   //   console.log("Adding product to wishlist:", product.name);
-  //     const data = { productId: product.id, size: selectedSize.name };
-  //     dispatch(addItemToWishlist({ data, jwt }));
-  //     // setIsClicked(true); // Update state to indicate that the icon has been clicked
-  //   // } else {
-  //   //   console.error("Product or product name is undefined");
-  //   // }
-  // };
 
-  // const [isInWishlist, setIsInWishlist] = useState(false);
-
-  // const handlewishlistSubmit = () => {
-  //   // Toggle the state when the wishlist icon is clicked
-  //   setIsInWishlist(!isInWishlist);
-  //   console.log('Product added to wishlist!');
-  // };
-
-  // const [wishlistClicked, setWishlistClicked] = useState(false);
-
-  // const handleWishlistClick = () => {
-  //   setWishlistClicked(!wishlistClicked);
-  //   // Add your handlewishlistSubmit logic here
-
-  // };
-  // const [clickedIndex, setClickedIndex] = useState(-1);
-
-  // const handlewishlistSubmit = (itemId) => {
-  //   const data = { productId: itemId }; // Use itemId as the product ID
-  //   dispatch(addItemToWishlist({ data, jwt }));
-  // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
-  //   // navigate("/wishlist");
-  // };
   const isProductInWishlist = (product) => {
     // Check if customersProduct exists and has a wishlist property
     if (customersProduct && customersProduct.wishlist) {
@@ -214,6 +210,8 @@ export default function ProductDetails() {
 
   // Function to check if a product is in the wishlist
 
+  const [showSizes, setShowSizes] = useState(false);
+
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -221,7 +219,16 @@ export default function ProductDetails() {
     setExpanded(isExpanded ? panel : false);
   };
 
+  // Define your custom arrow components
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return <div className="prev-arrow" onClick={onClick}>&#10094;</div>;
+  };
 
+  const NextArrow = (props) => {
+    const { onClick } = props;
+    return <div className="next-arrow" onClick={onClick}>&#10095;</div>;
+  };
 
   const containerStyle = {
     backgroundColor: '#e0eaf6',
@@ -336,32 +343,40 @@ export default function ProductDetails() {
                 Add To Cart
               </Button>
 
-              <Button
-                onClick={() => navigate("/checkout?step=2")}
-                variant="contained"
-                type="submit"
-                sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-              >
-                Buy Now
-              </Button>
+              <form onSubmit={handleBuyNow}>
+                <Button
+                  onClick={() => navigate("/checkout?step=2")}
+                  variant="contained"
+                  type="submit"
+                  sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+                >
+                  Buy Now
+                </Button>
+              </form>
             </form>
           </div>
 
           {/* Product info */}
           <Container >
             <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-              <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
-                <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
+              <div className="lg:col-span-2 flex flex-col justify-start -ml-1 items-start">
+                <h2 className="text-lg lg:text-xl font-semibold text-grey-900 opacity-60 text-left mb-2"> {/* Added mb-2 for bottom margin */}
                   {customersProduct.product?.brand}
-                </h1>
-                <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
+                </h2>
+                <h2 className='text-xl lg:text-2xl text-gray-900 pt-1 text-left font-semibold'> {/* Added font-semibold */}
                   {customersProduct.product?.title}
-                </h1>
+                </h2>
               </div>
+
+              <p className="font-semibold text-green-600 mt-4"> {/* Changed mt-2 to mt-4 */}
+                Special price
+              </p>
+
+
               {/* Options */}
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
-                <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
+                <div className="flex space-x-5 items-center text-l lg:text-2xl tracking-tight text-gray-900 mt-2">
                   <p className="font-semibold">
                     ₹{customersProduct.product?.discountedPrice}
                   </p>
@@ -372,103 +387,119 @@ export default function ProductDetails() {
                     {customersProduct.product?.discountPersent}% Off
                   </p>
                 </div>
-
-                {/* Reviews */}
+                {/* Reviews
                 <div className="mt-6">
-                
+                  <h3 className="sr-only">Reviews</h3>
+ 
+                  <div className="flex items-center space-x-3">
+                    <Rating
+                      name="read-only"
+                      value={4.6}
+                      precision={0.5}
+                      readOnly
+                    />
+ 
+                    <p className="opacity-60 text-sm">Ratings</p>
+                    <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
+                      {reviews.totalCount} reviews
+                    </p>
+                  </div>
+                 
+                </div> */}
+
+                <div className="mt-6">
+
 
                   <div className="flex items-center space-x-3">
-                   
 
-                   
-                   
+
+
+
                   </div>
                 </div>
-
-                <form className="mt-10" onSubmit={handleSubmit}>
-                  {/* Sizes */}
-                  <div className="mt-10">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                    </div>
-
-                    <RadioGroup
-                      value={selectedSize}
-                      onChange={setSelectedSize}
-                      className="mt-4"
-                    >
-                      <RadioGroup.Label className="sr-only">
-                        Choose a size
-                      </RadioGroup.Label>
-                      <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
-                        {product.sizes.map((size) => (
-                          <RadioGroup.Option
-                            key={size.name}
-                            value={size}
-                            disabled={!size.inStock}
-                            className={({ active }) =>
-                              classNames(
-                                size.inStock
-                                  ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                                  : "cursor-not-allowed bg-gray-50 text-gray-200",
-                                active ? "ring-1 ring-indigo-500" : "",
-                                "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
-                              )
-                            }
-                          >
-                            {({ active, checked }) => (
-                              <>
-                                <RadioGroup.Label as="span">
-                                  {size.name}
-                                </RadioGroup.Label>
-                                {size.inStock ? (
-                                  <span
-                                    className={classNames(
-                                      active ? "border" : "border-2",
-                                      checked
-                                        ? "border-indigo-500"
-                                        : "border-transparent",
-                                      "pointer-events-none absolute -inset-px rounded-md"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                  >
-                                    <svg
-                                      className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                      viewBox="0 0 100 100"
-                                      preserveAspectRatio="none"
-                                      stroke="currentColor"
-                                    >
-                                      <line
-                                        x1={0}
-                                        y1={100}
-                                        x2={100}
-                                        y2={0}
-                                        vectorEffect="non-scaling-stroke"
-                                      />
-                                    </svg>
-                                  </span>
-                                )}
-                              </>
-                            )}
-                          </RadioGroup.Option>
-                        ))}
+                {showSizes && (
+                  <form className="mt-10" onSubmit={handleSubmit}>
+                    {/* Sizes */}
+                    <div className="mt-10">
+                      <div className="flex items-center justify-between">
+                        <h5 className="text-lg font-semibold text-gray-900">Size</h5> {/* Adjust font size here */}
                       </div>
-                    </RadioGroup>
-                  </div>
+                      <RadioGroup
+                        value={selectedSize}
+                        onChange={setSelectedSize}
+                        className="mt-4"
+                      >
+                        <RadioGroup.Label className="sr-only">
+                          Choose a size
+                        </RadioGroup.Label>
+                        <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 gap-2"> {/* Adjust grid columns and gap */}
+                          {product.sizes.map((size) => (
+                            <RadioGroup.Option
+                              key={size.name}
+                              value={size}
+                              disabled={!size.inStock}
+                              className={({ active }) =>
+                                classNames(
+                                  "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm sm:text-base lg:text-lg font-semibold uppercase hover:bg-gray-50 focus:outline-none", // Adjust font size here
+                                  size.inStock
+                                    ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                                    : "cursor-not-allowed bg-gray-50 text-gray-200",
+                                  active ? "ring-1 ring-indigo-500" : ""
+                                )
+                              }
+                            >
+                              {({ active, checked }) => (
+                                <>
+                                  <RadioGroup.Label as="span">
+                                    {size.name}
+                                  </RadioGroup.Label>
+                                  {size.inStock ? (
+                                    <span
+                                      className={classNames(
+                                        active ? "border" : "border-2",
+                                        checked
+                                          ? "border-indigo-500"
+                                          : "border-transparent",
+                                        "pointer-events-none absolute -inset-px rounded-md"
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <span
+                                      aria-hidden="true"
+                                      className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-900"
+                                    >
+                                      <svg
+                                        className="absolute inset-0 h-full w-full stroke-2 text-gray-900"
+                                        viewBox="0 0 100 100"
+                                        preserveAspectRatio="none"
+                                        stroke="currentColor"
+                                      >
+                                        <line
+                                          x1={0}
+                                          y1={100}
+                                          x2={100}
+                                          y2={0}
+                                          vectorEffect="non-scaling-stroke"
+                                        />
+                                      </svg>
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                            </RadioGroup.Option>
+                          ))}
+                        </div>
+                      </RadioGroup>
+                    </div>
+                  </form>
+                )}
 
-
-                </form>
               </div>
-
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                 {/* Description and details */}
                 <div>
-                  <h3 className="text-sm font-bold text-gray-900 mt-2 mb-4">Description</h3>
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-900 mt-2 mb-4">Description</h3>
 
                   <div className="space-y-6">
                     <p className="text-base text-gray-900 mb-5">
@@ -476,11 +507,9 @@ export default function ProductDetails() {
                     </p>
                   </div>
                 </div>
-                <section className="pt-4 pb-4">
-        <h1 className="font-semibold text-lg pb-2">Total Reviews: {totalReviews}</h1>
-      </section>
+                {/* Highlights */}
                 {/* highlights */}
-
+ 
                 <Box sx={{ width: '100%' }}>
                   <Accordion
                     expanded={expanded === 'panel1'}
@@ -491,12 +520,12 @@ export default function ProductDetails() {
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
                         Highlights
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                      <Box sx={{ maxWidth: { sm: '100%', md: '100%' }, overflowX: 'auto' }}>
                         <Typography variant="body2" gutterBottom>
                           <pre className="text-base text-gray-900">
                             {customersProduct.product?.highlights}
@@ -505,10 +534,10 @@ export default function ProductDetails() {
                       </Box>
                     </AccordionDetails>
                   </Accordion>
-
+ 
                   {/* specification  */}
-
-
+ 
+ 
                   <Accordion
                     expanded={expanded === 'panel4'}
                     onChange={handleChange('panel4')}
@@ -518,12 +547,12 @@ export default function ProductDetails() {
                       aria-controls="panel4d-content"
                       id="panel4d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-sm font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
                         Specifications
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Box sx={{ maxWidth: { sm: '100%', md: '70%' }, overflowX: 'auto' }}>
+                      <Box sx={{ maxWidth: { sm: '100%', md: '100%' }, overflowX: 'auto' }}>
                         <Typography variant="body2" gutterBottom>
                           <pre className="text-base text-gray-900">
                             {customersProduct.product?.specifications}
@@ -534,11 +563,34 @@ export default function ProductDetails() {
                   </Accordion>
                 </Box>
 
+
+
+
+                <div style={{ border: '1px solid #ccc', padding: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }} className='mt-2 '>
+                    <FaTools style={{ color: '#ff5733', fontSize: '1.5rem', marginRight: '0.5rem' }} />
+                    <h3 className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Services</h3>
+                  </div>
+
+                  <div className="space-y-4" >
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <FaRupeeSign style={{ color: 'green', marginRight: '5px' }} />
+                      <h2 style={{ margin: '0' }}>Cash on Delivery available</h2>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <FaUndo style={{ color: 'blue', marginRight: '5px' }} />
+                      <h2 style={{ margin: '0' }}>3 Days Return Policy</h2>
+                    </div>
+                  </div>
+                </div>
+
+
+
                 {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
                 <div className="space-y-6">
                   <pre className="text-base text-gray-900">
-                    
+                   
                     {customersProduct.product?.highlights}
                   </pre>
                 </div>
@@ -560,7 +612,7 @@ export default function ProductDetails() {
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
-
+ 
                 <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                     {product.highlights.map((highlights) => (
@@ -574,7 +626,7 @@ export default function ProductDetails() {
 
                 {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
+ 
                 <div className="mt-4 space-y-6">
                   <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
@@ -596,12 +648,14 @@ export default function ProductDetails() {
 
 
         {/* rating and review section */}
+
+        {/* rating and review section */}
         <section className="">
           <h1 className="font-semibold text-lg pb-4">
             Recent Review & Ratings
           </h1>
 
-          <div className="">
+          <div className="border p-5">
             <Grid container spacing={7}>
               {/* <Grid item xs={7}>
                 <div className="space-y-5">
@@ -625,7 +679,7 @@ export default function ProductDetails() {
                     precision={0.5}
                     readOnly
                   />
-
+ 
                   <p className="opacity-60">42807 Ratings</p>
                 </div>
                 <Box>
@@ -760,79 +814,74 @@ export default function ProductDetails() {
         </section>
 
 
-       
+
 
         {/* rating and review section */}
-       
         <Grid item xs={7}>
-  <div className="space-y-5">
-    {review.reviews?.map((item, i) => (
-      <ProductReviewCard key={i} item={item} />
-    ))}
-  </div>
-</Grid>
-<div className="mt-6 flex justify-center">
-  <button
-    onClick={() => setShowRatingReview(!showRatingReview)}
-    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-  >
-    Add a review
-  </button>
-</div>
+          <div className="space-y-5">
+            {review.reviews?.map((item, i) => (
+              <ProductReviewCard key={i} item={item} />
+            ))}
+          </div>
+        </Grid>
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setShowRatingReview(!showRatingReview)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+          >
+            Add a review
+          </button>
+        </div>
 
-{/* Add margin or padding to create a gap */}
+        {/* Add margin or padding to create a gap */}
 
 
-{/* Conditionally render the rating and review section */}
-{showRatingReview && (
-  <Grid container spacing={7}>
-    <RateProduct />
-  </Grid>
-)}
-
+        {/* Conditionally render the rating and review section */}
+        {showRatingReview && (
+          <Grid container spacing={7}>
+            <RateProduct />
+          </Grid>
+        )}
         {/* Similar Products */}
 
         <div>
+          {/* Similar Products */}
           <section className="pt-10">
             <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-            <div className="flex flex-wrap space-y-5">
-              {simmyProducts.slice(0, 5).map((item) => (
+            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+              {simmyProducts.slice(0, 50).map((item) => (
                 <a key={item._id} href={`/product/${item._id}`} className="mb-5">
                   <HomeProductCard product={item} />
                 </a>
               ))}
-            </div>
+            </Slider>
           </section>
+        </div>
+        <div>
+          {/* Bought together */}
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Bought Together</h1>
+            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+              {BoughtTogether.slice(2, 15).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))}
+            </Slider>
+          </section>
+        </div>
 
-        </div>
         <div>
+          {/* Might be interested */}
           <section className="pt-10">
-            <h1 className="py-5 text-xl font-bold">Things Bought Together</h1>
-            <div className="flex flex-wrap space-y-5">
-              {BoughtTogether.slice(5, 9).map((item) => (
+            <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
+            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+              {interestedProducts.slice(0, 20).map((item) => (
                 <a key={item._id} href={`/product/${item._id}`} className="mb-5">
                   <HomeProductCard product={item} />
                 </a>
               ))}
-            </div>
-          </section>
-        </div>
-       
-        <div>
-          <section className="pt-10">
-            <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
-            <div className="flex flex-wrap space-y-5">
-              {interestedProducts.slice(0, 5).map((item) => (
-                <div key={item._id} className="mb-5">
-                  <HomeProductCard product={item} />
-                </div>
-              ))}
-              {/* {interestedProducts.slice(0, 5).map((item) => (
-                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-                  <HomeProductCard product={item} />
-                </a>
-              ))} */}
-            </div>
+            </Slider>
           </section>
 
         </div>

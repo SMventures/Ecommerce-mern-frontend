@@ -44,7 +44,7 @@ function Footer() {
                     <a className="text-white hover:text-Gray-400 font-semibold block pb-2 text-sm" href="/About">About Us</a>
                   </li>
                   <li>
-                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/About">Products</a>
+                    <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="/Prod">Products</a>
                   </li>
                   <li>
                     <a className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Team</a>
