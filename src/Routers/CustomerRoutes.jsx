@@ -25,6 +25,7 @@ import About from "../customer/Components/footer/About";
 // import { Highlight } from "@mui/icons-material";
 // import Highlights from "../customer/Components/footer/Highlights";
 import Terms from "../customer/Components/footer/Terms";
+import Profile from '../customer/Components/Profile/Profile'
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -59,6 +60,7 @@ const CustomerRoutes = () => {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
+        <Route path="/Profile/Profile" element={<Profile />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>

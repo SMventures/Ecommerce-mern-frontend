@@ -9,22 +9,25 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  LOGOUT
+  LOGOUT,
+  UPDATE_USER_PERSONAL_INFO_REQUEST,
+  UPDATE_USER_PERSONAL_INFO_SUCCESS,
+  UPDATE_USER_PERSONAL_INFO_FAILURE
 } from './ActionTypes';
-import api, { API_BASE_URL } from '../../config/api';
+import { API_BASE_URL } from '../../config/api';
 
 // Register action creators
 const registerRequest = () => ({ type: REGISTER_REQUEST });
-const registerSuccess = (user) => ({ type: REGISTER_SUCCESS, payload:user });
+const registerSuccess = (user) => ({ type: REGISTER_SUCCESS, payload: user });
 const registerFailure = error => ({ type: REGISTER_FAILURE, payload: error });
 
 export const register = userData => async dispatch => {
   dispatch(registerRequest());
   try {
-    const response=await axios.post(`${API_BASE_URL}/auth/signup`, userData);
+    const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
     const user = response.data;
-    if(user.jwt) localStorage.setItem("jwt",user.jwt)
-    console.log("registerr :",user)
+    if (user.jwt) localStorage.setItem("jwt", user.jwt);
+    console.log("registerr :", user);
     dispatch(registerSuccess(user));
   } catch (error) {
     dispatch(registerFailure(error.message));
@@ -41,29 +44,27 @@ export const login = userData => async dispatch => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/signin`, userData);
     const user = response.data;
-    if(user.jwt) localStorage.setItem("jwt",user.jwt)
-    console.log("login ",user)
+    if (user.jwt) localStorage.setItem("jwt", user.jwt);
+    console.log("login ", user);
     dispatch(loginSuccess(user));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
 };
 
-
-
-//  get user from token
+// Get user from token
 export const getUser = (token) => {
   return async (dispatch) => {
     dispatch({ type: GET_USER_REQUEST });
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/users/profile`,{
-        headers:{
-          "Authorization":`Bearer ${token}`
+      const response = await axios.get(`${API_BASE_URL}/api/users/profile`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
         }
       });
       const user = response.data;
       dispatch({ type: GET_USER_SUCCESS, payload: user });
-      console.log("req User ",user)
+      console.log("req User ", user);
     } catch (error) {
       const errorMessage = error.message;
       dispatch({ type: GET_USER_FAILURE, payload: errorMessage });
@@ -71,9 +72,33 @@ export const getUser = (token) => {
   };
 };
 
-export const logout = (token) => {
-    return async (dispatch) => {
-      dispatch({ type: LOGOUT });
-      localStorage.clear();
-    };
+// Logout action creator
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch({ type: LOGOUT });
+    localStorage.clear();
   };
+};
+
+// Update user personal information action creators
+const updateUserPersonalInfoRequest = () => ({ type: UPDATE_USER_PERSONAL_INFO_REQUEST });
+const updateUserPersonalInfoSuccess = () => ({ type: UPDATE_USER_PERSONAL_INFO_SUCCESS });
+const updateUserPersonalInfoFailure = error => ({ type: UPDATE_USER_PERSONAL_INFO_FAILURE, payload: error });
+
+export const updateUserPersonalInfo = (updatedInfo) => {
+  return async (dispatch) => {
+    const { userId, ...rest } = updatedInfo; // Destructure userId from updatedInfo
+    dispatch(updateUserPersonalInfoRequest());
+    try {
+      const updatedUser = await updateUserPersonalInfo(userId, rest); // Pass userId and rest of the properties
+      dispatch(updateUserPersonalInfoSuccess());
+      return updatedUser;
+    } catch (error) {
+      dispatch(updateUserPersonalInfoFailure(error.message));
+      throw error;
+    }
+  };
+};
+
+
+

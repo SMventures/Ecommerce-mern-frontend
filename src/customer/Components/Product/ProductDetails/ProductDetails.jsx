@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
 import RateProduct from "../../ReviewProduct/RateProduct";
 import { Favorite as FavoriteIconOutlined, FavoriteBorder as FavoriteIcon } from '@mui/icons-material';
-import axios from 'axios';
+
 import Rate from "../../ReviewProduct/ProductReviewCard";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
@@ -32,11 +32,7 @@ import Typography from '@mui/material/Typography';
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addItemToWishlist, removeWishlistItem } from '../../../../Redux/Customers/Wishlist/Action';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Checkout from '../../Checkout/Checkout';
-import OrderSummary from '../../Checkout/OrderSummary';
+
 
 const product = {
   name: "Product",
@@ -103,30 +99,18 @@ export default function ProductDetails() {
   const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
-
   const [showRatingReview, setShowRatingReview] = useState(false);
-  const [reviews, setReviews] = useState({ totalCount: 0 });
+  const totalReviews = review.reviews.length; 
 
   const getCategoryName = async () => {
-    try {
-      const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
-      const data = await res.json();
-      const cardId = data.category.name;
-      console.log('Category Name:', cardId); // Log the fetched category name
+    const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
+    const data = await res.json();
+    const cardId = data.category.name;
+    getSimilarProducts(cardId);
+    getBoughtTogether(cardId);
+    getInterested(cardId);
 
-      if (cardId === 'men_hoodies' || cardId === 'men_tshirts' || cardId === 'women_hoodies' || cardId === 'women_tshirts') {
-        setShowSizes(true); // Set showSizes to true for the specified category names
-      }
-      
-    
-      getSimilarProducts(cardId);
-      getBoughtTogether(cardId);
-      getInterested(cardId);
-    } catch (error) {
-      console.error('Error fetching category name:', error);
-    }
-  }
-  
+  };
 
   const getSimilarProducts = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
@@ -141,7 +125,7 @@ export default function ProductDetails() {
   };
 
   const getInterested = async (category) => {
-    const response = await fetch(`http://localhost:5454/api/products`);
+    const response = await fetch(`http://localhost:5454/api/products?=${category}`);
     const data = await response.json();
     setInterested(data.content);
   };
@@ -156,13 +140,12 @@ export default function ProductDetails() {
     setActiveImage(image);
   };
   const handleSubmit = () => {
-    const data = { productId, size: selectedSize ? selectedSize.name : null };
+    const data = { productId, size: selectedSize.name };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
-  
   const handlewishlistSubmit = () => {
-    const data = { productId };
+    const data = { productId, size: selectedSize.name };
     dispatch(addItemToWishlist({ data, jwt }));
     setIsClicked(true); // Toggle the state to change the color
     setShowNotification(true); // Show the notification
@@ -170,14 +153,44 @@ export default function ProductDetails() {
 
     // navigate("/cart");
   };
-  const handleBuyNow = () => {
-    const data = { productId };
-    dispatch(addItemToCart({ data, jwt }));
-    navigate("/checkout?step=2");
-  };
+
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  
+  // const handlewishlistSubmit = () => {
+  //   // if (product && product.name) {
+  //   //   // Access the name property only if product and product.name are defined
+  //   //   console.log("Adding product to wishlist:", product.name);
+  //     const data = { productId: product.id, size: selectedSize.name };
+  //     dispatch(addItemToWishlist({ data, jwt }));
+  //     // setIsClicked(true); // Update state to indicate that the icon has been clicked
+  //   // } else {
+  //   //   console.error("Product or product name is undefined");
+  //   // }
+  // };
+
+  // const [isInWishlist, setIsInWishlist] = useState(false);
+
+  // const handlewishlistSubmit = () => {
+  //   // Toggle the state when the wishlist icon is clicked
+  //   setIsInWishlist(!isInWishlist);
+  //   console.log('Product added to wishlist!');
+  // };
+
+  // const [wishlistClicked, setWishlistClicked] = useState(false);
+
+  // const handleWishlistClick = () => {
+  //   setWishlistClicked(!wishlistClicked);
+  //   // Add your handlewishlistSubmit logic here
+
+  // };
+  // const [clickedIndex, setClickedIndex] = useState(-1);
+
+  // const handlewishlistSubmit = (itemId) => {
+  //   const data = { productId: itemId }; // Use itemId as the product ID
+  //   dispatch(addItemToWishlist({ data, jwt }));
+  // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
+  //   // navigate("/wishlist");
+  // };
   const isProductInWishlist = (product) => {
     // Check if customersProduct exists and has a wishlist property
     if (customersProduct && customersProduct.wishlist) {
@@ -201,8 +214,6 @@ export default function ProductDetails() {
 
   // Function to check if a product is in the wishlist
 
-  const [showSizes, setShowSizes] = useState(false);
-  
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -210,16 +221,7 @@ export default function ProductDetails() {
     setExpanded(isExpanded ? panel : false);
   };
 
-// Define your custom arrow components
-const PrevArrow = (props) => {
-  const { onClick } = props;
-  return <div className="prev-arrow" onClick={onClick}>&#10094;</div>;
-};
- 
-const NextArrow = (props) => {
-  const { onClick } = props;
-  return <div className="next-arrow" onClick={onClick}>&#10095;</div>;
-};
+
 
   const containerStyle = {
     backgroundColor: '#e0eaf6',
@@ -334,23 +336,21 @@ const NextArrow = (props) => {
                 Add To Cart
               </Button>
 
-              <form  onSubmit={handleBuyNow}>
-    <Button
-      onClick={() => navigate("/checkout?step=2")}
-      variant="contained"
-      type="submit"
-      sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
-    >
-      Buy Now
-    </Button>
-  </form>
+              <Button
+                onClick={() => navigate("/checkout?step=2")}
+                variant="contained"
+                type="submit"
+                sx={{ padding: ".8rem 2rem", marginTop: "2rem", background: "#2874f0" }}
+              >
+                Buy Now
+              </Button>
             </form>
           </div>
 
           {/* Product info */}
           <Container >
             <div className="lg:col-span-1 mx-auto max-w-2xl px-0 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-              <div className="lg:col-span-2 flex flex-col justify-start -ml-8 items-start"> {/* Apply flexbox properties */}
+              <div className="lg:col-span-2 flex flex-col justify-start items-start"> {/* Apply flexbox properties */}
                 <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
                   {customersProduct.product?.brand}
                 </h1>
@@ -373,7 +373,7 @@ const NextArrow = (props) => {
                   </p>
                 </div>
 
-                {/* Reviews
+                {/* Reviews */}
                 <div className="mt-6">
                 
 
@@ -383,20 +383,8 @@ const NextArrow = (props) => {
                    
                    
                   </div>
-                  
-                </div> */}
-
-                  <div className="mt-6">
-                
-
-                  <div className="flex items-center space-x-3">
-                   
-
-                   
-                   
-                  </div>
                 </div>
-                {showSizes && (
+
                 <form className="mt-10" onSubmit={handleSubmit}>
                   {/* Sizes */}
                   <div className="mt-10">
@@ -475,7 +463,6 @@ const NextArrow = (props) => {
 
 
                 </form>
-                )}
               </div>
 
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -489,6 +476,9 @@ const NextArrow = (props) => {
                     </p>
                   </div>
                 </div>
+                <section className="pt-4 pb-4">
+        <h1 className="font-semibold text-lg pb-2">Total Reviews: {totalReviews}</h1>
+      </section>
                 {/* highlights */}
 
                 <Box sx={{ width: '100%' }}>
@@ -543,20 +533,7 @@ const NextArrow = (props) => {
                     </AccordionDetails>
                   </Accordion>
                 </Box>
-                <div>
-              <h3 className="text-sm font-bold text-gray-900 mt-9 mb-3">Services</h3>
- 
-              <div className="space-y-6">
-                <li className="text-base text-gray-900 mb-5">
-                 
-Cash on Delivery available
-</li>
-<li>
-3 Days Return Policy
-                </li>
-              </div>
-            </div>
- 
+
                 {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
                 <div className="space-y-6">
@@ -619,14 +596,12 @@ Cash on Delivery available
 
 
         {/* rating and review section */}
-       
-        {/* rating and review section */}
         <section className="">
           <h1 className="font-semibold text-lg pb-4">
             Recent Review & Ratings
           </h1>
 
-          <div className="border p-5">
+          <div className="">
             <Grid container spacing={7}>
               {/* <Grid item xs={7}>
                 <div className="space-y-5">
@@ -806,7 +781,7 @@ Cash on Delivery available
 </div>
 
 {/* Add margin or padding to create a gap */}
-<div style={{ marginBottom: "90px" }}></div>
+
 
 {/* Conditionally render the rating and review section */}
 {showRatingReview && (
@@ -814,47 +789,51 @@ Cash on Delivery available
     <RateProduct />
   </Grid>
 )}
+
         {/* Similar Products */}
 
         <div>
-        {/* Similar Products */}
-  <section className="pt-10">
-    <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-    <Slider slidesToShow={6} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-      {simmyProducts.slice(0, 50).map((item) => (
-        <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-          <HomeProductCard product={item} />
-        </a>
-      ))}
-    </Slider>
-  </section>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+            <div className="flex flex-wrap space-y-5">
+              {simmyProducts.slice(0, 5).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))}
+            </div>
+          </section>
+
         </div>
         <div>
-       {/* Bought together */}
-  <section className="pt-10">
-    <h1 className="py-5 text-xl font-bold">Bought Together</h1>
-    <Slider slidesToShow={6} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-      {BoughtTogether.slice(2, 15).map((item) => (
-        <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-          <HomeProductCard product={item} />
-        </a>
-      ))}
-    </Slider>
-  </section>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">Things Bought Together</h1>
+            <div className="flex flex-wrap space-y-5">
+              {BoughtTogether.slice(5, 9).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))}
+            </div>
+          </section>
         </div>
        
         <div>
-       {/* Might be interested */}
-  <section className="pt-10">
-    <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
-    <Slider slidesToShow={6} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-      {interestedProducts.slice(0, 20).map((item) => (
-        <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-          <HomeProductCard product={item} />
-        </a>
-      ))}
-    </Slider>
-  </section>
+          <section className="pt-10">
+            <h1 className="py-5 text-xl font-bold">You may be interested in</h1>
+            <div className="flex flex-wrap space-y-5">
+              {interestedProducts.slice(0, 5).map((item) => (
+                <div key={item._id} className="mb-5">
+                  <HomeProductCard product={item} />
+                </div>
+              ))}
+              {/* {interestedProducts.slice(0, 5).map((item) => (
+                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+                  <HomeProductCard product={item} />
+                </a>
+              ))} */}
+            </div>
+          </section>
 
         </div>
       </div >

@@ -86,6 +86,9 @@ const CustomButtons = () => {
     const handleMyOrderClick = () => {
         navigate("/account/order");
     };
+    const handleProfile = () => {
+        navigate("/Profile/Profile");
+    };
 
     useEffect(() => {
         if (jwt) {
@@ -134,7 +137,7 @@ const CustomButtons = () => {
                             "aria-labelledby": "basic-button",
                         }}
                     >
-                        <MenuItem onClick={handleCloseUserMenu}>
+                        <MenuItem onClick={handleProfile}>
                             Profile
                         </MenuItem>
                         <MenuItem onClick={handleMyOrderClick}>
