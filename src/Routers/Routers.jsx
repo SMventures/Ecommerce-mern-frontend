@@ -9,7 +9,7 @@ import Contact from "../Pages/Contact";
 import Product from "../customer/Components/Product/Product/Product";
 import ProductDetails from "../customer/Components/Product/ProductDetails/ProductDetails";
 import Cart from "../customer/Components/Product/Cart/Cart";
-
+import UnauthorizedPage from "../Pages/Unauthorized";
 import DemoAdmin from "../Admin/Views/DemoAdmin";
 import AdminPannel from "../Admin/AdminPannel";
 import Navigation from "../customer/Components/Navbar/Navigation";
@@ -33,12 +33,8 @@ const Routers = () => {
         <Route path="/men" element={<Product/>}></Route>
         <Route path="/product/:productId" element={<ProductDetails/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
-      
-      <ProtectedRoute>
-      <Route path="/admin" element={<AdminPannel/>}></Route>
-      </ProtectedRoute>
-        
         <Route path="/demo" element={<DemoAdmin/>}></Route>
+        <Route path="/admin/unauthorized" element={<UnauthorizedPage />} />
 
       </Routes>
        </div>

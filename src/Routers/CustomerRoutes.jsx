@@ -20,7 +20,10 @@ import SearchResults from "../customer/Components/Home/Search/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
 import About from "../customer/Components/footer/About";
-import Prod from "../customer/Components/footer/Prod";
+import Prod from "../customer/Components/footer/prod";
+import Notfound from "../Pages/Notfound"
+import UnauthorizedPage from "../Pages/Unauthorized"
+import AdminPannel from "../Admin/AdminPannel";
 // import Features from "../customer/Components/footer/Features";
 // import Pricing from "../customer/Components/footer/Pricing";
 // import { Highlight } from "@mui/icons-material";
@@ -51,6 +54,7 @@ const CustomerRoutes = () => {
         <Route path="/About" element={<About />}></Route>
         <Route path="/Terms" element={<Terms/>}></Route>
         <Route path="/Prod" element={<Prod/>}></Route>
+        <Route path="/admin" element={<AdminPannel/>}></Route>
 
      
         {/* <Route path="/Features" element={<Features />}></Route>
@@ -67,12 +71,11 @@ const CustomerRoutes = () => {
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
         {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
-        <Route path="/SearchResults/:query" element ={<SearchResults />} />
-
+        <Route path="/SearchResults/:query" element ={<SearchResults />} />f
         <Route path="/my-component" element={<MyComponent />} />
 
 
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<Notfound />} />
       </Routes>
       <Footer/>
     </ThemeProvider>
