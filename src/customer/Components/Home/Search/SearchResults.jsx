@@ -24,7 +24,7 @@ const SearchResults = () => {
 
     return (
         <div style={{ margin: '0 20px' }}>
-            <h2>Search Results</h2>
+            <h2>Search Results : ({productArr.length})</h2> {/* Display total number of results */}
             <div className='search-results'>
                 {productArr.map((product) => (
                     <Link to={`/product/${product._id}`} key={product._id}> {/* Link to product detail page */}
@@ -35,7 +35,7 @@ const SearchResults = () => {
                                 </div>
                             </div>
                             <div className='product-details'>
-                                <h3 className='product-title'>{product.title}</h3>
+                                <h2 className='product-title'>{product.title}</h2>
                                 <p className='product-brand'>{product.brand}</p>
                                 <p className='product-price'>
                                     <span className='font-semibold'>₹{product?.discountedPrice}</span>

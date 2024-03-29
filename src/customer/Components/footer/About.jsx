@@ -1,54 +1,30 @@
+import React, { useEffect } from 'react';
 import "./styles.css";
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 
-export default function About() {
-  function fok() {
-    var j = document.getElementById("arr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/premium/png-64-thumb/chevron-arrow-3883460-3231250.png)";
-  }
+export default function Prod() {
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-  function kof() {
-    var j = document.getElementById("arr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/free/png-64/right-arrow-1438234-1216195.png)";
-  }
-
-  function gok() {
-    let j = document.getElementById("brr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/premium/png-64-thumb/chevron-arrow-3883460-3231250.png)";
-  }
-
-  function kog() {
-    let j = document.getElementById("brr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/free/png-64/right-arrow-1438234-1216195.png)";
-  }
-
-  function hok() {
-    let j = document.getElementById("crr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/premium/png-64-thumb/chevron-arrow-3883460-3231250.png)";
-  }
-
-  function koh() {
-    let j = document.getElementById("crr");
-    j.style.backgroundImage =
-      "url(https://cdn.iconscout.com/icon/free/png-64/right-arrow-1438234-1216195.png)";
-  }
-
-  window.onscroll = function () {
+  function handleScroll() {
     jet();
-  };
+    revealElements();
+  }
 
   function jet() {
     var ilake = document.getElementById("head");
-    ilake.style.top = "0px";
-    ilake.style.position = "sticky";
+    if (ilake) {
+      ilake.style.top = "0px";
+      ilake.style.position = "sticky";
+    }
   }
+  
 
-  window.addEventListener("scroll", () => {
+  function revealElements() {
     var reveals = document.querySelectorAll(".reveal");
     for (var i = 0; i < reveals.length; i++) {
       var wnd = window.innerHeight;
@@ -61,18 +37,15 @@ export default function About() {
         reveals[i].classList.remove("active");
       }
     }
-  });
+  }
+
   return (
-    <div classNameName="App">
-      
+    <div className="App">
       <header id="head">
-        <a href={{}}>
-          <span>
-            
-          </span>
+        <a href="#">
+          <span></span>
           <span id="c_name">About Us</span>
         </a>
-       
       </header>
       <main>
         <div id="front">
@@ -81,10 +54,9 @@ export default function About() {
             src="https://cdni.iconscout.com/illustration/premium/thumb/about-us-1805547-1537820.png"
             alt="font"
           />
-          
           <p>
-          <h1 >Our Mission</h1>
-          At Digital Dalal Street, we are on a mission to revolutionize the way traders experience the stock market. We believe that trading should not only be profitable but also enjoyable and stylish. Our curated collection of products is designed to make your trading journey easy, comfortable, affordable, and undeniably fashionable.
+            <h1 >Our Mission</h1>
+            At Digital Dalal Street, we are on a mission to revolutionize the way traders experience the stock market. We believe that trading should not only be profitable but also enjoyable and stylish. Our curated collection of products is designed to make your trading journey easy, comfortable, affordable, and undeniably fashionable.
           </p>
         </div>
 

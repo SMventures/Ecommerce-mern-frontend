@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import WishlistItem from "./WishlistItem"
+import WishlistItem from "./WishlistItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,51 +14,39 @@ const Wishlist = () => {
   // Accessing wishlist slice of state from the store
   const { wishlist, loading, error } = useSelector((store) => store);
 
-  console.log("Wishlist component rendering...");
-  
   useEffect(() => {
-    console.log("Dispatching getWishlist action...");
+    // Fetch wishlist data when component mounts
     if (jwt) {
       dispatch(getWishlist(jwt));
     }
   }, [dispatch, jwt]);
 
-  useEffect(() => {
-    console.log("Wishlist state changed:", wishlist);
-    console.log("Loading:", loading);
-    console.log("Error:", error);
-  }, [wishlist, loading, error]);
-
+  // Display loading spinner while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // Display error message if fetch fails
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  
-  if (!wishlist || !wishlist.wishlistItems || wishlist.wishlistItems.length === 0) {
+
+  // Display message if wishlist is empty
+  if (!wishlist || !Array.isArray(wishlist.wishlistItems) || wishlist.wishlistItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
         <SentimentVeryDissatisfiedIcon style={{ width: "3rem", height: "3rem", color: "#7B7B7B" }} /> {/* Render the sad emoji */}
-        <p className="text-gray-500 mt-4">Your bag is empty</p>
+        <p className="text-gray-500 mt-4">Your wishlist is empty</p>
       </div>
     );
   }
 
+  // Render wishlist items if wishlist is not empty
   return (
-    <div className="">
-      {wishlist.wishlistItems.length > 0 && (
-        <div className="lg:grid grid-cols-3 lg:px-16 relative">
-          <div className="lg:col-span-2 lg:px-5 bg-white">
-            <div className=" space-y-3">
-              {wishlist.wishlistItems.map((item) => (
-                <WishlistItem key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+    <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6"> {/* Reduce left and right padding */}
+      {wishlist.wishlistItems.map((item) => (
+        <WishlistItem key={item.id} item={item} />
+      ))}
     </div>
   );
 };

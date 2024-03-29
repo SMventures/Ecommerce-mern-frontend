@@ -88,7 +88,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
       {/* Add to Cart button with blue background and white text */}
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
         <form onSubmit={handleCartSubmit}>
           <Button
             variant="contained"
@@ -98,7 +98,7 @@ const ProductCard = ({ product }) => {
             Add To Cart
           </Button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };
