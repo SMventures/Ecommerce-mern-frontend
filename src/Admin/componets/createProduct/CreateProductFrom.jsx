@@ -22,6 +22,12 @@ const initialSizes = [
   { name: "S", quantity: 0 },
   { name: "M", quantity: 0 },
   { name: "L", quantity: 0 },
+  {name:"XL",quantity: 0},
+  {name:"2XL",quantity: 0},
+  {name:"3XL",quantity: 0},
+  {name:"OneSize",quantity: 0}
+
+
 ];
 
 

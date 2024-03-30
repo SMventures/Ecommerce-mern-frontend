@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-
+import ProtectedRoute from "./ProtectedRoute";
 import AdminPannel from "../Admin/AdminPannel";
 import DemoAdmin from "../Admin/Views/DemoAdmin";
 
@@ -9,7 +9,6 @@ const AdminRoutes = () => {
     <div>
       <Routes>
         <Route path="/" element={<AdminPannel />}></Route>
-        {/* <Route path="/demo" element={<DemoAdmin />}></Route> */}
       </Routes>
     </div>
   );

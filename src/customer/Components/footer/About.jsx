@@ -22,6 +22,7 @@ export default function Prod() {
       ilake.style.position = "sticky";
     }
   }
+  
 
   function revealElements() {
     var reveals = document.querySelectorAll(".reveal");

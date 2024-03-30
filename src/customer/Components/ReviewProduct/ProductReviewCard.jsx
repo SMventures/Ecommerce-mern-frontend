@@ -10,20 +10,33 @@ const ProductReviewCard = ({ item, totalReviews }) => {
     if (item?.user) {
       setFirstName(item?.user?.firstName || "Anonymous");
     }
+
+    // Check if rating exists in local storage
+    const storedRating = localStorage.getItem(`productRating_${item.id}`);
+    if (storedRating !== null) {
+      setValue(parseFloat(storedRating));
+    }
+
     // Show the rating section after 2 seconds
     const timeout = setTimeout(() => {
       setShowRating(true);
     }, 2000);
+
     return () => clearTimeout(timeout); // Clear timeout on unmount
   }, [item]);
 
   // Function to handle rating change
   const handleRatingChange = (event, newValue) => {
     setValue(newValue);
+    // Save rating to local storage
+    localStorage.setItem(`productRating_${item.id}`, newValue);
   };
 
   return (
     <div className="">
+      <Typography variant="h6" gutterBottom>
+        {totalReviews} reviews
+      </Typography>
       <Grid container spacing={2} gap={3}>
         <Grid item xs={1}>
           <Box>
@@ -65,9 +78,6 @@ const ProductReviewCard = ({ item, totalReviews }) => {
         </Grid>
       </Grid>
       <div className="col-span-1 flex"></div>
-      <p className="ml-3 text-sm font-medium text-blue-700 hover:text-blue-500">
-        {totalReviews} 
-      </p>
     </div>
   );
 };
