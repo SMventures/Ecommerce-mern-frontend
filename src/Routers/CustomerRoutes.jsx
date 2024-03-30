@@ -15,7 +15,7 @@ import PaymentSuccess from "../customer/Components/paymentSuccess/PaymentSuccess
 import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
 // import Search from "../customer/Components/Home/Search";
 import Cart from "../customer/Components/Cart/Cart";
-import Wishlist from "../customer/Components/wishlist/wishlist";
+import Wishlist from "../customer/Components/Wishlist/wishlist";
 import SearchResults from "../customer/Components/Home/Search/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
@@ -29,6 +29,11 @@ import AdminPannel from "../Admin/AdminPannel";
 // import { Highlight } from "@mui/icons-material";
 // import Highlights from "../customer/Components/footer/Highlights";
 import Terms from "../customer/Components/footer/Terms";
+import Profile from '../customer/Components/Profile/Profile'
+import OrderTraker from "../customer/Components/orders/OrderTraker";
+import AddAddress from "../customer/Components/Checkout/AddAddress";
+
+
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -60,6 +65,9 @@ const CustomerRoutes = () => {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
+        <Route path="/account/orderTracker" element={<OrderTraker  />}></Route>
+        <Route path="/account/addAddress" element={<AddAddress/>}></Route>
+        <Route path="/Profile/Profile" element={<Profile />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
