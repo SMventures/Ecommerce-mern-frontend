@@ -1,90 +1,86 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 import Person2Icon from '@mui/icons-material/Person2';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import FolderSharedIcon from '@mui/icons-material/FolderShared';
 import LogoutIcon from '@mui/icons-material/Logout';
-import FaceIcon from '@mui/icons-material/Face';
- 
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Redux/Auth/Action";
+import Avatar from '@mui/material/Avatar';
+import { blue} from '@mui/material/colors';
+
 function MyAccount() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { auth } = useSelector((store) => store);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
-   
-      <div className='whole-container px-2'>
-        <div className='profile-photo'>
-            <FaceIcon style={{ color: 'blue', width:'35px',height:'35px'}}/>
-            <h2>Hello</h2>
-        </div>
-      <div className="my-account ">
+    <div className='whole-container px-2'>
+      <div className="avatar-wrapper">
+        {auth.user && (
+          <div className="avatar-info" style={{ marginBottom: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Avatar
+                onClick={() => {}}
+                sx={{
+                  bgcolor: blue[500],
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
+                {auth.user.firstName[0].toUpperCase()}
+              </Avatar>
+              <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{auth.user.firstName}</span>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="my-account">
         <div className="section">
           <div className="section-title">
             <OpenInBrowserIcon style={{ color: 'blue' }} />
             <h2>MY ORDERS</h2>
           </div>
-         
           <ul>
-            <li>View Orders</li>
-            <li>Track Orders</li>
-            <li>Cancel Orders</li>
+            <li style={{ color: 'black' }}><Link to="/account/order">View Orders</Link></li>
+            <li style={{ color: 'black' }}><Link to="/account/orderTracker">Track Orders</Link></li>
           </ul>
         </div>
         <hr />
         <div className="section">
-         <div className="section-title">
-          <Person2Icon style={{ color: 'blue' }}/>
-          <h2>ACCOUNT SETTINGS</h2>
-         </div>
- 
-         
+          <div className="section-title">
+            <Person2Icon style={{ color: 'blue' }}/>
+            <h2>ACCOUNT SETTINGS</h2>
+          </div>
           <ul>
-            <li>Profile Information</li>
-            <li>Manage Addresses</li>
-            <li>PAN Card Information</li>
+            <li style={{ color: 'black' }}><Link to="/Profile/Profile">Profile Information</Link></li>
+            <li style={{ color: 'black' }}><Link to="/account/addAddress">Manage Addresses</Link></li>
           </ul>
         </div>
         <hr/>
- 
         <div className="section">
           <div className="section-title">
-           <AccountBalanceWalletIcon style={{ color: 'blue' }}/>  
-          <h2>PAYMENTS</h2>
+            <FolderSharedIcon  style={{ color: 'blue' }}/>
+            <h2 >MY STUFF</h2>
           </div>
-         
           <ul>
-            <li>Gift Cards ₹0</li>
-            <li>Saved UPI</li>
-            <li>Saved Cards</li>
+            <li style={{ color: 'black' }}><Link to="/wishlist">My Wishlist</Link></li>
           </ul>
         </div>
         <hr/>
- 
-        <div className="section">
-          <div className="section-title">
-           <FolderSharedIcon  style={{ color: 'blue' }}/>
-          <h2 >MY STUFF</h2>
-          </div>
-         
-          <ul>
-            <li>My Coupons</li>
-            <li>My Reviews & Ratings</li>
-            <li>All Notifications</li>
-            <li>My Wishlist</li>
-           
-           
-          </ul>
-        </div>
-        <hr/>
-        <div className="section-title">
+        <div className="section-title" onClick={handleLogout} style={{ cursor: 'pointer' }}>
           <LogoutIcon style={{ color: 'blue' }}/>
           <h2 >Logout</h2>
         </div>
       </div>
-      </div>
-   
+    </div>
   );
 }
- 
+
 export default MyAccount;
-
-
-

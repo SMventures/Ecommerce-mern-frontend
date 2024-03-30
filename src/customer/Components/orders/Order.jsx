@@ -5,6 +5,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderHistory } from "../../../Redux/Customers/Order/Action";
 import BackdropComponent from "../BackDrop/Backdrop";
+import MyAccount from '../Profile/MyAccount';
 
 const orderStatus = [
   { label: "On The Way", value: "onTheWay" },
@@ -27,7 +28,10 @@ const Order = () => {
     <Box className="px-10">
       <Grid container spacing={0} sx={{ justifyContent: "space-between" }}>
         <Grid item xs={2.5} className="">
-          <div className="h-auto shadow-lg bg-white border p-5 sticky top-5">
+          <div className="h-auto shadow-lg bg-white border p-5 sticky top-5"  style={{ display: "flex", gap: "120px" }}>
+          <div className="sidebar" style={{ position: "sticky", top: 0 }}>
+        <MyAccount />
+      </div>
             <h1 className="font-bold text-lg">Filters</h1>
             <div className="space-y-4 mt-10">
               <h1 className="font-semibold">ORDER STATUS</h1>

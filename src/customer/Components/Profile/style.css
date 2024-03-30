@@ -1,61 +1,55 @@
-.my-account {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid white;
-    width: 350px;
-    /* Border */
-    padding: 50px;
-    /* Padding inside the box */
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    /* Box shadow effect */
-  }
-    
-    .section {
-      margin-bottom: 40px;
-    }
-    
-    .section-title {
-      color: darkgrey;
-      font-weight: bold;
-      margin-bottom: 30px;
-      font-size: 20px;
-      display: flex;
-      gap: 10px;
-    }
-    
-    .section ul li:hover {
-      background-color: lightblue;
-      cursor: pointer;
-      width: 300px;
-    }
-    
-    .section-title h2:hover {
-      background-color: lightblue;
-      cursor: pointer;
-      width: 300px;
-    }
-    
-    .logout:hover {
-      color: lightblue;
-      cursor: pointer;
-      width: 300px;
-    }
-    .profile-photo{
-      display: flex;
-      gap: 20px;
-     
-      border: 2px solid white;
-    width: 350px;
-    /* Border */
-    padding: 50px;
-    /* Padding inside the box */
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    /* Box shadow effect */
-    }
-    .profile-photo h2{
-      font-weight: bold;
-      font-size: 20px;
-      
-    }
+/* style.css */
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section ul li {
+  color: black; /* Set the color of the text */
+  margin-bottom: 5px; /* Adjust spacing between list items if needed */
+}
+
+.section ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit the color from parent */
+}
+
+.my-account ul li {
+  color: black; /* Set the font color to black */
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: darkgrey;
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Remove or modify hover styles */
+
+
+
+
+
+
+.profile-photo{
+  display: flex;
+  gap: 20px;
+  border: 2px solid white;
+  width: 350px;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo h2{
+  font-weight: bold;
+  font-size: 20px;
+}

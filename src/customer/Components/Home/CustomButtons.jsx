@@ -11,9 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
-import Cart from '../Cart/Cart';
-import WishlistItem from '../wishlist/WishlistItem';
-import Wishlist from "../wishlist/wishlist";
+
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -154,18 +152,6 @@ const CustomButtons = () => {
                 </LoginButton>
             )}
             <Container>
-            <IconWrapper onClick={handleWishlistClick} className="relative">
-    <FavoriteIcon />
-    {wishlist && wishlist.wishlistItems && wishlist.wishlistItems.length > 0 && (
-        <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-            {wishlist.wishlistItems.length}
-        </span>
-    )}
-    <span className="sr-only">items in wishlist</span>
-</IconWrapper>
-
-
-
                 <IconWrapper onClick={handleWishlistClick} className="relative">
                     <FavoriteIcon />
                     <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">

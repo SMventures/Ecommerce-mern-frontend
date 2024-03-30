@@ -27,6 +27,10 @@ import Prod from "../customer/Components/footer/Prod";
 // import Highlights from "../customer/Components/footer/Highlights";
 import Terms from "../customer/Components/footer/Terms";
 import Profile from '../customer/Components/Profile/Profile'
+import OrderTraker from "../customer/Components/orders/OrderTraker";
+import AddAddress from "../customer/Components/Checkout/AddAddress";
+
+
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -63,6 +67,8 @@ const CustomerRoutes = () => {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/wishlist" element={<Wishlist />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
+        <Route path="/account/orderTracker" element={<OrderTraker  />}></Route>
+        <Route path="/account/addAddress" element={<AddAddress/>}></Route>
         <Route path="/Profile/Profile" element={<Profile />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
@@ -73,7 +79,7 @@ const CustomerRoutes = () => {
         <Route path="/SearchResults/:query" element ={<SearchResults />} />
 
         <Route path="/my-component" element={<MyComponent />} />
-
+        
 
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
