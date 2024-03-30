@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation ,Navigate} from "react-router-dom";
 import ProductDetails from "../customer/Components/Product/ProductDetails/ProductDetails";
 import Product from "../customer/Components/Product/Product/Product";
 import Homepage from "../Pages/Homepage";
@@ -32,6 +32,7 @@ import Terms from "../customer/Components/footer/Terms";
 
 const CustomerRoutes = () => {
     const location = useLocation();
+    const isAdmin = false;
 
 
   
@@ -54,13 +55,6 @@ const CustomerRoutes = () => {
         <Route path="/About" element={<About />}></Route>
         <Route path="/Terms" element={<Terms/>}></Route>
         <Route path="/Prod" element={<Prod/>}></Route>
-        <Route path="/admin" element={<AdminPannel/>}></Route>
-
-     
-        {/* <Route path="/Features" element={<Features />}></Route>
-        <Route path="/Pricing" element={<Pricing />}></Route>
-        <Route path="/Highlights" element={<Highlights />}></Route>        */}
-        {/* <Route path="/contact" element={<Contact />}></Route> */}
         <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
         <Route path="/product/:productId" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
@@ -70,11 +64,9 @@ const CustomerRoutes = () => {
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
-        {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
         <Route path="/SearchResults/:query" element ={<SearchResults />} />f
         <Route path="/my-component" element={<MyComponent />} />
-
-
+    
         <Route path="*" element={<Notfound />} />
       </Routes>
       <Footer/>

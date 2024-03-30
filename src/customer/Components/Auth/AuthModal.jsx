@@ -26,9 +26,6 @@ export default function AuthModal({ handleClose, open }) {
   useEffect(() => {
     if (auth.user) {
       handleClose(); // Close the modal
-      if (auth.user.role === "ADMIN") {
-        navigate("/admin"); // Redirect to the admin panel
-      }
     }
   }, [auth.user, navigate]); // Add navigate to the dependency array
   

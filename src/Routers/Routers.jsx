@@ -34,7 +34,7 @@ const Routers = () => {
         <Route path="/product/:productId" element={<ProductDetails/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
         <Route path="/demo" element={<DemoAdmin/>}></Route>
-        <Route path="/admin/unauthorized" element={<UnauthorizedPage />} />
+        {/* <Route path="/admin/unauthorized" element={<UnauthorizedPage />} /> */}
 
       </Routes>
        </div>
