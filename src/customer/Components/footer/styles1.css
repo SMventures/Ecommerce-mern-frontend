@@ -356,7 +356,7 @@
       rgb(0, 91, 165) 30%
     );
     text-align: center;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
   }
   
   #fourth_cards div p {

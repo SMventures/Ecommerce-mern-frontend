@@ -163,7 +163,7 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            href: "Books/Trading_Books/Fundamental Analysis",
+            href: "Books/Trading_Books/Risk_Management",
             imageSrc: 'https://th.bing.com/th/id/OIP.-UrR4XN5e4Y7Vuwo8X7vZQAAAA?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
@@ -200,7 +200,7 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            href: "Electronics/Electronics_Items/Camera",
+            href: "Electronics/Electronics_Items/Mouse",
             imageSrc: 'https://th.bing.com/th/id/OIP.8Weor-i2kcIYRpxjIk0mggHaEK?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
