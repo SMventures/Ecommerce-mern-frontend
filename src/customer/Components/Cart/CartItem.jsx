@@ -6,10 +6,23 @@ import { IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { blue } from '@mui/material/colors';
+import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
+
+// for delivery date
+const ColumnText = styled(TableRow)`
+    font-size: 14px;
+    vertical-align: baseline;
+& > td {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+`
 
 const CartItem = ({ item,showButton }) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
+  const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
+  const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000));
 
   const handleRemoveItemFromCart = () => {
     const data = { cartItemId: item?._id, jwt };
@@ -31,6 +44,17 @@ const CartItem = ({ item,showButton }) => {
           />
         </div>
         <div className="ml-5 space-y-1">
+          {/* deliviry date */}
+ <Table>
+<TableBody>
+<ColumnText>
+<TableCell style={{ color: '#878787' }}>Delivery</TableCell>
+<TableCell style={{ fontWeight: 600 }}>Delivery by {date.toDateString()}</TableCell>
+</ColumnText>
+
+
+</TableBody>
+</Table>
           <p className="font-semibold">{item?.product?.title}</p>
           <p className="opacity-70">Size: {item?.size},White</p>
           <p className="opacity-70 mt-2">Seller: {item?.product?.brand}</p>

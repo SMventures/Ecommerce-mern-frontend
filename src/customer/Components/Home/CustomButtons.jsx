@@ -11,9 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
-import Cart from '../Cart/Cart';
-import WishlistItem from '../wishlist/WishlistItem';
-import Wishlist from "../wishlist/wishlist";
+
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -84,6 +82,9 @@ const CustomButtons = () => {
     const handleMyOrderClick = () => {
         navigate("/account/order");
     };
+    const handleProfile = () => {
+        navigate("/Profile/Profile");
+    };
 
     useEffect(() => {
         if (jwt) {
@@ -136,7 +137,7 @@ const CustomButtons = () => {
                             "aria-labelledby": "basic-button",
                         }}
                     >
-                        <MenuItem onClick={handleCloseUserMenu}>
+                        <MenuItem onClick={handleProfile}>
                             Profile
                         </MenuItem>
                         <MenuItem onClick={handleMyOrderClick}>
