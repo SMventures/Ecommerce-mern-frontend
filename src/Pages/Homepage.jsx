@@ -10,6 +10,9 @@ import { kurtaPage1 } from "../Data/Kurta/kurta";
 import { mensShoesPage1 } from "../Data/shoes";
 import { men_kurta } from "../Data/Men/men_kurta";
 import MidSection from "../customer/Components/Home/MidSection";
+import Section from "../customer/Components/Home/section";
+import App from "../customer/Components/Home/app"
+import { useState, useEffect } from "react"; // Remove 'React' from here
 
 const Component = styled(Box)`
   padding: 10px;
@@ -17,6 +20,70 @@ const Component = styled(Box)`
 `;
 
 const Homepage = () => {
+  const [menHoodiesProducts, setMenHoodiesProducts] = useState([]);
+  const [Headphones, setHeadphones] = useState([]);
+  const [womenTsirts, setWomenTshirts] = useState([]);
+  const [Fundamental, setFundamental] = useState([]);
+  const [Phonecover, setPhonecover] = useState([]);
+  const [Pen, setPen] = useState([]);
+
+
+  // const [menHoodiesProducts, setMenHoodiesProducts] = useState([]);
+  // const [menHoodiesProducts, setMenHoodiesProducts] = useState([]);
+
+  useEffect(() => {
+    getMenHoodiesProducts();
+    getPhonecover();
+    getHeadphones();
+    getWomenTshirts();
+    getFundamental();
+    getPen();
+  }, []);
+
+  const getMenHoodiesProducts = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=men_hoodies");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setMenHoodiesProducts(data.content);
+  };
+  const getPen = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Pen");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setPen(data.content);
+  };
+  const getPhonecover = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Phone_Covers");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setPhonecover(data.content);
+  }; 
+   const getHeadphones = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Headphones");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setHeadphones(data.content);
+  };  
+  const getWomenTshirts = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=women_tshirts");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setWomenTshirts(data.content);
+  };  
+  
+  
+  const getFundamental= async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Fundamental_Analysis");
+    const data = await response.json();
+    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+
+    setFundamental(data.content);
+  };
   return (
     <div className="">
       <Banner />
@@ -25,22 +92,44 @@ const Homepage = () => {
           <Link to="/new-arrivals">
             <HomeProductSection data={kurtaPage1} section={"New Arrivals"} />
           </Link>
-          <Link to="/seasons-top-pickup">
+          {/* <Link to="/seasons-top-pickup">
             <HomeProductSection data={mensShoesPage1} section={"Season's Top Pickup"} />
-          </Link>
-          <Link to="/best-selling-books">
+          </Link> */}
+          {/* <Link to="/best-selling-books">
             <HomeProductSection data={dressPage1} section={"Best Selling Books"} />
-          </Link>
-          <Link to="/Women/Clothing/women_tshirts">
-            <HomeProductSection data={Fashion} section={"Trendy Fashion Collection"} />
-          </Link>
-          <MidSection />
-          <Link to="/top-selling-accessories">
+          </Link> */}
+                    {/* <HomeProductSection section={"Men Hoodies"} data={menHoodiesProducts} /> */}
+
+          <App
+  leftData={womenTsirts}
+  leftSection={"Season's Top Pickup"}
+  centerData={menHoodiesProducts}
+  centerSection={"Top Men's Pickup"}
+  rightData={Headphones}
+  rightSection={"You May Also Like.."}
+/>
+
+<MidSection />
+<App
+  leftData={Fundamental}
+  leftSection={"Best recommended Books"}
+  centerData={Phonecover}
+  centerSection={"Stylish Phone Covers"}
+  rightData={Pen}
+  rightSection={"Top Selling Stationery"}
+/>
+
+<Link to="/top-selling-accessories">
             <HomeProductSection data={gounsPage1} section={"Top Selling Accessories"} />
           </Link>
-          <Link to="/best-of-electronics">
-            <HomeProductSection data={men_kurta} section={"Best of Electronics"} />
+
+          {/* <Link to="/Women/Clothing/women_tshirts">
+            <HomeProductSection data={Fashion} section={"Trendy Fashion Collection"} />
           </Link>
+           */}
+          {/* <Link to="/best-of-electronics">
+            <HomeProductSection data={men_kurta} section={"Best of Electronics"} />
+          </Link> */}
         </Component>
       </div>
     </div>

@@ -15,8 +15,8 @@ export const dressPage1 = [
   {
     "imageUrl":
     redbook ,
-    "brand": "MADAME",
-    "title": "Women Asymmetric Pink Dress",
+    "brand": "SM Ventures",
+    "title": "The Intelligent Investor",
     "color": "",
     "discountedPrice": 1299,
     "price": 2499,
@@ -45,7 +45,7 @@ export const dressPage1 = [
   {
     "imageUrl": bluebook,
     "brand": "Daevish",
-    "title": "Women Maxi Blue Dress",
+    "title": "How to make money in stock market",
     "color": "",
     "discountedPrice": 341,
     "price": 1899,
@@ -74,7 +74,7 @@ export const dressPage1 = [
   {
     "imageUrl":blue_book,
     "brand": "ZWERLON",
-    "title": "Women A-line Purple Dress",
+    "title": "How to make profit in stock market",
     "color": "",
     "discountedPrice": 499,
     "price": 1999,
@@ -103,7 +103,7 @@ export const dressPage1 = [
   {
     "imageUrl": book1_Fo5dpVq,
     "brand": "Purshottam Wala",
-    "title": "Women Fit and Flare Black Dress",
+    "title": "Complete Guide for Intraday Trading",
     "color": "",
     "discountedPrice": 359,
     "price": 2099,

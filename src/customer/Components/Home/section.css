@@ -1,0 +1,54 @@
+/* App.css */
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000;
+    margin: 0 10px;
+  }
+  
+  .main-title {
+    text-align: center;
+    -webkit-text-size-adjust: 100%;
+    font-size: 12px;
+    letter-spacing: 0;
+    font-family: inter_regular, fallback-inter_regular, Arial, sans-serif;
+    --sm-max-width: 100%;
+    --md-max-width: 996px;
+    --lg-max-width: 1600px;
+    --sm-col-gap: 8px;
+    --md-col-gap: 12px;
+    --lg-col-gap: 16px;
+    --full-span-val: 12;
+    --marginTop: 8px;
+    --sm-order: 15;
+    --md-order: 17;
+    --lg-order: 16;
+    list-style: none;
+    color: #333;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    padding: 16px;
+    margin-top: 8px;
+    min-height: 80px;
+    min-width: 0px;
+    position: relative;
+    z-index: 0;
+    box-sizing: border-box;
+  }
+  
+  .image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  

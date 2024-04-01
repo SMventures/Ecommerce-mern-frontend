@@ -15,7 +15,7 @@ import PaymentSuccess from "../customer/Components/paymentSuccess/PaymentSuccess
 import RateProduct from "../customer/Components/ReviewProduct/RateProduct";
 // import Search from "../customer/Components/Home/Search";
 import Cart from "../customer/Components/Cart/Cart";
-import Wishlist from "../customer/Components/Wishlist/wishlist";
+import Wishlist from "../customer/Components/wishlist/wishlist";
 import SearchResults from "../customer/Components/Home/Search/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
