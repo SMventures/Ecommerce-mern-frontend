@@ -44,7 +44,17 @@ import { FaUndo } from 'react-icons/fa';
 import { FaTools } from 'react-icons/fa';
 // import DeliveryDate from './DeliveryDate';
 import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
+import ItemList from './ItemList';
 
+// for delivery date
+const ColumnText = styled(TableRow)`
+    font-size: 14px;
+    vertical-align: baseline;
+& > td {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+`
 
 const product = {
   name: "Product",
@@ -279,17 +289,15 @@ export default function ProductDetails() {
         </nav>
 
         {/* product details */}
-        <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
+         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
           {/* Image gallery */}
-          <div className="flex flex-col items-center relative border border-gray-200 rounded-lg p-4">
-            <div
-              className="absolute top-2 right-8 cursor-pointer"
-              onClick={() => handlewishlistSubmit(product)}
-              style={{
-                width: '24px',
-                height: '24px',
-              }}
-            >
+      {/* Sticky section */}
+      <div className="relative">
+        <div className="sticky top-0">
+          {/* Image gallery */}
+          <div className="flex flex-col items-center border border-gray-200 rounded-lg p-4">
+            <div className="absolute top-2 right-8 cursor-pointer" onClick={handlewishlistSubmit}>
+              {/* Wishlist icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -298,6 +306,7 @@ export default function ProductDetails() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                style={{ width: '24px', height: '24px' }}
               >
                 <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
               </svg>
@@ -310,7 +319,7 @@ export default function ProductDetails() {
               </div>
             )}
 
-
+            {/* Main product image */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
               <img
                 src={activeImage?.src || customersProduct.product?.imageUrl}
@@ -318,6 +327,8 @@ export default function ProductDetails() {
                 className="h-full w-full object-cover object-center"
               />
             </div>
+
+            {/* Thumbnail images */}
             <div className="flex flex-wrap space-x-5 justify-center">
               {product.images.map((image) => (
                 <div
@@ -334,7 +345,9 @@ export default function ProductDetails() {
               ))}
             </div>
 
+            {/* Buttons */}
             <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
+              {/* Add to cart button */}
               <Button
                 variant="contained"
                 type="submit"
@@ -343,6 +356,7 @@ export default function ProductDetails() {
                 Add To Cart
               </Button>
 
+              {/* Buy now button */}
               <form onSubmit={handleBuyNow}>
                 <Button
                   onClick={() => navigate("/checkout?step=2")}
@@ -355,6 +369,9 @@ export default function ProductDetails() {
               </form>
             </form>
           </div>
+        </div>
+      </div>
+
 
           {/* Product info */}
           <Container >
@@ -499,7 +516,7 @@ export default function ProductDetails() {
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                 {/* Description and details */}
                 <div>
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-900 mt-2 mb-4">Description</h3>
+                  <h3 className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Description</h3>
 
                   <div className="space-y-6">
                     <p className="text-base text-gray-900 mb-5">
@@ -520,7 +537,7 @@ export default function ProductDetails() {
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
                         Highlights
                       </Typography>
                     </AccordionSummary>
@@ -547,7 +564,7 @@ export default function ProductDetails() {
                       aria-controls="panel4d-content"
                       id="panel4d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 "className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
                         Specifications
                       </Typography>
                     </AccordionSummary>
@@ -583,6 +600,62 @@ export default function ProductDetails() {
                     </div>
                   </div>
                 </div>
+
+
+ {/* deliviry date */}
+ <Table>
+<TableBody>
+<ColumnText>
+<TableCell style={{ color: '#878787' }}>Delivery</TableCell>
+<TableCell style={{ fontWeight: 600 }}>Delivery by {date.toDateString()}</TableCell>
+</ColumnText>
+
+
+</TableBody>
+</Table>
+
+
+ {/* rating and review section */}
+
+        {/* rating and review section */}
+        <section className="">
+        <h1 className="font-semibold text-2xl pb-4 mt-4">
+    Ratings & Reviews
+</h1>
+
+         
+        </section>
+
+
+
+
+        {/* rating and review section */}
+        <Grid item xs={7}>
+          <div className="space-y-5">
+            {review.reviews?.map((item, i) => (
+              <ProductReviewCard key={i} item={item} />
+            ))}
+          </div>
+        </Grid>
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setShowRatingReview(!showRatingReview)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+          >
+            Add a review
+          </button>
+        </div>
+
+        {/* Add margin or padding to create a gap */}
+
+
+        {/* Conditionally render the rating and review section */}
+        {showRatingReview && (
+          <Grid container spacing={7}>
+            <RateProduct />
+          </Grid>
+        )}
+
 
 
 
@@ -636,255 +709,84 @@ export default function ProductDetails() {
           </Container >
         </section>
         {/* Add the provided HTML code for the image */}
+        
         <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
           <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
             <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
           </div>
+        
         </div>
+       
 
 
 
 
 
-
-        {/* rating and review section */}
-
-        {/* rating and review section */}
-        <section className="">
-          <h1 className="font-semibold text-lg pb-4">
-            Recent Review & Ratings
-          </h1>
-
-          <div className="border p-5">
-            <Grid container spacing={7}>
-              {/* <Grid item xs={7}>
-                <div className="space-y-5">
-                  Iterate over reviews and render ProductReviewCard for each
-                  {review.reviews?.map((item, i) => (
-                    <ProductReviewCard key={i} item={item} />
-                  ))}
-                </div>
-              </Grid> */}
-              {/* <ProductReviewCard />
-              <RateProduct /> */}
-
-              {/* Add other components if needed */}
-
-              {/* <Grid item xs={5}>
-                <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
-                <div className="flex items-center space-x-3 pb-10">
-                  <Rating
-                    name="read-only"
-                    value={4.6}
-                    precision={0.5}
-                    readOnly
-                  />
- 
-                  <p className="opacity-60">42807 Ratings</p>
-                </div>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Excellent</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={40}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Very Good</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={30}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Good</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className="bg-[#885c0a]"
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={25}
-                        color="orange"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Avarage</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{
-                          bgcolor: "#d0d0d0",
-                          borderRadius: 4,
-                          height: 7,
-                          "& .MuiLinearProgress-bar": {
-                            bgcolor: "#885c0a", // stroke color
-                          },
-                        }}
-                        variant="determinate"
-                        value={21}
-                        color="success"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Grid xs={2}>
-                      <p className="p-0">Poor</p>
-                    </Grid>
-                    <Grid xs={7}>
-                      <LinearProgress
-                        className=""
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
-                        variant="determinate"
-                        value={10}
-                        color="error"
-                      />
-                    </Grid>
-                    <Grid xs={2}>
-                      <p className="opacity-50 p-2">19259</p>
-                    </Grid>
-                  </Grid> */}
-              {/* </Box> */}
-            </Grid>
-          </div>
-        </section>
-
-
-
-
-        {/* rating and review section */}
-        <Grid item xs={7}>
-          <div className="space-y-5">
-            {review.reviews?.map((item, i) => (
-              <ProductReviewCard key={i} item={item} />
-            ))}
-          </div>
-        </Grid>
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => setShowRatingReview(!showRatingReview)}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-          >
-            Add a review
-          </button>
-        </div>
-
-        {/* Add margin or padding to create a gap */}
-
-
-        {/* Conditionally render the rating and review section */}
-        {showRatingReview && (
-          <Grid container spacing={7}>
-            <RateProduct />
-          </Grid>
-        )}
+        
         {/* Similar Products */}
 
         <div>
           {/* Similar Products */}
           <section className="pt-10">
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
             <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+            <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
               {simmyProducts.slice(0, 50).map((item) => (
                 <a key={item._id} href={`/product/${item._id}`} className="mb-5">
                   <HomeProductCard product={item} />
                 </a>
               ))}
             </Slider>
+          </div>
           </section>
         </div>
+                        
+{/* interest */}
+<section className="pt-10">
+<div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
+    <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
+<ItemList />
+</div>
+</section>
         <div>
+       
           {/* Bought together */}
           <section className="pt-10">
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
             <h1 className="py-5 text-xl font-bold">Bought Together</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+            <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
               {BoughtTogether.slice(2, 15).map((item) => (
                 <a key={item._id} href={`/product/${item._id}`} className="mb-5">
                   <HomeProductCard product={item} />
                 </a>
               ))}
             </Slider>
+            </div>
           </section>
+         
         </div>
+      
+
 
         <div>
+          
           {/* Might be interested */}
           <section className="pt-10">
-            <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={true} autoplay={true} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-              {interestedProducts.slice(0, 20).map((item) => (
-                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-                  <HomeProductCard product={item} />
-                </a>
-              ))}
-            </Slider>
+         
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
+  <h1 className="py-5 text-xl font-bold">Season's Top Pickup</h1>
+  <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+    {interestedProducts.slice(0, 20).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </Slider>
+</div>
           </section>
-
+          
         </div>
+
       </div >
     </div >
   );

@@ -35,7 +35,7 @@ const ProductReviewCard = ({ item, totalReviews }) => {
   return (
     <div className="">
       <Typography variant="h6" gutterBottom>
-        {totalReviews} reviews
+        {totalReviews} Reviews
       </Typography>
       <Grid container spacing={2} gap={3}>
         <Grid item xs={1}>
