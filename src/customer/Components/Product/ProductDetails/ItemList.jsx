@@ -117,8 +117,8 @@ const ItemList = () => {
     
       {items.map((item, index) => (
         <div className="item-container" key={index}>
-          <div className="item-image-container" style={{ border: '3px solid #f0f0f0', borderRadius: '10px', boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
-            <img src={item.image} alt={item.title} className="item-image" style={{ width: '50%', height: '240px', display: 'block', float: 'left' }} />
+          <div className="item-image-container" style={{ border: '5px solid #bdbdbd', borderRadius: '10px', boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+            <img src={item.image} alt={item.title} className="item-image py-5" style={{ width: '50%', height: '200px', display: 'block', float: 'left' }} />
             <div className="item-content mt-12 ml-5" style={{ paddingLeft: '10px', marginLeft: '40px',display: 'block', float: 'left' }}>
             <div className="item-title font-bold" style={{ fontSize: '1.2em' }}>{item.title}</div>
             <div className="item-description mb-4">{item.description}</div>

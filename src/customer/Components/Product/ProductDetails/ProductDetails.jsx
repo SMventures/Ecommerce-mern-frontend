@@ -516,7 +516,7 @@ export default function ProductDetails() {
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                 {/* Description and details */}
                 <div>
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-900 mt-2 mb-4">Description</h3>
+                  <h3 className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Description</h3>
 
                   <div className="space-y-6">
                     <p className="text-base text-gray-900 mb-5">
@@ -537,7 +537,7 @@ export default function ProductDetails() {
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 " className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
                         Highlights
                       </Typography>
                     </AccordionSummary>
@@ -564,7 +564,7 @@ export default function ProductDetails() {
                       aria-controls="panel4d-content"
                       id="panel4d-header"
                     >
-                      <Typography component="h3" variant="subtitle2 " className="text-l lg:text-xl font-bold text-gray-900 mt-2 mb-4">
+                      <Typography component="h3" variant="subtitle2 "className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
                         Specifications
                       </Typography>
                     </AccordionSummary>
@@ -614,6 +614,47 @@ export default function ProductDetails() {
 </TableBody>
 </Table>
 
+
+ {/* rating and review section */}
+
+        {/* rating and review section */}
+        <section className="">
+        <h1 className="font-semibold text-2xl pb-4 mt-4">
+    Ratings & Reviews
+</h1>
+
+         
+        </section>
+
+
+
+
+        {/* rating and review section */}
+        <Grid item xs={7}>
+          <div className="space-y-5">
+            {review.reviews?.map((item, i) => (
+              <ProductReviewCard key={i} item={item} />
+            ))}
+          </div>
+        </Grid>
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setShowRatingReview(!showRatingReview)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+          >
+            Add a review
+          </button>
+        </div>
+
+        {/* Add margin or padding to create a gap */}
+
+
+        {/* Conditionally render the rating and review section */}
+        {showRatingReview && (
+          <Grid container spacing={7}>
+            <RateProduct />
+          </Grid>
+        )}
 
 
 
@@ -671,66 +712,23 @@ export default function ProductDetails() {
         
         <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
           <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
-          <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
             <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
           </div>
+        
         </div>
-        <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+       
 
 
 
 
 
-        {/* rating and review section */}
-
-        {/* rating and review section */}
-        <section className="">
-          <h1 className="font-semibold text-lg pb-4">
-            Recent Review & Ratings
-          </h1>
-
-          <div className="border p-5">
-            <Grid container spacing={7}>
-              
-            </Grid>
-          </div>
-        </section>
-
-
-
-
-        {/* rating and review section */}
-        <Grid item xs={7}>
-          <div className="space-y-5">
-            {review.reviews?.map((item, i) => (
-              <ProductReviewCard key={i} item={item} />
-            ))}
-          </div>
-        </Grid>
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => setShowRatingReview(!showRatingReview)}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-          >
-            Add a review
-          </button>
-        </div>
-
-        {/* Add margin or padding to create a gap */}
-
-
-        {/* Conditionally render the rating and review section */}
-        {showRatingReview && (
-          <Grid container spacing={7}>
-            <RateProduct />
-          </Grid>
-        )}
+        
         {/* Similar Products */}
 
         <div>
           {/* Similar Products */}
           <section className="pt-10">
-          <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
             <h1 className="py-5 text-xl font-bold">Similar Products</h1>
             <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
               {simmyProducts.slice(0, 50).map((item) => (
@@ -739,20 +737,22 @@ export default function ProductDetails() {
                 </a>
               ))}
             </Slider>
-            <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+          </div>
           </section>
         </div>
                         
 {/* interest */}
 <section className="pt-10">
+<div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
     <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
 <ItemList />
+</div>
 </section>
         <div>
        
           {/* Bought together */}
           <section className="pt-10">
-          <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
             <h1 className="py-5 text-xl font-bold">Bought Together</h1>
             <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
               {BoughtTogether.slice(2, 15).map((item) => (
@@ -761,10 +761,11 @@ export default function ProductDetails() {
                 </a>
               ))}
             </Slider>
+            </div>
           </section>
          
         </div>
-        <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+      
 
 
         <div>
@@ -772,16 +773,18 @@ export default function ProductDetails() {
           {/* Might be interested */}
           <section className="pt-10">
          
-            <h1 className="py-5 text-xl font-bold">Season's Top Pickup</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-              {interestedProducts.slice(0, 20).map((item) => (
-                <a key={item._id} href={`/product/${item._id}`} className="mb-5" >
-                  <HomeProductCard product={item} />
-                </a>
-              ))}
-            </Slider>
+          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
+  <h1 className="py-5 text-xl font-bold">Season's Top Pickup</h1>
+  <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+    {interestedProducts.slice(0, 20).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} className="mb-5">
+        <HomeProductCard product={item} />
+      </a>
+    ))}
+  </Slider>
+</div>
           </section>
-          <hr style={{ margin: '20px 0', border: 'none', borderBottom: '7px solid #ccc' }} />
+          
         </div>
 
       </div >
