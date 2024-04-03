@@ -24,12 +24,11 @@ export default function AuthModal({ handleClose, open }) {
   const { auth } = useSelector((store) => store);
   const navigate=useNavigate()
   useEffect(() => {
-    if (auth.user){
-       handleClose();
-       if(auth.user?.role==="ADMIN"){
-       }
-      }
-  }, [auth.user]);
+    if (auth.user) {
+      handleClose(); // Close the modal
+    }
+  }, [auth.user, navigate]); // Add navigate to the dependency array
+  
   return (
     <>
     <Modal

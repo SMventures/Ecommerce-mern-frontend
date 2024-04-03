@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation ,Navigate} from "react-router-dom";
 import ProductDetails from "../customer/Components/Product/ProductDetails/ProductDetails";
 import Product from "../customer/Components/Product/Product/Product";
 import Homepage from "../Pages/Homepage";
@@ -21,6 +21,9 @@ import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
 import About from "../customer/Components/footer/About";
 import Prod from "../customer/Components/footer/Prod";
+import Notfound from "../Pages/Notfound"
+import UnauthorizedPage from "../Pages/Unauthorized"
+import AdminPannel from "../Admin/AdminPannel";
 // import Features from "../customer/Components/footer/Features";
 // import Pricing from "../customer/Components/footer/Pricing";
 // import { Highlight } from "@mui/icons-material";
@@ -32,8 +35,10 @@ import AddAddress from "../customer/Components/Checkout/AddAddress";
 
 
 
+
 const CustomerRoutes = () => {
     const location = useLocation();
+    const isAdmin = false;
 
 
   
@@ -56,12 +61,6 @@ const CustomerRoutes = () => {
         <Route path="/About" element={<About />}></Route>
         <Route path="/Terms" element={<Terms/>}></Route>
         <Route path="/Prod" element={<Prod/>}></Route>
-
-     
-        {/* <Route path="/Features" element={<Features />}></Route>
-        <Route path="/Pricing" element={<Pricing />}></Route>
-        <Route path="/Highlights" element={<Highlights />}></Route>        */}
-        {/* <Route path="/contact" element={<Contact />}></Route> */}
         <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
         <Route path="/product/:productId" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
@@ -74,14 +73,10 @@ const CustomerRoutes = () => {
         <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/payment/:orderId" element={<PaymentSuccess />}></Route>
-        {/* <Route path="/search/:query" element={<SearchResults/>} /> */}
-        <Route path="/wishlist" element={<Wishlist />}></Route>
-        <Route path="/SearchResults/:query" element ={<SearchResults />} />
-
+        <Route path="/SearchResults/:query" element ={<SearchResults />} />f
         <Route path="/my-component" element={<MyComponent />} />
-        
-
-        {/* <Route path="*" element={<NotFound />} /> */}
+    
+        <Route path="*" element={<Notfound />} />
       </Routes>
       <Footer/>
     </ThemeProvider>

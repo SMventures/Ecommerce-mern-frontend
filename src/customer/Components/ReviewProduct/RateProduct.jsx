@@ -39,7 +39,7 @@ const RateProduct = () => {
   }, [dispatch, productId]);
 
   return (
-    <div className="px-5 lg:px-20">
+    <div className="px-30 lg:px-30 py-10 lg:py-20">
       <Grid sx={{ justifyContent: "space-between" }} container>
         <Grid
           className="flex  lg:items-center shadow-lg border rounded-md p-5"
@@ -62,7 +62,9 @@ const RateProduct = () => {
             <p>₹{customersProduct.product?.price}</p>
             <p>Size: Free</p>
             {customersProduct.product?.color && (
-              <p>Color: {customersProduct.product?.color}</p>
+              <p className="text-sm">
+              Color: {customersProduct.product?.color}
+          </p>
             )}
           </div>
         </Grid>

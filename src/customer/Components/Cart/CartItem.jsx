@@ -6,10 +6,24 @@ import { IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { blue } from '@mui/material/colors';
+import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+// for delivery date
+const ColumnText = styled(TableRow)`
+    font-size: 14px;
+    vertical-align: baseline;
+& > td {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+`
 
 const CartItem = ({ item,showButton }) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
+  const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
+  const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000));
 
   const handleRemoveItemFromCart = () => {
     const data = { cartItemId: item?._id, jwt };
@@ -30,8 +44,24 @@ const CartItem = ({ item,showButton }) => {
             alt=""
           />
         </div>
+
         <div className="ml-5 space-y-1">
+          {/* deliviry date */}
+          <div className="ml-16">           
+          <Table className="ml-40">
+<TableBody>
+<ColumnText>
+
+<TableCell className="mb-4" style={{ fontWeight: 600,textAlign:'center' }}>Delivery by {date.toDateString()}</TableCell>
+</ColumnText>
+
+
+</TableBody>
+</Table>
+</div>
+
           <p className="font-semibold">{item?.product?.title}</p>
+                             
           <p className="opacity-70">Size: {item?.size},White</p>
           <p className="opacity-70 mt-2">Seller: {item?.product?.brand}</p>
           <div className="flex space-x-2 items-center pt-3">
@@ -56,13 +86,14 @@ const CartItem = ({ item,showButton }) => {
             <AddCircleOutlineIcon />
           </IconButton>
         </div>
-        <div className="flex text-sm lg:text-base mt-5 lg:mt-0">
+        <div className="flex text-sm lg:text-base mt-5 lg:mt-0 " style={{ marginLeft: '350px' }}>
           
-          <Button onClick={handleRemoveItemFromCart} variant="text" style={{ color: blue[800] }}>
-            Remove{" "}
-          </Button>
+        <Button onClick={handleRemoveItemFromCart} variant="text" style={{ color: blue[800] }}>
+  <DeleteIcon /> Remove
+</Button>
           
         </div>
+
       </div>}
     </div>
   );

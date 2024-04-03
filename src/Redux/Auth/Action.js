@@ -64,7 +64,8 @@ export const getUser = (token) => {
       });
       const user = response.data;
       dispatch({ type: GET_USER_SUCCESS, payload: user });
-      console.log("req User ", user);
+      console.log("req User ", user.role)
+      localStorage.setItem("role",user.role);
     } catch (error) {
       const errorMessage = error.message;
       dispatch({ type: GET_USER_FAILURE, payload: errorMessage });
