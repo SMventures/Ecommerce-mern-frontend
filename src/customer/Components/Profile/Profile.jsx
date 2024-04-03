@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button, Snackbar, Alert, FormControl, RadioGroup, FormControlLabel, Radio, Typography } from "@mui/material";
+import { Grid, TextField, Button, Snackbar, Alert, FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserPersonalInfo, getUser } from "../../../Redux/Auth/Action";
+import { updateUserPersonalInfo } from "../../../Redux/Auth/Action";
 import MyAccount from './MyAccount';
 
 export default function PersonalInformationForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
   const { auth } = useSelector((store) => store);
+  const jwt = localStorage.getItem("jwt");
   const [userInfo, setUserInfo] = useState({
     firstName: auth.user?.firstName || "",
     lastName: auth.user?.lastName || "",
@@ -30,7 +30,6 @@ export default function PersonalInformationForm() {
       const updatedUser = await dispatch(updateUserPersonalInfo({
         ...userInfo,
         userId: auth.user._id, // Assuming the user ID is stored in auth.user._id
-        jwt
       }));
       setOpenSnackBar(true);
       // Update the local state with the updated user information
@@ -39,8 +38,6 @@ export default function PersonalInformationForm() {
       console.error("Error updating profile:", error.message);
     }
   };
-  
-  
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,7 +56,7 @@ export default function PersonalInformationForm() {
       <div className="sidebar" style={{ position: "sticky", top: 0 , marginRight: "280px",marginLeft:"20px"}}>
         <MyAccount />
       </div>
-      <div className="main-content" style={{ maxWidth: "800px" }}> {/* Adjust the max-width as needed */}
+      <div className="main-content" style={{ maxWidth: "800px" }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
@@ -72,12 +69,6 @@ export default function PersonalInformationForm() {
                 autoComplete="given-name"
                 value={userInfo.firstName}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -90,12 +81,6 @@ export default function PersonalInformationForm() {
                 autoComplete="family-name"
                 value={userInfo.lastName}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -109,12 +94,6 @@ export default function PersonalInformationForm() {
                 type="email"
                 value={userInfo.email}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -127,16 +106,10 @@ export default function PersonalInformationForm() {
                 autoComplete="tel"
                 value={userInfo.phoneNumber}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
-             <p>Select your gender</p>
+              <p>Select your gender</p>
               <div style={{ display: "flex" }}>
                 <FormControl component="fieldset">
                   <RadioGroup
@@ -158,7 +131,7 @@ export default function PersonalInformationForm() {
                 type="submit"
                 variant="contained"
                 size="large"
-                sx={{ padding: ".8rem 0" ,width: "100%"}}
+                sx={{ padding: ".8rem 0" , width:"100%"}}
                 style={{ backgroundColor: '#007bff', color: 'white' }}
               >
                 Update Information
