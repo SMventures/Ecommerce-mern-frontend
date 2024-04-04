@@ -47,7 +47,7 @@ const HomeProductSection = ({ section, data }) => {
 
   return (
     <Component>
-      <h2 className="text-2xl font-extrabold text-gray-900 py-5">{section}</h2>
+      <h2 className="text-2xl mx-4 font-extrabold text-gray-900 py-5">{section}</h2>
       {/* <ViewAllButtonContainer>
 
       <ViewAllButton variant="contained" color="primary">
@@ -70,32 +70,33 @@ const HomeProductSection = ({ section, data }) => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        {data.slice(0, 10).map(product => (
-           <div key={product._id} className="mb-5 cursor-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem] mx-3">
-           <Link to={`/product/${product._id}`}> 
-           <div className="h-[13rem] w-[10rem]">
-             <img
-               className="object-cover object-top w-full h-full"
-               src={product?.image || product?.imageUrl}
-               alt={product?.title}
-             />
-           </div>
-     </Link>
-           <div className="p-4 items-center">
-             <h3 className="text-lg items-center font-medium font-weight-600 text-gray-900">
-             {product?.title}
-             </h3>
-             {/* <p className="mt-2 text-sm text-gray-500">{product?.title}</p> */}
-           </div>
-           <div className='flex items-center space-x-2 '>
-          <p className='font-semibold'>₹{product?.discountedPrice}</p>
-          <p className='opacity-50 line-through'>₹{product?.price}</p>
-          <p className="text-green-600 font-semibold">{product?.discountPersent}% off</p>
+   
+  {data.slice(0, 10).map(product => (
+    <div key={product._id} className="mb-5 cursor-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem] mx-3">
+      <Link to={`/product/${product._id}`}> 
+        <div className="h-[13rem] w-[10rem] flex justify-center items-center"> {/* Center the image */}
+          <img
+            className="object-cover object-center h-full"
+            src={product?.image || product?.imageUrl}
+            alt={product?.title}
+          />
+        </div>
+      </Link>
+      <div className="p-4 items-center">
+        <h3 className="text-lg items-center font-medium font-weight-600 text-gray-900">
+          {product?.title}
+        </h3>
+        {/* <p className="mt-2 text-sm text-gray-500">{product?.title}</p> */}
+      </div>
+      <div className='flex items-center space-x-2 '>
+        <p className='font-semibold'>₹{product?.discountedPrice}</p>
+        <p className='opacity-50 line-through'>₹{product?.price}</p>
+        <p className="text-green-600 font-semibold">{product?.discountPersent}% off</p>
+      </div>
+    </div>
+  ))}
 
-           </div>
-         </div>
 
-        ))}
       </Carousel>
     </Component>
   );

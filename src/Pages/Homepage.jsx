@@ -26,6 +26,12 @@ const Homepage = () => {
   const [Fundamental, setFundamental] = useState([]);
   const [Phonecover, setPhonecover] = useState([]);
   const [Pen, setPen] = useState([]);
+  const [Allproducts, setProducts] = useState([]);
+  const [laptopCover, setlaptopCover] = useState([]);
+  const [Phoneskins, setPhoneskins] = useState([]);
+
+
+
 
 
   // const [menHoodiesProducts, setMenHoodiesProducts] = useState([]);
@@ -38,7 +44,29 @@ const Homepage = () => {
     getWomenTshirts();
     getFundamental();
     getPen();
+    getAllProducts();
+    getlaptopCover();
+    getPhoneskins();
   }, []);
+
+  const getlaptopCover = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Laptop_Skins");
+    const data = await response.json();
+    console.log("All Products:", data.content);
+    setlaptopCover(data.content);
+  };
+  const  getPhoneskins = async () => {
+    const response = await fetch("http://localhost:5454/api/products?category=Phone_Skins");
+    const data = await response.json();
+    console.log("All Products:", data.content);
+    setPhoneskins(data.content);
+  };
+  const getAllProducts = async () => {
+    const response = await fetch("http://localhost:5454/api/products");
+    const data = await response.json();
+    console.log("All Products:", data.content);
+    setProducts(data.content);
+  };
 
   const getMenHoodiesProducts = async () => {
     const response = await fetch("http://localhost:5454/api/products?category=men_hoodies");
@@ -50,28 +78,28 @@ const Homepage = () => {
   const getPen = async () => {
     const response = await fetch("http://localhost:5454/api/products?category=Pen");
     const data = await response.json();
-    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+    console.log("Pens:", data.content); // Add this console.log statement
 
     setPen(data.content);
   };
   const getPhonecover = async () => {
     const response = await fetch("http://localhost:5454/api/products?category=Phone_Covers");
     const data = await response.json();
-    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+    console.log("All phone covers:", data.content); // Add this console.log statement
 
     setPhonecover(data.content);
   }; 
    const getHeadphones = async () => {
     const response = await fetch("http://localhost:5454/api/products?category=Headphones");
     const data = await response.json();
-    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+    console.log("All Headphones:", data.content); // Add this console.log statement
 
     setHeadphones(data.content);
   };  
   const getWomenTshirts = async () => {
     const response = await fetch("http://localhost:5454/api/products?category=women_tshirts");
     const data = await response.json();
-    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+    console.log("Women tshirts are:", data.content); // Add this console.log statement
 
     setWomenTshirts(data.content);
   };  
@@ -80,7 +108,7 @@ const Homepage = () => {
   const getFundamental= async () => {
     const response = await fetch("http://localhost:5454/api/products?category=Fundamental_Analysis");
     const data = await response.json();
-    console.log("Men Hoodies Products:", data.content); // Add this console.log statement
+    console.log("Fundamental Books:", data.content); // Add this console.log statement
 
     setFundamental(data.content);
   };
@@ -89,9 +117,7 @@ const Homepage = () => {
       <Banner />
       <div className="space-y-10 py-8">
         <Component>
-          <Link to="/new-arrivals">
-            <HomeProductSection data={kurtaPage1} section={"New Arrivals"} />
-          </Link>
+            <HomeProductSection data={Allproducts} section={"New Arrivals"} />
           {/* <Link to="/seasons-top-pickup">
             <HomeProductSection data={mensShoesPage1} section={"Season's Top Pickup"} />
           </Link> */}
@@ -119,9 +145,7 @@ const Homepage = () => {
   rightSection={"Top Selling Stationery"}
 />
 
-<Link to="/top-selling-accessories">
-            <HomeProductSection data={gounsPage1} section={"Top Selling Accessories"} />
-          </Link>
+            <HomeProductSection data={Phoneskins} section={"Top Selling Accessories"} />
 
           {/* <Link to="/Women/Clothing/women_tshirts">
             <HomeProductSection data={Fashion} section={"Trendy Fashion Collection"} />

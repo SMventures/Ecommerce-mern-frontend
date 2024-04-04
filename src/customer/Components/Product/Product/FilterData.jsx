@@ -1,4 +1,4 @@
-
+ 
 export const color = [
   "white",
   "Black",
@@ -9,7 +9,7 @@ export const color = [
   "Green",
   "Yellow",
 ];
-
+ 
 export const filters = [
   {
     id: "color",
@@ -23,10 +23,10 @@ export const filters = [
       { value: "purple", label: "Purple" },
       {value:"yellow",label:"Yellow"},
       {value:"black",label:"black"}
-
+ 
     ],
   },
-
+ 
   {
     id: "size",
     name: "Size",
@@ -36,9 +36,9 @@ export const filters = [
       { value: "L", label: "L" },
     ],
   },
-  
+ 
 ];
-
+ 
 export const singleFilter=[
   {
     id: "price",
@@ -56,16 +56,16 @@ export const singleFilter=[
     name: "Disccount Range",
     options: [
       {
-        value: "10",
+        value: "9",
         label: "10% And Above",
       },
-      { value: "20", label: "20% And Above" },
-      { value: "30", label: "30% And Above" },
-      { value: "40", label: "40% And Above" },
-      { value: "50", label: "50% And Above" },
-      { value: "60", label: "60% And Above" },
-      { value: "70", label: "70% And Above" },
-      { value: "80", label: "80% And Above" },
+      { value: "19", label: "20% And Above" },
+      { value: "29", label: "30% And Above" },
+      { value: "39", label: "40% And Above" },
+      { value: "49", label: "50% And Above" },
+      { value: "59", label: "60% And Above" },
+      { value: "69", label: "70% And Above" },
+      { value: "79", label: "80% And Above" },
     ],
   },
   // {
@@ -74,13 +74,14 @@ export const singleFilter=[
   //   options: [
   //     { value: "in_stock", label: "In Stock" },
   //     { value: "out_of_stock", label: "Out Of Stock" },
-      
+     
   //   ],
   // },
 ]
-
+ 
 export const sortOptions = [
-  
+ 
   { name: "Price: Low to High", query: "price_low", current: false },
   { name: "Price: High to Low", query: "price_high", current: false },
 ];
+ 

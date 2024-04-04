@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Fragment } from 'react';
 import { useState } from "react";
 import "./styles2.css";
 import { RadioGroup } from "@headlessui/react";
@@ -19,7 +20,6 @@ import {
   getSimilarProducts,
   getBoughtTogether,
   getInterested,
-
 } from "../../../../Redux/Customers/Product/Action";
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
@@ -45,6 +45,7 @@ import { FaTools } from 'react-icons/fa';
 // import DeliveryDate from './DeliveryDate';
 import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
 import ItemList from './ItemList';
+import Boughtogether from './Boughtogether';
 
 // for delivery date
 const ColumnText = styled(TableRow)`
@@ -126,6 +127,11 @@ export default function ProductDetails() {
 
   const [showRatingReview, setShowRatingReview] = useState(false);
 
+  const Component = styled(Box)`
+  padding: 20px;
+  background: #f2f2f2;
+`;
+
   const getCategoryName = async () => {
     try {
       const res = await fetch(`http://localhost:5454/api/products/id/${productId}`);
@@ -158,6 +164,9 @@ export default function ProductDetails() {
     const data = await response.json();
     setBoughtTogether(data.content);
   };
+  
+
+  
 
   const getInterested = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products`);
@@ -179,7 +188,20 @@ export default function ProductDetails() {
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
-
+  const addToCart = (items) => {
+    // Dispatch an action to add items to the cart
+    console.log("Adding items to cart:", items);
+    dispatch(addItemToCart(items));
+  }
+  
+  const handleCartSubmit = () => {
+    const itemsToAdd = [customersProduct.product, BoughtTogether[0], BoughtTogether[1]];
+  
+    // Call addToCart function to add items to the cart
+    console.log("Submitting items to cart:", itemsToAdd);
+    addToCart(itemsToAdd);
+  };
+  
   const handlewishlistSubmit = () => {
     const data = { productId };
     dispatch(addItemToWishlist({ data, jwt }));
@@ -197,26 +219,51 @@ export default function ProductDetails() {
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  const isProductInWishlist = (product) => {
-    // Check if customersProduct exists and has a wishlist property
-    if (customersProduct && customersProduct.wishlist) {
-      // Check if the product exists in the wishlist array
-      return customersProduct.wishlist.some((item) => item.id === product.id);
-    }
-    // Return false if customersProduct or wishlist is undefined
-    return false;
-  };
+  // const isProductInWishlist = (product) => {
+  //   // Check if customersProduct exists and has a wishlist property
+  //   if (customersProduct && customersProduct.wishlist) {
+  //     // Check if the product exists in the wishlist array
+  //     return customersProduct.wishlist.some((item) => item.id === product.id);
+  //   }
+  //   // Return false if customersProduct or wishlist is undefined
+  //   return false;
+  // };
 
-  const handleWishlistToggle = (product) => {
-    if (!isProductInWishlist(product)) {
-      // If the product is not in the wishlist, add it to the wishlist
-      dispatch(addItemToWishlist({ jwt, data: product }));
-    } else {
-      // If the product is already in the wishlist, do nothing
-      console.log("Item is already in the wishlist");
-    }
-  };
+  // const handleWishlistToggle = (product) => {
+  //   if (!isProductInWishlist(product)) {
+  //     // If the product is not in the wishlist, add it to the wishlist
+  //     dispatch(addItemToWishlist({ jwt, data: product }));
+  //   } else {
+  //     // If the product is already in the wishlist, do nothing
+  //     console.log("Item is already in the wishlist");
+  //   }
+  // };
+ // Function to calculate total discounted price
+const calculateTotalDiscountedPrice = (products) => {
+  let total = 0;
+  products.forEach((item) => {
+    total += item.discountedPrice;
+  });
+  return total;
+};
 
+// Function to calculate total discounted percentage
+const calculateTotalDiscountedPersent = (products) => {
+  let totalDiscountedPersent = 0;
+  products.forEach((item) => {
+    totalDiscountedPersent += item.discountPersent;
+  });
+  return totalDiscountedPersent;
+};
+
+// Function to calculate total price
+const calculateTotalPrice = (products) => {
+  let totalPrice = 0;
+  products.forEach((item) => {
+    totalPrice += item.price;
+  });
+  return totalPrice;
+};
 
   // Function to check if a product is in the wishlist
 
@@ -246,14 +293,44 @@ export default function ProductDetails() {
     borderRadius: '10px',
   };
 
+  const FrequentlyBoughtTogether = styled(Box)`
+  background: #f2f2f2;
+  padding: 20px;
+`;
+
+const GrayBackground = styled(Box)`
+  background: #ccc;
+  padding: 20px;
+`;
+// const {  imageUrl } = product; // Assuming _id is the productId
+
+const WhiteContainer = styled(Box)`
+  background: #fff;
+  padding: 20px;
+`;
+const BackgroundBox = styled(Box)`
+    background: #f2f2f2; /* Background color */
+  `;
+  const Component1 = styled(Box)`
+  margin-top: 10px;
+  background:  #f2f2f2;
+`;
   return (
-    <div className="bg-white lg:px-20">
-      <div className="pt-6">
+    <Component>
+      {/* <div style={{  padding: '5px', backgroundColor: '#f0f0f0' ,width: '100%' }}> */}
+        {/* <WhiteContainer> */}
+        <div className="bg-white ">
+      <div className="pt-0">
+        
+      <div style={{  padding: '4px', backgroundColor: '#f0f0f0' ,width: '100%' }}> 
+        <WhiteContainer>
         <nav aria-label="Breadcrumb">
           <ol
             role="list"
             className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
           >
+            
+     
             {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
@@ -261,6 +338,8 @@ export default function ProductDetails() {
                     href={"/"}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
+                    
+    
                     {breadcrumb.name}
                   </a>
                   <svg
@@ -276,6 +355,8 @@ export default function ProductDetails() {
                 </div>
               </li>
             ))}
+            
+    
             <li className="text-sm">
               <a
                 href={product.href}
@@ -552,7 +633,7 @@ export default function ProductDetails() {
                     </AccordionDetails>
                   </Accordion>
  
-                  {/* specification  */}
+                  {/* specification 
  
  
                   <Accordion
@@ -577,8 +658,8 @@ export default function ProductDetails() {
                         </Typography>
                       </Box>
                     </AccordionDetails>
-                  </Accordion>
-                </Box>
+                  </Accordion>*/}
+                </Box> 
 
 
 
@@ -614,8 +695,6 @@ export default function ProductDetails() {
 </TableBody>
 </Table>
 
-
- {/* rating and review section */}
 
         {/* rating and review section */}
         <section className="">
@@ -704,77 +783,182 @@ export default function ProductDetails() {
                   <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
               </div> */}
+              
+              
               </div>
             </div>
           </Container >
         </section>
-        {/* Add the provided HTML code for the image */}
-        
-        <div className="_3ywSr_" style={{ paddingTop: '2%' }}>
-          <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '7.06%' }}>
-            <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
-          </div>
-        
+        </WhiteContainer>
+    </div>
+ 
         </div>
-       
 
+        
 
+        {/* Add the provided HTML code for the image */}
+        <div style={{  padding: '5px', backgroundColor: '#f0f0f0' ,width: '100%' }}>
+        <WhiteContainer>
 
+        {/* <div className="_3ywSr_" style={{ paddingTop: '2%' }}> */}
+        
+
+          {/* <div className="_1bEAQy _2iN8uD _312yBx" style={{ paddingTop: '1%' }}> */}
+            <img className="_2OHU_q HnOpP8 aA9eLq" alt="" src="https://rukminim2.flixcart.com/www/2000/2000/promos/01/12/2018/8aa01ab4-de88-4a46-9d93-5c7f3ebac2df.png?q=50" />
+          {/* </div> */}
+
+        {/* </div> */}
+        </WhiteContainer>
+
+</div>
 
 
         
         {/* Similar Products */}
+        {/* <section className="pt-10"> */}
+        <div style={{  padding: '5px', backgroundColor: '#f0f0f0' }}>
+        <WhiteContainer>
 
-        <div>
-          {/* Similar Products */}
-          <section className="pt-10">
-          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-            <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-              {simmyProducts.slice(0, 50).map((item) => (
-                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-                  <HomeProductCard product={item} />
-                </a>
-              ))}
-            </Slider>
-          </div>
-          </section>
-        </div>
+        <div class="divider-container">
+  <div class="divider-line"></div>
+  <div class="divider-content">
+    <h1 class="divider-heading">Similar Styles</h1>
+  </div>
+  <div class="divider-line"></div>
+</div>
+<div class="slider-container">
+  <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+    {simmyProducts.slice(0, 50).map((item) => (
+      <a key={item._id} href={`/product/${item._id}`} class="product-link">
+            <HomeProductCard product={item} src={item?.image || item?.imageUrl} />
+      </a>
+    ))}
+  </Slider>
+
+</div>
+</WhiteContainer>
+</div>
+{/* </section> */}
+
+
+
+
                         
 {/* interest */}
-<section className="pt-10">
-<div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-    <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
+<div style={{  padding: '5px', backgroundColor: '#f0f0f0' }}>
+<WhiteContainer>
+
+    <h1 className="py-5 text-xl font-bold">You May Also Like...</h1>
 <ItemList />
+</WhiteContainer>
+
 </div>
-</section>
-        <div>
-       
-          {/* Bought together */}
-          <section className="pt-10">
-          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-            <h1 className="py-5 text-xl font-bold">Bought Together</h1>
-            <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-              {BoughtTogether.slice(2, 15).map((item) => (
-                <a key={item._id} href={`/product/${item._id}`} className="mb-5">
-                  <HomeProductCard product={item} />
-                </a>
-              ))}
-            </Slider>
-            </div>
-          </section>
-         
-        </div>
+
+{/* <section className="pt-10"> */}
+<div style={{ padding: '5px', backgroundColor: '#f0f0f0', width: '100%' }}>
+  <WhiteContainer>
+  
+        <h1 className="py-5 text-xl font-bold">Frequently Bought Together</h1>
       
 
+    <div className="slider-container">
+      {BoughtTogether.slice(0, 2).map((productSet, index) => (
+        <Fragment key={index}>
+          <div className="bought-together-card flex items-center mb-4"> {/* Use flexbox for row layout */}
+            {/* Product 1 */}
+            <div className="product-card"> {/* Wrap product 1 in a card-like container */}
+              <div className="image-container relative">
+                <img
+                  src={activeImage?.src || customersProduct.product?.imageUrl}
+                  alt={product.images[0].alt}
+                  className="h-48 w-full object-cover object-center"
+                />
+                <div className="product-info flex flex-col justify-center items-center"> {/* Container for product details */}
+                  <h2 className="product-name text-black mb-1">{customersProduct.product?.title}</h2>
+                  <div className="flex items-center mb-1">
+                    <span className="text-gray-500 line-through mr-1">{product.price}</span> {/* Strike-through original price */}
+                    <span className="text-green-600 font-semibold">({customersProduct.product?.discountPersent}% Off)</span> {/* Display discount percentage */}
+                  </div>
+                  <p className="text-black ">₹{customersProduct.product?.discountedPrice}</p> {/* Display discounted price */}
+                </div>
+              </div>
+            </div>
+            {/* Plus sign */}
+            <div className="plus-sign flex justify-center items-center mx-4"> {/* Center the plus sign */}
+              +
+            </div>
+            {/* Product 2 */}
+            <div className="product-card"> {/* Wrap product 2 in a card-like container */}
+              <div className="image-container relative">
+                <img
+                  src={productSet.imageUrl}
+                  alt={productSet.alt}
+                  className="h-48 w-full object-cover object-center"
+                />
+                <div className="product-info flex flex-col justify-center items-center"> {/* Container for product details */}
+                  <h2 className="product-name text-black mb-1">{productSet.title}</h2>
+                  <div className="flex items-center mb-1">
+                    <span className="text-gray-500 line-through mr-1">₹{productSet.price}</span> {/* Strike-through original price */}
+                    <span className="text-green-600 font-semibold">({productSet.discountPersent}% Off)</span> {/* Display discount percentage */}
+                  </div>
+                  <p className="text-black ">₹{productSet.discountedPrice}</p> {/* Display discounted price */}
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-end mt-8 mx-12">
+              <div className="flex justify-center mb-8 mr-8">
+                <div className="w-full max-w-md border border-gray-200 rounded-lg overflow-hidden shadow-md ml-4">
+                  {/* Price Details heading */}
+                  <h1 className="text-black flex items-center justify-center mt-4 mb-4 font-semibold">Price Details</h1>
 
-        <div>
+                  {/* Vertical lines on both sides */}
+                  <div className="border-l-2 border-gray-200 absolute h-full left-0 top-0"></div>
+                  <div className="border-r-2 border-gray-200 absolute h-full right-0 top-0"></div>
+
+                  {/* Total price */}
+                  <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200">
+                    <p className="mr-2 font-semibold">Price (2 items):</p>
+                    <p className="text-gray-500 mr-2">₹{calculateTotalPrice([customersProduct.product, productSet])}</p> {/* Strike-through total price */}
+                  </div>
+
+                  {/* Discount percentage */}
+                  <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200">
+                    <p className="mr-2 font-semibold">Discount Percentage:</p>
+                    <p className="text-green-600 font-semibold">({calculateTotalDiscountedPersent([customersProduct.product, productSet])}% Off)</p> {/* Display total discount percentage */}
+                  </div>
+
+                  {/* Total amount */}
+                  <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200">
+                    <p className="mr-2 font-semibold">Total Amount:</p>
+                    <p className="text-black font-semibold">₹{calculateTotalDiscountedPrice([customersProduct.product, productSet])}</p>
+                  </div>
+
+                  {/* Add to Cart button */}
+                  <div className="flex justify-center my-4">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCartSubmit}>Add to Cart</button>
+                  </div>
+
+                  {/* Horizontal lines above and below total amount */}
+                  <div className="border-t-2 border-gray-200 mt-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      ))}
+    </div>
+  </WhiteContainer>
+</div>
+
           
           {/* Might be interested */}
-          <section className="pt-10">
+          {/* <section className="pt-10"> */}
          
-          <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-  <h1 className="py-5 text-xl font-bold">Season's Top Pickup</h1>
+          <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}>
+          <WhiteContainer>
+
+  <h1 className="py-5 text-xl font-bold">Season's Top Picks</h1>
   <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
     {interestedProducts.slice(0, 20).map((item) => (
       <a key={item._id} href={`/product/${item._id}`} className="mb-5">
@@ -782,12 +966,15 @@ export default function ProductDetails() {
       </a>
     ))}
   </Slider>
+  </WhiteContainer>
+
 </div>
-          </section>
+          {/* </section> */}
           
         </div>
 
-      </div >
-    </div >
+      
+    {/* </div > */}
+    </Component>
   );
 }

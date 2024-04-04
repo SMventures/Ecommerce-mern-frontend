@@ -18,7 +18,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
-
+ 
 import { filters, singleFilter, sortOptions } from "./FilterData";
 import ProductCard from "../ProductCard/ProductCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -34,11 +34,11 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
 import { getFilters } from "./getfilters";
 import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
-
+ 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
+ 
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const navigate = useNavigate();
@@ -49,11 +49,11 @@ export default function Product() {
   const location = useLocation();
   const [isLoaderOpen, setIsLoaderOpen] = useState(false);
   const [isClothing, setIsClothing] = useState(false); // State for indicating if it's clothing category
-
+ 
   const handleLoderClose = () => {
     setIsLoaderOpen(false);
   };
-
+ 
   // const filter = decodeURIComponent(location.search);
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
@@ -65,9 +65,9 @@ export default function Product() {
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
   const { productId } = useParams();
-
+ 
   const totalPages = Math.ceil(customersProduct.products?.totalElements / 2);
-
+ 
   // console.log("location - ", colorValue, sizeValue,price,disccount);
   // const handleCartSubmit = () => {
   //   const data = { ItemId, size: selectedSize.name };
@@ -76,7 +76,7 @@ export default function Product() {
   // };
   // const handleWishlistSubmit = async (itemId) => {
   //   const data = { itemId };
-
+ 
   //   try {
   //     await dispatch(addItemToWishlist({ data, jwt }));
   //     navigate("/wishlist"); // Move navigation inside the try block to ensure it's only triggered after successful dispatch
@@ -87,17 +87,17 @@ export default function Product() {
   // };
   const [isClicked, setIsClicked] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(-1);
-
+ 
   const handlewishlistSubmit = (itemId) => {
     const data = { productId: itemId }; // Use itemId as the product ID
     dispatch(addItemToWishlist({ data, jwt }));
     // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
     // navigate("/wishlist");
   };
-
-
-
-
+ 
+ 
+ 
+ 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
@@ -110,7 +110,7 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-
+ 
   useEffect(() => {
     const [minPrice, maxPrice] =
       price === null ? [0, 0] : price.split("-").map(Number);
@@ -123,7 +123,7 @@ export default function Product() {
       minDiscount: disccount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber,
-      pageSize: 4, // Set pageSize to 4 for 4 products per page
+      pageSize: 8, // Set pageSize to 4 for 4 products per page
       stock: stock,
     };
     dispatch(findProducts(data));
@@ -137,12 +137,12 @@ export default function Product() {
     pageNumber,
     stock,
   ]);
-
+ 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
-
+ 
     let filterValues = searchParams.getAll(sectionId);
-
+ 
     if (filterValues.length > 0 && filterValues[0].split(",").includes(value)) {
       filterValues = filterValues[0]
         .split(",")
@@ -156,10 +156,10 @@ export default function Product() {
       // searchParams.delete(sectionId);
       filterValues.push(value);
     }
-
+ 
     if (filterValues.length > 0)
       searchParams.set(sectionId, filterValues.join(","));
-
+ 
     // history.push({ search: searchParams.toString() });
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
@@ -168,27 +168,27 @@ export default function Product() {
     const usefilters = async () => {
       // Determine the sectionId
       const sectionId = param.lavelTwo || "Clothing";
-
+ 
       // Invoke the getFilters function to determine if it's a clothing category
       const { filters } = await getFilters(sectionId, param.lavelOne);
       const isClothingCategory = filters.length > 0 && (param.lavelOne === "Men" || param.lavelOne === "Women");
       setIsClothing(isClothingCategory);
       console.log("Is clothing category:", isClothingCategory);
     };
-
+ 
     usefilters();
   }, [param.lavelOne, param.lavelTwo]);
-
-
-
-
+ 
+ 
+ 
+ 
   const handleRadioFilterChange = (e, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set(sectionId, e.target.value);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-
+ 
   useEffect(() => {
     if (customersProduct.loading) {
       setIsLoaderOpen(true);
@@ -196,7 +196,7 @@ export default function Product() {
       setIsLoaderOpen(false);
     }
   }, [customersProduct.loading]);
-
+ 
   // const handleWishlistToggle = (product) => {
   //   if (isProductInWishlist(product)) {
   //     dispatch(removeWishlistItem({ jwt, wishlistItemId: product.id }));
@@ -204,12 +204,12 @@ export default function Product() {
   //     dispatch(addItemToWishlist({ jwt, data: product }));
   //   }
   // };
-
+ 
   // // Function to check if a product is in the wishlist
   // const isProductInWishlist = (product) => {
   //   return customersProduct.wishlist.some((item) => item.id === product.id);
   // };
-
+ 
   return (
     <div className="bg-white -z-20 ">
       <div>
@@ -231,7 +231,7 @@ export default function Product() {
             >
               <div className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
-
+ 
             <div className="fixed inset-0 z-40 flex">
               <Transition.Child
                 as={Fragment}
@@ -256,7 +256,7 @@ export default function Product() {
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-
+ 
                   {/* Filters */}
                   {isClothing && (
                     <form className="mt-4 border-t border-gray-200">
@@ -329,13 +329,13 @@ export default function Product() {
             </div>
           </Dialog>
         </Transition.Root>
-
+ 
         <main className="mx-auto px-4 lg:px-14 ">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               Product
             </h1>
-
+ 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
@@ -347,7 +347,7 @@ export default function Product() {
                     />
                   </Menu.Button>
                 </div>
-
+ 
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -381,7 +381,7 @@ export default function Product() {
                   </Menu.Items>
                 </Transition>
               </Menu>
-
+ 
               {/* <button
                 type="button"
                 className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
@@ -399,12 +399,12 @@ export default function Product() {
               </button>
             </div>
           </div>
-
+ 
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
+ 
             <div>
               <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -529,7 +529,7 @@ export default function Product() {
                     </Disclosure>
                   ))}
                 </form>
-
+ 
                 <div className="lg:col-span-4 w-full">
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
@@ -565,31 +565,31 @@ export default function Product() {
                       //   </div>     {/* Product card content */}
                       <ProductCard product={item} />
                       // </div>
-
+ 
                     ))}
-
+ 
                   </div>
                 </div>
               </div>
             </div>
           </section>
         </main>
-
+ 
         {/* pagination section */}
-
+ 
         <section className="w-full px-[3.6rem]">
           <div className="mx-auto px-4 py-5 flex justify-center shadow-lg border rounded-md">
-
+ 
             <Pagination
               count={totalPages}
               color="primary"
               className=""
               onChange={handlePaginationChange}
             />
-
+ 
           </div>
         </section>
-
+ 
         {/* {backdrop} */}
         <section>
           <BackdropComponent open={isLoaderOpen} />

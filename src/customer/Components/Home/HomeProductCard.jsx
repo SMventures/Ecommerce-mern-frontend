@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom'; // Import Link for React Router navigat
 // import { useNavigate } from "react-router-dom";
 
 const HomeProductCard = ({ product }) => {
-  // const navigate = useNavigate();
+  if (!product || !product._id) {
+    return null; // or return a placeholder component or message
+  }
+  console.log("Product:", product);
+  console.log("Product imgurl:",product?.imageUrl);
 
   return (
   

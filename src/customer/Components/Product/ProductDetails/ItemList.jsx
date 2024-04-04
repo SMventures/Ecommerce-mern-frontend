@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
-import "./styles2.css";
+// import "./styles2.css";
+import "./ItemList.css"
 // Define your custom arrow components
 const PrevArrow = (props) => {
     const { onClick } = props;
@@ -114,24 +115,24 @@ const ItemList = () => {
   return (
     <div className="item-list">
     <Slider slidesToShow={3} slidesToScroll={1} infinite={true} autoplay={false} autoplaySpeed={500} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-    
       {items.map((item, index) => (
-        <div className="item-container" key={index}>
-          <div className="item-image-container" style={{ border: '5px solid #bdbdbd', borderRadius: '10px', boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+        <div className="item-container" key={index} style={{ marginRight: '20px', width: 'calc(33.33% - 20px)' }}> {/* Reduce width and add margin to create gap */}
+          <div className="item-image-container" style={{ border: '2px solid #bdbdbd', borderRadius: '5px', boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
             <img src={item.image} alt={item.title} className="item-image py-5" style={{ width: '50%', height: '200px', display: 'block', float: 'left' }} />
             <div className="item-content mt-12 ml-5" style={{ paddingLeft: '10px', marginLeft: '40px',display: 'block', float: 'left' }}>
-            <div className="item-title font-bold" style={{ fontSize: '1.2em' }}>{item.title}</div>
-            <div className="item-description mb-4">{item.description}</div>
-           <a href={item.link} className="item-link font-bold" style={{ backgroundColor: 'blue', color: 'white', padding: '5px 20px', borderRadius: '5px', textDecoration: 'none', marginTop: '10px' }}>
-  Shop Now
-</a>
+              <div className="item-title font-bold" style={{ fontSize: '1.2em' }}>{item.title}</div>
+              <div className="item-description mb-4">{item.description}</div>
+              <a href={item.link} className="item-link font-bold" style={{ backgroundColor: 'blue', color: 'white', padding: '5px 20px', borderRadius: '5px', textDecoration: 'none', marginTop: '10px' }}>
+                Shop Now
+              </a>
+            </div>
           </div>
-          </div>
-          
         </div>
       ))}
     </Slider>
   </div>
+  
+
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./SlideComponent.css";
 
 const Container = styled(Box)`
@@ -63,6 +64,43 @@ const CenterContainer = styled(ColumnContainer)``;
 const RightHalfContainer = styled(ColumnContainer)``;
 
 const App = ({ leftData, centerData, rightData, leftSection, centerSection, rightSection }) => {
+  
+  const [leftCategoryPage, setLeftCategoryPage] = useState('');
+  const [centerCategoryPage, setCenterCategoryPage] = useState('');
+  const [rightCategoryPage, setRightCategoryPage] = useState('');
+
+  // Fetch category page data for each section
+  useEffect(() => {
+    getCategoryPage('leftCategory');
+    getCategoryPage('centerCategory');
+    getCategoryPage('rightCategory');
+  }, []);
+
+  const getCategoryPage = async (category) => {
+    const response = await fetch(`http://localhost:5454/api/products?category=${category}`);
+    const data = await response.json();
+
+    // Set the specific category page state based on the category
+    switch (category) {
+      case 'leftCategory':
+        setLeftCategoryPage(data.content);
+        break;
+      case 'centerCategory':
+        setCenterCategoryPage(data.content);
+        break;
+      case 'rightCategory':
+        setRightCategoryPage(data.content);
+        break;
+      default:
+        break;
+    }
+  };
+  // Render the component after fetching data
+  if (!leftCategoryPage || !centerCategoryPage || !rightCategoryPage) {
+    return null;
+  }
+
+
   if (!leftData || !Array.isArray(leftData) || leftData.length === 0 ||
     !centerData || !Array.isArray(centerData) || centerData.length === 0 ||
     !rightData || !Array.isArray(rightData) || rightData.length === 0) {
@@ -83,8 +121,8 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
       <LeftHalfContainer>
         <WhiteContainer>
           <BlueCircle style={{ position: "relative" }}>
-            {/* Added relative positioning */}
-            <svg width="16" height="16">
+          <Link to={leftCategoryPage}>
+                        <svg width="16" height="16">
               <path
                 d="m6.627 3.749 5 5-5 5"
                 stroke="#FFFFFF"
@@ -93,6 +131,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                 strokeLinejoin="round"
               ></path>
             </svg>
+            </Link>
           </BlueCircle>
 
           <SectionHeading variant="h2">{leftSection}</SectionHeading>
@@ -113,7 +152,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className="flex items-center space-x-1 ">
                     <p className="font-semibold text-sm">₹{product?.discountedPrice}</p>
                     <p className="opacity-50 line-through text-sm">₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>
@@ -136,7 +175,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className="flex items-center space-x-1 ">
                     <p className="font-semibold text-sm">₹{product?.discountedPrice}</p>
                     <p className="opacity-50 line-through text-sm">₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>
@@ -148,9 +187,11 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
       <CenterContainer>
         <WhiteContainer>
         <BlueCircle style={{ position: 'relative' }}> {/* Added relative positioning */}
+        <Link to={centerCategoryPage}>
   <svg width="16" height="16">
     <path d="m6.627 3.749 5 5-5 5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
   </svg>
+  </Link>
 </BlueCircle>
           <SectionHeading variant="h2">{centerSection}</SectionHeading>
           <CardContainer>
@@ -159,7 +200,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                 <Link to={`/product/${product._id}`}>
                   <div className="h-[10rem] w-[8rem]">
                     <img
-                      className="object-cover object-top w-full h-full"
+                      className="object-contain object-top w-full h-full"
                       src={product?.image || product?.imageUrl}
                       alt={product?.title}
                     />
@@ -172,7 +213,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className='flex items-center space-x-1 '>
                     <p className='font-semibold text-sm'>₹{product?.discountedPrice}</p>
                     <p className='opacity-50 line-through text-sm'>₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>
@@ -184,7 +225,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                 <Link to={`/product/${product._id}`}>
                   <div className="h-[10rem] w-[8rem]">
                     <img
-                      className="object-cover object-top w-full h-full"
+                      className="object-contain object-top w-full h-full"
                       src={product?.image || product?.imageUrl}
                       alt={product?.title}
                     />
@@ -197,7 +238,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className='flex items-center space-x-1 '>
                     <p className='font-semibold text-sm'>₹{product?.discountedPrice}</p>
                     <p className='opacity-50 line-through text-sm'>₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>
@@ -209,9 +250,12 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
       <RightHalfContainer>
         <WhiteContainer>
         <BlueCircle style={{ position: 'relative' }}> {/* Added relative positioning */}
+        <Link to={rightCategoryPage}>
+
   <svg width="16" height="16">
     <path d="m6.627 3.749 5 5-5 5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
   </svg>
+  </Link>
 </BlueCircle>
           <SectionHeading variant="h2">{rightSection}</SectionHeading>
           <CardContainer>
@@ -233,7 +277,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className='flex items-center space-x-1 '>
                     <p className='font-semibold text-sm'>₹{product?.discountedPrice}</p>
                     <p className='opacity-50 line-through text-sm'>₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>
@@ -245,7 +289,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                 <Link to={`/product/${product._id}`}>
                   <div className="h-[10rem] w-[8rem]">
                     <img
-                      className="object-cover object-top w-full h-full"
+                      className="object-contain object-top w-full h-full"
                       src={product?.image || product?.imageUrl}
                       alt={product?.title}
                     />
@@ -258,7 +302,7 @@ const App = ({ leftData, centerData, rightData, leftSection, centerSection, righ
                   <div className='flex items-center space-x-1 '>
                     <p className='font-semibold text-sm'>₹{product?.discountedPrice}</p>
                     <p className='opacity-50 line-through text-sm'>₹{product?.price}</p>
-                    <p className="text-green-600 font-semibold text-sm">{product?.discountPercent}% off</p>
+                    <p className="text-green-600 font-semibold text-sm">{product?.discountPersent}% off</p>
                   </div>
                 </div>
               </Card>

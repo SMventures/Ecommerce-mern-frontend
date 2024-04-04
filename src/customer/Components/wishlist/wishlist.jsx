@@ -42,23 +42,22 @@ const Wishlist = () => {
   }
 
   // Render wishlist items if wishlist is not empty
- // Render wishlist items if wishlist is not empty
-return (
-  <div className="mx-6 max-w-7xl px-2 sm:px-4 lg:px-6"> {/* Reduce left and right padding */}
-  {wishlist.wishlistItems.map((item) => (
-    <div key={item._id}>
-      {/* Log item id to console */}
-      {console.log("Item ID:", item._id)}
-      {/* Render wishlist item with a link to the product page */}
-      <a href={`/product/${item.product._id}`}>
-        <WishlistItem item={item} />
-      </a>
+  return (
+    <div className="mx-6 max-w-7xl px-2 sm:px-4 lg:px-6"> {/* Reduce left and right padding */}
+      {wishlist.wishlistItems.map((item) => (
+        <div key={item?._id}>
+          {/* Log item id to console */}
+          {console.log("Item ID:", item?._id)}
+          {/* Render wishlist item with a link to the product page */}
+          {item && item.product && (
+            <a href={`/product/${item.product._id}`}>
+              <WishlistItem item={item} />
+            </a>
+          )}
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-
-);
-
+  );
 };
 
 export default Wishlist;

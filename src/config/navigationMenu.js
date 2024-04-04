@@ -11,13 +11,13 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            href: 'women/clothing/Hoodies',
+            href: 'Women/Clothing/women_hoodies',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
           },
           {
             name: 'Basic Tees',
-            href: 'women/clothing/Tshirts',
+            href: 'Women/Clothing/women_tshirts',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
           },
@@ -44,13 +44,13 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            id: '#',
+            href: 'Men/Clothing/men_hoodies',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
           {
             name: 'Artwork Tees',
-            id: '#',
+            href: 'Men/Clothing/men_tshirts',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
             imageAlt:
               'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
@@ -78,17 +78,17 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+            href: 'Accessories/Phone_Accessories/Phone_Skins',
+            imageSrc: 'https://s3-eu-west-1.amazonaws.com/images.linnlive.com/093436108100fbc7dae16f8974130055/4217ad58-22c6-47ba-b35e-a9027d8256ed.jpg',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
-          {
-            name: 'Artwork Tees',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-            imageAlt:
-              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-          },
+          // {
+          //   // name: 'Artwork Tees',
+          //   // id: '#',
+          //   // imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          //   // imageAlt:
+          //   //   'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+          // },
         ],
         sections: [
           {
@@ -123,17 +123,16 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+            href: 'Stationery/Stationery_Items/Pen',
+            imageSrc: 'https://www.savetheplanet.ae/wp-content/uploads/2020/11/BG15.png',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
-          {
-            name: 'Artwork Tees',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-            imageAlt:
-              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-          },
+          // {
+          //   name: 'Artwork Tees',
+          //   id: '#',
+          //   imageSrc: 'https://www.savetheplanet.ae/wp-content/uploads/2020/11/BG15.png',
+          //   imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
+          // },
         ],
         sections: [
           {
@@ -161,17 +160,17 @@ export const navigation = {
         featured: [
           {
             name: 'New Arrivals',
-            href: "Books/Trading_Books/Risk_Management",
+            href: "Books/Trading_Books/Fundamental_Analysis",
             imageSrc: 'https://th.bing.com/th/id/OIP.-UrR4XN5e4Y7Vuwo8X7vZQAAAA?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
-          {
-            name: 'Artwork Tees',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-            imageAlt:
-              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-          },
+          // {
+          //   name: 'Artwork Tees',
+          //   id: '#',
+          //   imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          //   imageAlt:
+          //     'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+          // },
         ],
         sections: [
           {
@@ -202,13 +201,13 @@ export const navigation = {
             imageSrc: 'https://th.bing.com/th/id/OIP.8Weor-i2kcIYRpxjIk0mggHaEK?rs=1&pid=ImgDetMain',
             imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
           },
-          {
-            name: 'Artwork Tees',
-            id: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-            imageAlt:
-              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-          },
+          // {
+          //   name: 'Artwork Tees',
+          //   id: '#',
+          //   imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          //   imageAlt:
+          //     'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+          // },
         ],
         sections: [
           {

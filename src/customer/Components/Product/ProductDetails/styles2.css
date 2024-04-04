@@ -16,3 +16,78 @@
     z-index: 1;
     cursor: pointer;
   }
+
+  /* similar products */
+
+  .divider-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align items to the start and end */
+  }
+  
+  .divider-line {
+    flex-grow: 1; /* Allow the divider line to grow to fill remaining space */
+    border-top: 1px solid #ccc;
+    margin: 0 10px; /* Add margin to space out the divider line */
+  }
+  
+  .divider-content {
+    white-space: nowrap; /* Ensures the text remains in one line */
+  }
+  
+  .divider-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 2px 20px 2px 0; /* Adjust the right margin as needed */
+    margin-right:5px
+  }
+  
+  
+  /* .spacer {
+
+  
+  
+  .slider-container {
+    margin-top: 20px;
+  }
+  
+  
+  /* things bought together.css  */
+
+  .bought-together-card {
+    display: flex; /* Arrange image and info side-by-side */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .product-card {
+    width: 30%; /* Set card width to fit the container */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 5px; /* Add padding */
+    background-color: #f0f0f0; /* Light grey background color */
+    margin-left : 2%;
+  }
+  
+  .image-container {
+    width: auto; /* Adjust image width as needed */
+    margin-left: 5px; /* Add margin to the right side of the image */
+  }
+  
+  .product-info {
+    flex: 1; /* Allow remaining space for product info */
+  }
+  
+  .product-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .price {
+    color: #007bff;
+    font-weight: bold;
+  }
+  

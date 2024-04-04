@@ -20,7 +20,7 @@ import SearchResults from "../customer/Components/Home/Search/SearchResults"
 import  MyComponent from "../customer/Components/Home/MyComponent"
 import FAQ from "../customer/Components/footer/FAQ";
 import About from "../customer/Components/footer/About";
-import Prod from "../customer/Components/footer/Prod";
+import Prod from "../customer/Components/footer/prod";
 import Notfound from "../Pages/Notfound"
 import UnauthorizedPage from "../Pages/Unauthorized"
 import AdminPannel from "../Admin/AdminPannel";
