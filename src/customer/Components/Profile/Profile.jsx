@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button, Snackbar, Alert, FormControl, RadioGroup, FormControlLabel, Radio, Typography } from "@mui/material";
+import { Grid, TextField, Button, Snackbar, Alert, FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserPersonalInfo, getUser } from "../../../Redux/Auth/Action";
+import { updateUserPersonalInfo } from "../../../Redux/Auth/Action";
 import MyAccount from './MyAccount';
 
 export default function PersonalInformationForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
   const { auth } = useSelector((store) => store);
+  const jwt = localStorage.getItem("jwt");
   const [userInfo, setUserInfo] = useState({
     firstName: auth.user?.firstName || "",
     lastName: auth.user?.lastName || "",
@@ -39,6 +39,7 @@ export default function PersonalInformationForm() {
       console.error("Error updating profile:", error.message);
     }
   };
+  
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -75,12 +76,6 @@ export default function PersonalInformationForm() {
                 autoComplete="given-name"
                 value={userInfo.firstName}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -93,12 +88,6 @@ export default function PersonalInformationForm() {
                 autoComplete="family-name"
                 value={userInfo.lastName}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -112,12 +101,6 @@ export default function PersonalInformationForm() {
                 type="email"
                 value={userInfo.email}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,12 +113,6 @@ export default function PersonalInformationForm() {
                 autoComplete="tel"
                 value={userInfo.phoneNumber}
                 onChange={handleChange}
-                InputLabelProps={{
-                  style: { color: 'black' },
-                }}
-                InputProps={{
-                  style: { borderColor: 'black' },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
