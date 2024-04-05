@@ -370,28 +370,30 @@ const BackgroundBox = styled(Box)`
         </nav>
 
         {/* product details */}
-         <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
-          {/* Image gallery */}
-      {/* Sticky section */}
-      <div className="relative">
-        <div className="sticky top-0">
-          {/* Image gallery */}
-          <div className="flex flex-col items-center border border-gray-200 rounded-lg p-4">
-            <div className="absolute top-2 right-8 cursor-pointer" onClick={handlewishlistSubmit}>
-              {/* Wishlist icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill={isClicked ? 'red' : 'none'}
-                stroke={isClicked ? 'red' : 'grey'}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ width: '24px', height: '24px' }}
-              >
-                <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
-              </svg>
-            </div>
+        <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
+  {/* Image gallery */}
+  {/* Sticky section */}
+  <div className="relative">
+    <div className="sticky top-0">
+      {/* Image gallery */}
+      <div className="flex flex-col items-center border border-gray-200 rounded-lg p-4">
+        <div className="absolute top-2 right-8 cursor-pointer" onClick={handlewishlistSubmit}>
+          {/* Wishlist icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={isClicked ? 'red' : 'none'}
+            stroke={isClicked ? 'red' : 'grey'}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ width: '24px', height: '24px' }}
+          >
+            <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
+          </svg>
+        </div>
+        {/* Image with zoom effect */}
+       
 
             {/* Notification bar */}
             {showNotification && (
@@ -399,32 +401,34 @@ const BackgroundBox = styled(Box)`
                 Item added to wishlist
               </div>
             )}
+<div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
+  {/* Main product image with zoom effect */}
+  <div className="relative overflow-hidden">
+    <img
+      src={activeImage?.src || customersProduct.product?.imageUrl}
+      alt={product.images[0].alt}
+      className="h-full w-full object-cover object-center transition-transform duration-300 transform hover:scale-110"
+    />
+  </div>
+</div>
 
-            {/* Main product image */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
-              <img
-                src={activeImage?.src || customersProduct.product?.imageUrl}
-                alt={product.images[0].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-
-            {/* Thumbnail images */}
-            <div className="flex flex-wrap space-x-5 justify-center">
-              {product.images.map((image) => (
-                <div
-                  onClick={() => handleSetActiveImage(image)}
-                  className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
-                  key={image.id}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              ))}
-            </div>
+{/* Thumbnail images */}
+<div className="flex flex-wrap space-x-5 justify-center">
+  {product.images.map((image) => (
+    <div
+      onClick={() => handleSetActiveImage(image)}
+      className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
+      key={image.id}
+    >
+      {/* Thumbnail image */}
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="h-full w-full object-cover object-center transition-transform duration-300 transform hover:scale-110"
+      />
+    </div>
+  ))}
+</div>
 
             {/* Buttons */}
             <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>

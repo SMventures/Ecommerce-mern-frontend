@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPersonalInfo } from "../../../Redux/Auth/Action";
 import MyAccount from './MyAccount';
+import Typography from '@material-ui/core/Typography';
 
 export default function PersonalInformationForm() {
   const navigate = useNavigate();
