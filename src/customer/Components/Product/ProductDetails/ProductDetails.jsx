@@ -744,7 +744,7 @@ export default function ProductDetails() {
 {/* interest */}
 <section className="pt-10">
 <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-    <h1 className="py-5 text-xl font-bold">You might be interested in</h1>
+    <h1 className="py-5 text-xl font-bold">You may like</h1>
 <ItemList />
 </div>
 </section>
@@ -753,7 +753,7 @@ export default function ProductDetails() {
           {/* Bought together */}
           <section className="pt-10">
           <div style={{ borderRadius: '10px', padding: '20px', backgroundColor: '#f0f0f0' }}>
-            <h1 className="py-5 text-xl font-bold">Bought Together</h1>
+            <h1 className="py-5 text-xl font-bold">Frequently Bought Together</h1>
             <Slider slidesToShow={5} slidesToScroll={1} infinite={false} autoplay={false} autoplaySpeed={2000} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
               {BoughtTogether.slice(2, 15).map((item) => (
                 <a key={item._id} href={`/product/${item._id}`} className="mb-5">

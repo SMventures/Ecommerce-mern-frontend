@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
+  const param = useParams();
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const { productId } = useParams();
@@ -54,6 +55,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="productCardContainer">
       <div className="productCard w-[15rem] border m-3 transition-all cursor-pointer">
+        
         <div onClick={handleNavigate} className="h-[20rem] flex justify-center items-center relative">
           <FavoriteBorderIcon
             className="absolute top-4 right-4 cursor-pointer" // Adjusted position
@@ -81,8 +83,8 @@ const ProductCard = ({ product }) => {
             <p className="font-semibold opacity-50">{color}</p>
           </div>
           <div className="flex space-x-2 items-center">
-            <p className="font-semibold">₹{price}</p>
-            <p className="opacity-50 line-through">₹{discountedPrice}</p>
+            <p className="font-semibold">₹{discountedPrice}</p>
+            <p className="opacity-50 line-through">₹{price}</p>
             <p className="text-green-600 font-semibold">{discountPersent}% off</p>
           </div>
         </div>

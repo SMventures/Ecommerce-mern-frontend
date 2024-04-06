@@ -34,6 +34,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
 import { getFilters } from "./getfilters";
 import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
+import Slider from "@mui/material/Slider"; // Import the Slider component from Material-UI
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -59,6 +60,9 @@ export default function Product() {
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
   const sizeValue = searchParams.get("size");
+  const [minPrice, setMinPrice] = useState(0); // State variable for minimum price
+  const [maxPrice, setMaxPrice] = useState(10000); // State variable for maximum price
+
   const price = searchParams.get("price");
   const disccount = searchParams.get("disccout");
   const sortValue = searchParams.get("sort");
@@ -110,33 +114,39 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
+  // price slider
+  const handlePriceChange = (event, newValue) => {
+    setMinPrice(newValue[0]); // Update minimum price
+    setMaxPrice(newValue[1]); // Update maximum price
+  };
+
+  const handleDiscountChange = (event, newValue) => {
+    setMinDiscount(newValue[0]); // Update minimum discount
+    setMaxDiscount(newValue[1]); // Update maximum discount
+  };
+  // Step 1: Update component state to include discount range
+const [minDiscount, setMinDiscount] = useState(0); // State variable for minimum discount
+const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maximum discount
+
+
 
   useEffect(() => {
-    const [minPrice, maxPrice] =
-      price === null ? [0, 0] : price.split("-").map(Number);
     const data = {
       category: param.lavelThree,
       colors: colorValue || [],
       sizes: sizeValue || [],
-      minPrice: minPrice || 0,
-      maxPrice: maxPrice || 10000,
-      minDiscount: disccount || 0,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      minDiscount: minDiscount,
+      maxDiscount: maxDiscount,
       sort: sortValue || "price_low",
       pageNumber: pageNumber,
-      pageSize: 4, // Set pageSize to 4 for 4 products per page
+      pageSize: 8,
       stock: stock,
     };
     dispatch(findProducts(data));
-  }, [
-    param.lavelThree,
-    colorValue,
-    sizeValue,
-    price,
-    disccount,
-    sortValue,
-    pageNumber,
-    stock,
-  ]);
+  }, [param.lavelThree, colorValue, sizeValue, minPrice, maxPrice, minDiscount, maxDiscount, sortValue, pageNumber, stock]);
+  
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -332,14 +342,19 @@ export default function Product() {
 
         <main className="mx-auto px-4 lg:px-14 ">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            <div>
+            {/* <h1 className="text-3xl font-bold tracking-tight text-gray-900 ml-1">
               Product
-            </h1>
-
+              
+            </h1> */}
+            {/* product page heading */}
+            
+            </div>
+{/*  */}
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 mt-4">
                     Sort
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -400,13 +415,13 @@ export default function Product() {
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
+          <section aria-labelledby="products-heading" className="pb-24 pt-6 ">
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
 
             <div>
-              <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
+              <h2 className="py-1 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                 {/* Filters */}
                 <form className="hidden lg:block border rounded-md p-5">
@@ -528,9 +543,53 @@ export default function Product() {
                       )}
                     </Disclosure>
                   ))}
+                   <div className="mt-4">
+        <h3 className="font-semibold text-gray-500">Price Range</h3>
+        <Slider
+          value={[minPrice, maxPrice]}
+          onChange={handlePriceChange}
+          min={0}
+          max={10000}
+          step={100}
+          valueLabelDisplay="auto"
+        />
+        <p className="text-sm text-gray-500 mt-2">
+          ${minPrice} - ${maxPrice}
+        </p>
+      </div><div className="mt-4">
+  <h3 className="font-semibold text-gray-500">Discount Range</h3>
+  <Slider
+    value={[minDiscount, maxDiscount]}
+    onChange={handleDiscountChange}
+    min={0}
+    max={100}
+    step={1}
+    valueLabelDisplay="auto"
+  />
+  <p className="text-sm text-gray-500 mt-2">
+    {minDiscount}% - {maxDiscount}%
+  </p>
+</div>
                 </form>
+               
+                
 
                 <div className="lg:col-span-4 w-full">
+                <div>
+            <div className="flex items-center mt-0 ">
+            <h3 className="font-medium text-gray-500 hover:text-gray-600">
+    Home &gt;
+  </h3>
+  <h3 className="mr-2 text-sm font-medium text-gray-900">
+    {param.lavelTwo} &gt;
+  </h3>
+  <p className="mr-2 text-sm font-medium text-gray-900">{param.lavelThree}</p>
+</div>
+          <p className="text-sm text-gray-500 mb-5">
+         ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
+        </p>
+    </div>
+            
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
                       // <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
@@ -563,6 +622,7 @@ export default function Product() {
                       //       <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
                       //     </svg>
                       //   </div>     {/* Product card content */}
+                      
                       <ProductCard product={item} />
                       // </div>
 

@@ -56,7 +56,7 @@ export const singleFilter=[
     name: "Disccount Range",
     options: [
       {
-        value: "10",
+        value: "9",
         label: "10% And Above",
       },
       { value: "20", label: "20% And Above" },
