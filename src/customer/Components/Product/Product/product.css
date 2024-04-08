@@ -1,0 +1,19 @@
+/* Style to position the filter section on the top left corner */
+.filter-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px; /* Adjust the width as needed */
+    padding: 20px; /* Add padding as needed */
+  }
+  
+  /* Style to adjust the spacing between lavel names and sort function */
+  .items-baseline {
+    justify-content: space-between;
+  }
+  
+  /* Style to position the sort function on the right */
+  .sort-function {
+    margin-left: auto;
+  }
+  

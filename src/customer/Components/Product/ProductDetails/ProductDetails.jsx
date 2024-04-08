@@ -2,6 +2,9 @@ import * as React from 'react';
 import { Fragment } from 'react';
 import { useState } from "react";
 import "./styles2.css";
+import { useTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "../../ReviewProduct/ProductReviewCard";
@@ -13,7 +16,7 @@ import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
+import { addItemToCart,addMultipleItemsToCart } from "../../../../Redux/Customers/Cart/Action";
 import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
 import {
   findProductById,
@@ -21,6 +24,7 @@ import {
   getBoughtTogether,
   getInterested,
 } from "../../../../Redux/Customers/Product/Action";
+import { Link } from 'react-router-dom';
 
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gouns/gouns";
@@ -111,7 +115,7 @@ function classNames(...classes) {
 }
 
 
-export default function ProductDetails() {
+export default function ProductDetails({}) {
   const [selectedSize, setSelectedSize] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
   const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
@@ -124,9 +128,17 @@ export default function ProductDetails() {
   const { review, customersProduct } = useSelector((store) => store);
   const { productId } = useParams();
   const jwt = localStorage.getItem("jwt");
+  const [magnifyingGlassPosition, setMagnifyingGlassPosition] = useState({ x: 0, y: 0 });
+  const [showMagnifyingGlass, setShowMagnifyingGlass] = useState(false);
+  const theme = useTheme();
 
   const [showRatingReview, setShowRatingReview] = useState(false);
 
+    const [showRateProduct, setShowRateProduct] = useState(false);
+  
+    const handleAddReviewClick = () => {
+      setShowRateProduct(true);
+    };
   const Component = styled(Box)`
   padding: 20px;
   background: #f2f2f2;
@@ -164,10 +176,25 @@ export default function ProductDetails() {
     const data = await response.json();
     setBoughtTogether(data.content);
   };
-  
 
-  
+  const handleMouseMove = (e) => {
+    // Calculate the position of the magnifying glass relative to the image
+    const imageRect = e.target.getBoundingClientRect();
+    const mouseX = e.clientX - imageRect.left;
+    const mouseY = e.clientY - imageRect.top;
 
+    // Adjust the magnifying glass position based on mouse coordinates
+    const glassX = (mouseX / imageRect.width) * 100;
+    const glassY = (mouseY / imageRect.height) * 100;
+
+    // Set the magnifying glass position
+    setMagnifyingGlassPosition({ x: glassX, y: glassY });
+  };
+
+  const handleMouseLeave = () => {
+    // Reset the magnifying glass position when the mouse leaves the image
+    setMagnifyingGlassPosition({ x: 0, y: 0 });
+  };
   const getInterested = async (category) => {
     const response = await fetch(`http://localhost:5454/api/products`);
     const data = await response.json();
@@ -194,13 +221,37 @@ export default function ProductDetails() {
     dispatch(addItemToCart(items));
   }
   
+  // const handleCartSubmit = () => {
+  //   // Add both frequently bought products to the cart
+  //   dispatch(addItemToCart(customersProduct.product));
+  //   BoughtTogether.slice(0, 2).forEach(productSet => {
+  //     dispatch(addItemToCart(productSet));
+  //   });
+  // };
   const handleCartSubmit = () => {
-    const itemsToAdd = [customersProduct.product, BoughtTogether[0], BoughtTogether[1]];
+
+    // const productSetId = productSet._id;
+    // const productId = productId;
+    // Assuming BoughtTogether is an array containing frequently bought together products
+    const frequentlyBoughtTogetherProduct = BoughtTogether.slice(0, 2); // Assuming you want to include the first two frequently bought together products
+    
+    // Ensure that productId and size are correctly set for both items in the data array
+    const data = frequentlyBoughtTogetherProduct.map(productSet => ({
+        productId: productSet._id, // Assign the product set's ID to productSetId
+        size: productSet.size
+    }));
+
+    // Add the current product to the data array with the same key name as frequently bought together product
+    data.push({ productId,  size: selectedSize ? selectedSize.name : null });
+    data.push({ productId:productId,  size: selectedSize ? selectedSize.name : null });
+
+    console.log("Data to be added to cart:", data); // Add console log to see the data being sent to the cart
   
-    // Call addToCart function to add items to the cart
-    console.log("Submitting items to cart:", itemsToAdd);
-    addToCart(itemsToAdd);
-  };
+    dispatch(addMultipleItemsToCart({ data, jwt }));
+    navigate("/cart");
+};
+
+
   
   const handlewishlistSubmit = () => {
     const data = { productId };
@@ -315,7 +366,58 @@ const BackgroundBox = styled(Box)`
   margin-top: 10px;
   background:  #f2f2f2;
 `;
+
+const getTotalReviews = () => {
+  return review.reviews ? review.reviews.length : 0;
+};
+
+const calculateAverageRating = () => {
+  let total = 0;
+  review.reviews?.forEach((item) => {
+    total += item.rating;
+  });
+  return total / getTotalReviews();
+};
+
+const getRatingDistribution = () => {
+  const ratings = { Excellent: 0, 'Very Good': 0, Good: 0, Average: 0, Poor: 0 };
+  review.reviews?.forEach((item) => {
+    if (item.rating >= 4.5) ratings.Excellent++;
+    else if (item.rating >= 4) ratings['Very Good']++;
+    else if (item.rating >= 3) ratings.Good++;
+    else if (item.rating >= 2) ratings.Average++;
+    else ratings.Poor++;
+  });
+  const total = getTotalReviews();
+  return Object.entries(ratings).map(([label, count]) => ({
+    label,
+    count,
+    percent: (count / total) * 100,
+  }));
+};
+
+// const getRatingColor = (rating) => {
+//   switch (rating) {
+//     case 'Excellent':
+//     case 'Very Good':
+//       return '#4caf50'; // Green color from Material-UI palette
+//     case 'Good':
+//       return '#ff9800'; // Orange color from Material-UI palette
+//     case 'Average':
+//       return '#2196f3'; // Blue color from Material-UI palette
+//     case 'Poor':
+//       return '#f44336'; // Red color from Material-UI palette
+//     default:
+//       return ''; // Return an empty string or default color if rating is not recognized
+//   }
+// };
+// const getRatingColor = () => {
+//   return '#4caf50'; // Green color from Material-UI palette
+// };
+
   return (
+    <ThemeProvider theme={theme}>
+
     <Component>
       {/* <div style={{  padding: '5px', backgroundColor: '#f0f0f0' ,width: '100%' }}> */}
         {/* <WhiteContainer> */}
@@ -401,6 +503,7 @@ const BackgroundBox = styled(Box)`
                 Item added to wishlist
               </div>
             )}
+
 <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
   {/* Main product image with zoom effect */}
   <div className="relative overflow-hidden">
@@ -429,8 +532,7 @@ const BackgroundBox = styled(Box)`
     </div>
   ))}
 </div>
-
-            {/* Buttons */}
+     {/* Buttons */}
             <form className="mt-10 flex flex-wrap space-x-5 justify-center" onSubmit={handleSubmit}>
               {/* Add to cart button */}
               <Button
@@ -509,7 +611,7 @@ const BackgroundBox = styled(Box)`
                  
                 </div> */}
 
-                <div className="mt-6">
+                <div className="mt-4">
 
 
                   <div className="flex items-center space-x-3">
@@ -520,9 +622,9 @@ const BackgroundBox = styled(Box)`
                   </div>
                 </div>
                 {showSizes && (
-                  <form className="mt-10" onSubmit={handleSubmit}>
+                  <form className="mt-4" onSubmit={handleSubmit}>
                     {/* Sizes */}
-                    <div className="mt-10">
+                    <div className="mt-4">
                       <div className="flex items-center justify-between">
                         <h5 className="text-lg font-semibold text-gray-900">Size</h5> {/* Adjust font size here */}
                       </div>
@@ -598,44 +700,69 @@ const BackgroundBox = styled(Box)`
                 )}
 
               </div>
-              <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-                {/* Description and details */}
-                <div>
-                  <h3 className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Description</h3>
+            
+              <div className="py-10 lg:col-span-2 mt-4 lg:col-start-1  lg:pb-16 lg:pr-8 lg:pt-6">
+  {/* Description and details */}
+  <div >
+    <h3 className="text-xl font-bold text-gray-900 mt-2 mb-4" style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>DESCRIPTION</h3>
+    <div className="space-y-6">
+      <p className="text-base text-gray-900 mb-5" style={{ marginTop: '0.5rem' }}>{customersProduct.product?.description}</p>
+    </div>
+  </div>
 
-                  <div className="space-y-6">
-                    <p className="text-base text-gray-900 mb-5">
-                      {customersProduct.product?.description}
-                    </p>
-                  </div>
-                </div>
-                {/* Highlights */}
-                {/* highlights */}
- 
-                <Box sx={{ width: '100%' }}>
-                  <Accordion
-                    expanded={expanded === 'panel1'}
-                    onChange={handleChange('panel1')}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1d-content"
-                      id="panel1d-header"
-                    >
-                      <Typography component="h3" variant="subtitle2 " className='text-l lg:text-xl font-bold text-gray-900 mt-2 mb-1' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-                        Highlights
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Box sx={{ maxWidth: { sm: '100%', md: '100%' }, overflowX: 'auto' }}>
-                        <Typography variant="body2" gutterBottom>
-                          <pre className="text-base text-gray-900">
-                            {customersProduct.product?.highlights}
-                          </pre>
-                        </Typography>
-                      </Box>
-                    </AccordionDetails>
-                  </Accordion>
+  {/* Highlights */}
+  {customersProduct.product?.highlights && (
+  <Box sx={{ width: '100%'}}>
+    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1d-content" id="panel1d-header">
+        <Typography component="h3" variant="subtitle2" className="text-xl font-bold text-gray-900 mt-2 mb-1" style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+          HIGHLIGHTS
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Box sx={{ maxWidth: { sm: '100%', md: '100%' }, overflowX: 'auto' }}>
+          <div className="flex">
+            <div className="w-1/2 pr-2 flex flex-col justify-between"> {/* Left side for key */}
+              <ul className="list-none pl-4 ml-4">
+                {customersProduct.product.highlights.split(',').map((highlight, index) => {
+                  const [key, value] = highlight.split(':').map(item => item.trim()); // Trim key and value
+                  console.log("Key:", key);
+                  console.log("Value:", value);
+                  return (
+                    <li key={index} className="mb-2 text-black-400">
+                      {key}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="w-1/2 pl-2 border-l border-gray-300 flex flex-col justify-between"> {/* Right side for value */}
+              <ul className="list-none pl-4 ml-4">
+                {customersProduct.product.highlights.split(',').map((highlight, index) => {
+                  const [key, value] = highlight.split(':').map(item => item.trim()); // Trim key and value
+                  console.log("Key:", key);
+                  console.log("Value:", value);
+                  return (
+                    <li key={index} className="mb-2">
+                      {value}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </Box>
+      </AccordionDetails>
+    </Accordion>
+  </Box>
+)}
+
+
+
+
+
+
+
  
                   {/* specification 
  
@@ -663,7 +790,6 @@ const BackgroundBox = styled(Box)`
                       </Box>
                     </AccordionDetails>
                   </Accordion>*/}
-                </Box> 
 
 
 
@@ -698,20 +824,77 @@ const BackgroundBox = styled(Box)`
 
 </TableBody>
 </Table>
+</div>
 
 
+{/* Add review button */}
+<div className="px-5 lg:px-20">
+  {showRatingReview && (
+    <section>
+      <h1 className="font-semibold text-lg pb-4">Recent Review & Ratings</h1>
+      <div className="border p-5">
+        <Grid container spacing={7}>
+          <Grid item xs={7}>
+            {/* Render reviews here */}
+            <div className="space-y-5">
+              {review.reviews?.map((item, i) => (
+                <ProductReviewCard item={item} key={i} />
+              ))}
+            </div>
+          </Grid>
+          <Grid item xs={5}>
+            <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
+            <div className="flex items-center space-x-3 pb-10">
+              <Rating
+                name="read-only"
+                value={calculateAverageRating()}
+                precision={0.5}
+                readOnly
+              />
+              <p className="opacity-60">{getTotalReviews()} Ratings</p>
+            </div>
+            {getRatingDistribution().map((rating, index) => (
+              <Box key={index}>
+                <Grid
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={2}
+                >
+                  <Grid item xs={2}>
+                    <p className="p-0">{rating.label}</p>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <LinearProgress
+                      className=""
+                      sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                      variant="determinate"
+                      value={rating.percent}
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <p className="opacity-50 p-2">{rating.count}</p>
+                  </Grid>
+                </Grid>
+              </Box>
+            ))}
+          </Grid>
+        </Grid>
+      </div>
+    </section>
+  )}
         {/* rating and review section */}
         <section className="">
         <h1 className="font-semibold text-2xl pb-4 mt-4">
     Ratings & Reviews
 </h1>
-
+ 
          
         </section>
 
-
-
-
+ 
+ 
+ 
         {/* rating and review section */}
         <Grid item xs={7}>
           <div className="space-y-5">
@@ -728,19 +911,17 @@ const BackgroundBox = styled(Box)`
             Add a review
           </button>
         </div>
-
+ 
         {/* Add margin or padding to create a gap */}
-
-
+ 
+ 
         {/* Conditionally render the rating and review section */}
         {showRatingReview && (
           <Grid container spacing={7}>
             <RateProduct />
           </Grid>
         )}
-
-
-
+</div>
 
                 {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
@@ -790,13 +971,12 @@ const BackgroundBox = styled(Box)`
               
               
               </div>
-            </div>
           </Container >
         </section>
         </WhiteContainer>
     </div>
+    </div>
  
-        </div>
 
         
 
@@ -813,7 +993,6 @@ const BackgroundBox = styled(Box)`
 
         {/* </div> */}
         </WhiteContainer>
-
 </div>
 
 
@@ -891,25 +1070,29 @@ const BackgroundBox = styled(Box)`
             <div className="plus-sign flex justify-center items-center mx-4"> {/* Center the plus sign */}
               +
             </div>
-            {/* Product 2 */}
-            <div className="product-card"> {/* Wrap product 2 in a card-like container */}
-              <div className="image-container relative">
-                <img
-                  src={productSet.imageUrl}
-                  alt={productSet.alt}
-                  className="h-48 w-full object-cover object-center"
-                />
-                <div className="product-info flex flex-col justify-center items-center"> {/* Container for product details */}
-                  <h2 className="product-name text-black mb-1">{productSet.title}</h2>
-                  <div className="flex items-center mb-1">
-                    <span className="text-gray-500 line-through mr-1">₹{productSet.price}</span> {/* Strike-through original price */}
-                    <span className="text-green-600 font-semibold">({productSet.discountPersent}% Off)</span> {/* Display discount percentage */}
-                  </div>
-                  <p className="text-black ">₹{productSet.discountedPrice}</p> {/* Display discounted price */}
-                </div>
-              </div>
-            </div>
-            
+
+  {/* Product 2 */}
+  <div className="product-card"> {/* Wrap product 2 in a card-like container */}
+  <a href={`/product/${productSet._id}`} key={productSet._id}>
+    <div className="image-container relative">
+      <img
+        src={productSet.imageUrl}
+        alt={productSet.alt}
+        className="h-48 w-full object-cover object-center"
+      />
+      <div className="product-info flex flex-col justify-center items-center"> {/* Container for product details */}
+        <h2 className="product-name text-black mb-1">{productSet.title}</h2>
+        <div className="flex items-center mb-1">
+          <span className="text-gray-500 line-through mr-1">₹{productSet.price}</span> {/* Strike-through original price */}
+          <span className="text-green-600 font-semibold">({productSet.discountPersent}% Off)</span> {/* Display discount percentage */}
+        </div>
+        <p className="text-black ">₹{productSet.discountedPrice}</p> {/* Display discounted price */}
+      </div>
+    </div>
+  </a>
+</div>
+
+
             <div className="flex justify-end mt-8 mx-12">
               <div className="flex justify-center mb-8 mr-8">
                 <div className="w-full max-w-md border border-gray-200 rounded-lg overflow-hidden shadow-md ml-4">
@@ -976,9 +1159,10 @@ const BackgroundBox = styled(Box)`
           {/* </section> */}
           
         </div>
-
       
     {/* </div > */}
     </Component>
+    </ThemeProvider>
+
   );
 }

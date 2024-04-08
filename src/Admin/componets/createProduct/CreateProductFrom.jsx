@@ -69,6 +69,11 @@ const CreateProductForm = () => {
         ...prevState,
         [name]: e.target.files[0], // Set image file in productData
       }));
+    } else if (name === "highlights") {
+      setProductData((prevState) => ({
+        ...prevState,
+        [name]: value.split('\n'), // Split value by newline to convert to array
+      }));
     } else {
       setProductData((prevState) => ({
         ...prevState,
@@ -76,7 +81,7 @@ const CreateProductForm = () => {
       }));
     }
   };
-
+  
   const handleSizeChange = (e, index) => {
     const { name, value } = e.target;
     const updatedSizes = [...sizes]; // Make a copy of the sizes array
@@ -372,19 +377,18 @@ const CreateProductForm = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="outlined-multiline-static"
-              label="highlights"
-              multiline
-              name="highlights"
-              rows={3}
-              onChange={handleChange}
-              value={productData.highlights}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
+        <TextField
+          fullWidth
+          id="outlined-multiline-static"
+          label="Highlights"
+          multiline
+          name="highlights"
+          rows={3}
+          onChange={handleChange}
+          value={Array.isArray(productData.highlights) ? productData.highlights.join('\n') : productData.highlights}
+        />
+      </Grid>
+        {/* <Grid item xs={12}>
             <TextField
               fullWidth
               id="outlined-multiline-static"
@@ -395,7 +399,7 @@ const CreateProductForm = () => {
               onChange={handleChange}
               value={productData. specifications}
             />
-          </Grid>
+          </Grid> */}
 
           {sizes.map((size, index) => (
             <Grid container item spacing={3} key={index}>

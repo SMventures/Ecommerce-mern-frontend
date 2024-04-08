@@ -18,7 +18,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
- 
+import { Box, styled } from "@mui/material";
 import { filters, singleFilter, sortOptions } from "./FilterData";
 import ProductCard from "../ProductCard/ProductCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -34,7 +34,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import BackdropComponent from "../../BackDrop/Backdrop";
 import { getFilters } from "./getfilters";
 import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
- 
+import Slider from "@mui/material/Slider"; // Import the Slider component from Material-UI
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -111,6 +111,17 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
  
+  // discount slider
+  const handleDiscountChange = (event, newValue) => {
+    setMinDiscount(newValue[0]); // Update minimum discount
+    setMaxDiscount(newValue[1]); // Update maximum discount
+  };
+ // Step 1: Update component state to include discount range
+ const [minDiscount, setMinDiscount] = useState(0); // State variable for minimum discount
+ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maximum discount
+ 
+ 
+ 
   useEffect(() => {
     const [minPrice, maxPrice] =
       price === null ? [0, 0] : price.split("-").map(Number);
@@ -120,7 +131,8 @@ export default function Product() {
       sizes: sizeValue || [],
       minPrice: minPrice || 0,
       maxPrice: maxPrice || 10000,
-      minDiscount: disccount || 0,
+      minDiscount: minDiscount,
+      maxDiscount: maxDiscount,
       sort: sortValue || "price_low",
       pageNumber: pageNumber,
       pageSize: 8, // Set pageSize to 4 for 4 products per page
@@ -132,10 +144,11 @@ export default function Product() {
     colorValue,
     sizeValue,
     price,
-    disccount,
     sortValue,
     pageNumber,
     stock,
+    minDiscount,
+    maxDiscount,
   ]);
  
   const handleFilter = (value, sectionId) => {
@@ -209,10 +222,20 @@ export default function Product() {
   // const isProductInWishlist = (product) => {
   //   return customersProduct.wishlist.some((item) => item.id === product.id);
   // };
- 
+  const Component = styled(Box)`
+  padding: 10px;
+  background: #f2f2f2;
+`;
+const WhiteContainer = styled(Box)`
+background: #fff;
+padding: 20px;
+`;
   return (
+ < Component>
+   
     <div className="bg-white -z-20 ">
-      <div>
+     
+      <div >
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
@@ -258,88 +281,93 @@ export default function Product() {
                   </div>
  
                   {/* Filters */}
-                  {isClothing && (
-                    <form className="mt-4 border-t border-gray-200">
-                      {filters.map((section) => (
-                        <Disclosure
-                          as="div"
-                          key={section.id}
-                          className="border-t border-gray-200 px-4 py-6"
-                        // open={false}
-                        >
-                          {({ open }) => (
-                            <>
-                              <h3 className="-mx-2 -my-3 flow-root">
-                                <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                  <span className="font-medium text-gray-900">
-                                    {section.name}
-                                  </span>
-                                  <span className="ml-6 flex items-center">
-                                    {open ? (
-                                      <MinusIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                    ) : (
-                                      <PlusIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                    )}
-                                  </span>
-                                </Disclosure.Button>
-                              </h3>
-                              <Disclosure.Panel className="pt-6">
-                                <div className="space-y-6">
-                                  {section.options.map((option, optionIdx) => (
-                                    <div
-                                      key={option.value}
-                                      className="flex items-center"
-                                    >
-                                      <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type="checkbox"
-                                        defaultChecked={option.checked}
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                        onChange={() =>
-                                          handleFilter(option.value, section.id)
-                                        }
-                                      />
-                                      <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                        className="ml-3 min-w-0 flex-1 text-gray-500"
-                                      // onClick={()=>handleFilter(option.value,section.id)}
-                                      >
-                                        {option.label}
-                                      </label>
-                                    </div>
-                                  ))}
-                                </div>
-                              </Disclosure.Panel>
-                            </>
+                  <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}>
+                        {/* <WhiteContainer> */}
+                          {isClothing && (
+                            <form className="mt-4 border-t border-gray-200">
+                              {filters.map((section) => (
+                                <Disclosure
+                                  as="div"
+                                  key={section.id}
+                                  className="border-t border-gray-200 px-4 py-6"
+                                >
+                                  {({ open }) => (
+                                    <>
+                                      <h3 className="-mx-2 -my-3 flow-root">
+                                        <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                          <span className="font-medium text-gray-900">
+                                            {section.name}
+                                          </span>
+                                          <span className="ml-6 flex items-center">
+                                            {open ? (
+                                              <MinusIcon
+                                                className="h-5 w-5"
+                                                aria-hidden="true"
+                                              />
+                                            ) : (
+                                              <PlusIcon
+                                                className="h-5 w-5"
+                                                aria-hidden="true"
+                                              />
+                                            )}
+                                          </span>
+                                        </Disclosure.Button>
+                                      </h3>
+                                      <Disclosure.Panel className="pt-6">
+                                        <div className="space-y-6">
+                                          {section.options.map((option, optionIdx) => (
+                                            <div
+                                              key={option.value}
+                                              className="flex items-center"
+                                            >
+                                              <input
+                                                id={`filter-mobile-${section.id}-${optionIdx}`}
+                                                name={`${section.id}[]`}
+                                                defaultValue={option.value}
+                                                type="checkbox"
+                                                defaultChecked={option.checked}
+                                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                onChange={() =>
+                                                  handleFilter(option.value, section.id)
+                                                }
+                                              />
+                                              <label
+                                                htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                                className="ml-3 min-w-0 flex-1 text-gray-500"
+                                              >
+                                                {option.label}
+                                              </label>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </Disclosure.Panel>
+                                    </>
+                                  )}
+                                </Disclosure>
+                              ))}
+                            </form>
                           )}
-                        </Disclosure>
-                      ))}
-                    </form>
-                  )}
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </Dialog>
-        </Transition.Root>
- 
+                        {/* </WhiteContainer> */}
+                      </div>
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </Dialog>
+            </Transition.Root>
+           
         <main className="mx-auto px-4 lg:px-14 ">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              Product
+        {/* <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}>
+            <WhiteContainer> */}
+          <div className="flex items-baseline justify-between  pb-6">
+            {/* <div>
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 ml-1">
+              Products
             </h1>
- 
+          </div> */}
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                  <Menu.Button className="group inline-flex justify-right text-sm font-medium text-gray-700 hover:text-gray-900">
                     Sort
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -399,12 +427,14 @@ export default function Product() {
               </button>
             </div>
           </div>
- 
+          {/* </WhiteContainer>
+          </div> */}
+
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">
+            {/* <h2 id="products-heading" className="sr-only">
               Products
-            </h2>
- 
+            </h2> */}
+
             <div>
               <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -528,9 +558,41 @@ export default function Product() {
                       )}
                     </Disclosure>
                   ))}
+                  <div className="mt-4">
+  <h3 className="font-semibold text-gray-500">Discount Range</h3>
+  <Slider
+    value={[minDiscount, maxDiscount]}
+    onChange={handleDiscountChange}
+    min={0}
+    max={100}
+    step={1}
+    valueLabelDisplay="auto"
+  />
+ <div className="text-center">
+    <p className="text-sm text-gray-500 mt-2 flex items-center justify-center">
+      {minDiscount}% - {maxDiscount}%
+    </p>
+  </div>
+</div>
+ 
                 </form>
  
                 <div className="lg:col-span-4 w-full">
+                <div>
+            <div className="flex items-center mt-0 ">
+            <h3 className="font-medium text-gray-500 hover:text-gray-600">
+            {param.lavelOne} /
+  </h3>
+  <h3 className="mr-2 text-sm font-medium text-gray-900">
+    {param.lavelTwo} /
+  </h3>
+  <p className="mr-2 text-sm font-medium text-gray-900">{param.lavelThree}</p>
+</div>
+          <h3 className="font-semibold text-gray-600 mb-5">
+         ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
+        </h3>
+    </div>
+           
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
                     {customersProduct?.products?.content?.map((item) => (
                       // <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
@@ -596,5 +658,6 @@ export default function Product() {
         </section>
       </div>
     </div >
+    </Component>
   );
 }

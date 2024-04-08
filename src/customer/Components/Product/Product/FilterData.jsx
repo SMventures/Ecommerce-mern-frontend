@@ -51,23 +51,23 @@ export const singleFilter=[
       { value: "3999-4999", label: "₹3999 To ₹4999" },
     ],
   },
-  {
-    id: "disccout",
-    name: "Disccount Range",
-    options: [
-      {
-        value: "9",
-        label: "10% And Above",
-      },
-      { value: "19", label: "20% And Above" },
-      { value: "29", label: "30% And Above" },
-      { value: "39", label: "40% And Above" },
-      { value: "49", label: "50% And Above" },
-      { value: "59", label: "60% And Above" },
-      { value: "69", label: "70% And Above" },
-      { value: "79", label: "80% And Above" },
-    ],
-  },
+  // {
+  //   id: "disccout",
+  //   name: "Disccount Range",
+  //   options: [
+  //     {
+  //       value: "9",
+  //       label: "10% And Above",
+  //     },
+  //     { value: "19", label: "20% And Above" },
+  //     { value: "29", label: "30% And Above" },
+  //     { value: "39", label: "40% And Above" },
+  //     { value: "49", label: "50% And Above" },
+  //     { value: "59", label: "60% And Above" },
+  //     { value: "69", label: "70% And Above" },
+  //     { value: "79", label: "80% And Above" },
+  //   ],
+  // },
   // {
   //   id: "stock",
   //   name: "Availability",

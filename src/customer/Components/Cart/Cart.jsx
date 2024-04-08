@@ -1,23 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
-import { Badge, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getCart } from "../../../Redux/Customers/Cart/Action";
-import { blue } from '@mui/material/colors';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import { blue } from "@mui/material/colors";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const { cart } = useSelector(store => store);
-  console.log("cart ", cart);
+  const { cart } = useSelector((store) => store);
+  const [totalAmountBefore, setTotalAmountBefore] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [itemQuant, setItemQuant] = useState(0);
 
   useEffect(() => {
     dispatch(getCart(jwt));
-  }, [jwt]);
+  }, [dispatch, jwt]);
+
+  useEffect(() => {
+    // Calculate total amount
+    const calculateTotalAmount = () => {
+      if (!cart.cartItems || cart.cartItems.length === 0) {
+        return 0;
+      }
+
+      return cart.cartItems.reduce((total, item) => {
+        if (item && item.product && item.product.discountedPrice) {
+          return total + item.product.discountedPrice * item.quantity;
+        } else {
+          return total;
+        }
+      }, 0);
+    };
+
+    // Calculate total amount before discount
+    const calculateTotalAmountBefore = () => {
+      if (!cart.cartItems || cart.cartItems.length === 0) {
+        return 0;
+      }
+
+      return cart.cartItems.reduce((total, item) => {
+        if (item && item.product && item.product.price) {
+          return total + item.product.price * item.quantity;
+        } else {
+          return total;
+        }
+      }, 0);
+    };
+
+    setTotalAmountBefore(calculateTotalAmountBefore());
+    setTotalAmount(calculateTotalAmount());
+
+    // Calculate total discount
+    const calculateDiscount = () => {
+      if (!cart.cartItems || cart.cartItems.length === 0) {
+        return 0;
+      }
+
+      return cart.cartItems.reduce((discount, item) => {
+        if (item && item.product && item.product.price && item.product.discountedPrice) {
+          return discount + (item.product.price - item.product.discountedPrice) * item.quantity;
+        } else {
+          return discount;
+        }
+      }, 0);
+    };
+
+    setDiscount(calculateDiscount());
+
+    // Calculate total item quantity
+    const totalItems = cart.cartItems.reduce((total, item) => {
+      return total + item.quantity;
+    }, 0);
+    setItemQuant(totalItems);
+
+  }, [cart]);
 
   return (
     <div className="">
@@ -37,12 +98,12 @@ const Cart = () => {
 
               <div className="space-y-3 font-semibold">
                 <div className="flex justify-between pt-3 text-black ">
-                  <span>Price ({cart.cart?.totalItem} item)</span>
-                  <span>₹{cart.cart.totalPrice}</span>
+                  <span>Price {itemQuant} item</span>
+                  <span>₹{totalAmountBefore}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Discount</span>
-                  <span className="text-green-700">-₹{cart.cart?.discounte}</span>
+                  <span className="text-green-700">-₹{discount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Delivery Charges</span>
@@ -51,7 +112,7 @@ const Cart = () => {
                 <hr />
                 <div className="flex justify-between font-bold text-lg">
                   <span>Total Amount</span>
-                  <span className="text-green-700">₹{cart.cart?.totalDiscountedPrice}</span>
+                  <span className="text-green-700">₹{totalAmount}</span>
                 </div>
               </div>
 
@@ -59,7 +120,7 @@ const Cart = () => {
                 onClick={() => navigate("/checkout?step=2")}
                 variant="contained"
                 type="submit"
-                sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%",  backgroundColor:blue[700], // Change the background color to blue
+                sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%",  backgroundColor: blue[700], // Change the background color to blue
                 "&:hover": {
                   backgroundColor: blue[500] // Change the background color on hover
                 } }}

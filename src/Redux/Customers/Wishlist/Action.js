@@ -13,6 +13,7 @@ import {
     UPDATE_WISHLIST_ITEM_REQUEST,
     UPDATE_WISHLIST_ITEM_SUCCESS,
     UPDATE_WISHLIST_ITEM_FAILURE,
+    UPDATE_WISHLIST_TOTAL,
 } from "./ActionType";
 
 export const addItemToWishlist = (reqData) => async (dispatch) => {
@@ -30,6 +31,7 @@ export const addItemToWishlist = (reqData) => async (dispatch) => {
       reqData.data,
       config,
         );
+        dispatch(updateWishlistTotal(reqData.newTotal));
 
         dispatch({
             type: ADD_ITEM_TO_WISHLIST_SUCCESS,
@@ -84,6 +86,8 @@ export const removeWishlistItem = (reqData) => async (dispatch) => {
             `${API_BASE_URL}/api/wishlist_items/${reqData.wishlistItemId}`,
             config
         );
+        dispatch(updateWishlistTotal(reqData.newTotal));
+
         dispatch({
             type: REMOVE_WISHLIST_ITEM_SUCCESS,
             payload: reqData.wishlistItemId,
@@ -126,4 +130,9 @@ export const updateWishlistItem = (reqData) => async (dispatch) => {
                     : error.message,
         });
     }
+
 };
+export const updateWishlistTotal = (total) => ({
+    type: UPDATE_WISHLIST_TOTAL,
+    payload: total,
+  });  

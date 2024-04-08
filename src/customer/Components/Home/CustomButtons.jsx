@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
-
+import { updateCartTotal } from "../../../Redux/Customers/Cart/Action";
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -50,12 +50,13 @@ const CustomButtons = () => {
     const location = useLocation();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const { auth } = useSelector((store) => store);
+    const { auth, cart, wishlist } = useSelector((store) => store); // Include wishlist state
     const jwt = localStorage.getItem("jwt");
     const [openAuthModal, setOpenAuthModal] = useState(false);
+    const [cartItemCount, setCartItemCount] = useState(0);
+    const [itemQuant, setItemQuant] = useState(0);
+    const [wishlistItemCount, setWishlistItemCount] = useState(0); // State variable for wishlist item count
 
-    const { cart } = useSelector((store) => store);
-    const { wishlist } = useSelector((store) => store);
 
     const handleOpen = () => {
         setOpenAuthModal(true);
@@ -64,7 +65,7 @@ const CustomButtons = () => {
     const handleClose = () => {
         setOpenAuthModal(false);
     };
-
+    
     const handleCloseUserMenu = () => {
         setAnchorEl(null);
     };
@@ -82,6 +83,7 @@ const CustomButtons = () => {
     const handleMyOrderClick = () => {
         navigate("/account/order");
     };
+
     const handleProfile = () => {
         navigate("/Profile/Profile");
     };
@@ -90,7 +92,7 @@ const CustomButtons = () => {
         if (jwt) {
             dispatch(getUser(jwt));
         }
-    }, [jwt, auth.jwt]);
+    }, [jwt, auth.jwt, dispatch]);
 
     useEffect(() => {
         if (auth.user) {
@@ -99,7 +101,23 @@ const CustomButtons = () => {
         if ((location.pathname === "/login" || location.pathname === "/Signup")) {
             navigate(-1);
         }
-    }, [auth.user]);
+    }, [auth.user, location.pathname, navigate]);
+
+    // useEffect(() => {
+    //     const cartItemCount = cart.cart?.totalItem ?? 0;
+    //     setCartItemCount(cartItemCount);
+    //     // Update cart total in Redux state whenever cartItemCount changes
+    //     dispatch(updateCartTotal(cartItemCount));
+    // }, [cart.cart?.totalItem, dispatch]);
+    useEffect(() => {
+        const totalItems = cart.cartItems.reduce((total, item) => {
+            return total + item.quantity;
+        }, 0);
+        setItemQuant(totalItems);
+    }, [cart.cartItems]);
+    useEffect(() => {
+        dispatch(updateCartTotal(itemQuant));
+    }, [itemQuant, dispatch]);
 
     const handleWishlistClick = () => {
         navigate("/wishlist");
@@ -108,10 +126,17 @@ const CustomButtons = () => {
     const handleCartClick = () => {
         navigate("/cart");
     };
+    useEffect(() => {
+        if (wishlist && wishlist.wishlistItems) {
+            const totalItems = wishlist.wishlistItems.length; // Count the number of items in the wishlist
+            setWishlistItemCount(totalItems);
+        }
+    }, [wishlist]);
+    
 
-    const getWishlistItemCount = () => {
-        return wishlist?.wishlistItems?.length ?? 0;
-    };
+    // const getWishlistItemCount = () => {
+    //     return auth.wishlistItems?.length ?? 0;
+    // };
 
     return (
         <Wrapper>
@@ -155,7 +180,7 @@ const CustomButtons = () => {
                 <IconWrapper onClick={handleWishlistClick} className="relative">
                     <FavoriteIcon />
                     <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-                        {getWishlistItemCount()}
+                    {wishlistItemCount}
                     </span>
                     <span className="sr-only">items in wishlist</span>
                 </IconWrapper>
@@ -163,7 +188,7 @@ const CustomButtons = () => {
                 <IconWrapper onClick={handleCartClick} className="relative">
                     <ShoppingCartIcon />
                     <sup className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-                        {cart.cart?.totalItem}
+                        {itemQuant}
                     </sup>
                     <span className="sr-only">items in cart, view bag</span>
                 </IconWrapper>

@@ -11,6 +11,12 @@ import {
   UPDATE_CART_ITEM_FAILURE,
   UPDATE_CART_ITEM_REQUEST,
   UPDATE_CART_ITEM_SUCCESS,
+  ADD_MULTIPLE_ITEMS_TO_CART_FAILURE,
+  ADD_MULTIPLE_ITEMS_TO_CART_REQUEST,
+  ADD_MULTIPLE_ITEMS_TO_CART_SUCCESS,
+  UPDATE_CART_TOTAL,
+  UPDATE_CART_ITEMS_COUNT,
+
 } from "./ActionType";
 
 const initialState = {
@@ -18,19 +24,31 @@ const initialState = {
   loading: false,
   error: null,
   cartItems: [],
+  cartTotal: 0,
+  
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM_TO_CART_REQUEST:
+    case ADD_MULTIPLE_ITEMS_TO_CART_REQUEST:
       return { ...state, loading: true, error: null };
     case ADD_ITEM_TO_CART_SUCCESS:
       return {
         ...state,
         cartItems: [...state.cartItems, action.payload.cartItems],
         loading: false,
+        cartTotal: state.cartTotal + 1, // Increment cart total
+      };
+    case ADD_MULTIPLE_ITEMS_TO_CART_SUCCESS:
+      return {
+        ...state,
+        cartItems: [...state.cartItems, ...action.payload.cartItems],
+        loading: false,
+        cartTotal: state.cartTotal + action.payload.cartItems.length, // Increment cart total by the number of items added
       };
     case ADD_ITEM_TO_CART_FAILURE:
+    case ADD_MULTIPLE_ITEMS_TO_CART_FAILURE:
       return { ...state, loading: false, error: action.payload };
     case GET_CART_REQUEST:
       return {
@@ -41,8 +59,9 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: action.payload.cartItems,
-        cart:action.payload,
+        cart: action.payload,
         loading: false,
+        cartTotal: action.payload.totalItem, // Set cart total from the response
       };
     case GET_CART_FAILURE:
       return {
@@ -59,10 +78,9 @@ const cartReducer = (state = initialState, action) => {
     case REMOVE_CART_ITEM_SUCCESS:
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (item) => item._id !== action.payload
-        ),
+        cartItems: state.cartItems.filter((item) => item._id !== action.payload),
         loading: false,
+        cartTotal: state.cartTotal - 1, // Decrement cart total
       };
     case UPDATE_CART_ITEM_SUCCESS:
       return {
@@ -78,6 +96,11 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         loading: false,
+      };
+    case UPDATE_CART_TOTAL:
+      return {
+        ...state,
+        cartTotal: action.payload, // Update cart total
       };
     default:
       return state;

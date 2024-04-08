@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import WishlistItem from "./WishlistItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ const Wishlist = () => {
 
   // Accessing wishlist slice of state from the store
   const { wishlist, loading, error } = useSelector((store) => store);
+  const [itemQuant, setItemQuant] = useState(0);
 
   useEffect(() => {
     // Fetch wishlist data when component mounts
@@ -20,6 +21,15 @@ const Wishlist = () => {
       dispatch(getWishlist(jwt));
     }
   }, [dispatch, jwt]);
+
+  useEffect(() => {
+    if (wishlist && Array.isArray(wishlist.wishlistItems)) {
+      const totalItems = wishlist.wishlistItems.reduce((total, item) => {
+        return total + item.quantity;
+      }, 0);
+      setItemQuant(totalItems);
+    }
+  }, [wishlist]);
 
   // Display loading spinner while fetching data
   if (loading) {
