@@ -25,6 +25,7 @@ export const addItemToWishlist = (reqData) => async (dispatch) => {
                 Authorization: `Bearer ${reqData.jwt}`,
                 "Content-Type": "application/json",
             },
+            
         };
 
         const { data } = await axios.put(`${API_BASE_URL}/api/wishlist/add`, 

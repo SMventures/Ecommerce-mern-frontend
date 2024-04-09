@@ -22,67 +22,69 @@ const Cart = () => {
   }, [dispatch, jwt]);
 
   useEffect(() => {
+    if (!cart || !cart.cartItems || cart.cartItems.length === 0) {
+      // If cart or cartItems are undefined or empty, reset the state
+      setTotalAmountBefore(0);
+      setTotalAmount(0);
+      setDiscount(0);
+      setItemQuant(0);
+      return;
+    }
+  
     // Calculate total amount
     const calculateTotalAmount = () => {
-      if (!cart.cartItems || cart.cartItems.length === 0) {
-        return 0;
-      }
-
       return cart.cartItems.reduce((total, item) => {
-        if (item && item.product && item.product.discountedPrice) {
+        if (item && item.product && item.quantity && item.product.discountedPrice) {
           return total + item.product.discountedPrice * item.quantity;
         } else {
           return total;
         }
       }, 0);
     };
-
+  
     // Calculate total amount before discount
     const calculateTotalAmountBefore = () => {
-      if (!cart.cartItems || cart.cartItems.length === 0) {
-        return 0;
-      }
-
       return cart.cartItems.reduce((total, item) => {
-        if (item && item.product && item.product.price) {
+        if (item && item.product && item.quantity && item.product.price) {
           return total + item.product.price * item.quantity;
         } else {
           return total;
         }
       }, 0);
     };
-
+  
     setTotalAmountBefore(calculateTotalAmountBefore());
     setTotalAmount(calculateTotalAmount());
-
+  
     // Calculate total discount
     const calculateDiscount = () => {
-      if (!cart.cartItems || cart.cartItems.length === 0) {
-        return 0;
-      }
-
       return cart.cartItems.reduce((discount, item) => {
-        if (item && item.product && item.product.price && item.product.discountedPrice) {
+        if (item && item.product && item.quantity && item.product.price && item.product.discountedPrice) {
           return discount + (item.product.price - item.product.discountedPrice) * item.quantity;
         } else {
           return discount;
         }
       }, 0);
     };
-
+  
     setDiscount(calculateDiscount());
-
+  
     // Calculate total item quantity
     const totalItems = cart.cartItems.reduce((total, item) => {
-      return total + item.quantity;
+      if (item && item.quantity) {
+        return total + item.quantity;
+      } else {
+        return total;
+      }
     }, 0);
     setItemQuant(totalItems);
-
+  
   }, [cart]);
+  
 
   return (
     <div className="">
-      {cart.cartItems.length > 0 ? (
+      {cart && cart.cartItems && cart.cartItems.length > 0 ? (
         <div className="lg:grid grid-cols-3 lg:px-16 relative">
           <div className="lg:col-span-2 lg:px-5 bg-white">
             <div className="space-y-3">

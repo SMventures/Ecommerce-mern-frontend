@@ -30,6 +30,8 @@ export const register = userData => async dispatch => {
     console.log("registerr :", user);
     dispatch(registerSuccess(user));
   } catch (error) {
+    console.log("not able to register :", error.message);
+
     dispatch(registerFailure(error.message));
   }
 };
@@ -48,6 +50,8 @@ export const login = userData => async dispatch => {
     console.log("login ", user);
     dispatch(loginSuccess(user));
   } catch (error) {
+    console.log("not able to login:", error.message);
+
     dispatch(loginFailure(error.message));
   }
 };
@@ -81,7 +85,6 @@ export const logout = () => {
   };
 };
 
-// Update user personal information action creators
 const updateUserPersonalInfoRequest = () => ({ type: UPDATE_USER_PERSONAL_INFO_REQUEST });
 const updateUserPersonalInfoSuccess = () => ({ type: UPDATE_USER_PERSONAL_INFO_SUCCESS });
 const updateUserPersonalInfoFailure = error => ({ type: UPDATE_USER_PERSONAL_INFO_FAILURE, payload: error });
@@ -91,7 +94,7 @@ export const updateUserPersonalInfo = (updatedInfo) => {
     dispatch(updateUserPersonalInfoRequest());
     try {
       const { userId, ...rest } = updatedInfo;
-      const response = await axios.put(`${API_BASE_URL}/api/users/${userId}`, rest, {
+      const response = await axios.put(`${API_BASE_URL}/api/users/${userId}`, rest, { // Changed ${id} to ${userId}
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("jwt")}`
         }
@@ -105,6 +108,7 @@ export const updateUserPersonalInfo = (updatedInfo) => {
     }
   };
 };
+
 
 
 

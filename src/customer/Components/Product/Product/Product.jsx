@@ -35,6 +35,8 @@ import BackdropComponent from "../../BackDrop/Backdrop";
 import { getFilters } from "./getfilters";
 import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
 import Slider from "@mui/material/Slider"; // Import the Slider component from Material-UI
+import "./product.css";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -94,7 +96,6 @@ export default function Product() {
     // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
     // navigate("/wishlist");
   };
- 
  
  
  
@@ -230,12 +231,11 @@ const WhiteContainer = styled(Box)`
 background: #fff;
 padding: 20px;
 `;
+
   return (
- < Component>
-   
+    // <Component>
     <div className="bg-white -z-20 ">
-     
-      <div >
+      <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
@@ -268,7 +268,7 @@ padding: 20px;
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
-                      Filters
+                      FILTERS
                     </h2>
                     <button
                       type="button"
@@ -281,7 +281,8 @@ padding: 20px;
                   </div>
  
                   {/* Filters */}
-                  <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}>
+                 {/* Filters */}
+                 {/* <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}> */}
                         {/* <WhiteContainer> */}
                           {isClothing && (
                             <form className="mt-4 border-t border-gray-200">
@@ -348,26 +349,36 @@ padding: 20px;
                             </form>
                           )}
                         {/* </WhiteContainer> */}
-                      </div>
+                      {/* </div> */}
                     </Dialog.Panel>
                   </Transition.Child>
                 </div>
               </Dialog>
             </Transition.Root>
-           
+ 
+ 
         <main className="mx-auto px-4 lg:px-14 ">
-        {/* <div style={{ padding: '5px', backgroundColor: '#f0f0f0' }}>
-            <WhiteContainer> */}
-          <div className="flex items-baseline justify-between  pb-6">
-            {/* <div>
-            <h1 className="text-xl font-bold tracking-tight text-gray-900 ml-1">
-              Products
-            </h1>
-          </div> */}
-            <div className="flex items-center">
-              <Menu as="div" className="relative inline-block text-left">
+        <div className="lg:col-span-4 w-full flex items-baseline border-b border-gray-200 py-2 justify-between">
                 <div>
-                  <Menu.Button className="group inline-flex justify-right text-sm font-medium text-gray-700 hover:text-gray-900">
+            <div className="flex items-center mt-0 ">
+            <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">
+            {param.lavelOne} /
+  </h3>
+  <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">
+    {param.lavelTwo} /
+  </h3>
+  <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">{param.lavelThree}</h3>
+</div>
+          <h3 className="font-medium text-gray-500 mb-5">
+         ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
+        </h3>
+    </div>
+
+ 
+            <div className="flex items-center">
+              <Menu as="div" className="relative inline-block text-left items-end">
+                <div>
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                     Sort
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -427,14 +438,26 @@ padding: 20px;
               </button>
             </div>
           </div>
-          {/* </WhiteContainer>
-          </div> */}
-
+ 
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            {/* <h2 id="products-heading" className="sr-only">
+            <h2 id="products-heading" className="sr-only">
               Products
-            </h2> */}
+            </h2>
 
+  {/* <div className="flex flex-col">
+    <div className="flex items-center">
+      <h3 className="font-medium text-gray-500 hover:text-gray-600">
+        {param.lavelOne} /
+      </h3>
+      <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">
+        {param.lavelTwo} /
+      </h3>
+      <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">{param.lavelThree}</h3>
+    </div>
+    <h3 className="font-medium text-gray-600 ">
+      ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
+    </h3>
+  </div> */}
             <div>
               <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -558,13 +581,13 @@ padding: 20px;
                       )}
                     </Disclosure>
                   ))}
-                  <div className="mt-4">
+     <div className="mt-4">
   <h3 className="font-semibold text-gray-500">Discount Range</h3>
   <Slider
     value={[minDiscount, maxDiscount]}
     onChange={handleDiscountChange}
     min={0}
-    max={100}
+    max={100} 
     step={1}
     valueLabelDisplay="auto"
   />
@@ -574,26 +597,11 @@ padding: 20px;
     </p>
   </div>
 </div>
- 
+
                 </form>
- 
+  
                 <div className="lg:col-span-4 w-full">
-                <div>
-            <div className="flex items-center mt-0 ">
-            <h3 className="font-medium text-gray-500 hover:text-gray-600">
-            {param.lavelOne} /
-  </h3>
-  <h3 className="mr-2 text-sm font-medium text-gray-900">
-    {param.lavelTwo} /
-  </h3>
-  <p className="mr-2 text-sm font-medium text-gray-900">{param.lavelThree}</p>
-</div>
-          <h3 className="font-semibold text-gray-600 mb-5">
-         ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
-        </h3>
-    </div>
-           
-                  <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
+                <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md">
                     {customersProduct?.products?.content?.map((item) => (
                       // <div key={item.id} className="relative flex flex-col items-center p-4 border border-gray-200 rounded-lg shadow-md m-2">
                       //   {/* Favorite icon */}
@@ -625,10 +633,9 @@ padding: 20px;
                       //       <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
                       //     </svg>
                       //   </div>     {/* Product card content */}
-                      <ProductCard product={item} />
-                      // </div>
+                      <ProductCard key={item._id} product={item} />
+      ))}
  
-                    ))}
  
                   </div>
                 </div>
@@ -658,6 +665,5 @@ padding: 20px;
         </section>
       </div>
     </div >
-    </Component>
   );
 }

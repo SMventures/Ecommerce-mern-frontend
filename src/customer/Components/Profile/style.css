@@ -5,10 +5,12 @@
   gap: 10px;
   border-bottom: 1px solid lightgray; /* Add border to separate sections */
   padding-bottom: 10px; /* Add some padding at the bottom for spacing */
+  padding-top:5px;
+  
 }
 .whole-container-outer {
-  border: 1px solid #ccc; /* Border style */
-  border-radius: 5px; /* Rounded corners */
+  /* border: 1px solid #ccc; Border style */
+  /* border-radius: 5px; Rounded corners */
   padding: 10px; /* Padding to separate content from border */
 }
  

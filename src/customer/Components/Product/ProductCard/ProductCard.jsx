@@ -1,6 +1,6 @@
 import React from 'react';
 import "./ProductCard.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action';
@@ -15,7 +15,6 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  const { productId } = useParams();
 
   const handleNavigate = () => {
     navigate(`/product/${_id}`); // Use productId for navigation
@@ -38,18 +37,18 @@ const ProductCard = ({ product }) => {
     }
   };
   
-  const handleCartSubmit = async () => {
-    try {
-      console.log("Submitting cart item:", _id); // Log the productId
+  // const handleCartSubmit = async () => {
+  //   try {
+  //     console.log("Submitting cart item:", _id); // Log the productId
 
-      const data = { productId: product._id }; // Extract productId
+  //     const data = { productId: product._id }; // Extract productId
 
-      await dispatch(addItemToCart({ data, jwt })); // Use async/await for clarity
-    } catch (error) {
-      console.error("Error adding item to cart:", error);
-      // Optionally display an error message to the user
-    }
-  };
+  //     await dispatch(addItemToCart({ data, jwt })); // Use async/await for clarity
+  //   } catch (error) {
+  //     console.error("Error adding item to cart:", error);
+  //     // Optionally display an error message to the user
+  //   }
+  // };
 
   return (
     <div className="productCardContainer">
@@ -89,7 +88,7 @@ const ProductCard = ({ product }) => {
       </div>
       {/* Add to Cart button with blue background and white text */}
       {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <form onSubmit={handleCartSubmit}>
+        {/* <form onSubmit={handleCartSubmit}>
           <Button
             variant="contained"
             type="submit"
@@ -97,10 +96,10 @@ const ProductCard = ({ product }) => {
           >
             Add To Cart
           </Button>
-        </form>
-      </div> */}
+        </form> */}
+      {/* </div> */}
     </div>
   );
 };
-
+ 
 export default ProductCard;

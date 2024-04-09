@@ -24,7 +24,13 @@ const calculateNewTotal = (cartItems) => {
   }
 
   // Calculate the total count of distinct items in the cart
-  const totalCount = cartItems.reduce((total, item) => total + 1, 0);
+  const totalCount = cartItems.reduce((total, item) => {
+    if (item && item.quantity !== undefined) { // Check if item and quantity are defined
+      return total + 1;
+    } else {
+      return total;
+    }
+  }, 0);
   return totalCount;
 };
 
@@ -38,7 +44,8 @@ const CartItem = ({ item, showButton }) => {
   const cartTotal = cart.cartTotal ?? 0;
   const cartItemCount = cart.cart?.totalItem ?? 0;
   const handleRemoveItemFromCart = () => {
-    const data = { cartItemId: item?._id, jwt };
+    if (!item || typeof item.quantity === 'undefined') return; // Check if item or item.quantity is undefined
+    const data = { cartItemId: item._id, jwt };
     console.log("Data to be removed from cart:", data);
     dispatch(removeCartItem(data))
       .then(() => {
@@ -50,13 +57,15 @@ const CartItem = ({ item, showButton }) => {
       });
   };
   
-  
   const handleUpdateCartItem = (num) => {
+    if (!item || typeof item.quantity === 'undefined') return; // Check if item or item.quantity is undefined
     console.log("Updating cart item with quantity:", item.quantity + num);
-    const data = { data: { quantity: item.quantity + num }, cartItemId: item?._id, jwt };
+    const data = { data: { quantity: item.quantity + num }, cartItemId: item._id, jwt };
     console.log("Data to update cart item:", data);
     dispatch(updateCartItem(data));
   };
+  
+  
   
 
   

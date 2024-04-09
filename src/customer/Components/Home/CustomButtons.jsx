@@ -50,13 +50,11 @@ const CustomButtons = () => {
     const location = useLocation();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const { auth, cart, wishlist } = useSelector((store) => store); // Include wishlist state
+    const { auth, cart, wishlist } = useSelector((store) => store);
     const jwt = localStorage.getItem("jwt");
     const [openAuthModal, setOpenAuthModal] = useState(false);
-    const [cartItemCount, setCartItemCount] = useState(0);
     const [itemQuant, setItemQuant] = useState(0);
-    const [wishlistItemCount, setWishlistItemCount] = useState(0); // State variable for wishlist item count
-
+    const [wishlistItemCount, setWishlistItemCount] = useState(0);
 
     const handleOpen = () => {
         setOpenAuthModal(true);
@@ -103,21 +101,30 @@ const CustomButtons = () => {
         }
     }, [auth.user, location.pathname, navigate]);
 
-    // useEffect(() => {
-    //     const cartItemCount = cart.cart?.totalItem ?? 0;
-    //     setCartItemCount(cartItemCount);
-    //     // Update cart total in Redux state whenever cartItemCount changes
-    //     dispatch(updateCartTotal(cartItemCount));
-    // }, [cart.cart?.totalItem, dispatch]);
     useEffect(() => {
-        const totalItems = cart.cartItems.reduce((total, item) => {
-            return total + item.quantity;
-        }, 0);
-        setItemQuant(totalItems);
+        if (cart.cartItems && Array.isArray(cart.cartItems)) {
+            const validItems = cart.cartItems.filter(item => item); // Filter out undefined items
+            const totalItems = validItems.reduce((total, item) => {
+                return total + (item.quantity || 0); // Check if item.quantity is defined
+            }, 0);
+            setItemQuant(totalItems);
+        } else {
+            setItemQuant(0); // Set itemQuant to 0 if cart.cartItems is empty or undefined
+        }
     }, [cart.cartItems]);
+    
+    
+    
     useEffect(() => {
         dispatch(updateCartTotal(itemQuant));
     }, [itemQuant, dispatch]);
+
+    useEffect(() => {
+        if (wishlist && wishlist.wishlistItems) {
+            const totalItems = wishlist.wishlistItems.length;
+            setWishlistItemCount(totalItems);
+        }
+    }, [wishlist]);
 
     const handleWishlistClick = () => {
         navigate("/wishlist");
@@ -126,17 +133,6 @@ const CustomButtons = () => {
     const handleCartClick = () => {
         navigate("/cart");
     };
-    useEffect(() => {
-        if (wishlist && wishlist.wishlistItems) {
-            const totalItems = wishlist.wishlistItems.length; // Count the number of items in the wishlist
-            setWishlistItemCount(totalItems);
-        }
-    }, [wishlist]);
-    
-
-    // const getWishlistItemCount = () => {
-    //     return auth.wishlistItems?.length ?? 0;
-    // };
 
     return (
         <Wrapper>
@@ -180,7 +176,7 @@ const CustomButtons = () => {
                 <IconWrapper onClick={handleWishlistClick} className="relative">
                     <FavoriteIcon />
                     <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-                    {wishlistItemCount}
+                        {wishlistItemCount}
                     </span>
                     <span className="sr-only">items in wishlist</span>
                 </IconWrapper>
