@@ -18,7 +18,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Pagination from "@mui/material/Pagination";
-
+ 
 import { filters, singleFilter, sortOptions } from "./FilterData";
 import ProductCard from "../ProductCard/ProductCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -35,11 +35,11 @@ import BackdropComponent from "../../BackDrop/Backdrop";
 import { getFilters } from "./getfilters";
 import { addItemToWishlist, removeWishlistItem } from "../../../../Redux/Customers/Wishlist/Action"
 import Slider from "@mui/material/Slider"; // Import the Slider component from Material-UI
-
+ 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
+ 
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const navigate = useNavigate();
@@ -50,28 +50,25 @@ export default function Product() {
   const location = useLocation();
   const [isLoaderOpen, setIsLoaderOpen] = useState(false);
   const [isClothing, setIsClothing] = useState(false); // State for indicating if it's clothing category
-
+ 
   const handleLoderClose = () => {
     setIsLoaderOpen(false);
   };
-
+ 
   // const filter = decodeURIComponent(location.search);
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
   const sizeValue = searchParams.get("size");
-  const [minPrice, setMinPrice] = useState(0); // State variable for minimum price
-  const [maxPrice, setMaxPrice] = useState(10000); // State variable for maximum price
-
   const price = searchParams.get("price");
   const disccount = searchParams.get("disccout");
   const sortValue = searchParams.get("sort");
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
   const { productId } = useParams();
-
+ 
   const totalPages = Math.ceil(customersProduct.products?.totalElements / 2);
-
+ 
   // console.log("location - ", colorValue, sizeValue,price,disccount);
   // const handleCartSubmit = () => {
   //   const data = { ItemId, size: selectedSize.name };
@@ -80,7 +77,7 @@ export default function Product() {
   // };
   // const handleWishlistSubmit = async (itemId) => {
   //   const data = { itemId };
-
+ 
   //   try {
   //     await dispatch(addItemToWishlist({ data, jwt }));
   //     navigate("/wishlist"); // Move navigation inside the try block to ensure it's only triggered after successful dispatch
@@ -91,17 +88,17 @@ export default function Product() {
   // };
   const [isClicked, setIsClicked] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(-1);
-
+ 
   const handlewishlistSubmit = (itemId) => {
     const data = { productId: itemId }; // Use itemId as the product ID
     dispatch(addItemToWishlist({ data, jwt }));
     // setIsClicked(!isClicked); // Update state to indicate that the icon has been clicked
     // navigate("/wishlist");
   };
-
-
-
-
+ 
+ 
+ 
+ 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
@@ -114,45 +111,52 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-  // price slider
-  const handlePriceChange = (event, newValue) => {
-    setMinPrice(newValue[0]); // Update minimum price
-    setMaxPrice(newValue[1]); // Update maximum price
-  };
-
+ 
+  // discount slider 
   const handleDiscountChange = (event, newValue) => {
     setMinDiscount(newValue[0]); // Update minimum discount
     setMaxDiscount(newValue[1]); // Update maximum discount
   };
-  // Step 1: Update component state to include discount range
-const [minDiscount, setMinDiscount] = useState(0); // State variable for minimum discount
-const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maximum discount
-
-
-
+ // Step 1: Update component state to include discount range
+ const [minDiscount, setMinDiscount] = useState(0); // State variable for minimum discount
+ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maximum discount
+ 
+ 
+ 
   useEffect(() => {
+    const [minPrice, maxPrice] =
+      price === null ? [0, 0] : price.split("-").map(Number);
     const data = {
       category: param.lavelThree,
       colors: colorValue || [],
       sizes: sizeValue || [],
-      minPrice: minPrice,
-      maxPrice: maxPrice,
+      minPrice: minPrice || 0,
+      maxPrice: maxPrice || 10000,
       minDiscount: minDiscount,
       maxDiscount: maxDiscount,
       sort: sortValue || "price_low",
       pageNumber: pageNumber,
-      pageSize: 8,
+      pageSize: 8, // Set pageSize to 4 for 4 products per page
       stock: stock,
     };
     dispatch(findProducts(data));
-  }, [param.lavelThree, colorValue, sizeValue, minPrice, maxPrice, minDiscount, maxDiscount, sortValue, pageNumber, stock]);
-  
-
+  }, [
+    param.lavelThree,
+    colorValue,
+    sizeValue,
+    price,
+    sortValue,
+    pageNumber,
+    stock,
+    minDiscount, 
+    maxDiscount,
+  ]);
+ 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
-
+ 
     let filterValues = searchParams.getAll(sectionId);
-
+ 
     if (filterValues.length > 0 && filterValues[0].split(",").includes(value)) {
       filterValues = filterValues[0]
         .split(",")
@@ -166,10 +170,10 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
       // searchParams.delete(sectionId);
       filterValues.push(value);
     }
-
+ 
     if (filterValues.length > 0)
       searchParams.set(sectionId, filterValues.join(","));
-
+ 
     // history.push({ search: searchParams.toString() });
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
@@ -178,27 +182,27 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
     const usefilters = async () => {
       // Determine the sectionId
       const sectionId = param.lavelTwo || "Clothing";
-
+ 
       // Invoke the getFilters function to determine if it's a clothing category
       const { filters } = await getFilters(sectionId, param.lavelOne);
       const isClothingCategory = filters.length > 0 && (param.lavelOne === "Men" || param.lavelOne === "Women");
       setIsClothing(isClothingCategory);
       console.log("Is clothing category:", isClothingCategory);
     };
-
+ 
     usefilters();
   }, [param.lavelOne, param.lavelTwo]);
-
-
-
-
+ 
+ 
+ 
+ 
   const handleRadioFilterChange = (e, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set(sectionId, e.target.value);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-
+ 
   useEffect(() => {
     if (customersProduct.loading) {
       setIsLoaderOpen(true);
@@ -206,7 +210,7 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
       setIsLoaderOpen(false);
     }
   }, [customersProduct.loading]);
-
+ 
   // const handleWishlistToggle = (product) => {
   //   if (isProductInWishlist(product)) {
   //     dispatch(removeWishlistItem({ jwt, wishlistItemId: product.id }));
@@ -214,14 +218,16 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
   //     dispatch(addItemToWishlist({ jwt, data: product }));
   //   }
   // };
-
+ 
   // // Function to check if a product is in the wishlist
   // const isProductInWishlist = (product) => {
   //   return customersProduct.wishlist.some((item) => item.id === product.id);
   // };
-
+ 
   return (
+    
     <div className="bg-white -z-20 ">
+      
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -241,7 +247,7 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
             >
               <div className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
-
+ 
             <div className="fixed inset-0 z-40 flex">
               <Transition.Child
                 as={Fragment}
@@ -266,7 +272,7 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-
+ 
                   {/* Filters */}
                   {isClothing && (
                     <form className="mt-4 border-t border-gray-200">
@@ -339,22 +345,18 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
             </div>
           </Dialog>
         </Transition.Root>
-
+ 
         <main className="mx-auto px-4 lg:px-14 ">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
             <div>
-            {/* <h1 className="text-3xl font-bold tracking-tight text-gray-900 ml-1">
-              Product
-              
-            </h1> */}
-            {/* product page heading */}
-            
-            </div>
-{/*  */}
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 ml-1">
+              Products
+            </h1>
+          </div>
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 mt-4">
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                     Sort
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -362,7 +364,7 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
                     />
                   </Menu.Button>
                 </div>
-
+ 
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -396,7 +398,7 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
                   </Menu.Items>
                 </Transition>
               </Menu>
-
+ 
               {/* <button
                 type="button"
                 className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
@@ -414,14 +416,14 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
               </button>
             </div>
           </div>
-
-          <section aria-labelledby="products-heading" className="pb-24 pt-6 ">
+ 
+          <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
+ 
             <div>
-              <h2 className="py-1 font-semibold opacity-60 text-lg">Filters</h2>
+              <h2 className="py-5 font-semibold opacity-60 text-lg">Filters</h2>
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                 {/* Filters */}
                 <form className="hidden lg:block border rounded-md p-5">
@@ -543,21 +545,8 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
                       )}
                     </Disclosure>
                   ))}
-                   <div className="mt-4">
-        <h3 className="font-semibold text-gray-500">Price Range</h3>
-        <Slider
-          value={[minPrice, maxPrice]}
-          onChange={handlePriceChange}
-          min={0}
-          max={10000}
-          step={100}
-          valueLabelDisplay="auto"
-        />
-        <p className="text-sm text-gray-500 mt-2">
-          ${minPrice} - ${maxPrice}
-        </p>
-      </div><div className="mt-4">
-  <h3 className="font-semibold text-gray-500">Discount Range</h3>
+                  <div className="mt-4">
+  <h3 className="font-medium text-gray-900">Discount Range</h3>
   <Slider
     value={[minDiscount, maxDiscount]}
     onChange={handleDiscountChange}
@@ -566,19 +555,20 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
     step={1}
     valueLabelDisplay="auto"
   />
-  <p className="text-sm text-gray-500 mt-2">
-    {minDiscount}% - {maxDiscount}%
-  </p>
+ <div className="text-center">
+    <p className="text-sm text-gray-500 mt-2 flex items-center justify-center">
+      {minDiscount}% - {maxDiscount}%
+    </p>
+  </div>
 </div>
-                </form>
-               
-                
 
+                </form>
+ 
                 <div className="lg:col-span-4 w-full">
                 <div>
             <div className="flex items-center mt-0 ">
             <h3 className="font-medium text-gray-500 hover:text-gray-600">
-    Home &gt;
+            {param.lavelOne} &gt;
   </h3>
   <h3 className="mr-2 text-sm font-medium text-gray-900">
     {param.lavelTwo} &gt;
@@ -622,34 +612,33 @@ const [maxDiscount, setMaxDiscount] = useState(100); // State variable for maxim
                       //       <path d="M12 21.21l-1.65-1.51C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.35 11.2L12 21.21z" />
                       //     </svg>
                       //   </div>     {/* Product card content */}
-                      
                       <ProductCard product={item} />
                       // </div>
-
+ 
                     ))}
-
+ 
                   </div>
                 </div>
               </div>
             </div>
           </section>
         </main>
-
+ 
         {/* pagination section */}
-
+ 
         <section className="w-full px-[3.6rem]">
           <div className="mx-auto px-4 py-5 flex justify-center shadow-lg border rounded-md">
-
+ 
             <Pagination
               count={totalPages}
               color="primary"
               className=""
               onChange={handlePaginationChange}
             />
-
+ 
           </div>
         </section>
-
+ 
         {/* {backdrop} */}
         <section>
           <BackdropComponent open={isLoaderOpen} />

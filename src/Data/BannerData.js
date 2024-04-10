@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'; // Import Link for routing
 
 import men from "./Banners/men.png";
 import electronics from "./Banners/electronics.png";
-import women from "./Banners/women.png";
+import women from "./Banners/Women.png";
 import stationery from "./Banners/stationery.png";
-import accessories from "./Banners/Accessories.png";
+import accessories from "./Banners/accessories.png";
 import books from "./Banners/books.png";
 import dds from './Banners/dds.png';
 

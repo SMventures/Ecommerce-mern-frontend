@@ -1,4 +1,5 @@
 import {  Grid, styled } from '@mui/material';
+import { Link } from 'react-router-dom';
 import merchandise from '../../../Data/Banners/Merchandise.png'
 // const ImageURL = [
 //     // 'https://rukminim1.flixcart.com/flap/960/960/image/2f30db9425df5cec.jpg?q=50',
@@ -24,21 +25,19 @@ const Image = styled('img')(({ theme }) => ({
 }));
 
 const MidSection = () => {
-    const url = merchandise;
+    const merchandiseUrl = '/Men/Clothing/men_tshirts'; // Example URL
+    
     return (
         <>
             <Wrapper lg={12} sm={12} md={12} xs={12} container>
-                {/* {
-                    ImageURL.map(image => (
-                        <Grid item lg={4} md={4} sm={12} xs={12}>
-                            <img src={image} style={{ width: '100%' }} />
-                        </Grid>
-                    ))
-                } */}
+                {/* Your other content */}
             </Wrapper>
-            <Image src={url} />
+            {/* Link the image or any other element */}
+            <Link to={merchandiseUrl}>
+                <Image src={merchandise} />
+            </Link>
         </>
-    )
+    );
 }
 
 export default MidSection;

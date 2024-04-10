@@ -1,3 +1,5 @@
+// CustomButtons.js
+
 import React, { useState, useEffect } from 'react';
 import { Box, Button, styled } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -11,7 +13,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
-
+import { getWishlist } from "../../../Redux/Customers/Wishlist/Action"; // Import the action to fetch wishlist data
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -89,8 +91,9 @@ const CustomButtons = () => {
     useEffect(() => {
         if (jwt) {
             dispatch(getUser(jwt));
+            dispatch(getWishlist(jwt)); // Fetch wishlist data when the component mounts
         }
-    }, [jwt, auth.jwt]);
+    }, [jwt, auth.jwt, dispatch]);
 
     useEffect(() => {
         if (auth.user) {

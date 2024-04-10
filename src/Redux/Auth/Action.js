@@ -88,10 +88,15 @@ const updateUserPersonalInfoFailure = error => ({ type: UPDATE_USER_PERSONAL_INF
 
 export const updateUserPersonalInfo = (updatedInfo) => {
   return async (dispatch) => {
-    const { userId, ...rest } = updatedInfo; // Destructure userId from updatedInfo
     dispatch(updateUserPersonalInfoRequest());
     try {
-      const updatedUser = await updateUserPersonalInfo(userId, rest); // Pass userId and rest of the properties
+      const { userId, ...rest } = updatedInfo;
+      const response = await axios.put(`${API_BASE_URL}/api/users/${userId}`, rest, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+        }
+      });
+      const updatedUser = response.data;
       dispatch(updateUserPersonalInfoSuccess());
       return updatedUser;
     } catch (error) {
@@ -100,6 +105,8 @@ export const updateUserPersonalInfo = (updatedInfo) => {
     }
   };
 };
+
+
 
 
 

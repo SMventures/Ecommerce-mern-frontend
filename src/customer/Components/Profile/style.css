@@ -1,45 +1,58 @@
 /* style.css */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid lightgray; /* Add border to separate sections */
+  padding-bottom: 10px; /* Add some padding at the bottom for spacing */
+}
+.whole-container-outer {
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Padding to separate content from border */
+}
+ 
+ 
+.section:last-child {
+  border-bottom: none; /* Remove border from the last section */
+}
+ 
+.section-title {
+  color: darkgrey;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center; /* Align the title and icon horizontally */
+  gap: 10px;
+}
+ 
+.section-title svg {
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+ 
 .section ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
+ 
 .section ul li {
-  color: black; /* Set the color of the text */
-  margin-bottom: 5px; /* Adjust spacing between list items if needed */
+  color: black;
+  margin-bottom: 5px;
 }
-
+ 
 .section ul li a {
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit the color from parent */
+  text-decoration: none;
+  color: inherit;
 }
-
+ 
 .my-account ul li {
-  color: black; /* Set the font color to black */
+  color: black;
 }
-
-.section {
-  margin-bottom: 40px;
-}
-
-.section-title {
-  color: darkgrey;
-  font-weight: bold;
-  margin-bottom: 30px;
-  font-size: 20px;
-  display: flex;
-  gap: 10px;
-}
-
+ 
 /* Remove or modify hover styles */
-
-
-
-
-
-
-.profile-photo{
+ 
+.profile-photo {
   display: flex;
   gap: 20px;
   border: 2px solid white;
@@ -48,8 +61,9 @@
   border-radius: 5px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
-
-.profile-photo h2{
+ 
+.profile-photo h2 {
   font-weight: bold;
   font-size: 20px;
 }
+ 

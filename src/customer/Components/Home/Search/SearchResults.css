@@ -1,61 +1,64 @@
 .search-results {
-    margin-top: 20px;
-    margin-bottom: 4px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Display 4 items in one row */
+    gap: 10px; /* Reduce the gap between items */
 }
 
 .search-result-item {
     display: flex;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
-    flex: 0 0 20%;
-    display: flex;
-    align-items: center; /* Center the image vertically */
+    flex: 1;
 }
 
-.image-container {
-    background-color: #f0f0f0; /* Grey background color */
-    padding: 20px; /* Adjust padding as needed */
-    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
-    background-position: 20px center; /* Shift background position to the right */
-    margin-left: 50px;
-}
-
-
-.image-container .s-image {
-    width: auto; /* Allow the image to adjust its width */
-    height: auto; /* Allow the image to adjust its height */
-    max-width: 120px; /* Increase the maximum width of the image */
-    max-height: 120px; /* Increase the maximum height of the image */
-    object-fit: cover; /* Ensures the image fits inside the container */
-    object-position: top; /* Positions the image at the top */
+.s-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .product-details {
-    flex: 1; /* Take up remaining space */
-    padding: 10px;
-    box-sizing: border-box;
+    flex: 2;
+    padding: 20px;
 }
 
 .product-title {
-    margin-top: 0;
+    font-size: 1.2em;
+    margin-bottom: 5px;
 }
 
 .product-brand {
-    font-weight: bold;
-    opacity: 0.5;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    margin-bottom: 5px;
 }
 
-.delivery-info {
-    font-size: 0.8rem;
-    color: #888;
+.product-price-details {
+    display: flex;
+    align-items: center;
+}
+
+.product-price {
+    margin-bottom: 5px;
+}
+
+.product-discounted-price,
+.product-discount-percent {
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-green-600 {
+    color: #10B981;
 }
