@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
 import { updateCartTotal } from "../../../Redux/Customers/Cart/Action";
+import register from '../Auth/Register';
+import login from '../Auth/Login'
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -50,7 +52,9 @@ const CustomButtons = () => {
     const location = useLocation();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const { auth, cart, wishlist } = useSelector((store) => store);
+    const { cart, wishlist } = useSelector((store) => store);
+    const { auth } = useSelector((store) => store);
+
     const jwt = localStorage.getItem("jwt");
     const [openAuthModal, setOpenAuthModal] = useState(false);
     const [itemQuant, setItemQuant] = useState(0);
@@ -96,10 +100,10 @@ const CustomButtons = () => {
         if (auth.user) {
             handleClose();
         }
-        if ((location.pathname === "/login" || location.pathname === "/Signup")) {
+        if ((location.pathname === "/login" || location.pathname === "/register")) {
             navigate(-1);
         }
-    }, [auth.user, location.pathname, navigate]);
+    }, [auth.user]);
 
     useEffect(() => {
         if (cart.cartItems && Array.isArray(cart.cartItems)) {

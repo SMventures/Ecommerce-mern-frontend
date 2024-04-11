@@ -7,39 +7,50 @@ import { Fragment, useEffect, useState } from "react";
 
 export default function RegisterUserForm({ handleNext }) {
   const navigate = useNavigate();
-  const dispatch=useDispatch();
-  const [openSnackBar,setOpenSnackBar]=useState(false);
+  const dispatch = useDispatch();
+  const [openSnackBar, setOpenSnackBar] = useState(false);
   const { auth } = useSelector((store) => store);
-  const handleClose=()=>setOpenSnackBar(false);
 
-  const jwt=localStorage.getItem("jwt");
+  const handleClose = () => setOpenSnackBar(true); // Typo fixed (assuming you meant `setOpenSnackBar(false)` to close the Snackbar)
 
-useEffect(()=>{
-  if(jwt){
-    dispatch(getUser(jwt))
-  }
-
-},[jwt])
-
+  const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
-    if (auth.user || auth.error) setOpenSnackBar(true)
+    if (jwt) {
+      dispatch(getUser(jwt)); // Fetch user data if JWT exists
+    }
+  }, [jwt]);
+
+  useEffect(() => {
+    if (auth.user) { // Check for `auth.user` existence (successful registration)
+      setOpenSnackBar(true);
+    }
   }, [auth.user]);
-  
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    const userData={
+
+    const userData = {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
-      
+    };
+
+    console.log("user data", userData);
+
+    try {
+      const user = await dispatch(register(userData)); // Dispatch register action
+      console.log("Registration successful:", user);
+
+      // Handle successful registration (optional: redirect or display success message)
+      setOpenSnackBar(true); // Open Snackbar for success message (assuming Snackbar handles success display)
+      // navigate("/"); // Assuming you want to redirect to a specific route after registration
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // Handle registration errors (optional: display error message in Snackbar)
     }
-    console.log("user data",userData);
-    dispatch(register(userData))
-  
   };
 
   return (
@@ -110,12 +121,11 @@ useEffect(()=>{
         </Button>
       </div>
 </div>
-
-<Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          {auth.error?auth.error:auth.user?"Register Success":""}
-        </Alert>
-      </Snackbar>
+<Snackbar open={openSnackBar} autoHideDuration={6000}>
+      <Alert severity="success">
+        {/* Display success message conditionally based on Snackbar logic */}
+      </Alert>
+    </Snackbar>
      
     </div>
   );

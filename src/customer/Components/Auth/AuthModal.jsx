@@ -28,6 +28,7 @@ export default function AuthModal({ handleClose, open }) {
       handleClose(); // Close the modal
     }
   }, [auth.user, navigate]); // Add navigate to the dependency array
+  
   return (
     <>
     <Modal
@@ -38,11 +39,11 @@ export default function AuthModal({ handleClose, open }) {
       size="large"
     >
       <Box className="rounded-md" sx={style}>
-      {location.pathname === "/Signup"? (
-  <RegisterUserForm />
-) : (
-  <LoginUserForm />
-)}
+        {location.pathname === "/login" ? (
+          <LoginUserForm />
+        ) : (
+          <RegisterUserForm />
+        )}
       </Box>
     </Modal>
     
