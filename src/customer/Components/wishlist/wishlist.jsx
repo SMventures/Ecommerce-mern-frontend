@@ -1,46 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import WishlistItem from "./WishlistItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishlist } from "../../../Redux/Customers/Wishlist/Action";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-
+ 
 const Wishlist = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-
+ 
   // Accessing wishlist slice of state from the store
   const { wishlist, loading, error } = useSelector((store) => store);
-  const [itemQuant, setItemQuant] = useState(0);
-
+ 
   useEffect(() => {
     // Fetch wishlist data when component mounts
     if (jwt) {
       dispatch(getWishlist(jwt));
     }
   }, [dispatch, jwt]);
-
-  useEffect(() => {
-    if (wishlist && Array.isArray(wishlist.wishlistItems)) {
-      const totalItems = wishlist.wishlistItems.reduce((total, item) => {
-        return total + item.quantity;
-      }, 0);
-      setItemQuant(totalItems);
-    }
-  }, [wishlist]);
-
+ 
   // Display loading spinner while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
-
+ 
   // Display error message if fetch fails
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+ 
   // Display message if wishlist is empty
   if (!wishlist || !Array.isArray(wishlist.wishlistItems) || wishlist.wishlistItems.length === 0) {
     return (
@@ -50,7 +40,7 @@ const Wishlist = () => {
       </div>
     );
   }
-
+ 
   // Render wishlist items if wishlist is not empty
   return (
     <div className="mx-6 max-w-7xl px-2 sm:px-4 lg:px-6"> {/* Reduce left and right padding */}
@@ -69,5 +59,6 @@ const Wishlist = () => {
     </div>
   );
 };
-
+ 
 export default Wishlist;
+ 

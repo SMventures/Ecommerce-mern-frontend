@@ -112,7 +112,7 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
  
-  // discount slider
+  // discount slider 
   const handleDiscountChange = (event, newValue) => {
     setMinDiscount(newValue[0]); // Update minimum discount
     setMaxDiscount(newValue[1]); // Update maximum discount
@@ -132,6 +132,8 @@ export default function Product() {
       sizes: sizeValue || [],
       minPrice: minPrice || 0,
       maxPrice: maxPrice || 10000,
+      minDiscount: minDiscount,
+      maxDiscount: maxDiscount,
       minDiscount: minDiscount,
       maxDiscount: maxDiscount,
       sort: sortValue || "price_low",
@@ -235,6 +237,7 @@ padding: 20px;
   return (
     // <Component>
     <div className="bg-white -z-20 ">
+      
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -370,7 +373,7 @@ padding: 20px;
   <h3 className="mr-2 font-medium text-gray-500 hover:text-gray-600">{param.lavelThree}</h3>
 </div>
           <h3 className="font-medium text-gray-500 mb-5">
-         ( Showing {customersProduct?.products?.content?.length} of {customersProduct?.products?.totalElements} products )
+         ( Showing {customersProduct?.products?.content?.length} {customersProduct?.products?.totalElements} products )
         </h3>
     </div>
 
@@ -581,13 +584,13 @@ padding: 20px;
                       )}
                     </Disclosure>
                   ))}
-     <div className="mt-4">
-  <h3 className="font-semibold text-gray-500">Discount Range</h3>
+                  <div className="mt-4">
+  <h3 className="font-medium text-gray-900">Discount Range</h3>
   <Slider
     value={[minDiscount, maxDiscount]}
     onChange={handleDiscountChange}
     min={0}
-    max={100} 
+    max={100}
     step={1}
     valueLabelDisplay="auto"
   />

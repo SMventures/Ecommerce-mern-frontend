@@ -50,6 +50,8 @@ import { FaTools } from 'react-icons/fa';
 import { Table, TableBody, TableRow, TableCell, styled, } from '@mui/material';
 import ItemList from './ItemList';
 import Boughtogether from './Boughtogether';
+import ReactImageMagnify from 'react-image-magnify';
+
 
 // for delivery date
 const ColumnText = styled(TableRow)`
@@ -134,11 +136,11 @@ export default function ProductDetails({}) {
 
   const [showRatingReview, setShowRatingReview] = useState(false);
 
-    const [showRateProduct, setShowRateProduct] = useState(false);
+    // const [showRateProduct, setShowRateProduct] = useState(false);
   
-    const handleAddReviewClick = () => {
-      setShowRateProduct(true);
-    };
+    // const handleAddReviewClick = () => {
+    //   setShowRateProduct(true);
+    // };
   const Component = styled(Box)`
   padding: 20px;
   background: #f2f2f2;
@@ -215,11 +217,11 @@ export default function ProductDetails({}) {
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
-  const addToCart = (items) => {
-    // Dispatch an action to add items to the cart
-    console.log("Adding items to cart:", items);
-    dispatch(addItemToCart(items));
-  }
+  // const addToCart = (items) => {
+  //   // Dispatch an action to add items to the cart
+  //   console.log("Adding items to cart:", items);
+  //   dispatch(addItemToCart(items));
+  // }
   
   // const handleCartSubmit = () => {
   //   // Add both frequently bought products to the cart
@@ -228,28 +230,28 @@ export default function ProductDetails({}) {
   //     dispatch(addItemToCart(productSet));
   //   });
   // };
+  
   const handleCartSubmit = () => {
-
-    // const productSetId = productSet._id;
-    // const productId = productId;
     // Assuming BoughtTogether is an array containing frequently bought together products
     const frequentlyBoughtTogetherProduct = BoughtTogether.slice(0, 2); // Assuming you want to include the first two frequently bought together products
-    
+  
     // Ensure that productId and size are correctly set for both items in the data array
-    const data = frequentlyBoughtTogetherProduct.map(productSet => ({
+    const data = frequentlyBoughtTogetherProduct.map(productSet => {
+      console.log("Product Set:", productSet); // Log productSet here
+      return {
         productId: productSet._id, // Assign the product set's ID to productSetId
         size: productSet.size
-    }));
-
+      };
+    });
+  
     // Add the current product to the data array with the same key name as frequently bought together product
-    data.push({ productId,  size: selectedSize ? selectedSize.name : null });
-    data.push({ productId:productId,  size: selectedSize ? selectedSize.name : null });
-
-    console.log("Data to be added to cart:", data); // Add console log to see the data being sent to the cart
+    console.log("Data to be added to cart:", data); // Log data here to see the data being sent to the cart
+    data.push({ productId, size: selectedSize ? selectedSize.name : null });
   
     dispatch(addMultipleItemsToCart({ data, jwt }));
     navigate("/cart");
 };
+
 
 
   
@@ -367,34 +369,34 @@ const BackgroundBox = styled(Box)`
   background:  #f2f2f2;
 `;
 
-const getTotalReviews = () => {
-  return review.reviews ? review.reviews.length : 0;
-};
+// const getTotalReviews = () => {
+//   return review.reviews ? review.reviews.length : 0;
+// };
 
-const calculateAverageRating = () => {
-  let total = 0;
-  review.reviews?.forEach((item) => {
-    total += item.rating;
-  });
-  return total / getTotalReviews();
-};
+// const calculateAverageRating = () => {
+//   let total = 0;
+//   review.reviews?.forEach((item) => {
+//     total += item.rating;
+//   });
+//   return total / getTotalReviews();
+// };
 
-const getRatingDistribution = () => {
-  const ratings = { Excellent: 0, 'Very Good': 0, Good: 0, Average: 0, Poor: 0 };
-  review.reviews?.forEach((item) => {
-    if (item.rating >= 4.5) ratings.Excellent++;
-    else if (item.rating >= 4) ratings['Very Good']++;
-    else if (item.rating >= 3) ratings.Good++;
-    else if (item.rating >= 2) ratings.Average++;
-    else ratings.Poor++;
-  });
-  const total = getTotalReviews();
-  return Object.entries(ratings).map(([label, count]) => ({
-    label,
-    count,
-    percent: (count / total) * 100,
-  }));
-};
+// const getRatingDistribution = () => {
+//   const ratings = { Excellent: 0, 'Very Good': 0, Good: 0, Average: 0, Poor: 0 };
+//   review.reviews?.forEach((item) => {
+//     if (item.rating >= 4.5) ratings.Excellent++;
+//     else if (item.rating >= 4) ratings['Very Good']++;
+//     else if (item.rating >= 3) ratings.Good++;
+//     else if (item.rating >= 2) ratings.Average++;
+//     else ratings.Poor++;
+//   });
+//   const total = getTotalReviews();
+//   return Object.entries(ratings).map(([label, count]) => ({
+//     label,
+//     count,
+//     percent: (count / total) * 100,
+//   }));
+// };
 
 // const getRatingColor = (rating) => {
 //   switch (rating) {
@@ -472,8 +474,9 @@ const getRatingDistribution = () => {
         </nav>
 
         {/* product details */}
-        <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
-  {/* Image gallery */}
+    {/* Image gallery */}
+    <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
+
   {/* Sticky section */}
   <div className="relative">
     <div className="sticky top-0">
@@ -503,17 +506,45 @@ const getRatingDistribution = () => {
                 Item added to wishlist
               </div>
             )}
-
 <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]">
   {/* Main product image with zoom effect */}
   <div className="relative overflow-hidden">
+  <ReactImageMagnify
+  {...{
+    smallImage: {
+      alt: product.images[0].alt,
+      isFluidWidth: true,
+      src: activeImage?.src || customersProduct.product?.imageUrl,
+    },
+    largeImage: {
+      src: activeImage?.src || customersProduct.product?.imageUrl,
+      width: 1200,
+      height: 1800,
+    },
+    enlargedImageContainerClassName: 'enlargedImageContainer',
+    enlargedImageClassName: 'enlargedImage',
+  }}
+/>
+  </div>
+</div>
+
+            {/* Notification bar */}
+            {/* {showNotification && (
+              <div className="absolute top-0 right-0 mt-8 mr-8 bg-green-500 text-white px-4 py-2 rounded">
+                Item added to wishlist
+              </div>
+            )} */}
+
+{/* <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md max-w-[30rem] max-h-[35rem]"> */}
+  {/* Main product image with zoom effect */}
+  {/* <div className="relative overflow-hidden">
     <img
       src={activeImage?.src || customersProduct.product?.imageUrl}
       alt={product.images[0].alt}
       className="h-full w-full object-cover object-center transition-transform duration-300 transform hover:scale-110"
     />
   </div>
-</div>
+</div> */}
 
 {/* Thumbnail images */}
 <div className="flex flex-wrap space-x-5 justify-center">
@@ -828,15 +859,15 @@ const getRatingDistribution = () => {
 
 
 {/* Add review button */}
-<div className="px-5 lg:px-20">
+{/* <div className="px-5 lg:px-20">
   {showRatingReview && (
     <section>
       <h1 className="font-semibold text-lg pb-4">Recent Review & Ratings</h1>
       <div className="border p-5">
         <Grid container spacing={7}>
-          <Grid item xs={7}>
+          <Grid item xs={7}> */}
             {/* Render reviews here */}
-            <div className="space-y-5">
+            {/* <div className="space-y-5">
               {review.reviews?.map((item, i) => (
                 <ProductReviewCard item={item} key={i} />
               ))}
@@ -882,7 +913,7 @@ const getRatingDistribution = () => {
         </Grid>
       </div>
     </section>
-  )}
+  )} */}
         {/* rating and review section */}
         <section className="">
         <h1 className="font-semibold text-2xl pb-4 mt-4">
@@ -921,7 +952,6 @@ const getRatingDistribution = () => {
             <RateProduct />
           </Grid>
         )}
-</div>
 
                 {/* <div>
                 <h3 className="text-sm font-bold text-gray-900 mt-5 mb-2">Highlights</h3>
@@ -969,10 +999,11 @@ const getRatingDistribution = () => {
                 </div>
               </div> */}
               
-              
+          
               </div>
           </Container >
-        </section>
+          </section>
+
         </WhiteContainer>
     </div>
     </div>
@@ -1045,7 +1076,7 @@ const getRatingDistribution = () => {
       
 
     <div className="slider-container">
-      {BoughtTogether.slice(0, 2).map((productSet, index) => (
+      {BoughtTogether.slice(1, 3).map((productSet, index) => (
         <Fragment key={index}>
           <div className="bought-together-card flex items-center mb-4"> {/* Use flexbox for row layout */}
             {/* Product 1 */}
@@ -1123,7 +1154,7 @@ const getRatingDistribution = () => {
 
                   {/* Add to Cart button */}
                   <div className="flex justify-center my-4">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCartSubmit}>Add to Cart</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Add to Cart</button>
                   </div>
 
                   {/* Horizontal lines above and below total amount */}

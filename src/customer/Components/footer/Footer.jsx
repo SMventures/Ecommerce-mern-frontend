@@ -10,7 +10,7 @@ function Footer() {
         <div className="w-full md:w-1/2 px-4">
             <h4 className="text-3xl font-semibold text-white">Let's keep in touch!</h4>
             <h5 className="text-lg mt-0 mb-2 text-white">
-              Find us on any of these platforms, we respond 1-2 business days.
+              Find us on any of these platforms, we respond within 1-2 business days.
             </h5>
             <div className="mt-6 lg:mb-0 mb-6 flex">
               {/* Facebook icon */}

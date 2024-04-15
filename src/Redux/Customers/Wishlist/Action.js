@@ -13,27 +13,24 @@ import {
     UPDATE_WISHLIST_ITEM_REQUEST,
     UPDATE_WISHLIST_ITEM_SUCCESS,
     UPDATE_WISHLIST_ITEM_FAILURE,
-    UPDATE_WISHLIST_TOTAL,
 } from "./ActionType";
-
+ 
 export const addItemToWishlist = (reqData) => async (dispatch) => {
     try {
         dispatch({ type: ADD_ITEM_TO_WISHLIST_REQUEST });
-
+ 
         const config = {
             headers: {
                 Authorization: `Bearer ${reqData.jwt}`,
                 "Content-Type": "application/json",
             },
-            
         };
-
-        const { data } = await axios.put(`${API_BASE_URL}/api/wishlist/add`, 
+ 
+        const { data } = await axios.put(`${API_BASE_URL}/api/wishlist/add`,
       reqData.data,
       config,
         );
-        dispatch(updateWishlistTotal(reqData.newTotal));
-
+ 
         dispatch({
             type: ADD_ITEM_TO_WISHLIST_SUCCESS,
             payload: data,
@@ -48,7 +45,7 @@ export const addItemToWishlist = (reqData) => async (dispatch) => {
         });
     }
 };
-
+ 
 export const getWishlist = (jwt) => async (dispatch) => {
     try {
         dispatch({ type: GET_WISHLIST_REQUEST });
@@ -73,7 +70,7 @@ export const getWishlist = (jwt) => async (dispatch) => {
         });
     }
 };
-
+ 
 export const removeWishlistItem = (reqData) => async (dispatch) => {
     try {
         dispatch({ type: REMOVE_WISHLIST_ITEM_REQUEST });
@@ -87,8 +84,6 @@ export const removeWishlistItem = (reqData) => async (dispatch) => {
             `${API_BASE_URL}/api/wishlist_items/${reqData.wishlistItemId}`,
             config
         );
-        dispatch(updateWishlistTotal(reqData.newTotal));
-
         dispatch({
             type: REMOVE_WISHLIST_ITEM_SUCCESS,
             payload: reqData.wishlistItemId,
@@ -103,7 +98,7 @@ export const removeWishlistItem = (reqData) => async (dispatch) => {
         });
     }
 };
-
+ 
 export const updateWishlistItem = (reqData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_WISHLIST_ITEM_REQUEST });
@@ -131,9 +126,5 @@ export const updateWishlistItem = (reqData) => async (dispatch) => {
                     : error.message,
         });
     }
-
 };
-export const updateWishlistTotal = (total) => ({
-    type: UPDATE_WISHLIST_TOTAL,
-    payload: total,
-  });  
+ 

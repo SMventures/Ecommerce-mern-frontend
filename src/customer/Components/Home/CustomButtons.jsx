@@ -1,3 +1,5 @@
+// CustomButtons.js
+
 import React, { useState, useEffect } from 'react';
 import { Box, Button, styled } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -11,9 +13,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from "../../../Redux/Auth/Action";
 import { deepPurple } from '@mui/material/colors';
-import { updateCartTotal } from "../../../Redux/Customers/Cart/Action";
+import { getWishlist } from "../../../Redux/Customers/Wishlist/Action"; // Import the action to fetch wishlist dataimport { updateCartTotal } from "../../../Redux/Customers/Cart/Action";
 import register from '../Auth/Register';
 import login from '../Auth/Login'
+import { updateCartTotal } from "../../../Redux/Customers/Cart/Action";
+
+
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -93,6 +98,7 @@ const CustomButtons = () => {
     useEffect(() => {
         if (jwt) {
             dispatch(getUser(jwt));
+            dispatch(getWishlist(jwt)); // Fetch wishlist data when the component mounts
         }
     }, [jwt, auth.jwt, dispatch]);
 
@@ -133,9 +139,13 @@ const CustomButtons = () => {
     const handleWishlistClick = () => {
         navigate("/wishlist");
     };
-
+  
+ 
     const handleCartClick = () => {
         navigate("/cart");
+    };
+    const getWishlistItemCount = () => {
+        return wishlist?.wishlistItems?.length ?? 0;
     };
 
     return (
@@ -177,10 +187,10 @@ const CustomButtons = () => {
                 </LoginButton>
             )}
             <Container>
-                <IconWrapper onClick={handleWishlistClick} className="relative">
+            <IconWrapper onClick={handleWishlistClick} className="relative">
                     <FavoriteIcon />
                     <span className="wishlist-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-                        {wishlistItemCount}
+                        {getWishlistItemCount()}
                     </span>
                     <span className="sr-only">items in wishlist</span>
                 </IconWrapper>

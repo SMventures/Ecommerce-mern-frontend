@@ -7,12 +7,15 @@ import { addItemToWishlist } from '../../../../Redux/Customers/Wishlist/Action';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { addItemToCart } from '../../../../Redux/Customers/Cart/Action';
 import { Button } from "@mui/material";
+import { useParams } from 'react-router-dom';
+
 
 const ProductCard = ({ product }) => {
   const { _id, title, brand, imageUrl, price, discountedPrice, color, discountPersent } = product; // Assuming _id is the productId
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
+  const param = useParams();
   const [isClicked, setIsClicked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
@@ -53,6 +56,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="productCardContainer">
       <div className="productCard w-[15rem] border m-3 transition-all cursor-pointer">
+        
         <div onClick={handleNavigate} className="h-[20rem] flex justify-center items-center relative">
           <FavoriteBorderIcon
             className="absolute top-4 right-4 cursor-pointer" // Adjusted position
